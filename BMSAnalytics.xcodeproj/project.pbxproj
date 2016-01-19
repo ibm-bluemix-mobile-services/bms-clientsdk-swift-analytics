@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		926CF8121C4ECC330084355B /* BMSAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 926CF8111C4ECC330084355B /* BMSAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9221C0291C4ED280007FA9D0 /* BMSAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 9221C0091C4ED26F007FA9D0 /* BMSAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9221C02A1C4ED285007FA9D0 /* BMSAnalyticsWatchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 9221C00A1C4ED26F007FA9D0 /* BMSAnalyticsWatchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9221C02B1C4ED314007FA9D0 /* BMSAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0261C4ED26F007FA9D0 /* BMSAnalyticsTests.swift */; };
+		9221C02C1C4ED33E007FA9D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0101C4ED26F007FA9D0 /* AppDelegate.swift */; };
+		9221C02D1C4ED346007FA9D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0111C4ED26F007FA9D0 /* LaunchScreen.storyboard */; };
+		9221C02E1C4ED34A007FA9D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0131C4ED26F007FA9D0 /* Main.storyboard */; };
+		9221C02F1C4ED35B007FA9D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0181C4ED26F007FA9D0 /* ViewController.swift */; };
+		9221C0301C4ED362007FA9D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0161C4ED26F007FA9D0 /* Assets.xcassets */; };
+		9221C0311C4ED368007FA9D0 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9221C01A1C4ED26F007FA9D0 /* Interface.storyboard */; };
+		9221C0321C4ED374007FA9D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9221C01D1C4ED26F007FA9D0 /* Assets.xcassets */; };
+		9221C0331C4ED379007FA9D0 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0201C4ED26F007FA9D0 /* ExtensionDelegate.swift */; };
+		9221C0341C4ED37B007FA9D0 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0211C4ED26F007FA9D0 /* InterfaceController.swift */; };
+		9221C0351C4ED37F007FA9D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0231C4ED26F007FA9D0 /* Assets.xcassets */; };
 		926CF8191C4ECC330084355B /* BMSAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 926CF80E1C4ECC330084355B /* BMSAnalytics.framework */; };
-		926CF81E1C4ECC330084355B /* BMSAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926CF81D1C4ECC330084355B /* BMSAnalyticsTests.swift */; };
-		926CF8301C4ECD930084355B /* BMSAnalyticsWatchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 926CF82F1C4ECD930084355B /* BMSAnalyticsWatchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		926CF83C1C4ECDBD0084355B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926CF83B1C4ECDBD0084355B /* AppDelegate.swift */; };
-		926CF83E1C4ECDBD0084355B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926CF83D1C4ECDBD0084355B /* ViewController.swift */; };
-		926CF8411C4ECDBD0084355B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926CF83F1C4ECDBD0084355B /* Main.storyboard */; };
-		926CF8431C4ECDBD0084355B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 926CF8421C4ECDBD0084355B /* Assets.xcassets */; };
-		926CF8461C4ECDBD0084355B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926CF8441C4ECDBD0084355B /* LaunchScreen.storyboard */; };
-		926CF8511C4ECDF80084355B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926CF84F1C4ECDF80084355B /* Interface.storyboard */; };
-		926CF8531C4ECDF80084355B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 926CF8521C4ECDF80084355B /* Assets.xcassets */; };
 		926CF85A1C4ECDF80084355B /* TestAppWatchOS Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 926CF8591C4ECDF80084355B /* TestAppWatchOS Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		926CF85F1C4ECDF80084355B /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926CF85E1C4ECDF80084355B /* InterfaceController.swift */; };
-		926CF8611C4ECDF80084355B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926CF8601C4ECDF80084355B /* ExtensionDelegate.swift */; };
-		926CF8631C4ECDF80084355B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 926CF8621C4ECDF80084355B /* Assets.xcassets */; };
 		926CF8671C4ECDF80084355B /* TestAppWatchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 926CF84D1C4ECDF80084355B /* TestAppWatchOS.app */; };
 /* End PBXBuildFile section */
 
@@ -75,31 +75,31 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9221C0091C4ED26F007FA9D0 /* BMSAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMSAnalytics.h; sourceTree = "<group>"; };
+		9221C00A1C4ED26F007FA9D0 /* BMSAnalyticsWatchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMSAnalyticsWatchOS.h; sourceTree = "<group>"; };
+		9221C00B1C4ED26F007FA9D0 /* Info_iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info_iOS.plist; sourceTree = "<group>"; };
+		9221C00C1C4ED26F007FA9D0 /* Info_watchOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info_watchOS.plist; sourceTree = "<group>"; };
+		9221C0101C4ED26F007FA9D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9221C0121C4ED26F007FA9D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9221C0141C4ED26F007FA9D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9221C0161C4ED26F007FA9D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9221C0171C4ED26F007FA9D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9221C0181C4ED26F007FA9D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9221C01B1C4ED26F007FA9D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		9221C01D1C4ED26F007FA9D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9221C01E1C4ED26F007FA9D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9221C0201C4ED26F007FA9D0 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		9221C0211C4ED26F007FA9D0 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		9221C0231C4ED26F007FA9D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9221C0241C4ED26F007FA9D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9221C0261C4ED26F007FA9D0 /* BMSAnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMSAnalyticsTests.swift; sourceTree = "<group>"; };
+		9221C0281C4ED26F007FA9D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926CF80E1C4ECC330084355B /* BMSAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BMSAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		926CF8111C4ECC330084355B /* BMSAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMSAnalytics.h; sourceTree = "<group>"; };
-		926CF8131C4ECC330084355B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926CF8181C4ECC330084355B /* BMSAnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BMSAnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		926CF81D1C4ECC330084355B /* BMSAnalyticsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMSAnalyticsTests.swift; sourceTree = "<group>"; };
-		926CF81F1C4ECC330084355B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926CF82D1C4ECD930084355B /* BMSAnalyticsWatchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BMSAnalyticsWatchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		926CF82F1C4ECD930084355B /* BMSAnalyticsWatchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BMSAnalyticsWatchOS.h; sourceTree = "<group>"; };
-		926CF8311C4ECD930084355B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926CF8391C4ECDBD0084355B /* TestAppiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAppiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		926CF83B1C4ECDBD0084355B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		926CF83D1C4ECDBD0084355B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		926CF8401C4ECDBD0084355B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		926CF8421C4ECDBD0084355B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		926CF8451C4ECDBD0084355B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		926CF8471C4ECDBD0084355B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926CF84D1C4ECDF80084355B /* TestAppWatchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAppWatchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		926CF8501C4ECDF80084355B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		926CF8521C4ECDF80084355B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		926CF8541C4ECDF80084355B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926CF8591C4ECDF80084355B /* TestAppWatchOS Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TestAppWatchOS Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		926CF85E1C4ECDF80084355B /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		926CF8601C4ECDF80084355B /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		926CF8621C4ECDF80084355B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		926CF8641C4ECDF80084355B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,15 +142,140 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9221C0051C4ED26F007FA9D0 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				9221C0061C4ED26F007FA9D0 /* Analytics */,
+				9221C0071C4ED26F007FA9D0 /* Logger */,
+				9221C0081C4ED26F007FA9D0 /* Resources */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		9221C0061C4ED26F007FA9D0 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		9221C0071C4ED26F007FA9D0 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		9221C0081C4ED26F007FA9D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9221C0091C4ED26F007FA9D0 /* BMSAnalytics.h */,
+				9221C00A1C4ED26F007FA9D0 /* BMSAnalyticsWatchOS.h */,
+				9221C00B1C4ED26F007FA9D0 /* Info_iOS.plist */,
+				9221C00C1C4ED26F007FA9D0 /* Info_watchOS.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9221C00D1C4ED26F007FA9D0 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9221C0251C4ED26F007FA9D0 /* Unit Tests */,
+				9221C00E1C4ED26F007FA9D0 /* Test Apps */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		9221C00E1C4ED26F007FA9D0 /* Test Apps */ = {
+			isa = PBXGroup;
+			children = (
+				9221C00F1C4ED26F007FA9D0 /* TestAppiOS */,
+				9221C0191C4ED26F007FA9D0 /* TestAppWatchOS */,
+				9221C01F1C4ED26F007FA9D0 /* TestAppWatchOS Extension */,
+			);
+			path = "Test Apps";
+			sourceTree = "<group>";
+		};
+		9221C00F1C4ED26F007FA9D0 /* TestAppiOS */ = {
+			isa = PBXGroup;
+			children = (
+				9221C0101C4ED26F007FA9D0 /* AppDelegate.swift */,
+				9221C0181C4ED26F007FA9D0 /* ViewController.swift */,
+				9221C0131C4ED26F007FA9D0 /* Main.storyboard */,
+				9221C0111C4ED26F007FA9D0 /* LaunchScreen.storyboard */,
+				9221C0151C4ED26F007FA9D0 /* Resources */,
+			);
+			path = TestAppiOS;
+			sourceTree = "<group>";
+		};
+		9221C0151C4ED26F007FA9D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9221C0161C4ED26F007FA9D0 /* Assets.xcassets */,
+				9221C0171C4ED26F007FA9D0 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9221C0191C4ED26F007FA9D0 /* TestAppWatchOS */ = {
+			isa = PBXGroup;
+			children = (
+				9221C01A1C4ED26F007FA9D0 /* Interface.storyboard */,
+				9221C01C1C4ED26F007FA9D0 /* Resources */,
+			);
+			path = TestAppWatchOS;
+			sourceTree = "<group>";
+		};
+		9221C01C1C4ED26F007FA9D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9221C01D1C4ED26F007FA9D0 /* Assets.xcassets */,
+				9221C01E1C4ED26F007FA9D0 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9221C01F1C4ED26F007FA9D0 /* TestAppWatchOS Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9221C0201C4ED26F007FA9D0 /* ExtensionDelegate.swift */,
+				9221C0211C4ED26F007FA9D0 /* InterfaceController.swift */,
+				9221C0221C4ED26F007FA9D0 /* Resources */,
+			);
+			path = "TestAppWatchOS Extension";
+			sourceTree = "<group>";
+		};
+		9221C0221C4ED26F007FA9D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9221C0231C4ED26F007FA9D0 /* Assets.xcassets */,
+				9221C0241C4ED26F007FA9D0 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9221C0251C4ED26F007FA9D0 /* Unit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9221C0261C4ED26F007FA9D0 /* BMSAnalyticsTests.swift */,
+				9221C0271C4ED26F007FA9D0 /* Resources */,
+			);
+			path = "Unit Tests";
+			sourceTree = "<group>";
+		};
+		9221C0271C4ED26F007FA9D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9221C0281C4ED26F007FA9D0 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		926CF8041C4ECC330084355B = {
 			isa = PBXGroup;
 			children = (
-				926CF8101C4ECC330084355B /* BMSAnalytics */,
-				926CF81C1C4ECC330084355B /* BMSAnalyticsTests */,
-				926CF82E1C4ECD930084355B /* BMSAnalyticsWatchOS */,
-				926CF83A1C4ECDBD0084355B /* TestAppiOS */,
-				926CF84E1C4ECDF80084355B /* TestAppWatchOS */,
-				926CF85D1C4ECDF80084355B /* TestAppWatchOS Extension */,
+				9221C0051C4ED26F007FA9D0 /* Source */,
+				9221C00D1C4ED26F007FA9D0 /* Tests */,
 				926CF80F1C4ECC330084355B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -168,67 +293,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		926CF8101C4ECC330084355B /* BMSAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				926CF8111C4ECC330084355B /* BMSAnalytics.h */,
-				926CF8131C4ECC330084355B /* Info.plist */,
-			);
-			path = BMSAnalytics;
-			sourceTree = "<group>";
-		};
-		926CF81C1C4ECC330084355B /* BMSAnalyticsTests */ = {
-			isa = PBXGroup;
-			children = (
-				926CF81D1C4ECC330084355B /* BMSAnalyticsTests.swift */,
-				926CF81F1C4ECC330084355B /* Info.plist */,
-			);
-			path = BMSAnalyticsTests;
-			sourceTree = "<group>";
-		};
-		926CF82E1C4ECD930084355B /* BMSAnalyticsWatchOS */ = {
-			isa = PBXGroup;
-			children = (
-				926CF82F1C4ECD930084355B /* BMSAnalyticsWatchOS.h */,
-				926CF8311C4ECD930084355B /* Info.plist */,
-			);
-			path = BMSAnalyticsWatchOS;
-			sourceTree = "<group>";
-		};
-		926CF83A1C4ECDBD0084355B /* TestAppiOS */ = {
-			isa = PBXGroup;
-			children = (
-				926CF83B1C4ECDBD0084355B /* AppDelegate.swift */,
-				926CF83D1C4ECDBD0084355B /* ViewController.swift */,
-				926CF83F1C4ECDBD0084355B /* Main.storyboard */,
-				926CF8421C4ECDBD0084355B /* Assets.xcassets */,
-				926CF8441C4ECDBD0084355B /* LaunchScreen.storyboard */,
-				926CF8471C4ECDBD0084355B /* Info.plist */,
-			);
-			path = TestAppiOS;
-			sourceTree = "<group>";
-		};
-		926CF84E1C4ECDF80084355B /* TestAppWatchOS */ = {
-			isa = PBXGroup;
-			children = (
-				926CF84F1C4ECDF80084355B /* Interface.storyboard */,
-				926CF8521C4ECDF80084355B /* Assets.xcassets */,
-				926CF8541C4ECDF80084355B /* Info.plist */,
-			);
-			path = TestAppWatchOS;
-			sourceTree = "<group>";
-		};
-		926CF85D1C4ECDF80084355B /* TestAppWatchOS Extension */ = {
-			isa = PBXGroup;
-			children = (
-				926CF85E1C4ECDF80084355B /* InterfaceController.swift */,
-				926CF8601C4ECDF80084355B /* ExtensionDelegate.swift */,
-				926CF8621C4ECDF80084355B /* Assets.xcassets */,
-				926CF8641C4ECDF80084355B /* Info.plist */,
-			);
-			path = "TestAppWatchOS Extension";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -236,7 +300,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				926CF8121C4ECC330084355B /* BMSAnalytics.h in Headers */,
+				9221C0291C4ED280007FA9D0 /* BMSAnalytics.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,7 +308,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				926CF8301C4ECD930084355B /* BMSAnalyticsWatchOS.h in Headers */,
+				9221C02A1C4ED285007FA9D0 /* BMSAnalyticsWatchOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,9 +501,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				926CF8461C4ECDBD0084355B /* LaunchScreen.storyboard in Resources */,
-				926CF8431C4ECDBD0084355B /* Assets.xcassets in Resources */,
-				926CF8411C4ECDBD0084355B /* Main.storyboard in Resources */,
+				9221C02D1C4ED346007FA9D0 /* LaunchScreen.storyboard in Resources */,
+				9221C0301C4ED362007FA9D0 /* Assets.xcassets in Resources */,
+				9221C02E1C4ED34A007FA9D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,8 +511,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				926CF8531C4ECDF80084355B /* Assets.xcassets in Resources */,
-				926CF8511C4ECDF80084355B /* Interface.storyboard in Resources */,
+				9221C0321C4ED374007FA9D0 /* Assets.xcassets in Resources */,
+				9221C0311C4ED368007FA9D0 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +520,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				926CF8631C4ECDF80084355B /* Assets.xcassets in Resources */,
+				9221C0351C4ED37F007FA9D0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				926CF81E1C4ECC330084355B /* BMSAnalyticsTests.swift in Sources */,
+				9221C02B1C4ED314007FA9D0 /* BMSAnalyticsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,8 +553,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				926CF83E1C4ECDBD0084355B /* ViewController.swift in Sources */,
-				926CF83C1C4ECDBD0084355B /* AppDelegate.swift in Sources */,
+				9221C02F1C4ED35B007FA9D0 /* ViewController.swift in Sources */,
+				9221C02C1C4ED33E007FA9D0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,8 +562,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				926CF8611C4ECDF80084355B /* ExtensionDelegate.swift in Sources */,
-				926CF85F1C4ECDF80084355B /* InterfaceController.swift in Sources */,
+				9221C0331C4ED379007FA9D0 /* ExtensionDelegate.swift in Sources */,
+				9221C0341C4ED37B007FA9D0 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,26 +588,26 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		926CF83F1C4ECDBD0084355B /* Main.storyboard */ = {
+		9221C0111C4ED26F007FA9D0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				926CF8401C4ECDBD0084355B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		926CF8441C4ECDBD0084355B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				926CF8451C4ECDBD0084355B /* Base */,
+				9221C0121C4ED26F007FA9D0 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		926CF84F1C4ECDF80084355B /* Interface.storyboard */ = {
+		9221C0131C4ED26F007FA9D0 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				926CF8501C4ECDF80084355B /* Base */,
+				9221C0141C4ED26F007FA9D0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9221C01A1C4ED26F007FA9D0 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9221C01B1C4ED26F007FA9D0 /* Base */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -647,7 +711,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = BMSAnalytics/Info.plist;
+				INFOPLIST_FILE = Source/Resources/Info_iOS.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -664,7 +728,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = BMSAnalytics/Info.plist;
+				INFOPLIST_FILE = Source/Resources/Info_iOS.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -677,7 +741,7 @@
 		926CF8261C4ECC330084355B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = BMSAnalyticsTests/Info.plist;
+				INFOPLIST_FILE = "Tests/Unit Tests/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalyticsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -687,7 +751,7 @@
 		926CF8271C4ECC330084355B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = BMSAnalyticsTests/Info.plist;
+				INFOPLIST_FILE = "Tests/Unit Tests/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalyticsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -702,7 +766,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = BMSAnalyticsWatchOS/Info.plist;
+				INFOPLIST_FILE = Source/Resources/Info_watchOS.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalyticsWatchOS;
@@ -722,7 +786,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = BMSAnalyticsWatchOS/Info.plist;
+				INFOPLIST_FILE = Source/Resources/Info_watchOS.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalyticsWatchOS;
@@ -738,7 +802,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = TestAppiOS/Info.plist;
+				INFOPLIST_FILE = "Tests/Test Apps/TestAppiOS/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -749,7 +813,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = TestAppiOS/Info.plist;
+				INFOPLIST_FILE = "Tests/Test Apps/TestAppiOS/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -759,7 +823,7 @@
 		926CF8691C4ECDF80084355B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "TestAppWatchOS Extension/Info.plist";
+				INFOPLIST_FILE = "Tests/Test Apps/TestAppWatchOS Extension/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -773,7 +837,7 @@
 		926CF86A1C4ECDF80084355B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "TestAppWatchOS Extension/Info.plist";
+				INFOPLIST_FILE = "Tests/Test Apps/TestAppWatchOS Extension/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -790,7 +854,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = TestAppWatchOS_Extension;
-				INFOPLIST_FILE = TestAppWatchOS/Info.plist;
+				INFOPLIST_FILE = "Tests/Test Apps/TestAppWatchOS/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -806,7 +870,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = TestAppWatchOS_Extension;
-				INFOPLIST_FILE = TestAppWatchOS/Info.plist;
+				INFOPLIST_FILE = "Tests/Test Apps/TestAppWatchOS/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -835,6 +899,7 @@
 				926CF8241C4ECC330084355B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		926CF8251C4ECC330084355B /* Build configuration list for PBXNativeTarget "BMSAnalyticsTests" */ = {
 			isa = XCConfigurationList;
@@ -843,6 +908,7 @@
 				926CF8271C4ECC330084355B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		926CF8321C4ECD930084355B /* Build configuration list for PBXNativeTarget "BMSAnalyticsWatchOS" */ = {
 			isa = XCConfigurationList;
@@ -851,6 +917,7 @@
 				926CF8341C4ECD930084355B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		926CF8481C4ECDBD0084355B /* Build configuration list for PBXNativeTarget "TestAppiOS" */ = {
 			isa = XCConfigurationList;
@@ -859,6 +926,7 @@
 				926CF84A1C4ECDBD0084355B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		926CF8681C4ECDF80084355B /* Build configuration list for PBXNativeTarget "TestAppWatchOS Extension" */ = {
 			isa = XCConfigurationList;
@@ -867,6 +935,7 @@
 				926CF86A1C4ECDF80084355B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		926CF86C1C4ECDF80084355B /* Build configuration list for PBXNativeTarget "TestAppWatchOS" */ = {
 			isa = XCConfigurationList;
@@ -875,6 +944,7 @@
 				926CF86E1C4ECDF80084355B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
