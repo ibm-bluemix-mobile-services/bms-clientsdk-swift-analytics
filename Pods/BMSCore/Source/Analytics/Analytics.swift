@@ -12,8 +12,6 @@
 */
 
 
-import BMSCore
-
 /**
     `Analytics` provides a means of capturing analytics data and sending the data to the mobile analytics service.
 */
@@ -31,9 +29,9 @@ public class Analytics {
     public private(set) static var appName: String?
     
     
-
+    
     // MARK: Properties (internal/private)
-
+    
     internal static let logger = Logger.getLoggerForName(MFP_ANALYTICS_PACKAGE)
     
     // Stores metadata (including a duration timer) for each app session

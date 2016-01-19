@@ -1,0 +1,6 @@
+framework module Pods_BMSAnalytics {
+  umbrella header "Pods-BMSAnalytics-umbrella.h"
+
+  export *
+  module * { export * }
+}
