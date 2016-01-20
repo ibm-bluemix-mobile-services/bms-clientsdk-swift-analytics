@@ -17,16 +17,17 @@
 */
 public class BMSClient: MFPClient {
     
+    
+    // TODO: Turn into an enum and DOCUMENT
+    
+    // MARK: Constants
+    
     public static let REGION_US_SOUTH = "ng.bluemix.net"
     public static let REGION_UK = "eu-gb.bluemix.net"
     public static let REGION_SYDNEY = "au-syd.bluemix.net"
     
-    public static let HTTP_SCHEME = "http"
-    public static let HTTPS_SCHEME = "https"
     
-    static let QUERY_PARAM_SUBZONE = "subzone"
     
-    private var registeredAuthorizationManager: AuthorizationManager?
     // MARK: Properties (public)
     
     /// This singleton should be used for all `BMSClient` activity
@@ -43,11 +44,12 @@ public class BMSClient: MFPClient {
         
     /// Specifies the default timeout (in seconds) for all BMS network requests.
     public var defaultRequestTimeout: Double = 20.0
+
     
-    // Specifies the default protocol
-    public static var defaultProtocol: String  = BMSClient.HTTPS_SCHEME
     
-    public var sharedAuthorizationManager: AuthorizationManager {
+    // MARK: Properties (internal/private)
+    
+    internal var sharedAuthorizationManager: AuthorizationManager {
         get {
             if registeredAuthorizationManager == nil {
                 return DefaultAuthorizationManager()
@@ -61,10 +63,11 @@ public class BMSClient: MFPClient {
         }
     }
     
+    private var registeredAuthorizationManager: AuthorizationManager?
+    
+    
+    
     // MARK: Initializers
-    
-    private init() {} // Prevent users from using BMSClient() initializer - They must use BMSClient.sharedInstance
-    
     
     /**
         The required intializer for the `BMSClient` class.
@@ -80,17 +83,6 @@ public class BMSClient: MFPClient {
         self.bluemixRegionSuffix = bluemixRegionSuffix
     }
     
-}
-
-
-// For unit testing only
-internal extension BMSClient {
+    private init() {} // Prevent users from using BMSClient() initializer - They must use BMSClient.sharedInstance
     
-    internal func uninitializeBluemixAppRoute() {
-        self.bluemixAppRoute = nil
-    }
-    
-    internal func uninitalizeBluemixAppGUID(){
-        self.bluemixAppGUID = nil
-    }
 }
