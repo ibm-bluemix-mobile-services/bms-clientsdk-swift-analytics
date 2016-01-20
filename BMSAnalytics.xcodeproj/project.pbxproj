@@ -21,19 +21,19 @@
 		9221C0341C4ED37B007FA9D0 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0211C4ED26F007FA9D0 /* InterfaceController.swift */; };
 		9221C0351C4ED37F007FA9D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0231C4ED26F007FA9D0 /* Assets.xcassets */; };
 		9221C0461C4ED9AF007FA9D0 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* Analytics.swift */; };
-		9221C0471C4ED9AF007FA9D0 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* Analytics.swift */; };
 		9221C0481C4ED9AF007FA9D0 /* Analytics+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0441C4ED9AF007FA9D0 /* Analytics+iOS.swift */; };
-		9221C04B1C4ED9AF007FA9D0 /* Analytics+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0451C4ED9AF007FA9D0 /* Analytics+watchOS.swift */; };
 		9221C04D1C4ED9BC007FA9D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04C1C4ED9BC007FA9D0 /* Logger.swift */; };
-		9221C04E1C4ED9BC007FA9D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04C1C4ED9BC007FA9D0 /* Logger.swift */; };
 		9221C0501C4ED9CF007FA9D0 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04F1C4ED9CF007FA9D0 /* LoggerTests.swift */; };
 		9221C0521C4EDA9C007FA9D0 /* AnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0511C4EDA9C007FA9D0 /* AnalyticsTests.swift */; };
 		9221C0541C4EDACC007FA9D0 /* LargeData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0531C4EDACC007FA9D0 /* LargeData.txt */; };
 		9221C0DC1C4EE159007FA9D0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0DB1C4EE159007FA9D0 /* Error.swift */; };
-		9221C0DD1C4EE159007FA9D0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0DB1C4EE159007FA9D0 /* Error.swift */; };
 		926CF8191C4ECC330084355B /* BMSAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 926CF80E1C4ECC330084355B /* BMSAnalytics.framework */; };
 		926CF85A1C4ECDF80084355B /* TestAppWatchOS Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 926CF8591C4ECDF80084355B /* TestAppWatchOS Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		926CF8671C4ECDF80084355B /* TestAppWatchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 926CF84D1C4ECDF80084355B /* TestAppWatchOS.app */; };
+		929E62381C504712001E8880 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0DB1C4EE159007FA9D0 /* Error.swift */; };
+		929E62391C504715001E8880 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* Analytics.swift */; };
+		929E623A1C504717001E8880 /* Analytics+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0451C4ED9AF007FA9D0 /* Analytics+watchOS.swift */; };
+		929E623B1C50471C001E8880 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04C1C4ED9BC007FA9D0 /* Logger.swift */; };
 		939121CD1F98065152DD2C55 /* Pods_BMSAnalyticsWatchOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58236B12FC209BE156C1257C /* Pods_BMSAnalyticsWatchOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -687,10 +687,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9221C0DD1C4EE159007FA9D0 /* Error.swift in Sources */,
-				9221C04B1C4ED9AF007FA9D0 /* Analytics+watchOS.swift in Sources */,
-				9221C04E1C4ED9BC007FA9D0 /* Logger.swift in Sources */,
-				9221C0471C4ED9AF007FA9D0 /* Analytics.swift in Sources */,
+				929E623B1C50471C001E8880 /* Logger.swift in Sources */,
+				929E623A1C504717001E8880 /* Analytics+watchOS.swift in Sources */,
+				929E62391C504715001E8880 /* Analytics.swift in Sources */,
+				929E62381C504712001E8880 /* Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,11 +897,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-watchos/Pods-BMSAnalyticsWatchOS",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Tests/Unit Tests/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalyticsTests;
@@ -914,11 +910,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-watchos/Pods-BMSAnalyticsWatchOS",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Tests/Unit Tests/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalyticsTests;
@@ -930,7 +922,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B8ECE2817146F8AD50262040 /* Pods-BMSAnalyticsWatchOS.debug.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -953,7 +945,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3484AA0D2C0A9AF21FFE6C4E /* Pods-BMSAnalyticsWatchOS.release.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
