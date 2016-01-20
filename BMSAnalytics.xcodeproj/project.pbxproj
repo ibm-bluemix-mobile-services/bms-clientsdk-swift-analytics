@@ -38,6 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9221C0DE1C503054007FA9D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 926CF8051C4ECC330084355B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 926CF82C1C4ECD930084355B;
+			remoteInfo = BMSAnalyticsWatchOS;
+		};
 		926CF81A1C4ECC330084355B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 926CF8051C4ECC330084355B /* Project object */;
@@ -117,6 +124,8 @@
 		9221C0511C4EDA9C007FA9D0 /* AnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsTests.swift; sourceTree = "<group>"; };
 		9221C0531C4EDACC007FA9D0 /* LargeData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LargeData.txt; sourceTree = "<group>"; };
 		9221C0DB1C4EE159007FA9D0 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		9221C0E21C5030CC007FA9D0 /* BMSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BMSCore.framework; path = "Pods/../build/Debug-watchos/Pods-BMSAnalyticsWatchOS/BMSCore.framework"; sourceTree = "<group>"; };
+		9221C0E41C5030D3007FA9D0 /* Pods_BMSAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_BMSAnalytics.framework; path = "Pods/../build/Debug-iphoneos/Pods_BMSAnalytics.framework"; sourceTree = "<group>"; };
 		926CF80E1C4ECC330084355B /* BMSAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BMSAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		926CF8181C4ECC330084355B /* BMSAnalyticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BMSAnalyticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		926CF82D1C4ECD930084355B /* BMSAnalyticsWatchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BMSAnalyticsWatchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +181,8 @@
 		09097EECC7A66AF6A33558BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9221C0E41C5030D3007FA9D0 /* Pods_BMSAnalytics.framework */,
+				9221C0E21C5030CC007FA9D0 /* BMSCore.framework */,
 				9BCD7263DE4324118E56D58D /* Pods_BMSAnalytics.framework */,
 				58236B12FC209BE156C1257C /* Pods_BMSAnalyticsWatchOS.framework */,
 			);
@@ -402,6 +413,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9221C0DF1C503054007FA9D0 /* PBXTargetDependency */,
 				926CF81B1C4ECC330084355B /* PBXTargetDependency */,
 			);
 			name = BMSAnalyticsTests;
@@ -703,6 +715,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9221C0DF1C503054007FA9D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 926CF82C1C4ECD930084355B /* BMSAnalyticsWatchOS */;
+			targetProxy = 9221C0DE1C503054007FA9D0 /* PBXContainerItemProxy */;
+		};
 		926CF81B1C4ECC330084355B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 926CF80D1C4ECC330084355B /* BMSAnalytics */;
@@ -880,6 +897,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-watchos/Pods-BMSAnalyticsWatchOS",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = "Tests/Unit Tests/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalyticsTests;
@@ -892,6 +914,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-watchos/Pods-BMSAnalyticsWatchOS",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = "Tests/Unit Tests/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalyticsTests;

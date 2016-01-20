@@ -19,6 +19,19 @@ import BMSCore
 */
 public class Analytics {
     
+    
+    // MARK: Constants
+    
+    internal static let TAG_SESSION = "$session"
+    internal static let TAG_CATEGORY_EVENT = "event"
+    
+    internal static let KEY_METADATA_DURATION = "$duration"
+    internal static let KEY_EVENT_START_TIME = "$startTime"
+    internal static let KEY_METADATA_TYPE = "$type"
+    internal static let KEY_METADATA_CATEGORY = "$category"
+    
+    
+    
     // MARK: Properties (public)
     
     /// Determines whether analytics logs will be persisted to file.
@@ -34,7 +47,7 @@ public class Analytics {
 
     // MARK: Properties (internal/private)
 
-    internal static let logger = Logger.getLoggerForName(MFP_ANALYTICS_PACKAGE)
+    internal static let logger = Logger.getLoggerForName(Logger.MFP_ANALYTICS_PACKAGE)
     
     // Stores metadata (including a duration timer) for each app session
     // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)
@@ -207,7 +220,7 @@ public class Analytics {
         // Data for analytics logging
         var responseMetadata: [String: AnyObject] = [:]
         
-        responseMetadata["$category"] = "network"
+        responseMetadata[KEY_METADATA_CATEGORY] = "network"
         responseMetadata["$path"] = url
         responseMetadata["$trackingId"] = request.trackingId
         responseMetadata["$outboundTimestamp"] = request.startTime

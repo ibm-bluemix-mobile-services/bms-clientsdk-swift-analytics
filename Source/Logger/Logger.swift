@@ -15,7 +15,7 @@
 import BMSCore
 
 
-// TODO: Refactor this entire file so that it is better organized and more readable. Consider using extensions.
+// TODO: Refactor this entire file so that it is better organized and more readable. Consider using extensions or other classes.
 
 /**
     Logger is used to capture log messages and send them to a mobile analytics server.
@@ -37,6 +37,35 @@ import BMSCore
     - Note: The `Logger` class sets an uncaught exception handler to log application crashes. If you wish to set your own exception handler, do so **before** calling `Logger.getLoggerForName()` or the `Logger` exception handler will be overwritten.
 */
 extension Logger {
+    
+    
+    // MARK: Constants 
+    
+    internal static let HOST_NAME = "mfp-analytics-server"
+    internal static let UPLOAD_PATH =  "/imfmobileanalytics/v1/receiver/apps/"
+    internal static let API_ID_HEADER = "x-mfp-analytics-api-key"
+    
+    internal static let TAG_METADATA = "metadata"
+    internal static let TAG_UNCAUGHT_EXCEPTION = "loggerUncaughtExceptionDetected"
+    internal static let TAG_LEVEL = "level"
+    internal static let TAG_TIMESTAMP = "timestamp"
+    internal static let TAG_PACKAGE = "pkg"
+    internal static let TAG_MESSAGE = "msg"
+    
+    internal static let MFP_LOGGER_PACKAGE = MFP_PACKAGE_PREFIX + "logger"
+    internal static let FILE_LOGGER_LOGS = MFP_LOGGER_PACKAGE + ".log"
+    internal static let FILE_LOGGER_SEND = MFP_LOGGER_PACKAGE + ".log.send"
+    internal static let FILE_LOGGER_OVERFLOW = MFP_LOGGER_PACKAGE + ".log.overflow"
+    
+    internal static let MFP_ANALYTICS_PACKAGE = MFP_PACKAGE_PREFIX + "analytics"
+    internal static let FILE_ANALYTICS_LOGS = MFP_ANALYTICS_PACKAGE + ".log"
+    internal static let FILE_ANALYTICS_SEND = MFP_ANALYTICS_PACKAGE + ".log.send"
+    internal static let FILE_ANALYTICS_OVERFLOW = MFP_ANALYTICS_PACKAGE + ".log.overflow"
+
+    internal static let ANALYTICS_ERROR_CODE = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics"
+    
+    internal static let DEFAULT_MAX_STORE_SIZE: UInt64 = 100000
+    
     
     
     // MARK: Properties (API)
@@ -211,13 +240,13 @@ extension Logger {
         var fileDispatchQueue: dispatch_queue_t
         
         if level == LogLevel.Analytics {
-            logFile += FILE_ANALYTICS_LOGS
-            logOverflowFile += FILE_ANALYTICS_OVERFLOW
+            logFile += Logger.FILE_ANALYTICS_LOGS
+            logOverflowFile += Logger.FILE_ANALYTICS_OVERFLOW
             fileDispatchQueue = Logger.analyticsFileIOQueue
         }
         else {
-            logFile += FILE_LOGGER_LOGS
-            logOverflowFile += FILE_LOGGER_OVERFLOW
+            logFile += Logger.FILE_LOGGER_LOGS
+            logOverflowFile += Logger.FILE_LOGGER_OVERFLOW
             fileDispatchQueue = Logger.loggerFileIOQueue
         }
         
@@ -261,12 +290,12 @@ extension Logger {
     internal func convertLogToJson(logMessage: String, level: LogLevel, timeStamp: String, additionalMetadata: [String: AnyObject]?) -> String? {
         
         var logMetadata: [String: AnyObject] = [:]
-        logMetadata["timestamp"] = timeStamp
-        logMetadata["level"] = level.stringValue
-        logMetadata["pkg"] = self.name
-        logMetadata["msg"] = logMessage
+        logMetadata[Logger.TAG_TIMESTAMP] = timeStamp
+        logMetadata[Logger.TAG_LEVEL] = level.stringValue
+        logMetadata[Logger.TAG_PACKAGE] = self.name
+        logMetadata[Logger.TAG_MESSAGE] = logMessage
         if additionalMetadata != nil {
-            logMetadata["metadata"] = additionalMetadata! // Typically only available if the Logger.analytics method was called
+            logMetadata[Logger.TAG_METADATA] = additionalMetadata! // Typically only available if the Logger.analytics method was called
         }
 
         let logData: NSData
@@ -459,7 +488,7 @@ extension Logger {
         
         headers[API_ID_HEADER] = Analytics.apiKey!
     
-        let logUploaderUrl = BMSClient.defaultProtocol + "://" + HOST_NAME + bmsClient.bluemixRegionSuffix! + UPLOAD_PATH + appGuid
+        let logUploaderUrl = "https://" + HOST_NAME + bmsClient.bluemixRegionSuffix! + UPLOAD_PATH + appGuid
         
         let logPayload = "[" + logs + "]"
         
@@ -477,14 +506,14 @@ extension Logger {
         var errorCode: Int
         switch uninitializedClass {
         case "Analytics":
-            errorCode = MFPErrorCode.AnalyticsNotInitialized.rawValue
+            errorCode = AnalyticsErrorCode.AnalyticsNotInitialized.rawValue
         case "BMSClient":
             errorCode = MFPErrorCode.ClientNotInitialized.rawValue
         default:
             errorCode = -1
         }
         
-        let error = NSError(domain: MFP_CORE_ERROR_DOMAIN, code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+        let error = NSError(domain: ANALYTICS_ERROR_CODE, code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
         
         callback(nil, error)
     }
