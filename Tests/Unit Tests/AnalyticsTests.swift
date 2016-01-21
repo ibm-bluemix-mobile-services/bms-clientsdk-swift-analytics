@@ -12,7 +12,7 @@
 */
 
 import XCTest
-//import BMSCore
+import BMSCore
 @testable import BMSAnalytics
 
 class AnalyticsTests: XCTestCase {
@@ -148,35 +148,60 @@ class AnalyticsTests: XCTestCase {
         XCTAssert(requestMetadata!.containsString("\"mfpAppName\":\"Test app\""))
     }
 
-    // TODO: Reinstate this test once this class can access BMSCore
-//    func testGenerateInboundResponseMetadata() {
-//        
-//        let requestUrl = "http://example.com"
-//        let request = Request(url: requestUrl, headers: nil, queryParameters: nil)
-//        request.startTime = NSDate.timeIntervalSinceReferenceDate()
-//        request.trackingId = NSUUID().UUIDString
-//        request.sendWithCompletionHandler(nil)
-//        
-//        let responseData = "{\"key1\": \"value1\", \"key2\": \"value2\"}".dataUsingEncoding(NSUTF8StringEncoding)
-//        let httpURLResponse = NSHTTPURLResponse(URL: NSURL(string: "http://example.com")!, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: ["key": "value"])
-//        let response = Response(responseData: responseData!, httpResponse: httpURLResponse, isRedirect: true)
-//        
-//        let responseMetadata = Analytics.generateInboundResponseMetadata(request, response: response, url: requestUrl)
-//        
-//        let outboundTime = responseMetadata["$outboundTimestamp"] as? NSTimeInterval
-//        let inboundTime = responseMetadata["$inboundTimestamp"] as? NSTimeInterval
-//        let roundTripTime = responseMetadata["$roundTripTime"] as? NSTimeInterval
-//        
-//        XCTAssertNotNil(outboundTime)
-//        XCTAssertNotNil(inboundTime)
-//        XCTAssertNotNil(roundTripTime)
-//        
-//        XCTAssert(inboundTime > outboundTime)
-//        XCTAssert(roundTripTime > 0)
-//        
-//        let responseBytes = responseMetadata["$bytesReceived"] as? Int
-//        XCTAssertNotNil(responseBytes)
-//        XCTAssert(responseBytes == 36)
-//    }
+    func testGenerateInboundResponseMetadata() {
+        
+        class MockRequest: MFPRequest {
+            
+            override var startTime: NSTimeInterval {
+                get {
+                    return 0
+                }
+                set { }
+            }
+            
+            override var trackingId: String {
+                get {
+                    return ""
+                }
+                set { }
+            }
+            
+            init() {
+                super.init(url: "", headers: nil, queryParameters: nil)
+            }
+        }
+        
+        class MockResponse: Response {
+            
+            init() {
+                let responseInfo = "{\"key1\": \"value1\", \"key2\": \"value2\"}".dataUsingEncoding(NSUTF8StringEncoding)
+                let urlResponse = NSHTTPURLResponse(URL: NSURL(string: "http://example.com")!, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: ["key": "value"])
+                super.init(responseData: responseInfo, httpResponse: urlResponse, isRedirect: true)
+            }
+        }
+        
+        let requestUrl = "http://example.com"
+        let request = MockRequest()
+        request.sendWithCompletionHandler(nil)
+        
+        let response = MockResponse()
+        
+        let responseMetadata = Analytics.generateInboundResponseMetadata(request, response: response, url: requestUrl)
+        
+        let outboundTime = responseMetadata["$outboundTimestamp"] as? NSTimeInterval
+        let inboundTime = responseMetadata["$inboundTimestamp"] as? NSTimeInterval
+        let roundTripTime = responseMetadata["$roundTripTime"] as? NSTimeInterval
+        
+        XCTAssertNotNil(outboundTime)
+        XCTAssertNotNil(inboundTime)
+        XCTAssertNotNil(roundTripTime)
+        
+        XCTAssert(inboundTime > outboundTime)
+        XCTAssert(roundTripTime > 0)
+        
+        let responseBytes = responseMetadata["$bytesReceived"] as? Int
+        XCTAssertNotNil(responseBytes)
+        XCTAssert(responseBytes == 36)
+    }
     
 }

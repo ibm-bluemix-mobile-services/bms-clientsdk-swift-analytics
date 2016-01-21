@@ -5,13 +5,13 @@ use_frameworks!
 def import_pods_iOS
 	platform :ios, '8.0'
 #    pod 'BMSCore'
-    pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'analytics-removal', :commit => '6a8739762070802a724aea6b11ab54fb6b7dbe5b'
+    pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'analytics-removal', :commit => 'a6c90ae44eb910f53a316dfa79337f142a1eb3dc'
 end
 
 def import_pods_watchOS
 	platform :watchos, '2.0'
 #    pod 'BMSCore'
-    pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'analytics-removal', :commit => '6a8739762070802a724aea6b11ab54fb6b7dbe5b'
+    pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'analytics-removal', :commit => 'a6c90ae44eb910f53a316dfa79337f142a1eb3dc'
 end
 
 
@@ -21,7 +21,7 @@ target 'BMSAnalytics' do
 end
 
 target 'BMSAnalyticsTests' do
-
+    import_pods_iOS
 end
 
 target 'BMSAnalyticsWatchOS' do
