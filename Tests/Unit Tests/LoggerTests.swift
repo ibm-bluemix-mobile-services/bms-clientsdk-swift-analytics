@@ -112,12 +112,18 @@ class LoggerTests: XCTestCase {
         
         loggerInstance.analytics(meta)
         
-        let formattedContents = try! String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let jsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
-        let debugMessage = jsonDict![0]
+        let debugMessage = jsonDict[0]
         XCTAssertTrue(debugMessage[Logger.TAG_MESSAGE] == "")
         XCTAssertTrue(debugMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(debugMessage[Logger.TAG_TIMESTAMP] != nil)
@@ -173,36 +179,42 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
 
-        let formattedContents = try! String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let jsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
-        let debugMessage = jsonDict![0]
+        let debugMessage = jsonDict[0]
         XCTAssertTrue(debugMessage[Logger.TAG_MESSAGE] == "Hello world")
         XCTAssertTrue(debugMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(debugMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(debugMessage[Logger.TAG_LEVEL] == "DEBUG")
         
-        let infoMessage = jsonDict![1]
+        let infoMessage = jsonDict[1]
         XCTAssertTrue(infoMessage[Logger.TAG_MESSAGE] == "1242342342343243242342")
         XCTAssertTrue(infoMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(infoMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(infoMessage[Logger.TAG_LEVEL] == "INFO")
         
-        let warnMessage = jsonDict![2]
+        let warnMessage = jsonDict[2]
         XCTAssertTrue(warnMessage[Logger.TAG_MESSAGE] == "Str: heyoooooo")
         XCTAssertTrue(warnMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(warnMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(warnMessage[Logger.TAG_LEVEL] == "WARN")
         
-        let errorMessage = jsonDict![3]
+        let errorMessage = jsonDict[3]
         XCTAssertTrue(errorMessage[Logger.TAG_MESSAGE] == "1 2 3 4")
         XCTAssertTrue(errorMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(errorMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(errorMessage[Logger.TAG_LEVEL] == "ERROR")
         
-        let fatalMessage = jsonDict![4]
+        let fatalMessage = jsonDict[4]
         XCTAssertTrue(fatalMessage[Logger.TAG_MESSAGE] == "StephenColbert")
         XCTAssertTrue(fatalMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
@@ -235,36 +247,42 @@ class LoggerTests: XCTestCase {
         loggerInstance.fatal("StephenColbert")
     
         
-        let formattedContents = try! String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let jsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
 
-        let debugMessage = jsonDict![0]
+        let debugMessage = jsonDict[0]
         XCTAssertTrue(debugMessage[Logger.TAG_MESSAGE] == "Hello world")
         XCTAssertTrue(debugMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(debugMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(debugMessage[Logger.TAG_LEVEL] == "DEBUG")
 
-        let infoMessage = jsonDict![1]
+        let infoMessage = jsonDict[1]
         XCTAssertTrue(infoMessage[Logger.TAG_MESSAGE] == "1242342342343243242342")
         XCTAssertTrue(infoMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(infoMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(infoMessage[Logger.TAG_LEVEL] == "INFO")
 
-        let warnMessage = jsonDict![2]
+        let warnMessage = jsonDict[2]
         XCTAssertTrue(warnMessage[Logger.TAG_MESSAGE] == "Str: heyoooooo")
         XCTAssertTrue(warnMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(warnMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(warnMessage[Logger.TAG_LEVEL] == "WARN")
 
-        let errorMessage = jsonDict![3]
+        let errorMessage = jsonDict[3]
         XCTAssertTrue(errorMessage[Logger.TAG_MESSAGE] == "1 2 3 4")
         XCTAssertTrue(errorMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(errorMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(errorMessage[Logger.TAG_LEVEL] == "ERROR")
 
-        let fatalMessage = jsonDict![4]
+        let fatalMessage = jsonDict[4]
         XCTAssertTrue(fatalMessage[Logger.TAG_MESSAGE] == "StephenColbert")
         XCTAssertTrue(fatalMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
@@ -360,14 +378,20 @@ class LoggerTests: XCTestCase {
         
         Logger.logException(e)
         
-        let formattedContents = try! String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
         let fileContents = "[\(formattedContents)]"
         let reason = e.reason!
         let errorMessage = "Uncaught Exception: \(e.name)." + " Reason: \(reason)."
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let jsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
-        let exception = jsonDict![0]
+        let exception = jsonDict[0]
         XCTAssertTrue(exception[Logger.TAG_MESSAGE] == errorMessage)
         XCTAssertTrue(exception[Logger.TAG_PACKAGE] == Logger.MFP_LOGGER_PACKAGE)
         XCTAssertTrue(exception[Logger.TAG_TIMESTAMP] != nil)
@@ -412,33 +436,36 @@ class LoggerTests: XCTestCase {
         let fileContents = "[\(logs)]"
         
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let jsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
-        let debugMessage = jsonDict![0]
+        let debugMessage = jsonDict[0]
         XCTAssertTrue(debugMessage[Logger.TAG_MESSAGE] == "Hello world")
         XCTAssertTrue(debugMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(debugMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(debugMessage[Logger.TAG_LEVEL] == "DEBUG")
         
-        let infoMessage = jsonDict![1]
+        let infoMessage = jsonDict[1]
         XCTAssertTrue(infoMessage[Logger.TAG_MESSAGE] == "1242342342343243242342")
         XCTAssertTrue(infoMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(infoMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(infoMessage[Logger.TAG_LEVEL] == "INFO")
         
-        let warnMessage = jsonDict![2]
+        let warnMessage = jsonDict[2]
         XCTAssertTrue(warnMessage[Logger.TAG_MESSAGE] == "Str: heyoooooo")
         XCTAssertTrue(warnMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(warnMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(warnMessage[Logger.TAG_LEVEL] == "WARN")
         
-        let errorMessage = jsonDict![3]
+        let errorMessage = jsonDict[3]
         XCTAssertTrue(errorMessage[Logger.TAG_MESSAGE] == "1 2 3 4")
         XCTAssertTrue(errorMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(errorMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(errorMessage[Logger.TAG_LEVEL] == "ERROR")
         
-        let fatalMessage = jsonDict![4]
+        let fatalMessage = jsonDict[4]
         XCTAssertTrue(fatalMessage[Logger.TAG_MESSAGE] == "StephenColbert")
         XCTAssertTrue(fatalMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
@@ -482,9 +509,12 @@ class LoggerTests: XCTestCase {
         let fileContents = "[\(logs)]"
         
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let jsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
-        let analyticsMessage = jsonDict![0]
+        let analyticsMessage = jsonDict[0]
         XCTAssertTrue(analyticsMessage[Logger.TAG_MESSAGE] == "")
         XCTAssertTrue(analyticsMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(analyticsMessage[Logger.TAG_TIMESTAMP] != nil)
@@ -513,9 +543,13 @@ class LoggerTests: XCTestCase {
         
         let bundle = NSBundle(forClass: self.dynamicType)
         let path = bundle.pathForResource("LargeData", ofType: "txt")
-        let largeData = try! String(contentsOfFile: path!)
         
         let loggerInstance = Logger.getLoggerForName(fakePKG)
+        guard let largeData = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
+        
         Logger.logStoreEnabled = true
         Logger.sdkDebugLoggingEnabled = false
         Logger.logLevelFilter = LogLevel.Debug
@@ -529,42 +563,54 @@ class LoggerTests: XCTestCase {
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToOverflow))
         
-        var formattedContents = try! String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
         var fileContents = "[\(formattedContents)]"
         var logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        var jsonDict: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let jsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
-        let infoMessage = jsonDict![0]
+        let infoMessage = jsonDict[0]
         XCTAssertTrue(infoMessage[Logger.TAG_MESSAGE] == "1242342342343243242342")
         XCTAssertTrue(infoMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(infoMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(infoMessage[Logger.TAG_LEVEL] == "INFO")
         
-        let warnMessage = jsonDict![1]
+        let warnMessage = jsonDict[1]
         XCTAssertTrue(warnMessage[Logger.TAG_MESSAGE] == "Str: heyoooooo")
         XCTAssertTrue(warnMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(warnMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(warnMessage[Logger.TAG_LEVEL] == "WARN")
         
-        let errorMessage = jsonDict![2]
+        let errorMessage = jsonDict[2]
         XCTAssertTrue(errorMessage[Logger.TAG_MESSAGE] == "1 2 3 4")
         XCTAssertTrue(errorMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(errorMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(errorMessage[Logger.TAG_LEVEL] == "ERROR")
         
-        let fatalMessage = jsonDict![3]
+        let fatalMessage = jsonDict[3]
         XCTAssertTrue(fatalMessage[Logger.TAG_MESSAGE] == "StephenColbert")
         XCTAssertTrue(fatalMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(fatalMessage[Logger.TAG_LEVEL] == "FATAL")
         
-        formattedContents = try! String(contentsOfFile: pathToOverflow, encoding: NSUTF8StringEncoding)
-        fileContents = "[\(formattedContents)]"
+        guard let newFormattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
+        fileContents = "[\(newFormattedContents)]"
         logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        jsonDict = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let newJsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
         
-        let overflowMessage = jsonDict![0]
+        let overflowMessage = newJsonDict[0]
         XCTAssertTrue(overflowMessage[Logger.TAG_MESSAGE] == largeData)
         XCTAssertTrue(overflowMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(overflowMessage[Logger.TAG_TIMESTAMP] != nil)
@@ -612,9 +658,12 @@ class LoggerTests: XCTestCase {
         var formattedContents = try! String(contentsOfFile: pathToOverflow, encoding: NSUTF8StringEncoding)
         var fileContents = "[\(formattedContents)]"
         var logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        var jsonDict: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let jsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
-        XCTAssertTrue(jsonDict!.count == 1)
+        XCTAssertTrue(jsonDict.count == 1)
         
         loggerInstance.debug(largeData)
         
@@ -622,10 +671,13 @@ class LoggerTests: XCTestCase {
         formattedContents = try! String(contentsOfFile: pathToOverflow, encoding: NSUTF8StringEncoding)
         fileContents = "[\(formattedContents)]"
         logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        jsonDict = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let newJsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
         
-        XCTAssertTrue(jsonDict!.count == 1)
+        XCTAssertTrue(newJsonDict.count == 1)
 
     }
     
@@ -730,13 +782,19 @@ class LoggerTests: XCTestCase {
         
         XCTAssertNil(request)
         
-        let formattedContents = try! String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
         let fileContents = "[\(formattedContents)]"
         let logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
         
+        guard let newJsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
-        let error = jsonDict[0]
+        let error = newJsonDict[0]
         XCTAssertTrue(error[Logger.TAG_MESSAGE] != nil)
         XCTAssertTrue(error[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(error[Logger.TAG_TIMESTAMP] != nil)
@@ -746,10 +804,8 @@ class LoggerTests: XCTestCase {
     func testBuildLogSendRequestFail(){
         let fakePKG = Logger.MFP_LOGGER_PACKAGE
         let missingValue = "bluemixAppGUID"
-        let bmsClient = BMSClient.sharedInstance
-        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegionSuffix: BMSClient.REGION_US_SOUTH)
-        // TODO: Make these tests pass without the commented-out method
-//        bmsClient.uninitalizeBluemixAppGUID()
+        // TODO: Cannot uninitialize BMSClient
+        // Oops, we forgot to initialize the BMSClient!
         Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
         let msg = "No value found for the BMSClient \(missingValue) property."
         let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
@@ -797,13 +853,19 @@ class LoggerTests: XCTestCase {
         
         XCTAssertNil(request)
         
-        let formattedContents = try! String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
         let fileContents = "[\(formattedContents)]"
         let logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let newJsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
         
-        let error = jsonDict[0]
+        let error = newJsonDict[0]
         XCTAssertTrue(error[Logger.TAG_MESSAGE] == msg)
         XCTAssertTrue(error[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(error[Logger.TAG_TIMESTAMP] != nil)
@@ -814,9 +876,8 @@ class LoggerTests: XCTestCase {
     func testBuildLogSendRequestGUIDFail(){
         let fakePKG = Logger.MFP_LOGGER_PACKAGE
         let missingValue = "bluemixAppGUID"
-        let bmsClient = BMSClient.sharedInstance
-        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegionSuffix: BMSClient.REGION_US_SOUTH)
-//        bmsClient.uninitalizeBluemixAppGUID()
+        // TODO: Cannot uninitialize BMSClient
+        // Oops, we forgot to initialize the BMSClient!
         Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
         let msg = "No value found for the BMSClient \(missingValue) property."
         let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
@@ -864,13 +925,20 @@ class LoggerTests: XCTestCase {
         
         XCTAssertNil(request)
         
-        let formattedContents = try! String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
+
         let fileContents = "[\(formattedContents)]"
         let logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let newJsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
         
-        let error = jsonDict[0]
+        let error = newJsonDict[0]
         XCTAssertTrue(error[Logger.TAG_MESSAGE] == msg)
         XCTAssertTrue(error[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(error[Logger.TAG_TIMESTAMP] != nil)
@@ -943,13 +1011,19 @@ class LoggerTests: XCTestCase {
         
         Logger.deleteBufferFile(pathToBuffer)
         
-        let formattedContents = try! String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        let jsonDict: AnyObject? = try! NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        guard let newJsonDict = getLogsAsJson(logDict) else {
+            XCTFail()
+            return
+        }
         
     
-        let error = jsonDict![0]
+        let error = newJsonDict[0]
         XCTAssertNotNil(error[Logger.TAG_MESSAGE])
         XCTAssertTrue(error[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(error[Logger.TAG_TIMESTAMP] != nil)
@@ -1010,6 +1084,28 @@ class LoggerTests: XCTestCase {
         XCTAssertEqual(Logger.extractFileNameFromPath(logFile3), "[Unknown]")
         XCTAssertEqual(Logger.extractFileNameFromPath(logFile4), "[Unknown]")
         XCTAssertEqual(Logger.extractFileNameFromPath(logFile5), "[Unknown]")
+    }
+    
+    
+    
+    // MARK: Helpers
+    
+    func getFileContents(pathToFile: String) -> String? {
+        do {
+            return try String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        }
+        catch {
+            return nil
+        }
+    }
+    
+    func getLogsAsJson(logDict: NSData) -> AnyObject? {
+        do {
+            return try NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        }
+        catch {
+            return nil
+        }
     }
     
 }

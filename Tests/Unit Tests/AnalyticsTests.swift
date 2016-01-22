@@ -171,20 +171,13 @@ class AnalyticsTests: XCTestCase {
             }
         }
         
-        class MockResponse: Response {
-            
-            init() {
-                let responseInfo = "{\"key1\": \"value1\", \"key2\": \"value2\"}".dataUsingEncoding(NSUTF8StringEncoding)
-                let urlResponse = NSHTTPURLResponse(URL: NSURL(string: "http://example.com")!, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: ["key": "value"])
-                super.init(responseData: responseInfo, httpResponse: urlResponse, isRedirect: true)
-            }
-        }
-        
         let requestUrl = "http://example.com"
         let request = MockRequest()
         request.sendWithCompletionHandler(nil)
         
-        let response = MockResponse()
+        let responseInfo = "{\"key1\": \"value1\", \"key2\": \"value2\"}".dataUsingEncoding(NSUTF8StringEncoding)
+        let urlResponse = NSHTTPURLResponse(URL: NSURL(string: "http://example.com")!, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: ["key": "value"])
+        let response = Response(responseData: responseInfo, httpResponse: urlResponse, isRedirect: false)
         
         let responseMetadata = Analytics.generateInboundResponseMetadata(request, response: response, url: requestUrl)
         
