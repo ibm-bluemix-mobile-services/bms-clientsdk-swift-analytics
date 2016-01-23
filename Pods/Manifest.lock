@@ -3,18 +3,18 @@ PODS:
 
 DEPENDENCIES:
   - BMSCore (from `https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git`,
-    commit `a6c90ae44eb910f53a316dfa79337f142a1eb3dc`, branch `analytics-removal`)
+    commit `685a300e3252b26f2f63641b35e929608a06d949`, branch `analytics-removal`)
 
 EXTERNAL SOURCES:
   BMSCore:
     :branch: analytics-removal
-    :commit: a6c90ae44eb910f53a316dfa79337f142a1eb3dc
+    :commit: 685a300e3252b26f2f63641b35e929608a06d949
     :git: https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git
 
 CHECKOUT OPTIONS:
   BMSCore:
     :branch: analytics-removal
-    :commit: a6c90ae44eb910f53a316dfa79337f142a1eb3dc
+    :commit: 685a300e3252b26f2f63641b35e929608a06d949
     :git: https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git
 
 SPEC CHECKSUMS:

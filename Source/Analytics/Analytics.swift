@@ -62,7 +62,7 @@ public class Analytics {
     
         This method must be called before sending `Analytics` or `Logger` logs.
         
-        - parameter appName:  The analytics data
+        - parameter appName:  The name of the current app
         - parameter apiKey:   A unique ID used to authenticate with the MFP analytics server
     */
     // TODO: Add parameter for analytics events
@@ -75,6 +75,9 @@ public class Analytics {
         if !apiKey.isEmpty {
             Analytics.apiKey = apiKey
         }
+        
+        // Register the LogSaver so that logs can start being stored on the device
+        Logger.logSaver = LogSaver()
     }
     
     

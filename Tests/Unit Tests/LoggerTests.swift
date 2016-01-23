@@ -15,7 +15,13 @@ import XCTest
 import BMSCore
 @testable import BMSAnalytics
 
+// TODO: Reduce usage of force casting (so that tests fail instead of crash)
+
 class LoggerTests: XCTestCase {
+    
+    override func setUp() {
+        Analytics.initializeWithAppName("Unit tests", apiKey: "adsf")
+    }
     
     func testIsUncaughtException(){
 
@@ -23,7 +29,6 @@ class LoggerTests: XCTestCase {
         XCTAssertFalse(Logger.isUncaughtExceptionDetected)
         Logger.isUncaughtExceptionDetected = true
         XCTAssertTrue(Logger.isUncaughtExceptionDetected)
-        
     }
 
     func testSetGetMaxLogStoreSize(){
@@ -48,45 +53,42 @@ class LoggerTests: XCTestCase {
     }
     
     func testGetFilesForLogLevel(){
-        let fakePKG = "MYPKG"
         let pathToLoggerFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
         let pathToAnalyticsFile = Logger.logsDocumentPath + Logger.FILE_ANALYTICS_LOGS
         let pathToLoggerFileOverflow = Logger.logsDocumentPath + Logger.FILE_LOGGER_OVERFLOW
         let pathToAnalyticsFileOverflow = Logger.logsDocumentPath + Logger.FILE_ANALYTICS_OVERFLOW
-        
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
     
-        var (logFile, logOverflowFile, fileDispatchQueue) = loggerInstance.getFilesForLogLevel(LogLevel.Debug)
+        var (logFile, logOverflowFile, fileDispatchQueue) = LogSaver.getFilesForLogLevel(LogLevel.Debug)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = loggerInstance.getFilesForLogLevel(LogLevel.Error)
+        (logFile, logOverflowFile, fileDispatchQueue) = LogSaver.getFilesForLogLevel(LogLevel.Error)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = loggerInstance.getFilesForLogLevel(LogLevel.Fatal)
+        (logFile, logOverflowFile, fileDispatchQueue) = LogSaver.getFilesForLogLevel(LogLevel.Fatal)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = loggerInstance.getFilesForLogLevel(LogLevel.Info)
+        (logFile, logOverflowFile, fileDispatchQueue) = LogSaver.getFilesForLogLevel(LogLevel.Info)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = loggerInstance.getFilesForLogLevel(LogLevel.Error)
+        (logFile, logOverflowFile, fileDispatchQueue) = LogSaver.getFilesForLogLevel(LogLevel.Error)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = loggerInstance.getFilesForLogLevel(LogLevel.Analytics)
+        (logFile, logOverflowFile, fileDispatchQueue) = LogSaver.getFilesForLogLevel(LogLevel.Analytics)
         
         XCTAssertTrue(logFile == pathToAnalyticsFile)
         XCTAssertTrue(logOverflowFile == pathToAnalyticsFileOverflow)
@@ -545,7 +547,7 @@ class LoggerTests: XCTestCase {
         let path = bundle.pathForResource("LargeData", ofType: "txt")
         
         let loggerInstance = Logger.getLoggerForName(fakePKG)
-        guard let largeData = getFileContents(pathToFile) else {
+        guard let largeData = getFileContents(path!) else {
             XCTFail()
             return
         }
@@ -1079,11 +1081,11 @@ class LoggerTests: XCTestCase {
         let logFile5 = "sdajfasldkfjalksfdj"
         
         
-        XCTAssertEqual(Logger.extractFileNameFromPath(logFile1), "file.txt")
-        XCTAssertEqual(Logger.extractFileNameFromPath(logFile2), "slashes.log.txt")
-        XCTAssertEqual(Logger.extractFileNameFromPath(logFile3), "[Unknown]")
-        XCTAssertEqual(Logger.extractFileNameFromPath(logFile4), "[Unknown]")
-        XCTAssertEqual(Logger.extractFileNameFromPath(logFile5), "[Unknown]")
+        XCTAssertEqual(LogSaver.extractFileNameFromPath(logFile1), "file.txt")
+        XCTAssertEqual(LogSaver.extractFileNameFromPath(logFile2), "slashes.log.txt")
+        XCTAssertEqual(LogSaver.extractFileNameFromPath(logFile3), "[Unknown]")
+        XCTAssertEqual(LogSaver.extractFileNameFromPath(logFile4), "[Unknown]")
+        XCTAssertEqual(LogSaver.extractFileNameFromPath(logFile5), "[Unknown]")
     }
     
     
