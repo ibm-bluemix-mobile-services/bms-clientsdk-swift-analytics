@@ -600,7 +600,7 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(fatalMessage[Logger.TAG_LEVEL] == "FATAL")
         
-        guard let newFormattedContents = getFileContents(pathToFile) else {
+        guard let newFormattedContents = getFileContents(pathToOverflow) else {
             XCTFail()
             return
         }
@@ -692,13 +692,11 @@ class LoggerTests: XCTestCase {
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegionSuffix: BMSClient.REGION_US_SOUTH)
         Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
-        let url = "https://" + Logger.HOST_NAME + BMSClient.REGION_US_SOUTH + Logger.UPLOAD_PATH + bmsClient.bluemixAppGUID!
+        let url = "https://" + Logger.HOST_NAME + "." + BMSClient.REGION_US_SOUTH + Logger.UPLOAD_PATH
         
         Analytics.initializeWithAppName(APP_NAME, apiKey: API_KEY)
         
         let headers = ["Content-Type": "application/json", Logger.API_ID_HEADER: API_KEY]
-
-        
 
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
@@ -725,21 +723,13 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        let logs: String! =  try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
-        
-        let formattedLogs = "[\(logs)]"
-        
-        XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
-        
-        let (request, payload) = Logger.buildLogSendRequest(logs) { (response, error) -> Void in
-        }!
+        let request = Logger.buildLogSendRequest() { (response, error) -> Void in
+            }!
         
         XCTAssertTrue(request.resourceUrl == url)
         XCTAssertTrue(request.headers == headers)
         XCTAssertNil(request.queryParameters)
         XCTAssertTrue(request.httpMethod == HttpMethod.POST)
-        
-        XCTAssertTrue(payload == formattedLogs)
     }
     
     func testBuildLogSendRequestAPIKeyEmptyStringFail(){
@@ -775,11 +765,11 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        let logs: String! =  try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
-        
+        try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
-        let request = Logger.buildLogSendRequest(logs) { (response, error) -> Void in
+        let request = Logger.buildLogSendRequest() { (response, error) -> Void in
         }
         
         XCTAssertNil(request)
@@ -845,10 +835,11 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        let logs: String! = try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+        try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+        
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
-        let request = Logger.buildLogSendRequest(logs) { (response, error) -> Void in
+        let request = Logger.buildLogSendRequest { (response, error) -> Void in
                 XCTAssertNil(response)
                 XCTAssertNotNil(error)
         }
@@ -917,10 +908,10 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        let logs: String! = try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+        try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
-        let request = Logger.buildLogSendRequest(logs) { (response, error) -> Void in
+        let request = Logger.buildLogSendRequest { (response, error) -> Void in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
         }
@@ -974,7 +965,7 @@ class LoggerTests: XCTestCase {
         }
     }
     
-    func testDeleteBufferFileFail(){
+    func testDeleteFileFail(){
         let fakePKG = "mfpsdk.logger"
         let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
         let pathToBuffer = Logger.logsDocumentPath + Logger.FILE_LOGGER_SEND
@@ -1011,29 +1002,12 @@ class LoggerTests: XCTestCase {
             
         }
         
-        Logger.deleteBufferFile(pathToBuffer)
+        Logger.deleteFile(Logger.FILE_LOGGER_SEND)
         
-        guard let formattedContents = getFileContents(pathToFile) else {
-            XCTFail()
-            return
-        }
-        let fileContents = "[\(formattedContents)]"
-        let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let newJsonDict = getLogsAsJson(logDict) else {
-            XCTFail()
-            return
-        }
-        
-    
-        let error = newJsonDict[0]
-        XCTAssertNotNil(error[Logger.TAG_MESSAGE])
-        XCTAssertTrue(error[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(error[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(error[Logger.TAG_LEVEL] == "ERROR")
-        
+        XCTAssertFalse(NSFileManager().fileExistsAtPath(pathToBuffer))
     }
     
-    func testDeleteBufferFile(){
+    func testDeleteFile(){
         let fakePKG = "MYPKG"
         let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
         let pathToBuffer = Logger.logsDocumentPath + Logger.FILE_LOGGER_SEND
@@ -1067,7 +1041,7 @@ class LoggerTests: XCTestCase {
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
-        Logger.deleteBufferFile(pathToBuffer)
+        Logger.deleteFile(Logger.FILE_LOGGER_SEND)
         
         XCTAssertFalse(NSFileManager().fileExistsAtPath(pathToBuffer))
     }

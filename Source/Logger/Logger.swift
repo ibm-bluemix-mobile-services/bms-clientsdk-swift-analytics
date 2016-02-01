@@ -230,7 +230,7 @@ extension Logger {
             if error == nil && response?.statusCode == 201 {
                 Logger.internalLogger.debug("Client logs successfully sent to the server.")
                 
-                deleteBufferFile(FILE_LOGGER_SEND)
+                deleteFile(FILE_LOGGER_SEND)
                 // Remove the uncaught exception flag since the logs containing the exception(s) have just been sent to the server
                 NSUserDefaults.standardUserDefaults().setBool(false, forKey: TAG_UNCAUGHT_EXCEPTION)
             }
@@ -244,16 +244,20 @@ extension Logger {
         // Use a serial queue to ensure that the same logs do not get sent more than once
         dispatch_async(Logger.sendLogsToServerQueue) { () -> Void in
             do {
+                // Gather the logs and put them in a JSON object
                 let logsToSend: String? = try getLogs(fileName: FILE_LOGGER_LOGS, overflowFileName: FILE_LOGGER_OVERFLOW, bufferFileName: FILE_LOGGER_SEND)
-                if logsToSend != nil {
-                    if let (request, logPayload) = buildLogSendRequest(logsToSend!, withCallback: logSendCallback){
-                        // Everything went as expected, so send the logs!
-                        request.sendString(logPayload, withCompletionHandler: logSendCallback)
-                    }
-                    
+                var logPayloadData = try NSJSONSerialization.dataWithJSONObject([], options: [])
+                if let logPayload = logsToSend {
+                    let logPayloadJson = ["__logdata": logPayload]
+                    logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
                 }
                 else {
                     Logger.internalLogger.info("There are no logs to send.")
+                }
+                
+                // Send the request, even if there are no logs to send (to keep track of device info)
+                if let request = buildLogSendRequest(logSendCallback) {
+                    request.sendData(logPayloadData, withCompletionHandler: logSendCallback)
                 }
             }
             catch let error as NSError {
@@ -272,7 +276,7 @@ extension Logger {
             if error == nil && response?.statusCode == 201 {
                 Analytics.logger.debug("Analytics data successfully sent to the server.")
                 
-                deleteBufferFile(FILE_ANALYTICS_SEND)
+                deleteFile(FILE_ANALYTICS_SEND)
             }
             else {
                 Analytics.logger.error("Request to send analytics data to the server has failed.")
@@ -284,15 +288,20 @@ extension Logger {
         // Use a serial queue to ensure that the same analytics data do not get sent more than once
         dispatch_async(Logger.sendAnalyticsToServerQueue) { () -> Void in
             do {
-                let logsToSend: String? = try getLogs(fileName: FILE_ANALYTICS_LOGS, overflowFileName:FILE_ANALYTICS_OVERFLOW, bufferFileName: FILE_ANALYTICS_SEND)
-                if logsToSend != nil {
-                    if let (request, logPayload) = buildLogSendRequest(logsToSend!, withCallback: analyticsSendCallback){
-                        request.sendString(logPayload, withCompletionHandler: analyticsSendCallback)
-                    }
-
+                // Gather the logs and put them in a JSON object
+                let logsToSend: String? = try getLogs(fileName: FILE_ANALYTICS_LOGS, overflowFileName: FILE_ANALYTICS_OVERFLOW, bufferFileName: FILE_ANALYTICS_SEND)
+                var logPayloadData = try NSJSONSerialization.dataWithJSONObject([], options: [])
+                if let logPayload = logsToSend {
+                    let logPayloadJson = ["__logdata": logPayload]
+                    logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
                 }
                 else {
                     Analytics.logger.info("There are no analytics data to send.")
+                }
+                
+                // Send the request, even if there are no logs to send (to keep track of device info)
+                if let request = buildLogSendRequest(analyticsSendCallback) {
+                    request.sendData(logPayloadData, withCompletionHandler: analyticsSendCallback)
                 }
             }
             catch let error as NSError {
@@ -303,13 +312,14 @@ extension Logger {
     
     
     // Build the Request object that will be used to send the logs to the server
-    internal static func buildLogSendRequest(logs: String, withCallback callback: MfpCompletionHandler) -> (MFPRequest, String)? {
+    internal static func buildLogSendRequest(callback: MfpCompletionHandler) -> MFPRequest? {
         
         let bmsClient = BMSClient.sharedInstance
         var headers = ["Content-Type": "application/json"]
-    
-        guard let appGuid = bmsClient.bluemixAppGUID else {
-            returnInitializationError("BMSClient", missingValue: "bluemixAppGUID", callback: callback)
+        
+        // Only the region is required to communicate with the Analytics service. App route and GUID are not required.
+        guard bmsClient.bluemixRegionSuffix != nil && bmsClient.bluemixRegionSuffix != "" else {
+            returnInitializationError("BMSClient", missingValue: "bluemixRegionSuffix", callback: callback)
             return nil
         }
         
@@ -319,13 +329,10 @@ extension Logger {
         }
         
         headers[API_ID_HEADER] = Analytics.apiKey!
-    
-        let logUploaderUrl = "https://" + HOST_NAME + bmsClient.bluemixRegionSuffix! + UPLOAD_PATH + appGuid
         
-        let logPayload = "[" + logs + "]"
+        let logUploaderUrl = "https://" + HOST_NAME + "." + bmsClient.bluemixRegionSuffix! + UPLOAD_PATH
         
-        let request = MFPRequest(url: logUploaderUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
-        return (request, logPayload)
+        return MFPRequest(url: logUploaderUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
     }
     
     
@@ -409,15 +416,17 @@ extension Logger {
     }
     
     
-    // The buffer file is typically the one used for storing logs that will be sent to the server
-    internal static func deleteBufferFile(bufferFile: String) {
+    // For deleting files where only the file name is supplied, not the full path
+    internal static func deleteFile(fileName: String) {
         
-        if Logger.fileManager.isDeletableFileAtPath(bufferFile) {
+        let pathToFile = Logger.logsDocumentPath + fileName
+        
+        if Logger.fileManager.fileExistsAtPath(pathToFile) && Logger.fileManager.isDeletableFileAtPath(pathToFile) {
             do {
-                try Logger.fileManager.removeItemAtPath(bufferFile)
+                try Logger.fileManager.removeItemAtPath(pathToFile)
             }
             catch let error {
-                Logger.internalLogger.error("Failed to delete log file \(bufferFile) after sending. Error: \(error)")
+                Logger.internalLogger.error("Failed to delete log file \(fileName) after sending. Error: \(error)")
             }
         }
     }
