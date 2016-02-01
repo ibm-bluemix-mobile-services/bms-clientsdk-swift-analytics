@@ -22,14 +22,12 @@ public class Analytics {
     
     // MARK: Constants
     
-    internal static let TAG_SESSION = "$session"
-    internal static let TAG_CATEGORY_EVENT = "event"
-    
+    internal static let KEY_METADATA_SESSIONID = "$appSessionID"
     internal static let KEY_METADATA_DURATION = "$duration"
-    internal static let KEY_METADATA_TYPE = "$type"
     internal static let KEY_METADATA_CATEGORY = "$category"
     internal static let KEY_METADATA_CLOSEDBY = "$closedBy"
     
+    internal static let TAG_CATEGORY_APP_SESSION = "appSession"
     
     
     // MARK: Properties (public)
@@ -123,8 +121,8 @@ public class Analytics {
         
         Analytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
         
-        lifecycleEvents[KEY_METADATA_CATEGORY] = TAG_CATEGORY_EVENT
-        lifecycleEvents[KEY_METADATA_TYPE] = TAG_SESSION
+        lifecycleEvents[KEY_METADATA_CATEGORY] = TAG_CATEGORY_APP_SESSION
+        lifecycleEvents[KEY_METADATA_SESSIONID] = NSUUID().UUIDString
     }
     
     

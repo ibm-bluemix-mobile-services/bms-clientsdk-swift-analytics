@@ -52,17 +52,18 @@ class AnalyticsTests: XCTestCase {
         1) Call logSessionStart(), which should update Analytics.lifecycleEvents and Analytics.startTime.
         2) Call logSessionStart() again. This should cause Analytics.lifecycleEvents to be updated:
             - The original start time should be replaced with the new start time.
-            - The session (TAG_SESSION) is a unique ID that should contain a different value each time logSessionStart()
+            - The session (TAG_CATEGORY_APP_SESSION) is a unique ID that should contain a different value each time logSessionStart()
                 is called.
      */
     func testLogSessionStartUpdatesCorrectly() {
-
+        
         XCTAssertTrue(Analytics.lifecycleEvents.isEmpty)
         XCTAssertEqual(Analytics.startTime, 0)
         
         Analytics.logSessionStart()
         
         let firstSessionStartTime = Analytics.startTime
+        let firstSessionId = Analytics.lifecycleEvents[Analytics.KEY_METADATA_SESSIONID] as! String
         XCTAssert(firstSessionStartTime > 0)
         
         // Need a little time delay so that the first and second sessions don't have the same start time
@@ -72,8 +73,11 @@ class AnalyticsTests: XCTestCase {
             Analytics.logSessionStart()
             
             let secondSessionStartTime = Analytics.startTime
+            let secondSessionId = Analytics.lifecycleEvents[Analytics.KEY_METADATA_SESSIONID] as! String
             
             XCTAssertTrue(secondSessionStartTime > firstSessionStartTime)
+            XCTAssertNotEqual(firstSessionId, secondSessionId)
+            
         }
     }
     
@@ -83,7 +87,7 @@ class AnalyticsTests: XCTestCase {
         2) Call logSessionEnd(). This should reset Analytics.lifecycleEvents by removing the session ID.
         3) Call logSessionStart() again. This should cause Analytics.lifecycleEvents to be updated:
             - The original start time should be replaced with the new start time.
-            - The session (TAG_SESSION) is a unique ID that should contain a different value each time logSessionStart()
+            - The session (TAG_CATEGORY_APP_SESSION) is a unique ID that should contain a different value each time logSessionStart()
                 is called.
      */
     func testLogSessionAfterCompleteSession() {
@@ -94,6 +98,7 @@ class AnalyticsTests: XCTestCase {
         Analytics.logSessionStart()
         
         let firstSessionStartTime = Analytics.startTime
+        let firstSessionId = Analytics.lifecycleEvents[Analytics.KEY_METADATA_SESSIONID] as! String
         
         Analytics.logSessionEnd()
         
@@ -107,8 +112,10 @@ class AnalyticsTests: XCTestCase {
             Analytics.logSessionStart()
             
             let secondSessionStartTime = Analytics.startTime
+            let secondSessionId = Analytics.lifecycleEvents[Analytics.KEY_METADATA_SESSIONID] as! String
             
             XCTAssertTrue(secondSessionStartTime > firstSessionStartTime)
+            XCTAssertNotEqual(firstSessionId, secondSessionId)
         }
     }
     
