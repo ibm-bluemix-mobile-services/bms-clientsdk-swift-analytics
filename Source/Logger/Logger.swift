@@ -41,8 +41,8 @@ extension Logger {
     
     // MARK: Constants 
     
-    internal static let HOST_NAME = "mfp-analytics-server"
-    internal static let UPLOAD_PATH =  "/imfmobileanalytics/v1/receiver/apps/"
+    internal static let HOST_NAME = "mobile-analytics-dashboard"
+    internal static let UPLOAD_PATH =  "/analytics-service/data/events/clientlogs/"
     internal static let API_ID_HEADER = "x-mfp-analytics-api-key"
     
     internal static let TAG_METADATA = "metadata"
