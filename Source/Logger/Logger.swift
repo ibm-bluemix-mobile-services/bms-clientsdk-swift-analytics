@@ -72,7 +72,7 @@ extension Logger {
     
     /// Determines whether logs get written to file on the client device.
     /// Must be set to `true` to be able to send logs to the Bluemix server.
-    public static var logStoreEnabled: Bool = true
+    public static var logStoreEnabled: Bool = false
     
     /// The maximum file size (in bytes) for log storage.
     /// Both the Analytics and Logger log files are limited by `maxLogStoreSize`.
