@@ -29,6 +29,7 @@ public class Analytics {
     internal static let KEY_EVENT_START_TIME = "$startTime"
     internal static let KEY_METADATA_TYPE = "$type"
     internal static let KEY_METADATA_CATEGORY = "$category"
+    internal static let KEY_METADATA_CLOSEDBY = "$closedBy"
     
     
     
@@ -150,6 +151,14 @@ public class Analytics {
             logger.analytics(lifecycleEvents)
         }
         
+        // Let the Analytics service know how the app was last closed
+        if Logger.isUncaughtExceptionDetected {
+            lifecycleEvents[KEY_METADATA_CLOSEDBY] = AppClosedBy.CRASH.rawValue
+        }
+        else {
+            lifecycleEvents[KEY_METADATA_CLOSEDBY] = AppClosedBy.USER.rawValue
+        }
+        
         lifecycleEvents = [:]
     }
     
@@ -239,6 +248,14 @@ public class Analytics {
         return responseMetadata
     }
     
+}
+
+
+// How the last app session ended
+private enum AppClosedBy: String {
+    
+    case USER
+    case CRASH
 }
 
 
