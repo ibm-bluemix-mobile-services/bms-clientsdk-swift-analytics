@@ -48,6 +48,13 @@ class AnalyticsTests: XCTestCase {
     }
     
     
+    func testInitializeWithAppNameRegistersUncaughtExceptionHandler() {
+        
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
+        XCTAssertNotNil(NSGetUncaughtExceptionHandler())
+    }
+    
+    
     /**
         1) Call logSessionStart(), which should update Analytics.lifecycleEvents and Analytics.startTime.
         2) Call logSessionStart() again. This should cause Analytics.lifecycleEvents to be updated:

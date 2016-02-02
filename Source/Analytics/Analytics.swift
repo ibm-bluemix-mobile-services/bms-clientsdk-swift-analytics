@@ -98,6 +98,8 @@ public class Analytics {
         // Register the LogSaver so that logs can start being stored on the device
         Logger.logSaver = LogSaver()
         
+        Logger.startCapturingUncaughtExceptions()
+        
         // Package analytics metadata in a header for each request
         // Outbound request metadata is identical for all requests made on the same device from the same app
         MFPRequest.requestAnalyticsData = Analytics.generateOutboundRequestMetadata()
@@ -273,5 +275,6 @@ internal extension Analytics {
     internal static func uninitialize() {
         Analytics.apiKey = nil
         Analytics.appName = nil
+        NSSetUncaughtExceptionHandler(nil)
     }
 }

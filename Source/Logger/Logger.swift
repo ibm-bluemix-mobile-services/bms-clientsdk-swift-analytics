@@ -78,15 +78,6 @@ extension Logger {
     /// Both the Analytics and Logger log files are limited by `maxLogStoreSize`.
     public static var maxLogStoreSize: UInt64 = DEFAULT_MAX_STORE_SIZE
     
-    /// Enables log recording of app crashes due to uncaught exceptions.
-    public static var captureUncaughtExceptions: Bool = false {
-        didSet {
-            if captureUncaughtExceptions {
-                Logger.startCapturingUncaughtExceptions()
-            }
-        }
-    }
-    
     /// True if the app crashed recently due to an uncaught exception.
     /// This property will be set back to `false` if the logs are sent to the server.
     public static var isUncaughtExceptionDetected: Bool {
