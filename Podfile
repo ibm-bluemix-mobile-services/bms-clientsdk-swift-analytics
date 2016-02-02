@@ -3,7 +3,7 @@ use_frameworks!
 
 
 def pod_BMSCore
-    pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'analytics-removal', :commit => 'beac4faa17b4805c59667bfeca79222b4f01a6c7'
+    pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'analytics-removal', :commit => '5b423914285db7a70c6deac8cd6974ce5f698f65'
 end
 
 
