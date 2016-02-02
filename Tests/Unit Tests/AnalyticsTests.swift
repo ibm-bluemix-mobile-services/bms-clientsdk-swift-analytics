@@ -143,6 +143,12 @@ class AnalyticsTests: XCTestCase {
     }
     
     
+    func testGenerateOutboundRequestMetadata() {
+        
+        
+    }
+    
+    
     func testGenerateOutboundRequestMetadataWithoutAnalyticsAppName() {
         
         Analytics.uninitialize()
@@ -216,6 +222,22 @@ class AnalyticsTests: XCTestCase {
         let responseBytes = responseMetadata["$bytesReceived"] as? Int
         XCTAssertNotNil(responseBytes)
         XCTAssert(responseBytes == 36)
+    }
+
+
+    func testUniqueDeviceId() {
+        
+        let mfpUserDefaults = NSUserDefaults(suiteName: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore")
+        mfpUserDefaults?.removeObjectForKey("deviceId")
+        
+        // Generate new ID
+        let generatedId = Analytics.uniqueDeviceId
+        
+        // Since an ID was already created, this method should keep returning the same one
+        let retrievedId = Analytics.uniqueDeviceId
+        XCTAssertEqual(retrievedId, generatedId)
+        let retrievedId2 = Analytics.uniqueDeviceId
+        XCTAssertEqual(retrievedId2, generatedId)
     }
     
 }

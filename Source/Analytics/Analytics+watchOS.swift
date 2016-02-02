@@ -12,6 +12,9 @@
 */
 
 
+import WatchKit
+
+
 public extension Analytics {
     
     /**
@@ -36,4 +39,19 @@ public extension Analytics {
         
         Analytics.logSessionEnd()
     }
+    
+    
+    internal static func getWatchOSDeviceInfo() -> (String, String, String) {
+        
+        var osVersion = "", model = "", deviceId = ""
+        
+        let device = WKInterfaceDevice.currentDevice()
+        osVersion = device.systemVersion
+        // There is no "identifierForVendor" property for Apple Watch, so we generate a random ID
+        deviceId = Analytics.uniqueDeviceId
+        model = "Apple Watch"
+        
+        return (osVersion, model, deviceId)
+    }
+    
 }

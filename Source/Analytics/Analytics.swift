@@ -51,11 +51,27 @@ public class Analytics {
     // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)
     internal static var lifecycleEvents: [String: AnyObject] = [:]
     
+    // Create a UUID for the current device and save it to the keychain
+    // Currently only used for Apple Watch devices
+    internal static var uniqueDeviceId: String {
+        // First, check if a UUID was already created
+        let mfpUserDefaults = NSUserDefaults(suiteName: "com.ibm.mobilefirstplatform.clientsdk.swift.Analytics")
+        guard mfpUserDefaults != nil else {
+            Analytics.logger.error("Failed to get an ID for this device.")
+            return ""
+        }
+        
+        var deviceId = mfpUserDefaults!.stringForKey("deviceId")
+        if deviceId == nil {
+            deviceId = NSUUID().UUIDString
+            mfpUserDefaults!.setValue(deviceId, forKey: "deviceId")
+        }
+        return deviceId!
+    }
+    
     internal static var startTime: Int64 = 0
     
     
-    
-    // MARK: Methods (public)
     
     // MARK: Methods (public)
     
@@ -173,20 +189,12 @@ public class Analytics {
     internal static func generateOutboundRequestMetadata() -> String? {
         
         // Device info
-        var osVersion = ""
-        var model = ""
-        var deviceId = ""
-        #if TARGET_OS_WATCH
-            let device = WKInterfaceDevice.currentDevice()
-            osVersion = device.systemVersion
-            // There is no "identifierForVendor" property for Apple Watch, so we generate a random ID
-            deviceId = Request.uniqueDeviceId
-            model = "Apple Watch"
-            #elseif TARGET_OS_IOS
-            let device = UIDevice.currentDevice()
-            osVersion = device.systemVersion
-            deviceId = device.identifierForVendor?.UUIDString as String
-            model = device.modelName
+        var osVersion = "", model = "", deviceId = ""
+        
+        #if os(iOS)
+            (osVersion, model, deviceId) = Analytics.getiOSDeviceInfo()
+        #elseif os(watchOS)
+            (osVersion, model, deviceId) = Analytics.getWatchOSDeviceInfo()
         #endif
         
         // All of this data will go in a header for the request
