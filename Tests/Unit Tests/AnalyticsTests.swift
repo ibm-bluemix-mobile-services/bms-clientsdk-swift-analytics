@@ -145,7 +145,20 @@ class AnalyticsTests: XCTestCase {
     
     func testGenerateOutboundRequestMetadata() {
         
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
         
+        guard let outboundMetadata: String = Analytics.generateOutboundRequestMetadata() else {
+            XCTFail()
+            return
+        }
+        XCTAssert(outboundMetadata.containsString("\"os\":\"ios\""))
+        XCTAssert(outboundMetadata.containsString("\"brand\":\"Apple\""))
+        XCTAssert(outboundMetadata.containsString("\"model\":\"Simulator\""))
+        XCTAssert(outboundMetadata.containsString("\"mfpAppName\":\"Unit Test App\""))
+        XCTAssert(!outboundMetadata.containsString("\"deviceID\":\"\"")) // Make sure deviceID is not empty
+        
+        let osVersion = UIDevice.currentDevice().systemVersion
+        XCTAssert(outboundMetadata.containsString("\"osVersion\":\"" + "\(osVersion)" + "\""))
     }
     
     
