@@ -15,7 +15,8 @@
 import BMSCore
 
 
-// TODO: Refactor this entire file so that it is better organized and more readable. Consider using extensions or other classes.
+// TODO: Refactor this entire file so that it is better organized and more readable. Consider using extensions or other classes. Idea: Logger.swift, LogPersister.swift, and LogSender.swift
+
 
 /**
     Logger is used to capture log messages and send them to a mobile analytics server.
@@ -182,10 +183,13 @@ extension Logger {
         NSSetUncaughtExceptionHandler { (caughtException: NSException) -> Void in
             
             if (!Logger.exceptionHasBeenCalled) {
-                Logger.exceptionHasBeenCalled = true
-                Logger.logException(caughtException)
                 // Persist a flag so that when the app starts back up, we can see if an exception occurred in the last session
+                Logger.exceptionHasBeenCalled = true
                 Logger.isUncaughtExceptionDetected = true
+                
+                Logger.logException(caughtException)
+                Analytics.logSessionEnd()
+                
                 Logger.existingUncaughtExceptionHandler?(caughtException)
             }
         }
