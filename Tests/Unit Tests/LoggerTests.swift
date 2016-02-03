@@ -877,7 +877,7 @@ class LoggerTests: XCTestCase {
         Logger.returnInitializationError("Analytics", missingValue:"test") { (response, error) -> Void in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
-            XCTAssertEqual(error!.code, AnalyticsErrorCode.AnalyticsNotInitialized.rawValue)
+            XCTAssertEqual(error!.code, BMSAnalyticsErrorCode.AnalyticsNotInitialized.rawValue)
             XCTAssertEqual(error!.domain, Logger.ANALYTICS_ERROR_CODE)
         }
         

@@ -18,7 +18,7 @@ import BMSCore
 /**
     These error codes indicate a failure that occurred within the BMSAnalytics framework.
  */
-public enum AnalyticsErrorCode: Int {
+public enum BMSAnalyticsErrorCode: Int {
     
     // Start at 100 so that BMSAnalytics errors are distinguishable from BMSCore errors (which start at 0)
     case AnalyticsNotInitialized = 100

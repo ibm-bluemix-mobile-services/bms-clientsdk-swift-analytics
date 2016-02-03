@@ -340,7 +340,7 @@ extension Logger {
         var errorCode: Int
         switch uninitializedClass {
         case "Analytics":
-            errorCode = AnalyticsErrorCode.AnalyticsNotInitialized.rawValue
+            errorCode = BMSAnalyticsErrorCode.AnalyticsNotInitialized.rawValue
         case "BMSClient":
             errorCode = MFPErrorCode.ClientNotInitialized.rawValue
         default:
