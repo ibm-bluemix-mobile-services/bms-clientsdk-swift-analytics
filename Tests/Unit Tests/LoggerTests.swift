@@ -15,7 +15,6 @@ import XCTest
 import BMSCore
 @testable import BMSAnalytics
 
-// TODO: Reduce usage of force casting (so that tests fail instead of crash)
 
 class LoggerTests: XCTestCase {
     
@@ -28,6 +27,7 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(Logger.isUncaughtExceptionDetected)
     }
 
+    
     func testSetGetMaxLogStoreSize(){
     
         let size1 = Logger.maxLogStoreSize
@@ -38,6 +38,7 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(size3 == 12345678)
     }
 
+    
     func testlogStoreEnabled(){
         
         let capture1 = Logger.logStoreEnabled
@@ -48,6 +49,7 @@ class LoggerTests: XCTestCase {
         let capture2 = Logger.logStoreEnabled
         XCTAssertFalse(capture2)
     }
+    
     
     func testGetFilesForLogLevel(){
         let pathToLoggerFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
@@ -90,8 +92,8 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(logFile == pathToAnalyticsFile)
         XCTAssertTrue(logOverflowFile == pathToAnalyticsFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
-
     }
+    
     
     func testAnalyticsLog(){
         let fakePKG = "MYPKG"
@@ -117,7 +119,7 @@ class LoggerTests: XCTestCase {
         }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = getLogsAsJson(logDict) else {
+        guard let jsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -129,8 +131,8 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(debugMessage[Logger.TAG_LEVEL] == "ANALYTICS")
         print(debugMessage[Logger.TAG_METADATA])
         XCTAssertTrue(debugMessage[Logger.TAG_METADATA] == meta)
-        
     }
+    
     
     func testDisableAnalyticsLogging(){
         let fakePKG = "MYPKG"
@@ -153,8 +155,8 @@ class LoggerTests: XCTestCase {
         let fileExists = NSFileManager().fileExistsAtPath(pathToFile)
         
         XCTAssertFalse(fileExists)
-
     }
+    
     
     func testNoInternalLogging(){
         let fakePKG = Logger.MFP_LOGGER_PACKAGE
@@ -184,7 +186,7 @@ class LoggerTests: XCTestCase {
         }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = getLogsAsJson(logDict) else {
+        guard let jsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -217,10 +219,6 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(fatalMessage[Logger.TAG_MESSAGE] == "StephenColbert")
         XCTAssertTrue(fatalMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
-        
-        
-        
-        
     }
 
     
@@ -252,7 +250,7 @@ class LoggerTests: XCTestCase {
         }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = getLogsAsJson(logDict) else {
+        guard let jsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -287,6 +285,7 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
     }
     
+    
     func testLogWithNone(){
         let fakePKG = "MYPKG"
         let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
@@ -309,8 +308,8 @@ class LoggerTests: XCTestCase {
         loggerInstance.fatal("StephenColbert")
         
         XCTAssertFalse(NSFileManager().fileExistsAtPath(pathToFile))
-
     }
+    
     
     func testIncorrectLogLevel(){
         let fakePKG = "MYPKG"
@@ -335,8 +334,8 @@ class LoggerTests: XCTestCase {
         let fileExists = NSFileManager().fileExistsAtPath(pathToFile)
         
         XCTAssertFalse(fileExists)
-
     }
+    
     
     func testDisableLogging(){
         let fakePKG = "MYPKG"
@@ -364,6 +363,7 @@ class LoggerTests: XCTestCase {
         XCTAssertFalse(fileExists)
     }
     
+    
     func testLogException(){
         let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
         
@@ -385,7 +385,7 @@ class LoggerTests: XCTestCase {
         let reason = e.reason!
         let errorMessage = "Uncaught Exception: \(e.name)." + " Reason: \(reason)."
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = getLogsAsJson(logDict) else {
+        guard let jsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -395,8 +395,8 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(exception[Logger.TAG_PACKAGE] == Logger.MFP_LOGGER_PACKAGE)
         XCTAssertTrue(exception[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(exception[Logger.TAG_LEVEL] == "FATAL")
-        
     }
+    
     
     func testGetLogs(){
         let fakePKG = "MYPKG"
@@ -428,14 +428,17 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        let logs: String! =  try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+        guard let logs: String = getLogs(LogFileType.LOGGER) else {
+            XCTFail()
+            return
+        }
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
         let fileContents = "[\(logs)]"
         
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = getLogsAsJson(logDict) else {
+        guard let jsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -469,8 +472,8 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(fatalMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(fatalMessage[Logger.TAG_LEVEL] == "FATAL")
-        
     }
+    
     
     func testGetLogWithAnalytics(){
         let fakePKG = "MYPKG"
@@ -499,7 +502,10 @@ class LoggerTests: XCTestCase {
         
         loggerInstance.analytics(meta)
         
-        let logs: String! =  try! Logger.getLogs(fileName: Logger.FILE_ANALYTICS_LOGS, overflowFileName: Logger.FILE_ANALYTICS_OVERFLOW, bufferFileName: Logger.FILE_ANALYTICS_SEND)
+        guard let logs: String = getLogs(LogFileType.ANALYTICS) else {
+            XCTFail()
+            return
+        }
         
         let bufferFile = NSFileManager().fileExistsAtPath(pathToBuffer)
         
@@ -508,7 +514,7 @@ class LoggerTests: XCTestCase {
         let fileContents = "[\(logs)]"
         
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = getLogsAsJson(logDict) else {
+        guard let jsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -519,8 +525,8 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(analyticsMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(analyticsMessage[Logger.TAG_LEVEL] == "ANALYTICS")
         XCTAssertTrue(analyticsMessage[Logger.TAG_METADATA] == meta)
-
     }
+    
     
     func testOverFlowLogging(){
         let fakePKG = "MYPKG"
@@ -568,7 +574,7 @@ class LoggerTests: XCTestCase {
         }
         var fileContents = "[\(formattedContents)]"
         var logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = getLogsAsJson(logDict) else {
+        guard let jsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -603,7 +609,7 @@ class LoggerTests: XCTestCase {
         }
         fileContents = "[\(newFormattedContents)]"
         logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let newJsonDict = getLogsAsJson(logDict) else {
+        guard let newJsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -614,8 +620,8 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(overflowMessage[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(overflowMessage[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(overflowMessage[Logger.TAG_LEVEL] == "DEBUG")
-        
     }
+    
     
     func testExistingOverflowFile(){
         let fakePKG = "MYPKG"
@@ -637,7 +643,12 @@ class LoggerTests: XCTestCase {
         
         let bundle = NSBundle(forClass: self.dynamicType)
         let path = bundle.pathForResource("LargeData", ofType: "txt")
-        let largeData = try! String(contentsOfFile: path!)
+        
+        guard let largeData = getFileContents(path!) else {
+            XCTFail()
+            return
+        }
+        
         
         let loggerInstance = Logger.getLoggerForName(fakePKG)
         Logger.logStoreEnabled = true
@@ -654,10 +665,15 @@ class LoggerTests: XCTestCase {
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToOverflow))
         
-        var formattedContents = try! String(contentsOfFile: pathToOverflow, encoding: NSUTF8StringEncoding)
+        guard let formattedContents = getFileContents(pathToOverflow) else {
+            XCTFail()
+            return
+        }
+        
+
         var fileContents = "[\(formattedContents)]"
         var logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = getLogsAsJson(logDict) else {
+        guard let jsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -667,18 +683,20 @@ class LoggerTests: XCTestCase {
         loggerInstance.debug(largeData)
         
      
-        formattedContents = try! String(contentsOfFile: pathToOverflow, encoding: NSUTF8StringEncoding)
-        fileContents = "[\(formattedContents)]"
+        guard let newFormattedContents = getFileContents(pathToOverflow) else {
+            XCTFail()
+            return
+        }
+        fileContents = "[\(newFormattedContents)]"
         logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let newJsonDict = getLogsAsJson(logDict) else {
+        guard let newJsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
         
-        
         XCTAssertTrue(newJsonDict.count == 1)
-
     }
+    
     
     func testLogSendRequest(){
         let fakePKG = "MYPKG"
@@ -729,6 +747,7 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(request.httpMethod == HttpMethod.POST)
     }
     
+    
     func testLogSendFailWithEmptyAPIKey(){
         let fakePKG = Logger.MFP_LOGGER_PACKAGE
         let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
@@ -762,7 +781,10 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+        guard let _ = getLogs(LogFileType.LOGGER) else {
+            XCTFail()
+            return
+        }
 
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
@@ -778,7 +800,7 @@ class LoggerTests: XCTestCase {
         let fileContents = "[\(formattedContents)]"
         let logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
         
-        guard let newJsonDict = getLogsAsJson(logDict) else {
+        guard let newJsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -789,6 +811,7 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(error[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(error[Logger.TAG_LEVEL] == "ERROR")
     }
+    
     
     func testLogSendFailWithUninitializedBMSClient(){
         let fakePKG = Logger.MFP_LOGGER_PACKAGE
@@ -833,7 +856,10 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+        guard let _ = getLogs(LogFileType.LOGGER) else {
+            XCTFail()
+            return
+        }
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
@@ -850,7 +876,7 @@ class LoggerTests: XCTestCase {
         }
         let fileContents = "[\(formattedContents)]"
         let logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let newJsonDict = getLogsAsJson(logDict) else {
+        guard let newJsonDict = convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -861,8 +887,8 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(error[Logger.TAG_PACKAGE] == fakePKG)
         XCTAssertTrue(error[Logger.TAG_TIMESTAMP] != nil)
         XCTAssertTrue(error[Logger.TAG_LEVEL] == "ERROR")
-        
     }
+    
     
     func testReturnInitializationError(){
         // BMSClient initialization
@@ -890,6 +916,7 @@ class LoggerTests: XCTestCase {
         }
     }
     
+    
     func testDeleteFileFail(){
         let fakePKG = "mfpsdk.logger"
         let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
@@ -915,7 +942,10 @@ class LoggerTests: XCTestCase {
         
         loggerInstance.debug("Hello world")
     
-        let logs: String! =  try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+        guard let logs: String = getLogs(LogFileType.LOGGER) else {
+            XCTFail()
+            return
+        }
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
@@ -931,6 +961,7 @@ class LoggerTests: XCTestCase {
         
         XCTAssertFalse(NSFileManager().fileExistsAtPath(pathToBuffer))
     }
+    
     
     func testDeleteFile(){
         let fakePKG = "MYPKG"
@@ -962,7 +993,10 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        try! Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+        guard let _ = getLogs(LogFileType.LOGGER) else {
+            XCTFail()
+            return
+        }
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
@@ -970,6 +1004,7 @@ class LoggerTests: XCTestCase {
         
         XCTAssertFalse(NSFileManager().fileExistsAtPath(pathToBuffer))
     }
+    
     
     func testExtractFileNameFromPath() {
         
@@ -1000,9 +1035,29 @@ class LoggerTests: XCTestCase {
         }
     }
     
-    func getLogsAsJson(logDict: NSData) -> AnyObject? {
+    func convertLogsToJson(logDict: NSData) -> AnyObject? {
         do {
             return try NSJSONSerialization.JSONObjectWithData(logDict, options:NSJSONReadingOptions.MutableContainers)
+        }
+        catch {
+            return nil
+        }
+    }
+    
+    
+    enum LogFileType: String {
+        case LOGGER
+        case ANALYTICS
+    }
+    
+    func getLogs(logFile: LogFileType) -> String? {
+        do {
+            switch logFile {
+            case .LOGGER:
+                return try Logger.getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+            case .ANALYTICS:
+                return try Logger.getLogs(fileName: Logger.FILE_ANALYTICS_LOGS, overflowFileName: Logger.FILE_ANALYTICS_OVERFLOW, bufferFileName: Logger.FILE_ANALYTICS_SEND)
+            }
         }
         catch {
             return nil
