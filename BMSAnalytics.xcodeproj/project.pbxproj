@@ -30,6 +30,12 @@
 		926CF8191C4ECC330084355B /* BMSAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 926CF80E1C4ECC330084355B /* BMSAnalytics.framework */; };
 		926CF85A1C4ECDF80084355B /* TestAppWatchOS Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 926CF8591C4ECDF80084355B /* TestAppWatchOS Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		926CF8671C4ECDF80084355B /* TestAppWatchOS.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 926CF84D1C4ECDF80084355B /* TestAppWatchOS.app */; };
+		9276B45B1C69506D00E61F45 /* LogSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B45A1C69506D00E61F45 /* LogSender.swift */; };
+		9276B45D1C69506D00E61F45 /* LogSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B45A1C69506D00E61F45 /* LogSender.swift */; };
+		9276B45F1C69508400E61F45 /* LogRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B45E1C69508400E61F45 /* LogRecorder.swift */; };
+		9276B4601C69508400E61F45 /* LogRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B45E1C69508400E61F45 /* LogRecorder.swift */; };
+		9276B4621C69593E00E61F45 /* LogRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B4611C69593E00E61F45 /* LogRecorderTests.swift */; };
+		9276B4641C69594E00E61F45 /* LogSenderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B4631C69594E00E61F45 /* LogSenderTests.swift */; };
 		929E62381C504712001E8880 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0DB1C4EE159007FA9D0 /* Error.swift */; };
 		929E62391C504715001E8880 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* Analytics.swift */; };
 		929E623A1C504717001E8880 /* Analytics+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0451C4ED9AF007FA9D0 /* Analytics+watchOS.swift */; };
@@ -136,6 +142,10 @@
 		926CF8391C4ECDBD0084355B /* TestAppiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAppiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926CF84D1C4ECDF80084355B /* TestAppWatchOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAppWatchOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926CF8591C4ECDF80084355B /* TestAppWatchOS Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TestAppWatchOS Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9276B45A1C69506D00E61F45 /* LogSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogSender.swift; sourceTree = "<group>"; };
+		9276B45E1C69508400E61F45 /* LogRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRecorder.swift; sourceTree = "<group>"; };
+		9276B4611C69593E00E61F45 /* LogRecorderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRecorderTests.swift; sourceTree = "<group>"; };
+		9276B4631C69594E00E61F45 /* LogSenderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogSenderTests.swift; sourceTree = "<group>"; };
 		9BCD7263DE4324118E56D58D /* Pods_BMSAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BMSAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8ECE2817146F8AD50262040 /* Pods-BMSAnalyticsWatchOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BMSAnalyticsWatchOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BMSAnalyticsWatchOS/Pods-BMSAnalyticsWatchOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,6 +243,8 @@
 			isa = PBXGroup;
 			children = (
 				9221C04C1C4ED9BC007FA9D0 /* Logger.swift */,
+				9276B45E1C69508400E61F45 /* LogRecorder.swift */,
+				9276B45A1C69506D00E61F45 /* LogSender.swift */,
 			);
 			path = Logger;
 			sourceTree = "<group>";
@@ -330,6 +342,8 @@
 			children = (
 				9221C0511C4EDA9C007FA9D0 /* AnalyticsTests.swift */,
 				9221C04F1C4ED9CF007FA9D0 /* LoggerTests.swift */,
+				9276B4611C69593E00E61F45 /* LogRecorderTests.swift */,
+				9276B4631C69594E00E61F45 /* LogSenderTests.swift */,
 				9221C0271C4ED26F007FA9D0 /* Resources */,
 			);
 			path = "Unit Tests";
@@ -724,6 +738,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9221C0DC1C4EE159007FA9D0 /* Error.swift in Sources */,
+				9276B45B1C69506D00E61F45 /* LogSender.swift in Sources */,
+				9276B45F1C69508400E61F45 /* LogRecorder.swift in Sources */,
 				9221C0481C4ED9AF007FA9D0 /* Analytics+iOS.swift in Sources */,
 				9221C04D1C4ED9BC007FA9D0 /* Logger.swift in Sources */,
 				9221C0461C4ED9AF007FA9D0 /* Analytics.swift in Sources */,
@@ -734,6 +750,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9276B4621C69593E00E61F45 /* LogRecorderTests.swift in Sources */,
+				9276B4641C69594E00E61F45 /* LogSenderTests.swift in Sources */,
 				9221C0521C4EDA9C007FA9D0 /* AnalyticsTests.swift in Sources */,
 				9221C0501C4ED9CF007FA9D0 /* LoggerTests.swift in Sources */,
 			);
@@ -744,6 +762,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				929E623B1C50471C001E8880 /* Logger.swift in Sources */,
+				9276B45D1C69506D00E61F45 /* LogSender.swift in Sources */,
+				9276B4601C69508400E61F45 /* LogRecorder.swift in Sources */,
 				929E623A1C504717001E8880 /* Analytics+watchOS.swift in Sources */,
 				929E62391C504715001E8880 /* Analytics.swift in Sources */,
 				929E62381C504712001E8880 /* Error.swift in Sources */,

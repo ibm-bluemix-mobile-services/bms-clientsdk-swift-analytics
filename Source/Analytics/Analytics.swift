@@ -109,7 +109,7 @@ public class Analytics {
         }
         
         // Register the LogSaver so that logs can start being stored on the device
-        Logger.logSaver = LogSaver()
+        Logger.logSaver = LogRecorder()
         
         Logger.startCapturingUncaughtExceptions()
         
@@ -155,7 +155,7 @@ public class Analytics {
     */
     public static func send(completionHandler: MfpCompletionHandler? = nil) {
         
-        Logger.sendAnalytics(completionHandler: completionHandler)
+        LogSender.sendAnalytics(completionHandler: completionHandler)
     }
     
     
