@@ -17,6 +17,7 @@ import WatchKit
 
 public extension Analytics {
     
+    
     /**
         Starts a timer to record the length of time the WatchOS app is being used before becoming inactive.
         This event will be recorded and sent to the Analytics console, provided that the `Analytics.enabled` property is set to `true`.

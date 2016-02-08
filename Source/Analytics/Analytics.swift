@@ -14,6 +14,20 @@
 
 import BMSCore
 
+
+/**
+    Set of device events that the `Analytics` class will listen for. Whenever an event of the specified type occurs, analytics data for that event get recorded.
+ 
+    - Note: Register DeviceEvents in the `Analytics.initializeWithAppName()` method
+*/
+public enum DeviceEvent {
+    
+    /// Records the duration of the app's lifecycle from when it enters the foreground to when it goes to the background.
+    /// - Note: Only available for iOS apps. For watchOS apps, manually call the `recordApplicationDidBecomeActive()` and `recordApplicationWillResignActive()` methods in the appropriate `ExtensionDelegate` methods.
+    case LIFECYCLE
+}
+
+
 /**
     `Analytics` provides a means of capturing analytics data and sending the data to the mobile analytics service.
 */
@@ -80,12 +94,11 @@ public class Analytics {
         
         This method must be called before sending `Analytics` or `Logger` logs.
         
-        - parameter appName:  The application name.  Should be consistent across platforms (e.g. Android and iOS).
-        - parameter apiKey:   A unique ID used to authenticate with the MFP analytics server
+        - parameter appName:        The application name.  Should be consistent across platforms (e.g. Android and iOS).
+        - parameter apiKey:         A unique ID used to authenticate with the MFP analytics server
+        - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
     */
-    public static func initializeWithAppName(appName: String, apiKey: String) {
-        
-        // TODO: Add parameter for analytics events
+    public static func initializeWithAppName(appName: String, apiKey: String, deviceEvents: DeviceEvent...) {
         
         // Any required properties here should be checked for initialization in the private initializer
         if !appName.isEmpty {
@@ -99,6 +112,18 @@ public class Analytics {
         Logger.logSaver = LogSaver()
         
         Logger.startCapturingUncaughtExceptions()
+        
+        // Registering device events
+        for event in deviceEvents {
+            switch event {
+            case .LIFECYCLE:
+                #if os(iOS)
+                    Analytics.startRecordingApplicationLifecycle()
+                #else
+                    Analytics.logger.info("The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
+                #endif
+            }
+        }
         
         // Package analytics metadata in a header for each request
         // Outbound request metadata is identical for all requests made on the same device from the same app

@@ -55,6 +55,18 @@ class AnalyticsTests: XCTestCase {
     }
     
     
+    func testInitializeWithAppNameAndDeviceEvents() {
+        
+        let referenceTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000)
+        
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        
+        // When registering LIFECYCLE events, the Analytics.logSessionStart() method should get called immediately, assigning a new value to Analytics.startTime and Analytics.lifecycleEvents
+        XCTAssertTrue(Analytics.startTime >= referenceTime)
+        XCTAssertFalse(Analytics.lifecycleEvents.isEmpty)
+    }
+    
+    
     /**
         1) Call logSessionStart(), which should update Analytics.lifecycleEvents and Analytics.startTime.
         2) Call logSessionStart() again. This should cause Analytics.lifecycleEvents to be updated:

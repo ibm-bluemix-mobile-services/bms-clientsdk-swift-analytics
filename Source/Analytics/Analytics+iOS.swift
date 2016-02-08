@@ -14,13 +14,9 @@
 
 public extension Analytics {
     
-    /**
-        Records the duration of the app's lifecycle from when it enters the foreground to when it goes to the background.
-        This data will be sent to the Analytics server, provided that the `Analytics.enabled` property is set to `true`.
-        
-        This method should be called in the `AppDelegate didFinishLaunchingWithOptions` method.
-    */
-    public static func startRecordingApplicationLifecycle() {
+    
+    // Records the duration of the app's lifecycle from when it enters the foreground to when it goes to the background.
+    internal static func startRecordingApplicationLifecycle() {
         
         // By now, the app will have already passed the "will enter foreground" event. Therefore, we must manually start the timer for the current session.
         logSessionStart()
@@ -31,17 +27,8 @@ public extension Analytics {
     }
     
     
-    /**
-        Cease recording app lifecycle events.
-    */
-    public static func stopRecordingApplicationLifecycle() {
-        
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillEnterForegroundNotification, object: nil)
-        
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationDidEnterBackgroundNotification, object: nil)
-    }
-    
-    
+    // General information about the device that the app is running on.
+    // This data gets sent in every network request to the Analytics server
     internal static func getiOSDeviceInfo() -> (String, String, String) {
         
         var osVersion = "", model = "", deviceId = ""
