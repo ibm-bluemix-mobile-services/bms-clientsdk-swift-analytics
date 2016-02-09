@@ -210,21 +210,20 @@ public class Analytics {
     // This data gets added to a Request header
     internal static func generateOutboundRequestMetadata() -> String? {
         
+        // All of this data will go in a header for the request
+        var requestMetadata: [String: String] = [:]
+        
         // Device info
         var osVersion = "", model = "", deviceId = ""
         
         #if os(iOS)
             (osVersion, model, deviceId) = Analytics.getiOSDeviceInfo()
+            requestMetadata["os"] = "ios"
         #elseif os(watchOS)
             (osVersion, model, deviceId) = Analytics.getWatchOSDeviceInfo()
+            requestMetadata["os"] = "watchos"
         #endif
-        
-        // All of this data will go in a header for the request
-        var requestMetadata: [String: String] = [:]
-        
-        /// TODO: "os" can be ios or watchos
-        
-        requestMetadata["os"] = "ios"
+
         requestMetadata["brand"] = "Apple"
         requestMetadata["osVersion"] = osVersion
         requestMetadata["model"] = model
