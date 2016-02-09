@@ -82,7 +82,7 @@ class AnalyticsTests: XCTestCase {
         Analytics.logSessionStart()
         
         let firstSessionStartTime = Analytics.startTime
-        let firstSessionId = Analytics.lifecycleEvents[Analytics.KEY_METADATA_SESSIONID] as! String
+        let firstSessionId = Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
         XCTAssert(firstSessionStartTime > 0)
         
         // Need a little time delay so that the first and second sessions don't have the same start time
@@ -92,7 +92,7 @@ class AnalyticsTests: XCTestCase {
             Analytics.logSessionStart()
             
             let secondSessionStartTime = Analytics.startTime
-            let secondSessionId = Analytics.lifecycleEvents[Analytics.KEY_METADATA_SESSIONID] as! String
+            let secondSessionId = Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
             
             XCTAssertTrue(secondSessionStartTime > firstSessionStartTime)
             XCTAssertNotEqual(firstSessionId, secondSessionId)
@@ -117,7 +117,7 @@ class AnalyticsTests: XCTestCase {
         Analytics.logSessionStart()
         
         let firstSessionStartTime = Analytics.startTime
-        let firstSessionId = Analytics.lifecycleEvents[Analytics.KEY_METADATA_SESSIONID] as! String
+        let firstSessionId = Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
         
         Analytics.logSessionEnd()
         
@@ -131,7 +131,7 @@ class AnalyticsTests: XCTestCase {
             Analytics.logSessionStart()
             
             let secondSessionStartTime = Analytics.startTime
-            let secondSessionId = Analytics.lifecycleEvents[Analytics.KEY_METADATA_SESSIONID] as! String
+            let secondSessionId = Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
             
             XCTAssertTrue(secondSessionStartTime > firstSessionStartTime)
             XCTAssertNotEqual(firstSessionId, secondSessionId)

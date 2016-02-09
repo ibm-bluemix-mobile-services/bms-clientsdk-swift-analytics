@@ -19,10 +19,10 @@ import BMSCore
 class LogRecorderTests: XCTestCase {
 
     func testGetFilesForLogLevel(){
-        let pathToLoggerFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
-        let pathToAnalyticsFile = Logger.logsDocumentPath + Logger.FILE_ANALYTICS_LOGS
-        let pathToLoggerFileOverflow = Logger.logsDocumentPath + Logger.FILE_LOGGER_OVERFLOW
-        let pathToAnalyticsFileOverflow = Logger.logsDocumentPath + Logger.FILE_ANALYTICS_OVERFLOW
+        let pathToLoggerFile = Logger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToAnalyticsFile = Logger.logsDocumentPath + Constants.File.Analytics.logs
+        let pathToLoggerFileOverflow = Logger.logsDocumentPath + Constants.File.Logger.overflowLogs
+        let pathToAnalyticsFileOverflow = Logger.logsDocumentPath + Constants.File.Analytics.overflowLogs
         
         var (logFile, logOverflowFile, fileDispatchQueue) = LogRecorder.getFilesForLogLevel(LogLevel.Debug)
         
@@ -64,8 +64,8 @@ class LogRecorderTests: XCTestCase {
     
     func testGetLogs(){
         let fakePKG = "MYPKG"
-        let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
-        let pathToBuffer = Logger.logsDocumentPath + Logger.FILE_LOGGER_SEND
+        let pathToFile = Logger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
@@ -84,7 +84,7 @@ class LogRecorderTests: XCTestCase {
         let loggerInstance = Logger.getLoggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Logger.DEFAULT_MAX_STORE_SIZE
+        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -108,41 +108,41 @@ class LogRecorderTests: XCTestCase {
         }
         
         let debugMessage = jsonDict[0]
-        XCTAssertTrue(debugMessage[Logger.TAG_MESSAGE] == "Hello world")
-        XCTAssertTrue(debugMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(debugMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(debugMessage[Logger.TAG_LEVEL] == "DEBUG")
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.message] == "Hello world")
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.level] == "DEBUG")
         
         let infoMessage = jsonDict[1]
-        XCTAssertTrue(infoMessage[Logger.TAG_MESSAGE] == "1242342342343243242342")
-        XCTAssertTrue(infoMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(infoMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(infoMessage[Logger.TAG_LEVEL] == "INFO")
+        XCTAssertTrue(infoMessage[Constants.Metadata.Logger.message] == "1242342342343243242342")
+        XCTAssertTrue(infoMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(infoMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(infoMessage[Constants.Metadata.Logger.level] == "INFO")
         
         let warnMessage = jsonDict[2]
-        XCTAssertTrue(warnMessage[Logger.TAG_MESSAGE] == "Str: heyoooooo")
-        XCTAssertTrue(warnMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(warnMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(warnMessage[Logger.TAG_LEVEL] == "WARN")
+        XCTAssertTrue(warnMessage[Constants.Metadata.Logger.message] == "Str: heyoooooo")
+        XCTAssertTrue(warnMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(warnMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(warnMessage[Constants.Metadata.Logger.level] == "WARN")
         
         let errorMessage = jsonDict[3]
-        XCTAssertTrue(errorMessage[Logger.TAG_MESSAGE] == "1 2 3 4")
-        XCTAssertTrue(errorMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(errorMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(errorMessage[Logger.TAG_LEVEL] == "ERROR")
+        XCTAssertTrue(errorMessage[Constants.Metadata.Logger.message] == "1 2 3 4")
+        XCTAssertTrue(errorMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(errorMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(errorMessage[Constants.Metadata.Logger.level] == "ERROR")
         
         let fatalMessage = jsonDict[4]
-        XCTAssertTrue(fatalMessage[Logger.TAG_MESSAGE] == "StephenColbert")
-        XCTAssertTrue(fatalMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(fatalMessage[Logger.TAG_LEVEL] == "FATAL")
+        XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.message] == "StephenColbert")
+        XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.level] == "FATAL")
     }
     
     
     func testGetLogWithAnalytics(){
         let fakePKG = "MYPKG"
-        let pathToFile = Logger.logsDocumentPath + Logger.FILE_ANALYTICS_LOGS
-        let pathToBuffer = Logger.logsDocumentPath + Logger.FILE_ANALYTICS_SEND
+        let pathToFile = Logger.logsDocumentPath + Constants.File.Analytics.logs
+        let pathToBuffer = Logger.logsDocumentPath + Constants.File.Analytics.outboundLogs
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
@@ -161,7 +161,7 @@ class LogRecorderTests: XCTestCase {
         let loggerInstance = Logger.getLoggerForName(fakePKG)
         Analytics.enabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Logger.DEFAULT_MAX_STORE_SIZE
+        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         let meta = ["hello": 1]
         
         loggerInstance.analytics(meta)
@@ -184,18 +184,18 @@ class LogRecorderTests: XCTestCase {
         }
         
         let analyticsMessage = jsonDict[0]
-        XCTAssertTrue(analyticsMessage[Logger.TAG_MESSAGE] == "")
-        XCTAssertTrue(analyticsMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(analyticsMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(analyticsMessage[Logger.TAG_LEVEL] == "ANALYTICS")
-        XCTAssertTrue(analyticsMessage[Logger.TAG_METADATA] == meta)
+        XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.message] == "")
+        XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.level] == "ANALYTICS")
+        XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.metadata] == meta)
     }
     
     
     func testOverFlowLogging(){
         let fakePKG = "MYPKG"
-        let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
-        let pathToOverflow = Logger.logsDocumentPath + Logger.FILE_LOGGER_OVERFLOW
+        let pathToFile = Logger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToOverflow = Logger.logsDocumentPath + Constants.File.Logger.overflowLogs
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
@@ -222,7 +222,7 @@ class LogRecorderTests: XCTestCase {
         Logger.logStoreEnabled = true
         Logger.sdkDebugLoggingEnabled = false
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Logger.DEFAULT_MAX_STORE_SIZE
+        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug(largeData)
         loggerInstance.info("1242342342343243242342")
@@ -244,28 +244,28 @@ class LogRecorderTests: XCTestCase {
         }
         
         let infoMessage = jsonDict[0]
-        XCTAssertTrue(infoMessage[Logger.TAG_MESSAGE] == "1242342342343243242342")
-        XCTAssertTrue(infoMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(infoMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(infoMessage[Logger.TAG_LEVEL] == "INFO")
+        XCTAssertTrue(infoMessage[Constants.Metadata.Logger.message] == "1242342342343243242342")
+        XCTAssertTrue(infoMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(infoMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(infoMessage[Constants.Metadata.Logger.level] == "INFO")
         
         let warnMessage = jsonDict[1]
-        XCTAssertTrue(warnMessage[Logger.TAG_MESSAGE] == "Str: heyoooooo")
-        XCTAssertTrue(warnMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(warnMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(warnMessage[Logger.TAG_LEVEL] == "WARN")
+        XCTAssertTrue(warnMessage[Constants.Metadata.Logger.message] == "Str: heyoooooo")
+        XCTAssertTrue(warnMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(warnMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(warnMessage[Constants.Metadata.Logger.level] == "WARN")
         
         let errorMessage = jsonDict[2]
-        XCTAssertTrue(errorMessage[Logger.TAG_MESSAGE] == "1 2 3 4")
-        XCTAssertTrue(errorMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(errorMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(errorMessage[Logger.TAG_LEVEL] == "ERROR")
+        XCTAssertTrue(errorMessage[Constants.Metadata.Logger.message] == "1 2 3 4")
+        XCTAssertTrue(errorMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(errorMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(errorMessage[Constants.Metadata.Logger.level] == "ERROR")
         
         let fatalMessage = jsonDict[3]
-        XCTAssertTrue(fatalMessage[Logger.TAG_MESSAGE] == "StephenColbert")
-        XCTAssertTrue(fatalMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(fatalMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(fatalMessage[Logger.TAG_LEVEL] == "FATAL")
+        XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.message] == "StephenColbert")
+        XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.level] == "FATAL")
         
         guard let newFormattedContents = LoggerTests.getFileContents(pathToOverflow) else {
             XCTFail()
@@ -280,17 +280,17 @@ class LogRecorderTests: XCTestCase {
         
         
         let overflowMessage = newJsonDict[0]
-        XCTAssertTrue(overflowMessage[Logger.TAG_MESSAGE] == largeData)
-        XCTAssertTrue(overflowMessage[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(overflowMessage[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(overflowMessage[Logger.TAG_LEVEL] == "DEBUG")
+        XCTAssertTrue(overflowMessage[Constants.Metadata.Logger.message] == largeData)
+        XCTAssertTrue(overflowMessage[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(overflowMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(overflowMessage[Constants.Metadata.Logger.level] == "DEBUG")
     }
     
     
     func testExistingOverflowFile(){
         let fakePKG = "MYPKG"
-        let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
-        let pathToOverflow = Logger.logsDocumentPath + Logger.FILE_LOGGER_OVERFLOW
+        let pathToFile = Logger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToOverflow = Logger.logsDocumentPath + Constants.File.Logger.overflowLogs
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
@@ -318,7 +318,7 @@ class LogRecorderTests: XCTestCase {
         Logger.logStoreEnabled = true
         Logger.sdkDebugLoggingEnabled = false
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Logger.DEFAULT_MAX_STORE_SIZE
+        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug(largeData)
         loggerInstance.info(largeData)

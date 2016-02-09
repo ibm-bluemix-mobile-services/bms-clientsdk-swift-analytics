@@ -99,13 +99,13 @@ public class LogRecorder: LogSaverProtocol {
         var fileDispatchQueue: dispatch_queue_t
         
         if level == LogLevel.Analytics {
-            logFile += Logger.FILE_ANALYTICS_LOGS
-            logOverflowFile += Logger.FILE_ANALYTICS_OVERFLOW
+            logFile += Constants.File.Analytics.logs
+            logOverflowFile += Constants.File.Analytics.overflowLogs
             fileDispatchQueue = LogRecorder.analyticsFileIOQueue
         }
         else {
-            logFile += Logger.FILE_LOGGER_LOGS
-            logOverflowFile += Logger.FILE_LOGGER_OVERFLOW
+            logFile += Constants.File.Logger.logs
+            logOverflowFile += Constants.File.Logger.overflowLogs
             fileDispatchQueue = LogRecorder.loggerFileIOQueue
         }
         
@@ -149,12 +149,12 @@ public class LogRecorder: LogSaverProtocol {
     internal static func convertLogToJson(logMessage: String, level: LogLevel, loggerName: String, timeStamp: String, additionalMetadata: [String: AnyObject]?) -> String? {
         
         var logMetadata: [String: AnyObject] = [:]
-        logMetadata[Logger.TAG_TIMESTAMP] = timeStamp
-        logMetadata[Logger.TAG_LEVEL] = level.stringValue
-        logMetadata[Logger.TAG_PACKAGE] = loggerName
-        logMetadata[Logger.TAG_MESSAGE] = logMessage
+        logMetadata[Constants.Metadata.Logger.timestamp] = timeStamp
+        logMetadata[Constants.Metadata.Logger.level] = level.stringValue
+        logMetadata[Constants.Metadata.Logger.package] = loggerName
+        logMetadata[Constants.Metadata.Logger.message] = logMessage
         if additionalMetadata != nil {
-            logMetadata[Logger.TAG_METADATA] = additionalMetadata! // Typically only available if the Logger.analytics method was called
+            logMetadata[Constants.Metadata.Logger.metadata] = additionalMetadata! // Typically only available if the Logger.analytics method was called
         }
         
         let logData: NSData
@@ -194,7 +194,7 @@ public class LogRecorder: LogSaverProtocol {
     // When logging messages to the user, make sure to only mention the log file name, not the full path since it may contain sensitive data unique to the device.
     internal static func extractFileNameFromPath(filePath: String) -> String {
         
-        var logFileName = "[Unknown]"
+        var logFileName = Constants.File.unknown
         
         let logFileNameRange = filePath.rangeOfString("/", options:NSStringCompareOptions.BackwardsSearch)
         if let fileNameStartIndex = logFileNameRange?.startIndex.successor() {

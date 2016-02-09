@@ -34,16 +34,6 @@ public enum DeviceEvent {
 public class Analytics {
     
     
-    // MARK: Constants
-    
-    internal static let KEY_METADATA_SESSIONID = "$appSessionID"
-    internal static let KEY_METADATA_DURATION = "$duration"
-    internal static let KEY_METADATA_CATEGORY = "$category"
-    internal static let KEY_METADATA_CLOSEDBY = "$closedBy"
-    
-    internal static let TAG_CATEGORY_APP_SESSION = "appSession"
-    
-    
     // MARK: Properties (public)
     
     /// Determines whether analytics logs will be persisted to file.
@@ -59,7 +49,7 @@ public class Analytics {
 
     // MARK: Properties (internal/private)
 
-    internal static let logger = Logger.getLoggerForName(Logger.MFP_ANALYTICS_PACKAGE)
+    internal static let logger = Logger.getLoggerForName(Constants.Package.analytics)
     
     // Stores metadata (including a duration timer) for each app session
     // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)
@@ -69,16 +59,16 @@ public class Analytics {
     // Currently only used for Apple Watch devices
     internal static var uniqueDeviceId: String {
         // First, check if a UUID was already created
-        let mfpUserDefaults = NSUserDefaults(suiteName: "com.ibm.mobilefirstplatform.clientsdk.swift.Analytics")
+        let mfpUserDefaults = NSUserDefaults(suiteName: Constants.userDefaultsSuiteName)
         guard mfpUserDefaults != nil else {
             Analytics.logger.error("Failed to get an ID for this device.")
             return ""
         }
         
-        var deviceId = mfpUserDefaults!.stringForKey("deviceId")
+        var deviceId = mfpUserDefaults!.stringForKey(Constants.Metadata.Analytics.deviceId)
         if deviceId == nil {
             deviceId = NSUUID().UUIDString
-            mfpUserDefaults!.setValue(deviceId, forKey: "deviceId")
+            mfpUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
         }
         return deviceId!
     }
@@ -99,7 +89,7 @@ public class Analytics {
         - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
     */
     public static func initializeWithAppName(appName: String, apiKey: String, deviceEvents: DeviceEvent...) {
-        
+
         // Any required properties here should be checked for initialization in the private initializer
         if !appName.isEmpty {
             Analytics.appName = appName
@@ -171,8 +161,8 @@ public class Analytics {
         
         Analytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
         
-        lifecycleEvents[KEY_METADATA_CATEGORY] = TAG_CATEGORY_APP_SESSION
-        lifecycleEvents[KEY_METADATA_SESSIONID] = NSUUID().UUIDString
+        lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
+        lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
     }
     
     
@@ -189,15 +179,15 @@ public class Analytics {
         }
         
         let sessionDuration = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) - Analytics.startTime
-        lifecycleEvents[KEY_METADATA_DURATION] = Int(sessionDuration)
+        lifecycleEvents[Constants.Metadata.Analytics.duration] = Int(sessionDuration)
         
         // Let the Analytics service know how the app was last closed
         if Logger.isUncaughtExceptionDetected {
-            lifecycleEvents[KEY_METADATA_CLOSEDBY] = AppClosedBy.CRASH.rawValue
+            lifecycleEvents[Constants.Metadata.Analytics.closedBy] = AppClosedBy.CRASH.rawValue
             Logger.isUncaughtExceptionDetected = false
         }
         else {
-            lifecycleEvents[KEY_METADATA_CLOSEDBY] = AppClosedBy.USER.rawValue
+            lifecycleEvents[Constants.Metadata.Analytics.closedBy] = AppClosedBy.USER.rawValue
         }
         
         logger.analytics(lifecycleEvents)
@@ -231,6 +221,8 @@ public class Analytics {
         
         // All of this data will go in a header for the request
         var requestMetadata: [String: String] = [:]
+        
+        /// TODO: "os" can be ios or watchos
         
         requestMetadata["os"] = "ios"
         requestMetadata["brand"] = "Apple"
@@ -268,7 +260,7 @@ public class Analytics {
         // Data for analytics logging
         var responseMetadata: [String: AnyObject] = [:]
         
-        responseMetadata[KEY_METADATA_CATEGORY] = "network"
+        responseMetadata["$category"] = "network"
         responseMetadata["$path"] = url
         responseMetadata["$trackingId"] = request.trackingId
         responseMetadata["$outboundTimestamp"] = request.startTime

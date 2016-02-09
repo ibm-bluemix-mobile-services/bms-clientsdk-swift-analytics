@@ -11,15 +11,14 @@
 *     limitations under the License.
 */
 
-import BMSCore
-
-// TODO: Rename error code type
 
 /**
     These error codes indicate a failure that occurred within the BMSAnalytics framework.
  */
-public enum BMSAnalyticsErrorCode: Int {
+public enum BMSAnalyticsError: Int {
     
     // Start at 100 so that BMSAnalytics errors are distinguishable from BMSCore errors (which start at 0)
     case AnalyticsNotInitialized = 100
+    
+    static let domain = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics"
 }

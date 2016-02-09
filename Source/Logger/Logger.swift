@@ -15,42 +15,8 @@
 import BMSCore
 
 
-/// TODO: Refactor this entire file so that it is better organized and more readable. Consider using extensions or other classes. Idea: Logger.swift, LogRecorder.swift, and LogSender.swift
-
-
 extension Logger {
-    
-    
-    /// TODO: Improve use of constants
-    
-    // MARK: Constants 
-    
-    internal static let HOST_NAME = "mobile-analytics-dashboard"
-    internal static let UPLOAD_PATH =  "/analytics-service/data/events/clientlogs/"
-    internal static let API_ID_HEADER = "x-mfp-analytics-api-key"
-    
-    internal static let TAG_METADATA = "metadata"
-    internal static let TAG_UNCAUGHT_EXCEPTION = "loggerUncaughtExceptionDetected"
-    internal static let TAG_LEVEL = "level"
-    internal static let TAG_TIMESTAMP = "timestamp"
-    internal static let TAG_PACKAGE = "pkg"
-    internal static let TAG_MESSAGE = "msg"
-    
-    internal static let MFP_LOGGER_PACKAGE = MFP_PACKAGE_PREFIX + "logger"
-    internal static let FILE_LOGGER_LOGS = MFP_LOGGER_PACKAGE + ".log"
-    internal static let FILE_LOGGER_SEND = MFP_LOGGER_PACKAGE + ".log.send"
-    internal static let FILE_LOGGER_OVERFLOW = MFP_LOGGER_PACKAGE + ".log.overflow"
-    
-    internal static let MFP_ANALYTICS_PACKAGE = MFP_PACKAGE_PREFIX + "analytics"
-    internal static let FILE_ANALYTICS_LOGS = MFP_ANALYTICS_PACKAGE + ".log"
-    internal static let FILE_ANALYTICS_SEND = MFP_ANALYTICS_PACKAGE + ".log.send"
-    internal static let FILE_ANALYTICS_OVERFLOW = MFP_ANALYTICS_PACKAGE + ".log.overflow"
 
-    internal static let ANALYTICS_ERROR_CODE = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics"
-    
-    internal static let DEFAULT_MAX_STORE_SIZE: UInt64 = 100000
-    
-    
     
     // MARK: Properties (API)
     
@@ -60,16 +26,16 @@ extension Logger {
     
     /// The maximum file size (in bytes) for log storage.
     /// Both the Analytics and Logger log files are limited by `maxLogStoreSize`.
-    public static var maxLogStoreSize: UInt64 = DEFAULT_MAX_STORE_SIZE
+    public static var maxLogStoreSize: UInt64 = Constants.File.defaultMaxSize
     
     /// True if the app crashed recently due to an uncaught exception.
     /// This property will be set back to `false` if the logs are sent to the server.
     public static var isUncaughtExceptionDetected: Bool {
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey(TAG_UNCAUGHT_EXCEPTION)
+            return NSUserDefaults.standardUserDefaults().boolForKey(Constants.uncaughtException)
         }
         set {
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: TAG_UNCAUGHT_EXCEPTION)
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Constants.uncaughtException)
         }
     }
     
@@ -78,7 +44,7 @@ extension Logger {
     // MARK: Properties (internal/private)
     
     // Internal instrumentation for troubleshooting issues in BMSCore
-    internal static let internalLogger = Logger.getLoggerForName(MFP_LOGGER_PACKAGE)
+    internal static let internalLogger = Logger.getLoggerForName(Constants.Package.logger)
     
     
     
@@ -159,7 +125,7 @@ extension Logger {
     
     internal static func logException(exception: NSException) {
         
-        let logger = Logger.getLoggerForName(MFP_LOGGER_PACKAGE)
+        let logger = Logger.getLoggerForName(Constants.Package.logger)
         var exceptionString = "Uncaught Exception: \(exception.name)."
         if let reason = exception.reason {
             exceptionString += " Reason: \(reason)."

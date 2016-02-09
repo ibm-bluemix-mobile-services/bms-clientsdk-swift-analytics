@@ -23,16 +23,16 @@ class LogSenderTests: XCTestCase {
         let fakePKG = "MYPKG"
         let API_KEY = "apikey"
         let APP_NAME = "myApp"
-        let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
-        let pathToBuffer = Logger.logsDocumentPath + Logger.FILE_LOGGER_SEND
+        let pathToFile = Logger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         let bmsClient = BMSClient.sharedInstance
-        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegionSuffix: BMSClient.REGION_US_SOUTH)
+        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegionSuffix: BluemixRegion.US_SOUTH)
         Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
-        let url = "https://" + Logger.HOST_NAME + "." + BMSClient.REGION_US_SOUTH + Logger.UPLOAD_PATH
+        let url = "https://" + Constants.AnalyticsServer.hostName + "." + BluemixRegion.US_SOUTH.rawValue + Constants.AnalyticsServer.uploadPath
         
         Analytics.initializeWithAppName(APP_NAME, apiKey: API_KEY)
         
-        let headers = ["Content-Type": "application/json", Logger.API_ID_HEADER: API_KEY]
+        let headers = ["Content-Type": "application/json", Constants.analyticsApiKey: API_KEY]
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
@@ -51,7 +51,7 @@ class LogSenderTests: XCTestCase {
         let loggerInstance = Logger.getLoggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Logger.DEFAULT_MAX_STORE_SIZE
+        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -70,11 +70,11 @@ class LogSenderTests: XCTestCase {
     
     
     func testLogSendFailWithEmptyAPIKey(){
-        let fakePKG = Logger.MFP_LOGGER_PACKAGE
-        let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
-        let pathToBuffer = Logger.logsDocumentPath + Logger.FILE_LOGGER_SEND
+        let fakePKG = Constants.Package.logger
+        let pathToFile = Logger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         let bmsClient = BMSClient.sharedInstance
-        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegionSuffix: BMSClient.REGION_US_SOUTH)
+        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegionSuffix: BluemixRegion.US_SOUTH)
         Analytics.initializeWithAppName("testAppName", apiKey: "")
         
         do {
@@ -94,7 +94,7 @@ class LogSenderTests: XCTestCase {
         let loggerInstance = Logger.getLoggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Logger.DEFAULT_MAX_STORE_SIZE
+        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -127,87 +127,10 @@ class LogSenderTests: XCTestCase {
         }
         
         let error = newJsonDict[0]
-        XCTAssertTrue(error[Logger.TAG_MESSAGE] != nil)
-        XCTAssertTrue(error[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(error[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(error[Logger.TAG_LEVEL] == "ERROR")
-    }
-    
-    
-    func testLogSendFailWithUninitializedBMSClient(){
-        let fakePKG = Logger.MFP_LOGGER_PACKAGE
-        let missingValue = "bluemixRegionSuffix"
-        let bmsClient = BMSClient.sharedInstance
-        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegionSuffix: "")
-        
-        Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
-        let msg = "No value found for the BMSClient \(missingValue) property."
-        let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
-        let pathToBuffer = Logger.logsDocumentPath + Logger.FILE_LOGGER_SEND
-        let pathToOverflow = Logger.logsDocumentPath + Logger.FILE_LOGGER_OVERFLOW
-        
-        do {
-            try NSFileManager().removeItemAtPath(pathToFile)
-            
-        } catch {
-            
-        }
-        
-        do {
-            try NSFileManager().removeItemAtPath(pathToBuffer)
-            
-        } catch {
-            
-        }
-        
-        do {
-            try NSFileManager().removeItemAtPath(pathToOverflow)
-        } catch {
-            
-        }
-        
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
-        Logger.logStoreEnabled = true
-        Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Logger.DEFAULT_MAX_STORE_SIZE
-        
-        loggerInstance.debug("Hello world")
-        loggerInstance.info("1242342342343243242342")
-        loggerInstance.warn("Str: heyoooooo")
-        loggerInstance.error("1 2 3 4")
-        loggerInstance.fatal("StephenColbert")
-        
-        guard let _ = LoggerTests.getLogs(LogFileType.LOGGER) else {
-            XCTFail()
-            return
-        }
-        
-        XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
-        
-        let request = LogSender.buildLogSendRequest { (response, error) -> Void in
-            XCTAssertNil(response)
-            XCTAssertNotNil(error)
-        }
-        
-        XCTAssertNil(request)
-        
-        guard let formattedContents = LoggerTests.getFileContents(pathToFile) else {
-            XCTFail()
-            return
-        }
-        let fileContents = "[\(formattedContents)]"
-        let logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let newJsonDict = LoggerTests.convertLogsToJson(logDict) else {
-            XCTFail()
-            return
-        }
-        
-        
-        let error = newJsonDict[0]
-        XCTAssertTrue(error[Logger.TAG_MESSAGE] == msg)
-        XCTAssertTrue(error[Logger.TAG_PACKAGE] == fakePKG)
-        XCTAssertTrue(error[Logger.TAG_TIMESTAMP] != nil)
-        XCTAssertTrue(error[Logger.TAG_LEVEL] == "ERROR")
+        XCTAssertTrue(error[Constants.Metadata.Logger.message] != nil)
+        XCTAssertTrue(error[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(error[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(error[Constants.Metadata.Logger.level] == "ERROR")
     }
     
     
@@ -216,16 +139,16 @@ class LogSenderTests: XCTestCase {
         LogSender.returnInitializationError("BMSClient", missingValue:"test") { (response, error) -> Void in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
-            XCTAssertEqual(error!.code, MFPErrorCode.ClientNotInitialized.rawValue)
-            XCTAssertEqual(error!.domain, Logger.ANALYTICS_ERROR_CODE)
+            XCTAssertEqual(error!.code, BMSCoreError.ClientNotInitialized.rawValue)
+            XCTAssertEqual(error!.domain, BMSAnalyticsError.domain)
         }
         
         // Analytics initialization
         LogSender.returnInitializationError("Analytics", missingValue:"test") { (response, error) -> Void in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
-            XCTAssertEqual(error!.code, BMSAnalyticsErrorCode.AnalyticsNotInitialized.rawValue)
-            XCTAssertEqual(error!.domain, Logger.ANALYTICS_ERROR_CODE)
+            XCTAssertEqual(error!.code, BMSAnalyticsError.AnalyticsNotInitialized.rawValue)
+            XCTAssertEqual(error!.domain, BMSAnalyticsError.domain)
         }
         
         // Unknown initialization
@@ -233,15 +156,15 @@ class LogSenderTests: XCTestCase {
             XCTAssertNil(response)
             XCTAssertNotNil(error)
             XCTAssertEqual(error!.code, -1)
-            XCTAssertEqual(error!.domain, Logger.ANALYTICS_ERROR_CODE)
+            XCTAssertEqual(error!.domain, BMSAnalyticsError.domain)
         }
     }
     
     
     func testDeleteFileFail(){
         let fakePKG = "mfpsdk.logger"
-        let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
-        let pathToBuffer = Logger.logsDocumentPath + Logger.FILE_LOGGER_SEND
+        let pathToFile = Logger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
             
@@ -259,7 +182,7 @@ class LogSenderTests: XCTestCase {
         let loggerInstance = Logger.getLoggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Logger.DEFAULT_MAX_STORE_SIZE
+        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         
@@ -278,7 +201,7 @@ class LogSenderTests: XCTestCase {
             
         }
         
-        LogSender.deleteFile(Logger.FILE_LOGGER_SEND)
+        LogSender.deleteFile(Constants.File.Logger.outboundLogs)
         
         XCTAssertFalse(NSFileManager().fileExistsAtPath(pathToBuffer))
     }
@@ -286,8 +209,8 @@ class LogSenderTests: XCTestCase {
     
     func testDeleteFile(){
         let fakePKG = "MYPKG"
-        let pathToFile = Logger.logsDocumentPath + Logger.FILE_LOGGER_LOGS
-        let pathToBuffer = Logger.logsDocumentPath + Logger.FILE_LOGGER_SEND
+        let pathToFile = Logger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
@@ -306,7 +229,7 @@ class LogSenderTests: XCTestCase {
         let loggerInstance = Logger.getLoggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Logger.DEFAULT_MAX_STORE_SIZE
+        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -321,7 +244,7 @@ class LogSenderTests: XCTestCase {
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
-        LogSender.deleteFile(Logger.FILE_LOGGER_SEND)
+        LogSender.deleteFile(Constants.File.Logger.outboundLogs)
         
         XCTAssertFalse(NSFileManager().fileExistsAtPath(pathToBuffer))
     }
@@ -338,9 +261,9 @@ class LogSenderTests: XCTestCase {
         
         XCTAssertEqual(LogRecorder.extractFileNameFromPath(logFile1), "file.txt")
         XCTAssertEqual(LogRecorder.extractFileNameFromPath(logFile2), "slashes.log.txt")
-        XCTAssertEqual(LogRecorder.extractFileNameFromPath(logFile3), "[Unknown]")
-        XCTAssertEqual(LogRecorder.extractFileNameFromPath(logFile4), "[Unknown]")
-        XCTAssertEqual(LogRecorder.extractFileNameFromPath(logFile5), "[Unknown]")
+        XCTAssertEqual(LogRecorder.extractFileNameFromPath(logFile3), Constants.File.unknown)
+        XCTAssertEqual(LogRecorder.extractFileNameFromPath(logFile4), Constants.File.unknown)
+        XCTAssertEqual(LogRecorder.extractFileNameFromPath(logFile5), Constants.File.unknown)
     }
 
 }

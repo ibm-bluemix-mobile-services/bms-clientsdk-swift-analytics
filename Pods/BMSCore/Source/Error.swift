@@ -12,13 +12,14 @@
 */
 
 
-// TODO: Rename error code type
-
 /**
     These error codes indicate a failure that occurred within the BMSCore framework.
 */
-public enum MFPErrorCode: Int {
+public enum BMSCoreError: Int {
     
     case MalformedUrl
     case ClientNotInitialized
+    
+    static let domain = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore"
 }
+

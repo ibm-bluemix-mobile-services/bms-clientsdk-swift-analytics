@@ -40,9 +40,9 @@ internal class LogSender {
             if error == nil && response?.statusCode == 201 {
                 Logger.internalLogger.debug("Client logs successfully sent to the server.")
                 
-                deleteFile(Logger.FILE_LOGGER_SEND)
+                deleteFile(Constants.File.Logger.outboundLogs)
                 // Remove the uncaught exception flag since the logs containing the exception(s) have just been sent to the server
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: Logger.TAG_UNCAUGHT_EXCEPTION)
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: Constants.uncaughtException)
             }
             else {
                 Logger.internalLogger.error("Request to send client logs has failed.")
@@ -55,10 +55,10 @@ internal class LogSender {
         dispatch_async(LogSender.sendLogsToServerQueue) { () -> Void in
             do {
                 // Gather the logs and put them in a JSON object
-                let logsToSend: String? = try getLogs(fileName: Logger.FILE_LOGGER_LOGS, overflowFileName: Logger.FILE_LOGGER_OVERFLOW, bufferFileName: Logger.FILE_LOGGER_SEND)
+                let logsToSend: String? = try getLogs(fileName: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
                 var logPayloadData = try NSJSONSerialization.dataWithJSONObject([], options: [])
                 if let logPayload = logsToSend {
-                    let logPayloadJson = ["__logdata": logPayload]
+                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
                     logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
                 }
                 else {
@@ -86,7 +86,7 @@ internal class LogSender {
             if error == nil && response?.statusCode == 201 {
                 Analytics.logger.debug("Analytics data successfully sent to the server.")
                 
-                deleteFile(Logger.FILE_ANALYTICS_SEND)
+                deleteFile(Constants.File.Analytics.outboundLogs)
             }
             else {
                 Analytics.logger.error("Request to send analytics data to the server has failed.")
@@ -99,10 +99,10 @@ internal class LogSender {
         dispatch_async(LogSender.sendAnalyticsToServerQueue) { () -> Void in
             do {
                 // Gather the logs and put them in a JSON object
-                let logsToSend: String? = try getLogs(fileName: Logger.FILE_ANALYTICS_LOGS, overflowFileName: Logger.FILE_ANALYTICS_OVERFLOW, bufferFileName: Logger.FILE_ANALYTICS_SEND)
+                let logsToSend: String? = try getLogs(fileName: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
                 var logPayloadData = try NSJSONSerialization.dataWithJSONObject([], options: [])
                 if let logPayload = logsToSend {
-                    let logPayloadJson = ["__logdata": logPayload]
+                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
                     logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
                 }
                 else {
@@ -138,9 +138,9 @@ internal class LogSender {
             return nil
         }
         
-        headers[Logger.API_ID_HEADER] = Analytics.apiKey!
+        headers[Constants.analyticsApiKey] = Analytics.apiKey!
         
-        let logUploaderUrl = "https://" + Logger.HOST_NAME + "." + bmsClient.bluemixRegionSuffix! + Logger.UPLOAD_PATH
+        let logUploaderUrl = "https://" + Constants.AnalyticsServer.hostName + "." + bmsClient.bluemixRegionSuffix! + Constants.AnalyticsServer.uploadPath
         
         return MFPRequest(url: logUploaderUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
     }
@@ -155,14 +155,14 @@ internal class LogSender {
         var errorCode: Int
         switch uninitializedClass {
         case "Analytics":
-            errorCode = BMSAnalyticsErrorCode.AnalyticsNotInitialized.rawValue
+            errorCode = BMSAnalyticsError.AnalyticsNotInitialized.rawValue
         case "BMSClient":
-            errorCode = MFPErrorCode.ClientNotInitialized.rawValue
+            errorCode = BMSCoreError.ClientNotInitialized.rawValue
         default:
             errorCode = -1
         }
         
-        let error = NSError(domain: Logger.ANALYTICS_ERROR_CODE, code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+        let error = NSError(domain: BMSAnalyticsError.domain, code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
         
         callback(nil, error)
     }
@@ -200,8 +200,8 @@ internal class LogSender {
     // We should only be sending logs from a buffer file, which is a copy of the normal log file. This way, if the logs fail to get sent to the server, we can hold onto them until the send succeeds, while continuing to log to the normal log file.
     internal static func readLogsFromFile(bufferLogFile: String) throws -> String? {
         
-        let ANALYTICS_SEND = Logger.logsDocumentPath + Logger.FILE_ANALYTICS_SEND
-        let LOGGER_SEND = Logger.logsDocumentPath + Logger.FILE_LOGGER_SEND
+        let analyticsOutboundLogs: String = Logger.logsDocumentPath + Constants.File.Analytics.outboundLogs
+        let loggerOutboundLogs: String = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         
         
         var fileContents: String?
@@ -209,11 +209,11 @@ internal class LogSender {
         do {
             // Before sending the logs, we need to read them from the file. This is done in a serial dispatch queue to prevent conflicts if the log file is simulatenously being written to.
             switch bufferLogFile {
-            case ANALYTICS_SEND:
+            case analyticsOutboundLogs:
                 try dispatch_sync_throwable(LogRecorder.analyticsFileIOQueue, block: { () -> () in
                     fileContents = try NSString(contentsOfFile: bufferLogFile, encoding: NSUTF8StringEncoding) as String
                 })
-            case LOGGER_SEND:
+            case loggerOutboundLogs:
                 try dispatch_sync_throwable(LogRecorder.loggerFileIOQueue, block: { () -> () in
                     fileContents = try NSString(contentsOfFile: bufferLogFile, encoding: NSUTF8StringEncoding) as String
                 })
