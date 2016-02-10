@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,102 +18,158 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vF2-1Q-weD">
-                                <rect key="frame" x="214" y="113" width="366" height="77"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log level filter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wo8-df-VS1">
+                                <rect key="frame" x="20" y="139" width="96" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logger name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jJ-AU-MM6">
+                                <rect key="frame" x="20" y="229" width="90" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3M-qg-Pfg">
+                                <rect key="frame" x="20" y="267" width="62" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max store size" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irD-GB-IPs">
+                                <rect key="frame" x="20" y="305" width="98.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store logs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myz-ta-IbZ">
+                                <rect key="frame" x="20" y="371" width="69.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show internal logs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcK-Mr-PGq">
+                                <rect key="frame" x="20" y="411" width="126" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="OnW-dZ-hVY">
+                                <rect key="frame" x="20" y="471" width="461" height="34"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QO-vx-IUP">
+                                        <rect key="frame" x="0.0" y="0.0" width="31" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Log"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8h-Dy-bsk">
+                                        <rect key="frame" x="102" y="0.0" width="42" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Send"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXO-vE-JiO">
+                                        <rect key="frame" x="215" y="0.0" width="84" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Show logs"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCz-VC-1ga">
+                                        <rect key="frame" x="370" y="0.0" width="91" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Delete logs"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7pe-8f-c88">
+                                <rect key="frame" x="161" y="223" width="320" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100000" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zOV-yy-5fd">
+                                <rect key="frame" x="161" y="299" width="320" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aus-NT-Joo">
+                                <rect key="frame" x="161" y="261" width="320" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KHA-ip-20K">
+                                <rect key="frame" x="161" y="364" width="51" height="31"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gsz-uf-XAi">
+                                <rect key="frame" x="161" y="405" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log level" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHE-Dl-lcc">
+                                <rect key="frame" x="20" y="51" width="61" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="61" id="6gn-zy-Ja2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0RA-O8-3Dt">
+                                <rect key="frame" x="161" y="20" width="320" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="1X7-ID-Fc3"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="145" id="VXA-hC-iJY"/>
+                                </constraints>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Log level filter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wo8-df-VS1">
-                                <rect key="frame" x="20" y="136" width="180" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Logger name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jJ-AU-MM6">
-                                <rect key="frame" x="20" y="203" width="180" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3M-qg-Pfg">
-                                <rect key="frame" x="20" y="243" width="180" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max store size (bytes)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irD-GB-IPs">
-                                <rect key="frame" x="20" y="283" width="180" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Store logs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myz-ta-IbZ">
-                                <rect key="frame" x="20" y="348" width="180" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show internal SDK logs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcK-Mr-PGq">
-                                <rect key="frame" x="20" y="388" width="180" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QO-vx-IUP">
-                                <rect key="frame" x="41" y="462" width="105" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Log"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8h-Dy-bsk">
-                                <rect key="frame" x="152" y="462" width="105" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Send"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXO-vE-JiO">
-                                <rect key="frame" x="279" y="462" width="105" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Show logs"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCz-VC-1ga">
-                                <rect key="frame" x="429" y="462" width="105" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Delete logs"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRN-9Z-LyP">
-                                <rect key="frame" x="152" y="524" width="296" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vF2-1Q-weD">
+                                <rect key="frame" x="161" y="108" width="320" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="Bxw-RN-Byx"/>
+                                </constraints>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRN-9Z-LyP">
+                                <rect key="frame" x="139" y="520" width="223" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Trigger uncaught exception"/>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7pe-8f-c88">
-                                <rect key="frame" x="214" y="204" width="366" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zOV-yy-5fd">
-                                <rect key="frame" x="214" y="284" width="366" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aus-NT-Joo">
-                                <rect key="frame" x="214" y="244" width="366" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KHA-ip-20K">
-                                <rect key="frame" x="214" y="348" width="51" height="31"/>
-                            </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gsz-uf-XAi">
-                                <rect key="frame" x="214" y="389" width="51" height="31"/>
-                            </switch>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0RA-O8-3Dt">
-                                <rect key="frame" x="214" y="28" width="366" height="77"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Log level" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHE-Dl-lcc">
-                                <rect key="frame" x="20" y="51" width="180" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7pe-8f-c88" firstAttribute="top" secondItem="vF2-1Q-weD" secondAttribute="bottom" constant="35" id="00q-DD-0FB"/>
+                            <constraint firstItem="vF2-1Q-weD" firstAttribute="top" secondItem="0RA-O8-3Dt" secondAttribute="bottom" constant="8" id="048-oS-x4x"/>
+                            <constraint firstItem="zOV-yy-5fd" firstAttribute="top" secondItem="Aus-NT-Joo" secondAttribute="bottom" constant="8" id="0nz-Ui-aNW"/>
+                            <constraint firstItem="OnW-dZ-hVY" firstAttribute="top" secondItem="gsz-uf-XAi" secondAttribute="bottom" constant="35" id="1Nr-aC-DTq"/>
+                            <constraint firstItem="wo8-df-VS1" firstAttribute="leading" secondItem="HHE-Dl-lcc" secondAttribute="leading" id="4nI-zW-2E9"/>
+                            <constraint firstItem="Aus-NT-Joo" firstAttribute="trailing" secondItem="0RA-O8-3Dt" secondAttribute="trailing" id="7EP-66-egz"/>
+                            <constraint firstItem="irD-GB-IPs" firstAttribute="leading" secondItem="HHE-Dl-lcc" secondAttribute="leading" id="7Fu-LK-W2R"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="lRN-9Z-LyP" secondAttribute="bottom" constant="30" id="7Ry-BH-GaF"/>
+                            <constraint firstItem="KHA-ip-20K" firstAttribute="centerY" secondItem="Myz-ta-IbZ" secondAttribute="centerY" id="95r-5n-OYu"/>
+                            <constraint firstItem="gsz-uf-XAi" firstAttribute="centerY" secondItem="zcK-Mr-PGq" secondAttribute="centerY" id="9bM-pn-ij1"/>
+                            <constraint firstItem="Aus-NT-Joo" firstAttribute="top" secondItem="7pe-8f-c88" secondAttribute="bottom" constant="8" id="IBS-Bg-Gk7"/>
+                            <constraint firstItem="Aus-NT-Joo" firstAttribute="centerY" secondItem="V3M-qg-Pfg" secondAttribute="centerY" id="IRa-JB-ZLi"/>
+                            <constraint firstItem="7pe-8f-c88" firstAttribute="centerY" secondItem="3jJ-AU-MM6" secondAttribute="centerY" id="K4H-bz-shD"/>
+                            <constraint firstItem="gsz-uf-XAi" firstAttribute="leading" secondItem="0RA-O8-3Dt" secondAttribute="leading" id="LQS-Pj-Tb9"/>
+                            <constraint firstItem="KHA-ip-20K" firstAttribute="leading" secondItem="0RA-O8-3Dt" secondAttribute="leading" id="MIF-Tn-ATv"/>
+                            <constraint firstItem="OnW-dZ-hVY" firstAttribute="trailing" secondItem="0RA-O8-3Dt" secondAttribute="trailing" id="Nsq-TP-nrq"/>
+                            <constraint firstItem="7pe-8f-c88" firstAttribute="leading" secondItem="0RA-O8-3Dt" secondAttribute="leading" id="PTa-sM-HyJ"/>
+                            <constraint firstItem="KHA-ip-20K" firstAttribute="top" secondItem="zOV-yy-5fd" secondAttribute="bottom" constant="35" id="UEe-Wv-GRf"/>
+                            <constraint firstItem="lRN-9Z-LyP" firstAttribute="centerX" secondItem="OnW-dZ-hVY" secondAttribute="centerX" id="VG5-fs-Uns"/>
+                            <constraint firstItem="OnW-dZ-hVY" firstAttribute="leading" secondItem="HHE-Dl-lcc" secondAttribute="leading" id="YC3-3h-CTl"/>
+                            <constraint firstItem="0RA-O8-3Dt" firstAttribute="leading" secondItem="HHE-Dl-lcc" secondAttribute="trailing" constant="80" id="Ynu-0i-0Y5"/>
+                            <constraint firstItem="V3M-qg-Pfg" firstAttribute="leading" secondItem="HHE-Dl-lcc" secondAttribute="leading" id="Zp9-Hl-nEN"/>
+                            <constraint firstItem="vF2-1Q-weD" firstAttribute="trailing" secondItem="0RA-O8-3Dt" secondAttribute="trailing" id="bGu-qo-Myi"/>
+                            <constraint firstItem="Aus-NT-Joo" firstAttribute="leading" secondItem="0RA-O8-3Dt" secondAttribute="leading" id="bff-Uc-rbg"/>
+                            <constraint firstItem="0RA-O8-3Dt" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="cpS-7u-Ye6"/>
+                            <constraint firstItem="zOV-yy-5fd" firstAttribute="trailing" secondItem="0RA-O8-3Dt" secondAttribute="trailing" id="ecv-Sj-2Og"/>
+                            <constraint firstItem="lRN-9Z-LyP" firstAttribute="top" secondItem="OnW-dZ-hVY" secondAttribute="bottom" constant="15" id="fCL-E2-PgW"/>
+                            <constraint firstItem="Myz-ta-IbZ" firstAttribute="leading" secondItem="HHE-Dl-lcc" secondAttribute="leading" id="h05-d0-rXH"/>
+                            <constraint firstItem="vF2-1Q-weD" firstAttribute="leading" secondItem="0RA-O8-3Dt" secondAttribute="leading" id="jIy-Zo-vC0"/>
+                            <constraint firstItem="0RA-O8-3Dt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="km1-92-Y1N"/>
+                            <constraint firstItem="7pe-8f-c88" firstAttribute="trailing" secondItem="0RA-O8-3Dt" secondAttribute="trailing" id="lTw-kl-vKx"/>
+                            <constraint firstItem="zOV-yy-5fd" firstAttribute="leading" secondItem="0RA-O8-3Dt" secondAttribute="leading" id="ort-44-suF"/>
+                            <constraint firstItem="zOV-yy-5fd" firstAttribute="centerY" secondItem="irD-GB-IPs" secondAttribute="centerY" id="oru-TJ-woa"/>
+                            <constraint firstItem="HHE-Dl-lcc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="qaj-7d-2gg"/>
+                            <constraint firstItem="0RA-O8-3Dt" firstAttribute="centerY" secondItem="HHE-Dl-lcc" secondAttribute="centerY" id="wSJ-ha-eFx"/>
+                            <constraint firstItem="zcK-Mr-PGq" firstAttribute="leading" secondItem="HHE-Dl-lcc" secondAttribute="leading" id="wgM-Wy-Lxo"/>
+                            <constraint firstItem="vF2-1Q-weD" firstAttribute="centerY" secondItem="wo8-df-VS1" secondAttribute="centerY" id="xM1-fS-m40"/>
+                            <constraint firstItem="3jJ-AU-MM6" firstAttribute="leading" secondItem="HHE-Dl-lcc" secondAttribute="leading" id="ziI-sx-OeH"/>
+                            <constraint firstItem="gsz-uf-XAi" firstAttribute="top" secondItem="KHA-ip-20K" secondAttribute="bottom" constant="10" id="zmZ-0U-byV"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
