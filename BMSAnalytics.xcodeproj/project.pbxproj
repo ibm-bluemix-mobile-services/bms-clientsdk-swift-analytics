@@ -119,6 +119,13 @@
 			remoteGlobalIDString = 7982D7E7BCCE39EF96714F8D6AC081AE;
 			remoteInfo = "Pods-BMSAnalyticsWatchOS-BMSCore";
 		};
+		9276B5161C6D445A00E61F45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 926CF8051C4ECC330084355B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 926CF80D1C4ECC330084355B;
+			remoteInfo = BMSAnalytics;
+		};
 		92787D3A1C6D1DCB00D97FAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
@@ -815,6 +822,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9276B5171C6D445A00E61F45 /* PBXTargetDependency */,
 				926CF8661C4ECDF80084355B /* PBXTargetDependency */,
 			);
 			name = TestAppiOS;
@@ -1260,6 +1268,11 @@
 			isa = PBXTargetDependency;
 			target = 926CF84C1C4ECDF80084355B /* TestAppWatchOS */;
 			targetProxy = 926CF8651C4ECDF80084355B /* PBXContainerItemProxy */;
+		};
+		9276B5171C6D445A00E61F45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 926CF80D1C4ECC330084355B /* BMSAnalytics */;
+			targetProxy = 9276B5161C6D445A00E61F45 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

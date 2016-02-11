@@ -35,6 +35,55 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // MARK: Button presses
     
     @IBAction func recordLog(sender: UIButton) {
+        
+        Analytics.log(["buttonPressed": "recordLog"])
+        
+        if let maxStoreSize = maxStoreSizeField.text {
+            Logger.maxLogStoreSize = UInt64(maxStoreSize) ?? 100000
+        }
+        
+        Logger.logStoreEnabled = logStorageEnabledSwitch.on
+        Logger.sdkDebugLoggingEnabled = internalSdkLoggingSwitch.on
+        
+        switch currentLogLevelFilter {
+        case "None":
+            Logger.logLevelFilter = LogLevel.None
+        case "Analytics":
+            Logger.logLevelFilter = LogLevel.Analytics
+        case "Fatal":
+            Logger.logLevelFilter = LogLevel.Fatal
+        case "Error":
+            Logger.logLevelFilter = LogLevel.Error
+        case "Warn":
+            Logger.logLevelFilter = LogLevel.Warn
+        case "Info":
+            Logger.logLevelFilter = LogLevel.Info
+        case "Debug":
+            Logger.logLevelFilter = LogLevel.Debug
+        default:
+            break
+        }
+        
+        let logger = Logger.getLoggerForName(loggerNameField.text ?? "TestAppiOS")
+        
+        switch currentLogLevel {
+        case "None":
+            print("Cannot log at the 'None' level")
+        case "Analytics":
+            print("Cannot log at the 'Analytics' level")
+        case "Fatal":
+            logger.fatal(logMessageField.text ?? "")
+        case "Error":
+            logger.error(logMessageField.text ?? "")
+        case "Warn":
+            logger.warn(logMessageField.text ?? "")
+        case "Info":
+            logger.info(logMessageField.text ?? "")
+        case "Debug":
+            logger.debug(logMessageField.text ?? "")
+        default:
+            break
+        }
     }
     
     @IBAction func sendLogs(sender: UIButton) {
@@ -86,6 +135,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("Uncaught Exception Detected: \(Logger.isUncaughtExceptionDetected)")
         
         self.logLevelPicker.dataSource = self
         self.logLevelPicker.delegate = self
