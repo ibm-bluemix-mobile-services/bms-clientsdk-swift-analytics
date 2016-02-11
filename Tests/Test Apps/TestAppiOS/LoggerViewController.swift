@@ -10,7 +10,12 @@ import UIKit
 import BMSCore
 import BMSAnalytics
 
-class LoggerViewController: UIViewController {
+class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    
+    var currentLogLevel = ""
+    var currentLogLevelFilter = ""
+    
     
     
     // MARK: Outlets
@@ -46,11 +51,47 @@ class LoggerViewController: UIViewController {
     
     
     
+    // MARK: UIPickerViewDelegate protocol
+    
+    let logLevels = ["None", "Analytics", "Fatal", "Error", "Warn", "Info", "Debug"]
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        return logLevels.count
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return logLevels[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        switch pickerView.tag {
+        case 0:
+            currentLogLevel = logLevels[row]
+        case 1:
+            currentLogLevelFilter = logLevels[row]
+        default:
+            break
+        }
+    }
+    
+    
     // MARK: UIViewController protocol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.logLevelPicker.dataSource = self
+        self.logLevelPicker.delegate = self
+        
+        self.logLevelFilterPicker.dataSource = self
+        self.logLevelFilterPicker.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
