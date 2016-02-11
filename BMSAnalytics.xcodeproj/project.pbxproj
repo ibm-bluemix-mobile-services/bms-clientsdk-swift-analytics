@@ -13,7 +13,7 @@
 		9221C02C1C4ED33E007FA9D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0101C4ED26F007FA9D0 /* AppDelegate.swift */; };
 		9221C02D1C4ED346007FA9D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0111C4ED26F007FA9D0 /* LaunchScreen.storyboard */; };
 		9221C02E1C4ED34A007FA9D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0131C4ED26F007FA9D0 /* Main.storyboard */; };
-		9221C02F1C4ED35B007FA9D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0181C4ED26F007FA9D0 /* ViewController.swift */; };
+		9221C02F1C4ED35B007FA9D0 /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0181C4ED26F007FA9D0 /* LoggerViewController.swift */; };
 		9221C0301C4ED362007FA9D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0161C4ED26F007FA9D0 /* Assets.xcassets */; };
 		9221C0311C4ED368007FA9D0 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9221C01A1C4ED26F007FA9D0 /* Interface.storyboard */; };
 		9221C0321C4ED374007FA9D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9221C01D1C4ED26F007FA9D0 /* Assets.xcassets */; };
@@ -38,6 +38,7 @@
 		9276B4641C69594E00E61F45 /* LogSenderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B4631C69594E00E61F45 /* LogSenderTests.swift */; };
 		9276B4661C6A621F00E61F45 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B4651C6A621F00E61F45 /* Constants.swift */; };
 		9276B4671C6A621F00E61F45 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B4651C6A621F00E61F45 /* Constants.swift */; };
+		9276B48C1C6C0CA200E61F45 /* LogDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B48B1C6C0CA200E61F45 /* LogDisplayViewController.swift */; };
 		929E62381C504712001E8880 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0DB1C4EE159007FA9D0 /* Error.swift */; };
 		929E62391C504715001E8880 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* Analytics.swift */; };
 		929E623A1C504717001E8880 /* Analytics+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0451C4ED9AF007FA9D0 /* Analytics+watchOS.swift */; };
@@ -119,7 +120,7 @@
 		9221C0141C4ED26F007FA9D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9221C0161C4ED26F007FA9D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9221C0171C4ED26F007FA9D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9221C0181C4ED26F007FA9D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9221C0181C4ED26F007FA9D0 /* LoggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
 		9221C01B1C4ED26F007FA9D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		9221C01D1C4ED26F007FA9D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9221C01E1C4ED26F007FA9D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		9276B4611C69593E00E61F45 /* LogRecorderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogRecorderTests.swift; sourceTree = "<group>"; };
 		9276B4631C69594E00E61F45 /* LogSenderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogSenderTests.swift; sourceTree = "<group>"; };
 		9276B4651C6A621F00E61F45 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9276B48B1C6C0CA200E61F45 /* LogDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogDisplayViewController.swift; sourceTree = "<group>"; };
 		9BCD7263DE4324118E56D58D /* Pods_BMSAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BMSAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8ECE2817146F8AD50262040 /* Pods-BMSAnalyticsWatchOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BMSAnalyticsWatchOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BMSAnalyticsWatchOS/Pods-BMSAnalyticsWatchOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -287,7 +289,8 @@
 			isa = PBXGroup;
 			children = (
 				9221C0101C4ED26F007FA9D0 /* AppDelegate.swift */,
-				9221C0181C4ED26F007FA9D0 /* ViewController.swift */,
+				9221C0181C4ED26F007FA9D0 /* LoggerViewController.swift */,
+				9276B48B1C6C0CA200E61F45 /* LogDisplayViewController.swift */,
 				9221C0131C4ED26F007FA9D0 /* Main.storyboard */,
 				9221C0111C4ED26F007FA9D0 /* LaunchScreen.storyboard */,
 				9221C0151C4ED26F007FA9D0 /* Resources */,
@@ -780,7 +783,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9221C02F1C4ED35B007FA9D0 /* ViewController.swift in Sources */,
+				9276B48C1C6C0CA200E61F45 /* LogDisplayViewController.swift in Sources */,
+				9221C02F1C4ED35B007FA9D0 /* LoggerViewController.swift in Sources */,
 				9221C02C1C4ED33E007FA9D0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
