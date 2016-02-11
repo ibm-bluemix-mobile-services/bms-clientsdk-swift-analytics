@@ -10,6 +10,22 @@ import UIKit
 
 class LogDisplayViewController: UIViewController {
     
+    
+    // MARK: Outlets
+    
+    @IBOutlet var logsTextView: UITextView!
+    
+    
+    
+    // MARK: Button presses
+    
+    @IBAction func dismissViewController(sender: UIButton) {
+    }
+    
+    
+    
+    // MARK: UIViewController protocol
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

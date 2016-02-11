@@ -91,6 +91,9 @@
                                         <variation key="heightClass=compact-widthClass=regular" ambiguous="YES">
                                             <rect key="frame" x="0.0" y="0.0" width="31" height="0.0"/>
                                         </variation>
+                                        <connections>
+                                            <action selector="recordLog:" destination="BYZ-38-t0r" eventType="touchUpInside" id="moa-ut-D4f"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8h-Dy-bsk">
                                         <rect key="frame" x="102" y="0.0" width="42" height="34"/>
@@ -102,6 +105,9 @@
                                         <variation key="heightClass=compact-widthClass=regular" ambiguous="YES">
                                             <rect key="frame" x="102" y="0.0" width="42" height="0.0"/>
                                         </variation>
+                                        <connections>
+                                            <action selector="sendLogs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6TG-An-RHE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXO-vE-JiO">
                                         <rect key="frame" x="215" y="0.0" width="84" height="34"/>
@@ -114,6 +120,7 @@
                                             <rect key="frame" x="215" y="0.0" width="84" height="0.0"/>
                                         </variation>
                                         <connections>
+                                            <action selector="showLogs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rw1-SZ-HjB"/>
                                             <segue destination="M4Z-js-j9n" kind="presentation" id="Np3-VM-A1I"/>
                                         </connections>
                                     </button>
@@ -127,6 +134,9 @@
                                         <variation key="heightClass=compact-widthClass=regular" ambiguous="YES">
                                             <rect key="frame" x="370" y="0.0" width="91" height="0.0"/>
                                         </variation>
+                                        <connections>
+                                            <action selector="deleteLogs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3lV-5A-Wzv"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
@@ -216,6 +226,9 @@
                                 <variation key="heightClass=compact-widthClass=regular" ambiguous="YES">
                                     <rect key="frame" x="139" y="370" width="223" height="0.0"/>
                                 </variation>
+                                <connections>
+                                    <action selector="triggerUncaughtException:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P0R-Z4-Ne5"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -261,6 +274,15 @@
                             <constraint firstItem="gsz-uf-XAi" firstAttribute="top" secondItem="KHA-ip-20K" secondAttribute="bottom" constant="10" id="zmZ-0U-byV"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="internalSdkLoggingSwitch" destination="gsz-uf-XAi" id="YuM-rs-uRD"/>
+                        <outlet property="logLevelFilterPicker" destination="vF2-1Q-weD" id="a76-nc-i6Q"/>
+                        <outlet property="logLevelPicker" destination="0RA-O8-3Dt" id="YgH-jd-stJ"/>
+                        <outlet property="logMessageField" destination="Aus-NT-Joo" id="Ycx-Mu-id1"/>
+                        <outlet property="logStorageEnabledSwitch" destination="KHA-ip-20K" id="xNj-AA-vfB"/>
+                        <outlet property="loggerNameField" destination="7pe-8f-c88" id="AqJ-rv-Knu"/>
+                        <outlet property="maxStoreSizeField" destination="zOV-yy-5fd" id="w9M-e8-A1S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -289,6 +311,9 @@
                                 <rect key="frame" x="277.5" y="544" width="45" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="dismissViewController:" destination="M4Z-js-j9n" eventType="touchUpInside" id="HfX-fU-gQq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -301,6 +326,9 @@
                             <constraint firstItem="ZR5-3C-jvb" firstAttribute="top" secondItem="onm-2h-UG2" secondAttribute="bottom" constant="20" id="or8-pd-Ocp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logsTextView" destination="onm-2h-UG2" id="Z5g-tt-yBY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OqE-9M-bmu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
