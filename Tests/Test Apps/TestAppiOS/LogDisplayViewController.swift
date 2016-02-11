@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import BMSCore
+import BMSAnalytics
 
 class LogDisplayViewController: UIViewController {
     

@@ -34,7 +34,7 @@ target 'BMSAnalyticsWatchOS' do
 end
 
 target 'TestAppiOS' do
-	
+	import_pods_iOS
 end
 
 target 'TestAppWatchOS' do
