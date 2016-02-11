@@ -18,6 +18,28 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     
     
+    // MARK: UIViewController protocol
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegionSuffix: BluemixRegion.US_SOUTH)
+        
+        Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.enabled = true
+        
+        self.logLevelPicker.dataSource = self
+        self.logLevelPicker.delegate = self
+        
+        self.logLevelFilterPicker.dataSource = self
+        self.logLevelFilterPicker.delegate = self
+        
+        // Should print true if the "Trigger Uncaught Exception" button was pressed in the last app session
+        print("Uncaught Exception Detected: \(Logger.isUncaughtExceptionDetected)")
+    }
+    
+    
+    
     // MARK: Outlets
     
     @IBOutlet var logLevelPicker: UIPickerView!
@@ -87,6 +109,30 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     @IBAction func sendLogs(sender: UIButton) {
+        
+        Logger.send { (response: Response?, error: NSError?) -> Void in
+            if let response = response {
+                print("\nSENDING LOGS")
+                print("Logs send successfully: " + String(response.isSuccessful))
+                print("Status code: " + String(response.statusCode))
+                if let responseText = response.responseText {
+                    print("Response text: " + responseText)
+                }
+                print("\n")
+            }
+        }
+        
+        Analytics.send { (response: Response?, error: NSError?) -> Void in
+            if let response = response {
+                print("\nSENDING ANALYTICS")
+                print("Logs send successfully: " + String(response.isSuccessful))
+                print("Status code: " + String(response.statusCode))
+                if let responseText = response.responseText {
+                    print("Response text: " + responseText)
+                }
+                print("\n")
+            }
+        }
     }
     
     @IBAction func showLogs(sender: UIButton) {
@@ -103,6 +149,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // MARK: UIPickerViewDelegate protocol
     
     let logLevels = ["None", "Analytics", "Fatal", "Error", "Warn", "Info", "Debug"]
+    
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -129,27 +176,4 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             break
         }
     }
-    
-    
-    // MARK: UIViewController protocol
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        print("Uncaught Exception Detected: \(Logger.isUncaughtExceptionDetected)")
-        
-        self.logLevelPicker.dataSource = self
-        self.logLevelPicker.delegate = self
-        
-        self.logLevelFilterPicker.dataSource = self
-        self.logLevelFilterPicker.delegate = self
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
-
