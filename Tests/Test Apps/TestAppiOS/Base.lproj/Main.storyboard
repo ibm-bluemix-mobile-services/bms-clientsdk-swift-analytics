@@ -120,7 +120,6 @@
                                             <rect key="frame" x="215" y="0.0" width="84" height="0.0"/>
                                         </variation>
                                         <connections>
-                                            <action selector="showLogs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rw1-SZ-HjB"/>
                                             <segue destination="M4Z-js-j9n" kind="presentation" id="Np3-VM-A1I"/>
                                         </connections>
                                     </button>

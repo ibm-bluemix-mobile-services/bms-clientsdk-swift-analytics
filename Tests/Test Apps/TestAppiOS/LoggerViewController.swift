@@ -18,28 +18,6 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     
     
-    // MARK: UIViewController protocol
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegionSuffix: BluemixRegion.US_SOUTH)
-        
-        Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
-        Analytics.enabled = true
-        
-        self.logLevelPicker.dataSource = self
-        self.logLevelPicker.delegate = self
-        
-        self.logLevelFilterPicker.dataSource = self
-        self.logLevelFilterPicker.delegate = self
-        
-        // Should print true if the "Trigger Uncaught Exception" button was pressed in the last app session
-        print("Uncaught Exception Detected: \(Logger.isUncaughtExceptionDetected)")
-    }
-    
-    
-    
     // MARK: Outlets
     
     @IBOutlet var logLevelPicker: UIPickerView!
@@ -135,13 +113,24 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
-    @IBAction func showLogs(sender: UIButton) {
-    }
-    
     @IBAction func deleteLogs(sender: UIButton) {
+        
+        Analytics.log(["buttonPressed": "deleteLogs"])
+        
+        let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/"
+        let fileName = "mfpsdk.logger.log"
+        do {
+            try NSFileManager().removeItemAtPath(filePath + fileName)
+        } catch {
+            print("Failed to delete logs!")
+        }
     }
     
     @IBAction func triggerUncaughtException(sender: UIButton) {
+        
+        Analytics.log(["buttonPressed": "triggerUncaughtException"])
+        
+        NSException(name: "Test crash", reason: "Ensure that BMSAnalytics framework is catching uncaught exceptions", userInfo: nil).raise()
     }
     
     
@@ -175,5 +164,22 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         default:
             break
         }
+    }
+    
+    
+    
+    // MARK: UIViewController protocol
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.logLevelPicker.dataSource = self
+        self.logLevelPicker.delegate = self
+        
+        self.logLevelFilterPicker.dataSource = self
+        self.logLevelFilterPicker.delegate = self
+        
+        // Should print true if the "Trigger Uncaught Exception" button was pressed in the last app session
+        print("Uncaught Exception Detected: \(Logger.isUncaughtExceptionDetected)")
     }
 }
