@@ -149,10 +149,13 @@ public class Analytics {
     }
     
     
+    
+    // MARK: Sessions
+    
     // Log that the app is starting a new session, and start a timer to record the session duration
     // This method should be called when the app starts up.
     //      In iOS, this occurs when the app is about to enter the foreground.
-    //      In WatchOS, the user decides when this method is executed, but we recommend calling it when the app becomes active.
+    //      In watchOS, the user decides when this method is executed, but we recommend calling it when the app becomes active.
     dynamic static internal func logSessionStart() {
         
         if !lifecycleEvents.isEmpty {
@@ -167,9 +170,9 @@ public class Analytics {
     
     
     // Log that the app session is ending, and use the timer from logSessionStart() to record the duration of this session
-    // This method should be called when the closes.
+    // This method should be called when the app closes.
     //      In iOS, this occurs when the app enters the background.
-    //      In WatchOS, the user decides when this method is executed, but we recommend calling it when the app becomes active.
+    //      In watchOS, the user decides when this method is executed, but we recommend calling it when the app becomes active.
     dynamic static internal func logSessionEnd() {
         
         // logSessionStart() must have been called first so that we can get the session start time
@@ -182,12 +185,13 @@ public class Analytics {
         lifecycleEvents[Constants.Metadata.Analytics.duration] = Int(sessionDuration)
         
         // Let the Analytics service know how the app was last closed
-        if Logger.isUncaughtExceptionDetected {
+        if Logger.exceptionHasBeenCalled {
             lifecycleEvents[Constants.Metadata.Analytics.closedBy] = AppClosedBy.CRASH.rawValue
-            Logger.isUncaughtExceptionDetected = false
+            Logger.isUncaughtExceptionDetected = true
         }
         else {
             lifecycleEvents[Constants.Metadata.Analytics.closedBy] = AppClosedBy.USER.rawValue
+            Logger.isUncaughtExceptionDetected = false
         }
         
         logger.analytics(lifecycleEvents)

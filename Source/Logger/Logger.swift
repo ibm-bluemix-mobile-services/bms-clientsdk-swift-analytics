@@ -103,7 +103,7 @@ extension Logger {
     internal static let existingUncaughtExceptionHandler = NSGetUncaughtExceptionHandler()
     
     // This flag prevents infinite loops of uncaught exceptions
-    private static var exceptionHasBeenCalled = false
+    internal static var exceptionHasBeenCalled = false
     
     internal static func startCapturingUncaughtExceptions() {
         
@@ -112,7 +112,6 @@ extension Logger {
             if (!Logger.exceptionHasBeenCalled) {
                 // Persist a flag so that when the app starts back up, we can see if an exception occurred in the last session
                 Logger.exceptionHasBeenCalled = true
-                Logger.isUncaughtExceptionDetected = true
                 
                 Logger.logException(caughtException)
                 Analytics.logSessionEnd()
