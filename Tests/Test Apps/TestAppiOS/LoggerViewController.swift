@@ -13,8 +13,8 @@ import BMSAnalytics
 class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
-    var currentLogLevel = ""
-    var currentLogLevelFilter = ""
+    var currentLogLevel = "None"
+    var currentLogLevelFilter = "None"
     
     
     
@@ -121,6 +121,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         let fileName = "mfpsdk.logger.log"
         do {
             try NSFileManager().removeItemAtPath(filePath + fileName)
+            print("Successfully deleted logs!")
         } catch {
             print("Failed to delete logs!")
         }

@@ -22,6 +22,22 @@ class LogDisplayViewController: UIViewController {
     // MARK: Button presses
     
     @IBAction func dismissViewController(sender: UIButton) {
+        
+        self.dismissViewControllerAnimated(true) { () -> Void in }
+    }
+    
+    func populateLogTextView() {
+        
+        // Populate text view with all stored logs
+        let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/"
+        let fileName = "mfpsdk.logger.log"
+        let pathToFile = filePath + fileName
+        
+        do {
+            logsTextView.text = try String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        } catch {
+            logsTextView.text = "No logs!"
+        }
     }
     
     
@@ -30,13 +46,12 @@ class LogDisplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        logsTextView.layer.borderWidth = 1
+        
+        populateLogTextView()
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
     
 }
