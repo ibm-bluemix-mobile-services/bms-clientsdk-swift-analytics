@@ -16,7 +16,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         
         BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegionSuffix: BluemixRegion.US_SOUTH)
         
-        Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234") // Cannot use DeviceEvents.LIFECYCLE for watchOS apps
+        // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+        Analytics.initializeWithAppName("TestAppWatchOS", apiKey: "1234")
         Analytics.enabled = true
     }
 

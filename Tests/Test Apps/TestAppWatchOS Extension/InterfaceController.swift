@@ -18,16 +18,22 @@ class InterfaceController: WKInterfaceController {
         
         Analytics.log(["buttonPressed": "recordLog"])
         
-        Analytics.send { (response: Response?, error: NSError?) -> Void in
-            if let response = response {
-                print("\nSENDING ANALYTICS")
-                print("Logs send successfully: " + String(response.isSuccessful))
-                print("Status code: " + String(response.statusCode))
-                if let responseText = response.responseText {
-                    print("Response text: " + responseText)
+        func completionHandler(sendType: String) -> MfpCompletionHandler {
+            return {
+                (response: Response?, error: NSError?) -> Void in
+                if let response = response {
+                    print("\(sendType) sent successfully: " + String(response.isSuccessful))
+                    print("Status code: " + String(response.statusCode))
+                    if let responseText = response.responseText {
+                        print("Response text: " + responseText)
+                    }
+                    print("\n")
                 }
-                print("\n")
             }
         }
+        
+        Logger.send(completionHandler: completionHandler("Logs"))
+        
+        Analytics.send(completionHandler: completionHandler("Analytics"))
     }
 }
