@@ -38,10 +38,10 @@ target 'TestAppiOS' do
 end
 
 target 'TestAppWatchOS' do
-	
+
 end
 
 target 'TestAppWatchOS Extension' do
-	
+	import_pods_watchOS
 end
 
