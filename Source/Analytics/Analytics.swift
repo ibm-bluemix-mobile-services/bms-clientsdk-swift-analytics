@@ -143,9 +143,9 @@ public class Analytics {
         
         - parameter completionHandler:  Optional callback containing the results of the send request
     */
-    public static func send(completionHandler: MfpCompletionHandler? = nil) {
+    public static func send(completionHandler userCallback: MfpCompletionHandler? = nil) {
         
-        LogSender.sendAnalytics(completionHandler: completionHandler)
+        LogSender.sendAnalytics(completionHandler: userCallback)
     }
     
     
@@ -218,10 +218,10 @@ public class Analytics {
         
         #if os(iOS)
             (osVersion, model, deviceId) = Analytics.getiOSDeviceInfo()
-            requestMetadata["os"] = "ios"
+            requestMetadata["os"] = "iOS"
         #elseif os(watchOS)
             (osVersion, model, deviceId) = Analytics.getWatchOSDeviceInfo()
-            requestMetadata["os"] = "watchos"
+            requestMetadata["os"] = "watchOS"
         #endif
 
         requestMetadata["brand"] = "Apple"

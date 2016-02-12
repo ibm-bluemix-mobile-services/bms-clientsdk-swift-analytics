@@ -170,7 +170,7 @@ class AnalyticsTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(outboundMetadata.containsString("\"os\":\"ios\""))
+        XCTAssert(outboundMetadata.containsString("\"os\":\"iOS\""))
         XCTAssert(outboundMetadata.containsString("\"brand\":\"Apple\""))
         XCTAssert(outboundMetadata.containsString("\"model\":\"Simulator\""))
         XCTAssert(outboundMetadata.containsString("\"mfpAppName\":\"Unit Test App\""))
