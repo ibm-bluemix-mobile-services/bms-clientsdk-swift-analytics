@@ -7,25 +7,27 @@
 //
 
 import WatchKit
-import Foundation
+import BMSAnalyticsWatchOS
+import BMSCore
 
 
 class InterfaceController: WKInterfaceController {
 
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    
+    @IBAction func sendAnalyticsButtonPressed() {
         
-        // Configure interface objects here.
+        Analytics.log(["buttonPressed": "recordLog"])
+        
+        Analytics.send { (response: Response?, error: NSError?) -> Void in
+            if let response = response {
+                print("\nSENDING ANALYTICS")
+                print("Logs send successfully: " + String(response.isSuccessful))
+                print("Status code: " + String(response.statusCode))
+                if let responseText = response.responseText {
+                    print("Response text: " + responseText)
+                }
+                print("\n")
+            }
+        }
     }
-
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-    }
-
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
-
 }

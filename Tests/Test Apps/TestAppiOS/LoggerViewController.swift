@@ -91,7 +91,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         Logger.send { (response: Response?, error: NSError?) -> Void in
             if let response = response {
                 print("\nSENDING LOGS")
-                print("Logs send successfully: " + String(response.isSuccessful))
+                print("Logs sent successfully: " + String(response.isSuccessful))
                 print("Status code: " + String(response.statusCode))
                 if let responseText = response.responseText {
                     print("Response text: " + responseText)
@@ -103,7 +103,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         Analytics.send { (response: Response?, error: NSError?) -> Void in
             if let response = response {
                 print("\nSENDING ANALYTICS")
-                print("Logs send successfully: " + String(response.isSuccessful))
+                print("Logs sent successfully: " + String(response.isSuccessful))
                 print("Status code: " + String(response.statusCode))
                 if let responseText = response.responseText {
                     print("Response text: " + responseText)
