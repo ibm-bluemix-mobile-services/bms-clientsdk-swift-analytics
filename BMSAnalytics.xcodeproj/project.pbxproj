@@ -1633,6 +1633,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AC592126088B732C417883AF /* Pods-TestAppWatchOS Extension.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				INFOPLIST_FILE = "Tests/Test Apps/TestAppWatchOS Extension/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp.watchkitextension;
@@ -1648,6 +1649,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3A8CEEDB2B5B5B0292DDF107 /* Pods-TestAppWatchOS Extension.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				INFOPLIST_FILE = "Tests/Test Apps/TestAppWatchOS Extension/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp.watchkitextension;
