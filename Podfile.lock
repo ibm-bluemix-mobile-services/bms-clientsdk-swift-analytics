@@ -2,7 +2,7 @@ PODS:
   - BMSCore (0.0.15)
 
 DEPENDENCIES:
-  - BMSCore
+  - BMSCore (~> 0.0.15)
 
 SPEC CHECKSUMS:
   BMSCore: b6eb8e7861b83ca95f83fa4b7fce5f8e66716356

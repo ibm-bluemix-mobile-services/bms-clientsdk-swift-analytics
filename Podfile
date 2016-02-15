@@ -2,14 +2,18 @@ use_frameworks!
 
 
 
+def pod_BMSCore
+	pod 'BMSCore', '~> 0.0.15'
+end
+
 def import_pods_iOS
 	platform :ios, '8.0'
-    pod 'BMSCore'
+    pod_BMSCore
 end
 
 def import_pods_watchOS
 	platform :watchos, '2.0'
-    pod 'BMSCore'
+    pod_BMSCore
 end
 
 
