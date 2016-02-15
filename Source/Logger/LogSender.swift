@@ -128,8 +128,8 @@ internal class LogSender {
         var headers = ["Content-Type": "application/json"]
         
         // Only the region is required to communicate with the Analytics service. App route and GUID are not required.
-        guard bmsClient.bluemixRegionSuffix != nil && bmsClient.bluemixRegionSuffix != "" else {
-            returnInitializationError("BMSClient", missingValue: "bluemixRegionSuffix", callback: callback)
+        guard bmsClient.bluemixRegion != nil && bmsClient.bluemixRegion != "" else {
+            returnInitializationError("BMSClient", missingValue: "bluemixRegion", callback: callback)
             return nil
         }
         
@@ -140,7 +140,7 @@ internal class LogSender {
         
         headers[Constants.analyticsApiKey] = Analytics.apiKey!
         
-        let logUploaderUrl = "https://" + Constants.AnalyticsServer.hostName + "." + bmsClient.bluemixRegionSuffix! + Constants.AnalyticsServer.uploadPath
+        let logUploaderUrl = "https://" + Constants.AnalyticsServer.hostName + "." + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadPath
         
         return MFPRequest(url: logUploaderUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
     }

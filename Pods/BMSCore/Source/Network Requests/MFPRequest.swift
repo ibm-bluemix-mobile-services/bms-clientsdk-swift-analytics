@@ -1,5 +1,5 @@
 /*
-*     Copyright 2015 IBM Corp.
+*     Copyright 2016 IBM Corp.
 *     Licensed under the Apache License, Version 2.0 (the "License");
 *     you may not use this file except in compliance with the License.
 *     You may obtain a copy of the License at
@@ -87,6 +87,12 @@ public class MFPRequest: NSObject, NSURLSessionTaskDelegate {
     
     
     
+    // MARK: Constants
+    
+    public static let CONTENT_TYPE = "Content-Type"
+    
+    
+    
     // MARK: Initializer
     
     /**
@@ -155,8 +161,8 @@ public class MFPRequest: NSObject, NSURLSessionTaskDelegate {
         self.requestBody = requestBody.dataUsingEncoding(NSUTF8StringEncoding)
         
         // Don't want to overwrite content type if it has already been specified as something else
-        if headers["Content-Type"] == nil {
-            headers["Content-Type"] = "text/plain"
+        if headers[MFPRequest.CONTENT_TYPE] == nil {
+            headers[MFPRequest.CONTENT_TYPE] = "text/plain"
         }
         
         self.sendWithCompletionHandler(callback)
