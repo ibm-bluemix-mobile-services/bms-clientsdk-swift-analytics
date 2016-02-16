@@ -20,7 +20,7 @@ public enum PersistencePolicy: String {
 public protocol AuthorizationManager {
 
     func isAuthorizationRequired(statusCode: Int, responseAuthorizationHeader: String) -> Bool
-    func isAuthorizationRequired(httpResponse: Response?) -> Bool
+    func isAuthorizationRequired(httpResponse: Response) -> Bool
     
     func obtainAuthorization(completionHandler: MfpCompletionHandler?)
     func getCachedAuthorizationHeader() -> String?
@@ -28,12 +28,4 @@ public protocol AuthorizationManager {
     func clearAuthorizationData()
     
     
-    
-    //TODO: ilan - make this like the android version
-    func addCachedAuthorizationHeader(request: NSMutableURLRequest)
-    func getUserIdentity() -> AnyObject?
-    func getDeviceIdentity() -> AnyObject?
-    func getAppIdentity() -> AnyObject?
-    func getAuthorizationPersistencePolicy() -> PersistencePolicy
-    func setAuthorizationPersistensePolicy(policy: PersistencePolicy)
 }
