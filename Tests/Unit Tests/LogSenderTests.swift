@@ -27,9 +27,9 @@ class LogSenderTests: XCTestCase {
         let pathToFile = Logger.logsDocumentPath + Constants.File.Logger.logs
         let pathToBuffer = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         let bmsClient = BMSClient.sharedInstance
-        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.US_SOUTH)
+        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
         Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
-        let url = "https://" + Constants.AnalyticsServer.hostName + "." + BMSClient.US_SOUTH + Constants.AnalyticsServer.uploadPath
+        let url = "https://" + Constants.AnalyticsServer.hostName + "." + BMSClient.REGION_US_SOUTH + Constants.AnalyticsServer.uploadPath
         
         Analytics.initializeWithAppName(APP_NAME, apiKey: API_KEY)
         
@@ -75,7 +75,7 @@ class LogSenderTests: XCTestCase {
         let pathToFile = Logger.logsDocumentPath + Constants.File.Logger.logs
         let pathToBuffer = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         let bmsClient = BMSClient.sharedInstance
-        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.US_SOUTH)
+        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
         Analytics.initializeWithAppName("testAppName", apiKey: "")
         
         do {

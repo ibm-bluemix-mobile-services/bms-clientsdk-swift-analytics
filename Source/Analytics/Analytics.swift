@@ -98,8 +98,8 @@ public class Analytics {
             Analytics.apiKey = apiKey
         }
         
-        // Register the LogSaver so that logs can start being stored on the device
-        Logger.logSaver = LogRecorder()
+        // Register the LogRecorder so that logs can start being stored on the device
+        Logger.logRecorder = LogRecorder()
         
         Logger.startCapturingUncaughtExceptions()
         

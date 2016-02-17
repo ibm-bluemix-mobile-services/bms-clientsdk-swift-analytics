@@ -16,7 +16,7 @@ import BMSCore
 
 
 // Stores all logs (for both Logger and Analytics) to the device's file system
-public class LogRecorder: LogSaverProtocol {
+public class LogRecorder: LogRecorderProtocol {
     
     
     // MARK: Dispatch queues
