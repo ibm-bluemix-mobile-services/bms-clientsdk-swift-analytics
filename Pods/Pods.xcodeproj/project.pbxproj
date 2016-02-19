@@ -1014,60 +1014,7 @@
 			};
 			name = Release;
 		};
-		13E7CD834DDB31253AEA4CF25828265E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3AC696DC35628E2FE0513DC109ACB63C /* Pods-TestAppiOS-BMSCore.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-TestAppiOS-BMSCore/Pods-TestAppiOS-BMSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-TestAppiOS-BMSCore/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-TestAppiOS-BMSCore/Pods-TestAppiOS-BMSCore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = BMSCore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		1B99F6DE3DB0703A4C40CD41458BE1CC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE31B3C2AA7E3C2CABF4CA2C8B2F156E /* Pods-BMSAnalyticsWatchOS-BMSCore.xcconfig */;
-			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Pods-BMSAnalyticsWatchOS-BMSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Pods-BMSAnalyticsWatchOS-BMSCore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = BMSCore;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		2EDCBBCC3C49A80A373AB64DF6BD3476 /* Debug */ = {
+		225A6475A442EA63922CC956D6960A60 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4189D17AA9CBCA730C92104913BB6889 /* Pods-BMSAnalyticsTests-BMSCore.xcconfig */;
 			buildSettings = {
@@ -1084,18 +1031,18 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalyticsTests-BMSCore/Pods-BMSAnalyticsTests-BMSCore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_NAME = BMSCore;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		318D3DBD9B39765A4EE210D8EB7B2317 /* Release */ = {
+		2E56A5B2032DFFE47EDB851C15D748B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F2D0977A3E62AE4AC347E6413ACC4CC5 /* Pods-BMSAnalytics-BMSCore.xcconfig */;
 			buildSettings = {
@@ -1112,15 +1059,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics-BMSCore/Pods-BMSAnalytics-BMSCore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_NAME = BMSCore;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		327D4CEA9BA5981596302BCF8D279563 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1162,7 +1111,7 @@
 			};
 			name = Debug;
 		};
-		6009686DCB69DAE23BBA9F9D5DE22DCC /* Release */ = {
+		3D32BACE374ADCD97C4EDCB371871763 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4189D17AA9CBCA730C92104913BB6889 /* Pods-BMSAnalyticsTests-BMSCore.xcconfig */;
 			buildSettings = {
@@ -1179,7 +1128,65 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalyticsTests-BMSCore/Pods-BMSAnalyticsTests-BMSCore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				PRODUCT_NAME = BMSCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3E58BBE0B7F7B0D68C493B257D5A5E0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2D0977A3E62AE4AC347E6413ACC4CC5 /* Pods-BMSAnalytics-BMSCore.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-BMSAnalytics-BMSCore/Pods-BMSAnalytics-BMSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics-BMSCore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics-BMSCore/Pods-BMSAnalytics-BMSCore.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_NAME = BMSCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		485A3F72F051BDBB12612E8E9ED7CBC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AC696DC35628E2FE0513DC109ACB63C /* Pods-TestAppiOS-BMSCore.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-TestAppiOS-BMSCore/Pods-TestAppiOS-BMSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-TestAppiOS-BMSCore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-TestAppiOS-BMSCore/Pods-TestAppiOS-BMSCore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_NAME = BMSCore;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1245,32 +1252,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		97262AE5074F36133D64B8722C86536D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55CA67A426908F68B5EEECEE9DF2DA41 /* Pods-TestAppWatchOS Extension-BMSCore.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Pods-TestAppWatchOS Extension-BMSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Pods-TestAppWatchOS Extension-BMSCore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = BMSCore;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -1420,6 +1401,62 @@
 			};
 			name = Release;
 		};
+		B8301C3930CBE22B965792D21DB6AF49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55CA67A426908F68B5EEECEE9DF2DA41 /* Pods-TestAppWatchOS Extension-BMSCore.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Pods-TestAppWatchOS Extension-BMSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Pods-TestAppWatchOS Extension-BMSCore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				PRODUCT_NAME = BMSCore;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		C0205C58520E4171335B3A1B554C625D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AC696DC35628E2FE0513DC109ACB63C /* Pods-TestAppiOS-BMSCore.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-TestAppiOS-BMSCore/Pods-TestAppiOS-BMSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-TestAppiOS-BMSCore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-TestAppiOS-BMSCore/Pods-TestAppiOS-BMSCore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				PRODUCT_NAME = BMSCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		C31EA20FE935B29175E1421BA172CE34 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5289908E5B4A873448575656B2BDE6F0 /* Pods-BMSAnalytics.debug.xcconfig */;
@@ -1451,22 +1488,22 @@
 			};
 			name = Debug;
 		};
-		C85A19ABFDCD84B65F8E7353F08F4929 /* Release */ = {
+		D69949FE65AED86E6674A8981E1240FC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55CA67A426908F68B5EEECEE9DF2DA41 /* Pods-TestAppWatchOS Extension-BMSCore.xcconfig */;
+			baseConfigurationReference = DE31B3C2AA7E3C2CABF4CA2C8B2F156E /* Pods-BMSAnalyticsWatchOS-BMSCore.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Pods-TestAppWatchOS Extension-BMSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Pods-BMSAnalyticsWatchOS-BMSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Pods-TestAppWatchOS Extension-BMSCore.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Pods-BMSAnalyticsWatchOS-BMSCore.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_NAME = BMSCore;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1475,34 +1512,6 @@
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
-		};
-		CCBA050A473623AEB5541A92B386A0F0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2D0977A3E62AE4AC347E6413ACC4CC5 /* Pods-BMSAnalytics-BMSCore.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-BMSAnalytics-BMSCore/Pods-BMSAnalytics-BMSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics-BMSCore/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics-BMSCore/Pods-BMSAnalytics-BMSCore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = BMSCore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		DFA7F289AF632565616A5BAF966F2AFB /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1534,32 +1543,31 @@
 			};
 			name = Release;
 		};
-		F6D126152F70F1C844F019F384DBE17A /* Release */ = {
+		E11C715CBDE1FCF33A7640CBB8020637 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3AC696DC35628E2FE0513DC109ACB63C /* Pods-TestAppiOS-BMSCore.xcconfig */;
+			baseConfigurationReference = DE31B3C2AA7E3C2CABF4CA2C8B2F156E /* Pods-BMSAnalyticsWatchOS-BMSCore.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-TestAppiOS-BMSCore/Pods-TestAppiOS-BMSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-TestAppiOS-BMSCore/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Pods-BMSAnalyticsWatchOS-BMSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-TestAppiOS-BMSCore/Pods-TestAppiOS-BMSCore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Pods-BMSAnalyticsWatchOS-BMSCore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_NAME = BMSCore;
-				SDKROOT = iphoneos;
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
-			name = Release;
+			name = Debug;
 		};
 		FB852C5314C98234DFF95BCCF0CF950F /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1590,21 +1598,23 @@
 			};
 			name = Debug;
 		};
-		FC2429029F2E40FEA789EDFBCE799AA1 /* Release */ = {
+		FC72E26FB4F1BFE804482F3EC9612290 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE31B3C2AA7E3C2CABF4CA2C8B2F156E /* Pods-BMSAnalyticsWatchOS-BMSCore.xcconfig */;
+			baseConfigurationReference = 55CA67A426908F68B5EEECEE9DF2DA41 /* Pods-TestAppWatchOS Extension-BMSCore.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Pods-BMSAnalyticsWatchOS-BMSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Pods-TestAppWatchOS Extension-BMSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalyticsWatchOS-BMSCore/Pods-BMSAnalyticsWatchOS-BMSCore.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-TestAppWatchOS Extension-BMSCore/Pods-TestAppWatchOS Extension-BMSCore.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_NAME = BMSCore;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -1620,8 +1630,8 @@
 		025F4E1AC7B1F560EA45146303E4A4ED /* Build configuration list for PBXNativeTarget "Pods-BMSAnalyticsTests-BMSCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2EDCBBCC3C49A80A373AB64DF6BD3476 /* Debug */,
-				6009686DCB69DAE23BBA9F9D5DE22DCC /* Release */,
+				3D32BACE374ADCD97C4EDCB371871763 /* Debug */,
+				225A6475A442EA63922CC956D6960A60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1638,8 +1648,8 @@
 		53EC37E4F03A3AC9CB01B7E40AF317E2 /* Build configuration list for PBXNativeTarget "Pods-BMSAnalytics-BMSCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CCBA050A473623AEB5541A92B386A0F0 /* Debug */,
-				318D3DBD9B39765A4EE210D8EB7B2317 /* Release */,
+				2E56A5B2032DFFE47EDB851C15D748B8 /* Debug */,
+				3E58BBE0B7F7B0D68C493B257D5A5E0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1674,8 +1684,8 @@
 		8712B815A2C761D58C03A7566FCF9348 /* Build configuration list for PBXNativeTarget "Pods-BMSAnalyticsWatchOS-BMSCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1B99F6DE3DB0703A4C40CD41458BE1CC /* Debug */,
-				FC2429029F2E40FEA789EDFBCE799AA1 /* Release */,
+				E11C715CBDE1FCF33A7640CBB8020637 /* Debug */,
+				D69949FE65AED86E6674A8981E1240FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1683,8 +1693,8 @@
 		982911510E574F9A8CA9BFB8B74F87DC /* Build configuration list for PBXNativeTarget "Pods-TestAppWatchOS Extension-BMSCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				97262AE5074F36133D64B8722C86536D /* Debug */,
-				C85A19ABFDCD84B65F8E7353F08F4929 /* Release */,
+				B8301C3930CBE22B965792D21DB6AF49 /* Debug */,
+				FC72E26FB4F1BFE804482F3EC9612290 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1710,8 +1720,8 @@
 		E7D8A0D1626BE254BEB4EB55D44BB532 /* Build configuration list for PBXNativeTarget "Pods-TestAppiOS-BMSCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				13E7CD834DDB31253AEA4CF25828265E /* Debug */,
-				F6D126152F70F1C844F019F384DBE17A /* Release */,
+				C0205C58520E4171335B3A1B554C625D /* Debug */,
+				485A3F72F051BDBB12612E8E9ED7CBC9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

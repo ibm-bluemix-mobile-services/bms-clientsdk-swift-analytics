@@ -1,6 +1,9 @@
+
 use_frameworks!
 
 
+
+# Methods
 
 def pod_BMSCore
 	pod 'BMSCore', '~> 0.0.17'
@@ -17,6 +20,8 @@ def import_pods_watchOS
 end
 
 
+
+# Targets
 
 target 'BMSAnalytics' do
 	import_pods_iOS
@@ -42,3 +47,21 @@ target 'TestAppWatchOS Extension' do
 	import_pods_watchOS
 end
 
+
+
+# Post installer
+
+# The -DDEBUG flag allows Logger to print logs to the console, but only when the app is running in Debug mode
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if target.name.include? 'BMSCore'
+            target.build_configurations.each do |config|
+                if config.name == 'Debug'
+                    config.build_settings['OTHER_SWIFT_FLAGS'] = '-DDEBUG'
+                else
+                    config.build_settings['OTHER_SWIFT_FLAGS'] = ''
+                end
+            end
+        end
+    end
+end
