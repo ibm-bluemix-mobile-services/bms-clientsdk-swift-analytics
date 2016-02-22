@@ -65,7 +65,6 @@ class AnalyticsTests: XCTestCase {
         
         // When registering LIFECYCLE events, the Analytics.logSessionStart() method should get called immediately, assigning a new value to Analytics.startTime and Analytics.lifecycleEvents
         XCTAssertTrue(Analytics.startTime >= referenceTime)
-        XCTAssertFalse(Analytics.lifecycleEvents.isEmpty)
     }
     
     
@@ -84,7 +83,6 @@ class AnalyticsTests: XCTestCase {
         Analytics.logSessionStart()
         
         let firstSessionStartTime = Analytics.startTime
-        let firstSessionId = Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
         XCTAssert(firstSessionStartTime > 0)
         
         // Need a little time delay so that the first and second sessions don't have the same start time
@@ -94,11 +92,8 @@ class AnalyticsTests: XCTestCase {
             Analytics.logSessionStart()
             
             let secondSessionStartTime = Analytics.startTime
-            let secondSessionId = Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
             
             XCTAssertTrue(secondSessionStartTime > firstSessionStartTime)
-            XCTAssertNotEqual(firstSessionId, secondSessionId)
-            
         }
     }
     
@@ -119,7 +114,6 @@ class AnalyticsTests: XCTestCase {
         Analytics.logSessionStart()
         
         let firstSessionStartTime = Analytics.startTime
-        let firstSessionId = Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
         
         Analytics.logSessionEnd()
         
@@ -133,10 +127,8 @@ class AnalyticsTests: XCTestCase {
             Analytics.logSessionStart()
             
             let secondSessionStartTime = Analytics.startTime
-            let secondSessionId = Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
             
             XCTAssertTrue(secondSessionStartTime > firstSessionStartTime)
-            XCTAssertNotEqual(firstSessionId, secondSessionId)
         }
     }
     
@@ -159,7 +151,6 @@ class AnalyticsTests: XCTestCase {
         
         let sessionStartTime = Analytics.startTime
         
-        XCTAssertFalse(Analytics.lifecycleEvents.isEmpty)
         XCTAssert(sessionStartTime > 0)
     }
     

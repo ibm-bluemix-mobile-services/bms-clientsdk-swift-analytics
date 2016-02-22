@@ -158,14 +158,13 @@ public class Analytics {
     //      In watchOS, the user decides when this method is executed, but we recommend calling it when the app becomes active.
     dynamic static internal func logSessionStart() {
         
-        if !lifecycleEvents.isEmpty {
-            logger.warn("The previous session did not end properly so the session will not be recorded. This new session will override the previous session.")
+        // If this method is called before logSessionEnd() gets called, exit early so that the original startTime and metadata from the previous session start do not get discarded.
+        guard lifecycleEvents.isEmpty else {
+            logger.info("A new session is starting before previous session ended. Data for this new session will be discarded.")
+            return
         }
         
         Analytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
-        
-        lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
-        lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
     }
     
     
@@ -175,13 +174,16 @@ public class Analytics {
     //      In watchOS, the user decides when this method is executed, but we recommend calling it when the app becomes active.
     dynamic static internal func logSessionEnd() {
         
-        // logSessionStart() must have been called first so that we can get the session start time
-        guard !lifecycleEvents.isEmpty && Analytics.startTime > 0 else {
-            logger.warn("The current app session ended before the start event was triggered, so the session cannot be recorded.")
-            return
+        // If logSessionStart() has not been called yet, the app session is ending before it starts.
+        //      This may occur if the app crashes while launching. In this case, set the session duration to 0.
+        var sessionDuration: Int64 = 0
+        if !lifecycleEvents.isEmpty && Analytics.startTime > 0 {
+            sessionDuration = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) - Analytics.startTime
         }
         
-        let sessionDuration = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) - Analytics.startTime
+        lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
+        lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
+        
         lifecycleEvents[Constants.Metadata.Analytics.duration] = Int(sessionDuration)
         
         // Let the Analytics service know how the app was last closed
