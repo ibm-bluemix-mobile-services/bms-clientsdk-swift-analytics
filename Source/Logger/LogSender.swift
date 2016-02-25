@@ -125,24 +125,38 @@ internal class LogSender {
     internal static func buildLogSendRequest(callback: MfpCompletionHandler) -> MFPRequest? {
         
         let bmsClient = BMSClient.sharedInstance
-        var headers = ["Content-Type": "application/json"]
+        let mfpClient = MFPFClient.sharedInstance
+        var headers: [String: String] = [:]
+        var logUploadUrl = ""
         
+        // TODO: Consider sending request to both if user wants to send data to both Bluemix and an MFP server
+        
+        // Check that the BMSClient or MFPClient classes have been initialized before building the upload URL
+        
+        // Bluemix request
         // Only the region is required to communicate with the Analytics service. App route and GUID are not required.
-        guard bmsClient.bluemixRegion != nil && bmsClient.bluemixRegion != "" else {
-            returnInitializationError("BMSClient", missingValue: "bluemixRegion", callback: callback)
+        if bmsClient.bluemixRegion != nil && bmsClient.bluemixRegion != "" {
+            guard Analytics.apiKey != nil && Analytics.apiKey != "" else {
+                returnInitializationError("Analytics", missingValue: "apiKey", callback: callback)
+                return nil
+            }
+            headers["Content-Type"] = "application/json"
+            headers[Constants.analyticsApiKey] = Analytics.apiKey!
+            
+            logUploadUrl = "https://" + Constants.AnalyticsServer.Bluemix.hostName + "." + bmsClient.bluemixRegion! + Constants.AnalyticsServer.Bluemix.uploadPath
+        }
+        // MFP request
+        else if let mfpProtocol = mfpClient.mfpProtocol, mfpHost = mfpClient.mfpHost, mfpPort = mfpClient.mfpPort {
+            headers["Content-Type"] = "text/plain"
+            
+            logUploadUrl = mfpProtocol + "://" + mfpHost + ":" + mfpPort + Constants.AnalyticsServer.Foundation.uploadPath
+        }
+        else {
+            Logger.internalLogger.error("Failed to send logs because the client was not yet initialized. Make sure that either the BMSClient or the MFPClient class has been initialized.")
             return nil
         }
         
-        guard Analytics.apiKey != nil && Analytics.apiKey != "" else {
-            returnInitializationError("Analytics", missingValue: "apiKey", callback: callback)
-            return nil
-        }
-        
-        headers[Constants.analyticsApiKey] = Analytics.apiKey!
-        
-        let logUploaderUrl = "https://" + Constants.AnalyticsServer.hostName + "." + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadPath
-        
-        return MFPRequest(url: logUploaderUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
+        return MFPRequest(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
     }
     
     
