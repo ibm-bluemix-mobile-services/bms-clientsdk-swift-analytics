@@ -117,7 +117,7 @@ public class Analytics {
         
         // Package analytics metadata in a header for each request
         // Outbound request metadata is identical for all requests made on the same device from the same app
-        MFPRequest.requestAnalyticsData = Analytics.generateOutboundRequestMetadata()
+        Request.requestAnalyticsData = Analytics.generateOutboundRequestMetadata()
     }
     
     
@@ -254,7 +254,7 @@ public class Analytics {
     
     
     // Gather response data as JSON to be recorded in an analytics log
-    internal static func generateInboundResponseMetadata(request: MFPRequest, response: Response, url: String) -> [String: AnyObject] {
+    internal static func generateInboundResponseMetadata(request: Request, response: Response, url: String) -> [String: AnyObject] {
         
         Analytics.logger.debug("Network response inbound")
         

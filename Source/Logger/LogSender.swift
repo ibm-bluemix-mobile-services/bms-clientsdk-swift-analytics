@@ -122,10 +122,10 @@ internal class LogSender {
     
     
     // Build the Request object that will be used to send the logs to the server
-    internal static func buildLogSendRequest(callback: MfpCompletionHandler) -> MFPRequest? {
+    internal static func buildLogSendRequest(callback: MfpCompletionHandler) -> Request? {
         
         let bmsClient = BMSClient.sharedInstance
-        let mfpClient = MFPFClient.sharedInstance
+        let mfpClient = MFPClient.sharedInstance
         var headers: [String: String] = [:]
         var logUploadUrl = ""
         
@@ -156,7 +156,7 @@ internal class LogSender {
             return nil
         }
         
-        return MFPRequest(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
+        return Request(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
     }
     
     

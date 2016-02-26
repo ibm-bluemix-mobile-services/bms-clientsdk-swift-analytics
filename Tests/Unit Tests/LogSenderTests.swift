@@ -29,7 +29,7 @@ class LogSenderTests: XCTestCase {
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
         Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
-        let url = "https://" + Constants.AnalyticsServer.hostName + "." + BMSClient.REGION_US_SOUTH + Constants.AnalyticsServer.uploadPath
+        let url = "https://" + Constants.AnalyticsServer.Bluemix.hostName + "." + BMSClient.REGION_US_SOUTH + Constants.AnalyticsServer.Bluemix.uploadPath
         
         Analytics.initializeWithAppName(APP_NAME, apiKey: API_KEY)
         

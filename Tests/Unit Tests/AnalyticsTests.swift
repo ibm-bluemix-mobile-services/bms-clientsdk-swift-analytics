@@ -202,7 +202,7 @@ class AnalyticsTests: XCTestCase {
     
     func testGenerateInboundResponseMetadata() {
         
-        class MockRequest: MFPRequest {
+        class MockRequest: Request {
             
             override var startTime: NSTimeInterval {
                 get {
