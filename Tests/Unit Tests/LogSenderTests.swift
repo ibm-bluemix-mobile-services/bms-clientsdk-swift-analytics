@@ -18,6 +18,12 @@ import BMSCore
 
 
 class LogSenderTests: XCTestCase {
+    
+    
+    override func tearDown() {
+        BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: "")
+        Analytics.uninitialize()
+    }
 
     
     func testLogSendRequest(){
@@ -132,6 +138,39 @@ class LogSenderTests: XCTestCase {
         XCTAssertTrue(error[Constants.Metadata.Logger.package] == fakePKG)
         XCTAssertTrue(error[Constants.Metadata.Logger.timestamp] != nil)
         XCTAssertTrue(error[Constants.Metadata.Logger.level] == "ERROR")
+    }
+    
+    
+    func testBuildLogSendRequestForBluemix() {
+        
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
+        Analytics.initializeWithAppName("testAppName", apiKey: "1234")
+        
+        let bmsRequest = LogSender.buildLogSendRequest() { (response, error) -> Void in
+            }
+        
+        XCTAssertNotNil(bmsRequest)
+        XCTAssertTrue(bmsRequest is Request)
+        
+        let bmsLogUploadUrl = "https://" + Constants.AnalyticsServer.Bluemix.hostName + "." + "ng.bluemix.net" + Constants.AnalyticsServer.Bluemix.uploadPath
+        XCTAssertEqual(bmsRequest!.resourceUrl, bmsLogUploadUrl)
+    }
+    
+    
+    func testBuildLogSendRequestForFoundation() {
+        
+        let mfpClient = MFPClient.sharedInstance
+        mfpClient.initializeWithMfpProtocol("http", mfpHost: "localhost", mfpPort: "9080")
+        Analytics.initializeWithAppName("testAppName", apiKey: "1234")
+        
+        let mfpRequest = LogSender.buildLogSendRequest() { (response, error) -> Void in
+        }
+        
+        XCTAssertNotNil(mfpRequest)
+        
+        let mfpLogUploadUrl = "http://localhost:9080" + Constants.AnalyticsServer.Foundation.uploadPath
+        XCTAssertEqual(mfpRequest!.resourceUrl, mfpLogUploadUrl)
     }
     
     
