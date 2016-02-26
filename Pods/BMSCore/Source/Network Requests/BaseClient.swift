@@ -12,22 +12,12 @@
 */
 
 
-public enum PersistencePolicy: String {
-    case ALWAYS = "ALWAYS"
-    case NEVER = "NEVER"
-}
-
-public protocol AuthorizationManager {
-
-    func isAuthorizationRequired(statusCode: Int, responseAuthorizationHeader: String) -> Bool
-    func isAuthorizationRequired(httpResponse: Response) -> Bool
+/**
+    Defines the methods and properties needed to create network connections to a server.
+*/
+internal protocol BaseClient {
     
-    func obtainAuthorization(completionHandler: MfpCompletionHandler?)
-    func getCachedAuthorizationHeader() -> String?
-
-    func clearAuthorizationData()
     
-    func getUserIdentity() -> BaseUserIdentity
-    func getDeviceIdentity() -> BaseDeviceIdentity
-    func getAppIdentity() -> BaseAppIdentity
+    /// Specifies the default timeout (in seconds) for all network requests.
+    var defaultRequestTimeout: Double { get set }    
 }

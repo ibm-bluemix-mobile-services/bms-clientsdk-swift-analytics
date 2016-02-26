@@ -15,7 +15,7 @@
 /**
     A singleton that serves as an entry point to Bluemix client-server communication.
 */
-public class BMSClient: MFPClient {
+public class BMSClient: BaseClient {
     
 
     // MARK: Properties (public)
@@ -38,7 +38,7 @@ public class BMSClient: MFPClient {
     public var sharedAuthorizationManager: AuthorizationManager {
         get {
             if registeredAuthorizationManager == nil {
-                return DefaultAuthorizationManager()
+                return BaseAuthorizationManager()
             }
             
             return registeredAuthorizationManager!
