@@ -66,7 +66,7 @@ internal class LogSender {
                 }
                 
                 // Send the request, even if there are no logs to send (to keep track of device info)
-                if let request = buildLogSendRequest(logSendCallback) {
+                if let request: BaseRequest = buildLogSendRequest(logSendCallback) {
                     request.sendData(logPayloadData, withCompletionHandler: logSendCallback)
                 }
             }
@@ -110,7 +110,7 @@ internal class LogSender {
                 }
                 
                 // Send the request, even if there are no logs to send (to keep track of device info)
-                if let request = buildLogSendRequest(analyticsSendCallback) {
+                if let request: BaseRequest = buildLogSendRequest(analyticsSendCallback) {
                     request.sendData(logPayloadData, withCompletionHandler: analyticsSendCallback)
                 }
             }
@@ -122,7 +122,7 @@ internal class LogSender {
     
     
     // Build the Request object that will be used to send the logs to the server
-    internal static func buildLogSendRequest(callback: MfpCompletionHandler) -> Request? {
+    internal static func buildLogSendRequest(callback: MfpCompletionHandler) -> BaseRequest? {
         
         let bmsClient = BMSClient.sharedInstance
         let mfpClient = MFPClient.sharedInstance
@@ -144,19 +144,22 @@ internal class LogSender {
             headers[Constants.analyticsApiKey] = Analytics.apiKey!
             
             logUploadUrl = "https://" + Constants.AnalyticsServer.Bluemix.hostName + "." + bmsClient.bluemixRegion! + Constants.AnalyticsServer.Bluemix.uploadPath
+            
+            // Request class is specific to Bluemix (since it uses Bluemix authorization managers)
+            return Request(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
         }
         // MFP request
         else if let mfpProtocol = mfpClient.mfpProtocol, mfpHost = mfpClient.mfpHost, mfpPort = mfpClient.mfpPort {
             headers["Content-Type"] = "text/plain"
             
             logUploadUrl = mfpProtocol + "://" + mfpHost + ":" + mfpPort + Constants.AnalyticsServer.Foundation.uploadPath
+
+            return BaseRequest(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
         }
         else {
             Logger.internalLogger.error("Failed to send logs because the client was not yet initialized. Make sure that either the BMSClient or the MFPClient class has been initialized.")
             return nil
         }
-        
-        return Request(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
     }
     
     
