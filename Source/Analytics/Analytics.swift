@@ -73,6 +73,7 @@ public class Analytics {
         return deviceId!
     }
     
+    // The timestamp for when the current session started
     internal static var startTime: Int64 = 0
     
     
@@ -88,13 +89,11 @@ public class Analytics {
         - parameter apiKey:         A unique ID used to authenticate with the MFP analytics server
         - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
     */
-    public static func initializeWithAppName(appName: String, apiKey: String, deviceEvents: DeviceEvent...) {
+    public static func initializeWithAppName(appName: String, apiKey: String?, deviceEvents: DeviceEvent...) {
 
-        // Any required properties here should be checked for initialization in the private initializer
-        if !appName.isEmpty {
-            Analytics.appName = appName
-        }
-        if !apiKey.isEmpty {
+        Analytics.appName = appName
+
+        if apiKey != nil {
             Analytics.apiKey = apiKey
         }
         

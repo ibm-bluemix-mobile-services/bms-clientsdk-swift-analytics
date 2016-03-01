@@ -37,12 +37,6 @@ class AnalyticsTests: XCTestCase {
      
         XCTAssertNil(Analytics.apiKey)
         XCTAssertNil(Analytics.appName)
-        XCTAssertEqual(Analytics.appName, NSBundle.mainBundle().bundleIdentifier)
-        
-        Analytics.initializeWithAppName("", apiKey: "")
-        XCTAssertNil(Analytics.apiKey)
-        XCTAssertNil(Analytics.appName)
-        XCTAssertEqual(Analytics.appName, NSBundle.mainBundle().bundleIdentifier)
         
         Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
         XCTAssertEqual(Analytics.apiKey, "testApiKey")
