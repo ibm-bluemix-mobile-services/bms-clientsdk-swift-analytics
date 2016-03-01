@@ -23,9 +23,16 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         
         BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: "stage1.ng.bluemix.net")
         
+        // To use an MFP Foundation server instead of Bluemix, comment out the BMSClient initializer above and use this MFPClient initializer instead
+//        MFPClient.sharedInstance.initializeWithMfpProtocol("http", mfpHost: "localhost", mfpPort: "9080")
+        
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+        // The apiKey parameter is required if using BMSClient, but not when using MFPClient
         Analytics.initializeWithAppName("TestAppWatchOS", apiKey: "1234")
+        
         Analytics.enabled = true
+        Logger.logStoreEnabled = true
+        Logger.sdkDebugLoggingEnabled = true
     }
 
     func applicationDidBecomeActive() {

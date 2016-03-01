@@ -22,6 +22,10 @@ class InterfaceController: WKInterfaceController {
     
     @IBAction func sendAnalyticsButtonPressed() {
         
+        Logger.logLevelFilter = LogLevel.Debug
+        let logger = Logger.getLoggerForName("TestAppWatchOS")
+        logger.debug("Send analytics button pressed")
+        
         Analytics.log(["buttonPressed": "recordLog"])
         
         func completionHandler(sendType: String) -> MfpCompletionHandler {

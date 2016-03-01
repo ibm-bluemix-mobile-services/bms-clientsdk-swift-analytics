@@ -27,7 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: "stage1.ng.bluemix.net")
         
+        // To use an MFP Foundation server instead of Bluemix, comment out the BMSClient initializer above and use this MFPClient initializer instead
+//        MFPClient.sharedInstance.initializeWithMfpProtocol("http", mfpHost: "localhost", mfpPort: "9080")
+        
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+        // The apiKey parameter is required if using BMSClient, but not when using MFPClient
         Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
         
         Analytics.enabled = true

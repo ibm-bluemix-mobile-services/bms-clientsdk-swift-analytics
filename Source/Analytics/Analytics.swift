@@ -109,7 +109,7 @@ public class Analytics {
                 #if os(iOS)
                     Analytics.startRecordingApplicationLifecycle()
                 #else
-                    Analytics.logger.info("The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
+                    Analytics.logger.warn("The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
                 #endif
             }
         }
