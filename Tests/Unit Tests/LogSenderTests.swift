@@ -39,7 +39,7 @@ class LogSenderTests: XCTestCase {
         
         Analytics.initializeWithAppName(APP_NAME, apiKey: API_KEY)
         
-        let headers = ["Content-Type": "application/json", Constants.analyticsApiKey: API_KEY]
+        let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: API_KEY]
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)

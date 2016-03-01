@@ -126,7 +126,7 @@ internal class LogSender {
         
         let bmsClient = BMSClient.sharedInstance
         let mfpClient = MFPClient.sharedInstance
-        var headers: [String: String] = [:]
+        var headers: [String: String] = ["Content-Type": "text/plain"]
         var logUploadUrl = ""
         
         // TODO: Consider sending request to both if user wants to send data to both Bluemix and an MFP server
@@ -140,7 +140,6 @@ internal class LogSender {
                 returnInitializationError("Analytics", missingValue: "apiKey", callback: callback)
                 return nil
             }
-            headers["Content-Type"] = "application/json"
             headers[Constants.analyticsApiKey] = Analytics.apiKey!
             
             logUploadUrl = "https://" + Constants.AnalyticsServer.Bluemix.hostName + "." + bmsClient.bluemixRegion! + Constants.AnalyticsServer.Bluemix.uploadPath
@@ -150,8 +149,6 @@ internal class LogSender {
         }
         // MFP request
         else if let mfpProtocol = mfpClient.mfpProtocol, mfpHost = mfpClient.mfpHost, mfpPort = mfpClient.mfpPort {
-            headers["Content-Type"] = "text/plain"
-            
             logUploadUrl = mfpProtocol + "://" + mfpHost + ":" + mfpPort + Constants.AnalyticsServer.Foundation.uploadPath
 
             return BaseRequest(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
