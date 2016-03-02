@@ -161,7 +161,7 @@ class LogSenderTests: XCTestCase {
     func testBuildLogSendRequestForFoundation() {
         
         let mfpClient = MFPClient.sharedInstance
-        mfpClient.initializeWithMfpProtocol("http", mfpHost: "localhost", mfpPort: "9080")
+        mfpClient.initializeWithUrlComponents(mfpProtocol: "http", mfpHost: "localhost", mfpPort: "9080")
         Analytics.initializeWithAppName("testAppName", apiKey: "1234")
         
         let mfpRequest = LogSender.buildLogSendRequest() { (response, error) -> Void in

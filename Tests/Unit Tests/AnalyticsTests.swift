@@ -23,24 +23,52 @@ class AnalyticsTests: XCTestCase {
         Analytics.lifecycleEvents = [:]
         Analytics.startTime = 0
         Analytics.uninitialize()
+        
+        Request.requestAnalyticsData = nil
     }
     
-    
-    /**
-        1) Check Analytics properties prior to initialization
-        2) Initialize Analytics with empty strings
-        3) Confirm that Analytics properties (apiKey, appName) are not yet initialized
-        4) Initialize Analytics with real values
-        5) Confirm that properties have been updated properly
-    */
+
     func testInitializeWithAppName() {
      
         XCTAssertNil(Analytics.apiKey)
         XCTAssertNil(Analytics.appName)
         
-        Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
-        XCTAssertEqual(Analytics.apiKey, "testApiKey")
-        XCTAssertEqual(Analytics.appName, "testAppName")
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
+        XCTAssertEqual(Analytics.apiKey, "1234")
+        XCTAssertEqual(Analytics.appName, "Unit Test App")
+    }
+    
+    
+    func testInitializeWithAppNameWithBmsClientInitialized() {
+        
+        XCTAssertNil(Analytics.apiKey)
+        XCTAssertNil(Analytics.appName)
+        XCTAssertNil(Request.requestAnalyticsData)
+        
+        BMSClient.sharedInstance.initializeWithBluemixAppRoute("http://example.com", bluemixAppGUID: "1234", bluemixRegion: BMSClient.REGION_US_SOUTH)
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
+        
+        XCTAssertEqual(Analytics.apiKey, "1234")
+        XCTAssertEqual(Analytics.appName, "Unit Test App")
+        XCTAssertNotNil(Request.requestAnalyticsData)
+    }
+    
+    
+    func testInitializeWithAppNameMfpClientInitialized() {
+        
+        XCTAssertNil(Analytics.apiKey)
+        XCTAssertNil(Analytics.appName)
+        XCTAssertNil(Request.requestAnalyticsData)
+        
+        let mfpClientDeviceMetadata = "{example: metadata}"
+        
+        MFPClient.sharedInstance.initializeWithUrlComponents(mfpProtocol: "http", mfpHost: "localhost", mfpPort: "9080")
+        MFPClient.sharedInstance.deviceMetadata = mfpClientDeviceMetadata
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
+        
+        XCTAssertEqual(Analytics.apiKey, "1234")
+        XCTAssertEqual(Analytics.appName, "Unit Test App")
+        XCTAssertEqual(Request.requestAnalyticsData, mfpClientDeviceMetadata)
     }
     
     
@@ -183,7 +211,7 @@ class AnalyticsTests: XCTestCase {
     
     func testAddAnalyticsMetadataToRequestWithAnalyticsAppName() {
         
-        Analytics.initializeWithAppName("Test app", apiKey: "asdfjasdfj")
+        Analytics.initializeWithAppName("Test app", apiKey: "1234")
         
         let requestMetadata = Analytics.generateOutboundRequestMetadata()
         

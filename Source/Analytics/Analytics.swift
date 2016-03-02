@@ -81,15 +81,15 @@ public class Analytics {
     // MARK: Methods (public)
     
     /**
-        The required initializer for the `Analytics` class.
+        The required initializer for the `Analytics` class when communicating with a Bluemix analytics service.
         
-        This method must be called before sending `Analytics` or `Logger` logs.
+        This method must be called after the `BMSClient.initializeWithBluemixAppRoute()` method and before calling `Analytics.send()` or `Logger.send()`.
         
         - parameter appName:        The application name.  Should be consistent across platforms (e.g. Android and iOS).
-        - parameter apiKey:         A unique ID used to authenticate with the MFP analytics server
+        - parameter apiKey:         A unique ID used to authenticate with the Bluemix analytics service
         - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
     */
-    public static func initializeWithAppName(appName: String, apiKey: String?, deviceEvents: DeviceEvent...) {
+    public static func initializeWithAppName(appName: String?, apiKey: String?, deviceEvents: DeviceEvent...) {
 
         Analytics.appName = appName
 
@@ -116,7 +116,17 @@ public class Analytics {
         
         // Package analytics metadata in a header for each request
         // Outbound request metadata is identical for all requests made on the same device from the same app
-        Request.requestAnalyticsData = Analytics.generateOutboundRequestMetadata()
+        if BMSClient.sharedInstance.bluemixRegion != nil {
+            Request.requestAnalyticsData = Analytics.generateOutboundRequestMetadata()
+        }
+        else if MFPClient.sharedInstance.mfpHost != nil {
+            if MFPClient.sharedInstance.deviceMetadata != nil {
+                Request.requestAnalyticsData = MFPClient.sharedInstance.deviceMetadata!
+            }
+        }
+        else {
+            Analytics.logger.warn("Make sure that either the MFPClient or the BMSClient class has been initialized before calling the Analytics initializer.")
+        }
     }
     
     
