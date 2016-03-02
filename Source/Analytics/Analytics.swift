@@ -80,6 +80,22 @@ public class Analytics {
     
     // MARK: Methods (public)
     
+    
+    // TODO: Rename MFP Foundation to a more appropriate name - DO THIS WHEREVER ELSE IT IS APPLICABLE
+    // TODO: These initializer methods may need to be renamed
+    /**
+        The required initializer for the `Analytics` class when communicating with an MFP analytics server.
+        
+        This method must be called after the `MFPClient.initializeWithUrlComponents()` method and before calling `Analytics.send()` or `Logger.send()`.
+
+        - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
+    */
+    public static func initializeForMFP(deviceEvents deviceEvents: DeviceEvent) {
+        
+        initializeForBluemix(appName: nil, apiKey: nil, deviceEvents: deviceEvents)
+    }
+    
+    
     /**
         The required initializer for the `Analytics` class when communicating with a Bluemix analytics service.
         
@@ -89,7 +105,7 @@ public class Analytics {
         - parameter apiKey:         A unique ID used to authenticate with the Bluemix analytics service
         - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
     */
-    public static func initializeWithAppName(appName: String?, apiKey: String?, deviceEvents: DeviceEvent...) {
+    public static func initializeForBluemix(appName appName: String?, apiKey: String?, deviceEvents: DeviceEvent...) {
 
         Analytics.appName = appName
 

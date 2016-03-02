@@ -34,10 +34,10 @@ class LogSenderTests: XCTestCase {
         let pathToBuffer = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
+        Analytics.initializeForBluemix(appName: "testAppName", apiKey: "testApiKey")
         let url = "https://" + Constants.AnalyticsServer.Bluemix.hostName + "." + BMSClient.REGION_US_SOUTH + Constants.AnalyticsServer.Bluemix.uploadPath
         
-        Analytics.initializeWithAppName(APP_NAME, apiKey: API_KEY)
+        Analytics.initializeForBluemix(appName: APP_NAME, apiKey: API_KEY)
         
         let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: API_KEY]
         
@@ -82,7 +82,7 @@ class LogSenderTests: XCTestCase {
         let pathToBuffer = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        Analytics.initializeWithAppName("testAppName", apiKey: "")
+        Analytics.initializeForBluemix(appName: "testAppName", apiKey: "")
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
@@ -145,7 +145,7 @@ class LogSenderTests: XCTestCase {
         
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        Analytics.initializeWithAppName("testAppName", apiKey: "1234")
+        Analytics.initializeForBluemix(appName: "testAppName", apiKey: "1234")
         
         let bmsRequest = LogSender.buildLogSendRequest() { (response, error) -> Void in
             }
@@ -162,7 +162,7 @@ class LogSenderTests: XCTestCase {
         
         let mfpClient = MFPClient.sharedInstance
         mfpClient.initializeWithUrlComponents(mfpProtocol: "http", mfpHost: "localhost", mfpPort: "9080")
-        Analytics.initializeWithAppName("testAppName", apiKey: "1234")
+        Analytics.initializeForBluemix(appName: "testAppName", apiKey: "1234")
         
         let mfpRequest = LogSender.buildLogSendRequest() { (response, error) -> Void in
         }

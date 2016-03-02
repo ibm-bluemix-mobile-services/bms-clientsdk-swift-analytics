@@ -129,8 +129,6 @@ internal class LogSender {
         var headers: [String: String] = ["Content-Type": "text/plain"]
         var logUploadUrl = ""
         
-        // TODO: Consider sending request to both if user wants to send data to both Bluemix and an MFP server
-        
         // Check that the BMSClient or MFPClient classes have been initialized before building the upload URL
         
         // Bluemix request

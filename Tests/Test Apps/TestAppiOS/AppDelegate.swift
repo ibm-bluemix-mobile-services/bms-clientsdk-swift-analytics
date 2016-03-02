@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
         // The apiKey parameter is required if using BMSClient, but not when using MFPClient
-        Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initializeForBluemix(appName: "TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
         
         Analytics.enabled = true
         Logger.logStoreEnabled = true
