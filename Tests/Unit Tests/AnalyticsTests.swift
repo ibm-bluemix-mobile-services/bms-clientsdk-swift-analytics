@@ -288,4 +288,18 @@ class AnalyticsTests: XCTestCase {
         XCTAssertEqual(retrievedId2, generatedId)
     }
     
+    
+    func testUserIdUpdatesCorrectly() {
+        
+        XCTAssertNotNil(Analytics.userIdentity)
+        XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)
+        
+        Analytics.userIdentity = "test user"
+        XCTAssertEqual(Analytics.userIdentity, "test user")
+        XCTAssertNotEqual(Analytics.userIdentity, Analytics.deviceId)
+        
+        Analytics.userIdentity = nil
+        XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)
+    }
+    
 }

@@ -45,6 +45,27 @@ public class Analytics {
     /// The name of the iOS/WatchOS app
     public private(set) static var appName: String?
     
+    /// Identifies the current application user
+    /// To reset the userId, set the value to nil
+    public static var userIdentity: String? = Analytics.deviceId {
+        didSet {
+            if userIdentity != nil {
+                let currentTime = Int(NSDate.timeIntervalSinceReferenceDate()) * 1000
+                var userIdMetadata: [String: AnyObject] = [:]
+                userIdMetadata[Constants.Metadata.Analytics.user] = userIdentity
+                userIdMetadata[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.user
+                userIdMetadata[Constants.Metadata.Analytics.timestamp] = currentTime
+                userIdMetadata[Constants.Metadata.Analytics.appSession] = lifecycleEvents[Constants.Metadata.Analytics.sessionId]
+                
+                Analytics.log(userIdMetadata)
+            }
+            else {
+                // If the user sets to nil, change the value back to the deviceId
+                userIdentity = Analytics.deviceId
+            }
+        }
+    }
+    
     
 
     // MARK: Properties (internal/private)
@@ -75,6 +96,9 @@ public class Analytics {
     
     // The timestamp for when the current session started
     internal static var startTime: Int64 = 0
+    
+    // This property only exists to provide a default value for Analytics.userId
+    internal static var deviceId: String = ""
     
     
     
@@ -190,6 +214,7 @@ public class Analytics {
         }
         
         Analytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
+        lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
     }
     
     
@@ -207,7 +232,6 @@ public class Analytics {
         }
         
         lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
-        lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
         
         lifecycleEvents[Constants.Metadata.Analytics.duration] = Int(sessionDuration)
         
@@ -254,6 +278,9 @@ public class Analytics {
             (osVersion, model, deviceId) = Analytics.getWatchOSDeviceInfo()
             requestMetadata["os"] = "watchOS"
         #endif
+        
+        // deviceId is the default value for Analytics.userId
+        Analytics.deviceId = deviceId
 
         requestMetadata["brand"] = "Apple"
         requestMetadata["osVersion"] = osVersion
