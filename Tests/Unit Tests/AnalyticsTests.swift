@@ -89,15 +89,8 @@ class AnalyticsTests: XCTestCase {
         XCTAssertTrue(Analytics.startTime >= referenceTime)
     }
     
-    
-    /**
-        1) Call logSessionStart(), which should update Analytics.lifecycleEvents and Analytics.startTime.
-        2) Call logSessionStart() again. This should cause Analytics.lifecycleEvents to be updated:
-            - The original start time should be replaced with the new start time.
-            - The session (TAG_CATEGORY_APP_SESSION) is a unique ID that should contain a different value each time logSessionStart()
-                is called.
-     */
-    func testLogSessionStartUpdatesCorrectly() {
+
+    func testLogSessionStartTwiceDoesNothing() {
         
         XCTAssertTrue(Analytics.lifecycleEvents.isEmpty)
         XCTAssertEqual(Analytics.startTime, 0)
@@ -107,15 +100,19 @@ class AnalyticsTests: XCTestCase {
         let firstSessionStartTime = Analytics.startTime
         XCTAssert(firstSessionStartTime > 0)
         
-        // Need a little time delay so that the first and second sessions don't have the same start time
-        let timeDelay = dispatch_time(DISPATCH_TIME_NOW, 1)
+        let newSessionExpectation = expectationWithDescription("New session start time")
+        
+        // Even after waiting 1 second, the session start time should not change; the original session data should be preserved
+        let timeDelay = dispatch_time(DISPATCH_TIME_NOW, 1000000) // 1 millisecond
         dispatch_after(timeDelay, dispatch_get_main_queue()) { () -> Void in
-            
+            newSessionExpectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(0.01) { (error: NSError?) -> Void in
             Analytics.logSessionStart()
-            
             let secondSessionStartTime = Analytics.startTime
             
-            XCTAssertTrue(secondSessionStartTime > firstSessionStartTime)
+            XCTAssertTrue(secondSessionStartTime == firstSessionStartTime)
         }
     }
     
@@ -142,12 +139,16 @@ class AnalyticsTests: XCTestCase {
         XCTAssertTrue(Analytics.lifecycleEvents.isEmpty)
         XCTAssertEqual(Analytics.startTime, 0)
         
+        let newSessionExpectation = expectationWithDescription("New session start time")
+        
         // Need a little time delay so that the first and second sessions don't have the same start time
-        let timeDelay = dispatch_time(DISPATCH_TIME_NOW, 1)
+        let timeDelay = dispatch_time(DISPATCH_TIME_NOW, 1000000) // 1 millisecond
         dispatch_after(timeDelay, dispatch_get_main_queue()) { () -> Void in
-            
+            newSessionExpectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(0.01) { (error: NSError?) -> Void in
             Analytics.logSessionStart()
-            
             let secondSessionStartTime = Analytics.startTime
             
             XCTAssertTrue(secondSessionStartTime > firstSessionStartTime)
