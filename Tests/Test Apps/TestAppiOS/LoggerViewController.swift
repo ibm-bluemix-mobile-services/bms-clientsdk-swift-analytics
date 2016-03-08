@@ -20,8 +20,8 @@ import BMSAnalytics
 class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
-    var currentLogLevel = "None"
-    var currentLogLevelFilter = "None"
+    var currentLogLevel = "Debug"
+    var currentLogLevelFilter = "Debug"
     
     
     
@@ -139,7 +139,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // MARK: UIPickerViewDelegate protocol
     
-    let logLevels = ["None", "Analytics", "Fatal", "Error", "Warn", "Info", "Debug"]
+    let logLevels = ["Debug", "Info", "Warn", "Error", "Fatal", "Analytics", "None"]
     
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
