@@ -13,6 +13,7 @@
 
 
 import BMSCore
+import IDZSwiftCommonCrypto
 
 
 /**
@@ -45,19 +46,26 @@ public class Analytics {
     /// The name of the iOS/WatchOS app
     public private(set) static var appName: String?
     
-    /// Identifies the current application user
-    /// To reset the userId, set the value to nil
+    /// Identifies the current application user. This value will be hashed to ensure privacy.
+    /// To reset the userId, set the value to nil.
     public static var userIdentity: String? = Analytics.deviceId {
         didSet {
             if userIdentity != nil {
-                let currentTime = Int(NSDate.timeIntervalSinceReferenceDate()) * 1000
-                var userIdMetadata: [String: AnyObject] = [:]
-                userIdMetadata[Constants.Metadata.Analytics.user] = userIdentity
-                userIdMetadata[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.user
-                userIdMetadata[Constants.Metadata.Analytics.timestamp] = currentTime
-                userIdMetadata[Constants.Metadata.Analytics.appSession] = lifecycleEvents[Constants.Metadata.Analytics.sessionId]
-                
-                Analytics.log(userIdMetadata)
+                if let userIdentityDigest = Digest(algorithm: .MD5).update(userIdentity!)?.final() {
+                    userIdentity = hexStringFromArray(userIdentityDigest)
+                    let currentTime = Int(NSDate.timeIntervalSinceReferenceDate()) * 1000
+                    
+                    var userIdMetadata: [String: AnyObject] = [:]
+                    userIdMetadata[Constants.Metadata.Analytics.user] = userIdentity
+                    userIdMetadata[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.user
+                    userIdMetadata[Constants.Metadata.Analytics.timestamp] = currentTime
+                    userIdMetadata[Constants.Metadata.Analytics.appSession] = lifecycleEvents[Constants.Metadata.Analytics.sessionId]
+                    
+                    Analytics.log(userIdMetadata)
+                }
+                else {
+                    userIdentity = Analytics.deviceId
+                }
             }
             else {
                 // If the user sets to nil, change the value back to the deviceId
@@ -65,7 +73,6 @@ public class Analytics {
             }
         }
     }
-    
     
 
     // MARK: Properties (internal/private)

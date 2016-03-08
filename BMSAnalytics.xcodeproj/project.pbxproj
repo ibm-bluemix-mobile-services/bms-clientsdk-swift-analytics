@@ -50,6 +50,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		920078371C8F44240019E24D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 32D169DB72E7BCFCEDB56941E3BEA921;
+			remoteInfo = "Pods-BMSAnalytics-IDZSwiftCommonCrypto";
+		};
+		920078391C8F44240019E24D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 32D169DB72E7BCFCEDB56941E3BEA921;
+			remoteInfo = "Pods-BMSAnalyticsTests-IDZSwiftCommonCrypto";
+		};
+		9200783B1C8F44240019E24D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 32D169DB72E7BCFCEDB56941E3BEA921;
+			remoteInfo = "Pods-BMSAnalyticsWatchOS-IDZSwiftCommonCrypto";
+		};
+		9200783D1C8F44240019E24D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 32D169DB72E7BCFCEDB56941E3BEA921;
+			remoteInfo = "Pods-TestAppiOS-IDZSwiftCommonCrypto";
+		};
+		9200783F1C8F44240019E24D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 32D169DB72E7BCFCEDB56941E3BEA921;
+			remoteInfo = "Pods-TestAppWatchOS Extension-IDZSwiftCommonCrypto";
+		};
 		9221C0DE1C503054007FA9D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 926CF8051C4ECC330084355B /* Project object */;
@@ -639,14 +674,19 @@
 			children = (
 				9276B50A1C6D1D9E00E61F45 /* Pods_BMSAnalytics.framework */,
 				9276B50C1C6D1D9E00E61F45 /* BMSCore.framework */,
+				920078381C8F44240019E24D /* IDZSwiftCommonCrypto.framework */,
 				9276B50E1C6D1D9E00E61F45 /* Pods_BMSAnalyticsTests.framework */,
 				9276B5101C6D1D9E00E61F45 /* BMSCore.framework */,
+				9200783A1C8F44240019E24D /* IDZSwiftCommonCrypto.framework */,
 				9276B5121C6D1D9E00E61F45 /* Pods_BMSAnalyticsWatchOS.framework */,
 				9276B5141C6D1D9E00E61F45 /* BMSCore.framework */,
+				9200783C1C8F44240019E24D /* IDZSwiftCommonCrypto.framework */,
 				92787D3B1C6D1DCB00D97FAA /* Pods_TestAppiOS.framework */,
 				92787D3D1C6D1DCB00D97FAA /* BMSCore.framework */,
+				9200783E1C8F44240019E24D /* IDZSwiftCommonCrypto.framework */,
 				928113DA1C6D5B0400B38048 /* Pods_TestAppWatchOS_Extension.framework */,
 				928113DC1C6D5B0400B38048 /* BMSCore.framework */,
+				920078401C8F44240019E24D /* IDZSwiftCommonCrypto.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -959,6 +999,41 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		920078381C8F44240019E24D /* IDZSwiftCommonCrypto.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IDZSwiftCommonCrypto.framework;
+			remoteRef = 920078371C8F44240019E24D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9200783A1C8F44240019E24D /* IDZSwiftCommonCrypto.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IDZSwiftCommonCrypto.framework;
+			remoteRef = 920078391C8F44240019E24D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9200783C1C8F44240019E24D /* IDZSwiftCommonCrypto.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IDZSwiftCommonCrypto.framework;
+			remoteRef = 9200783B1C8F44240019E24D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9200783E1C8F44240019E24D /* IDZSwiftCommonCrypto.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IDZSwiftCommonCrypto.framework;
+			remoteRef = 9200783D1C8F44240019E24D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		920078401C8F44240019E24D /* IDZSwiftCommonCrypto.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = IDZSwiftCommonCrypto.framework;
+			remoteRef = 9200783F1C8F44240019E24D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		9276B50A1C6D1D9E00E61F45 /* Pods_BMSAnalytics.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1501,6 +1576,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
+				);
 				INFOPLIST_FILE = Source/Resources/Info_iOS.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1521,6 +1600,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
+				);
 				INFOPLIST_FILE = Source/Resources/Info_iOS.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1568,6 +1651,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
+				);
 				INFOPLIST_FILE = Source/Resources/Info_watchOS.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1591,6 +1678,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
+				);
 				INFOPLIST_FILE = Source/Resources/Info_watchOS.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1634,6 +1725,10 @@
 			baseConfigurationReference = AC592126088B732C417883AF /* Pods-TestAppWatchOS Extension.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
+				);
 				INFOPLIST_FILE = "Tests/Test Apps/TestAppWatchOS Extension/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp.watchkitextension;
@@ -1650,6 +1745,10 @@
 			baseConfigurationReference = 3A8CEEDB2B5B5B0292DDF107 /* Pods-TestAppWatchOS Extension.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
+				);
 				INFOPLIST_FILE = "Tests/Test Apps/TestAppWatchOS Extension/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp.watchkitextension;
