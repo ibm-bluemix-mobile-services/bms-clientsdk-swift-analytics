@@ -1,11 +1,9 @@
 PODS:
   - BMSCore (0.0.19)
-  - IDZSwiftCommonCrypto (0.7.1)
 
 DEPENDENCIES:
   - BMSCore (from `https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git`,
     commit `77016a327d8907ccb4d22e175b5ce221787731e5`)
-  - IDZSwiftCommonCrypto
 
 EXTERNAL SOURCES:
   BMSCore:
@@ -19,6 +17,5 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BMSCore: 36863f5e14225ff0b47e756b5fd9b9cb04a15e7f
-  IDZSwiftCommonCrypto: 320d5d0254b3d5230004bb01ef7753b0777d916c
 
 COCOAPODS: 0.39.0

@@ -289,21 +289,14 @@ class AnalyticsTests: XCTestCase {
     }
     
     
-    func testUserIdGetsHashed() {
+    func testUserIdUpdatesCorrectly() {
         
         XCTAssertNotNil(Analytics.userIdentity)
         XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)
         
         Analytics.userIdentity = "test user"
-        
+        XCTAssertEqual(Analytics.userIdentity, "test user")
         XCTAssertNotEqual(Analytics.userIdentity, Analytics.deviceId)
-        
-        XCTAssertEqual(Analytics.userIdentity?.characters.count, 32)
-        
-        let hexCharacters = NSCharacterSet(charactersInString: "0123456789abcdef")
-        let nonHexCharacters = hexCharacters.invertedSet
-        XCTAssertNotNil(Analytics.userIdentity?.rangeOfCharacterFromSet(hexCharacters))
-        XCTAssertNil(Analytics.userIdentity?.rangeOfCharacterFromSet(nonHexCharacters))
         
         Analytics.userIdentity = nil
         XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)

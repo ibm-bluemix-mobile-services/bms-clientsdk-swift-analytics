@@ -13,7 +13,6 @@ Pod::Spec.new do |s|
   s.watchos.exclude_files = 'Source/**/*iOS*.swift'
 
   s.dependency 'BMSCore', '~> 0.0.19'
-  s.dependency 'IDZSwiftCommonCrypto', '~> 0.7.1'
 
   s.requires_arc = true
 

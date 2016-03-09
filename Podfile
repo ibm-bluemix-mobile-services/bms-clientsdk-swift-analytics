@@ -26,7 +26,6 @@ end
 
 target 'BMSAnalytics' do
 	import_pods_iOS
-    pod 'IDZSwiftCommonCrypto'
 end
 
 target 'BMSAnalyticsTests' do
@@ -35,7 +34,6 @@ end
 
 target 'BMSAnalyticsWatchOS' do
 	import_pods_watchOS
-    pod 'IDZSwiftCommonCrypto'
 end
 
 target 'TestAppiOS' do
