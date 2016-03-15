@@ -45,19 +45,28 @@ public class Analytics {
     /// The name of the iOS/WatchOS app
     public private(set) static var appName: String?
     
-    /// Identifies the current application user
-    /// To reset the userId, set the value to nil
+    /// Identifies the current application user.
+    /// To reset the userId, set the value to nil.
     public static var userIdentity: String? = Analytics.deviceId {
         didSet {
             if userIdentity != nil {
-                let currentTime = Int(NSDate.timeIntervalSinceReferenceDate()) * 1000
-                var userIdMetadata: [String: AnyObject] = [:]
-                userIdMetadata[Constants.Metadata.Analytics.user] = userIdentity
-                userIdMetadata[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.user
-                userIdMetadata[Constants.Metadata.Analytics.timestamp] = currentTime
-                userIdMetadata[Constants.Metadata.Analytics.appSession] = lifecycleEvents[Constants.Metadata.Analytics.sessionId]
                 
-                Analytics.log(userIdMetadata)
+                if let sessionId = lifecycleEvents[Constants.Metadata.Analytics.sessionId] {
+                    
+                    let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
+                    
+                    var userIdMetadata: [String: AnyObject] = [:]
+                    userIdMetadata[Constants.Metadata.Analytics.sessionId] = sessionId
+                    userIdMetadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
+                    userIdMetadata[Constants.Metadata.Analytics.userId] = userIdentity
+                    userIdMetadata[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.user
+                    
+                    Analytics.log(userIdMetadata)
+                }
+                else {
+                    Analytics.logger.warn("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
+                    userIdentity = Analytics.deviceId
+                }
             }
             else {
                 // If the user sets to nil, change the value back to the deviceId
@@ -162,6 +171,9 @@ public class Analytics {
         else if MFPClient.sharedInstance.mfpHost != nil {
             if MFPClient.sharedInstance.deviceMetadata != nil {
                 Request.requestAnalyticsData = MFPClient.sharedInstance.deviceMetadata!
+            }
+            else {
+                Request.requestAnalyticsData = Analytics.generateOutboundRequestMetadata()
             }
         }
         else {
@@ -311,7 +323,7 @@ public class Analytics {
         Analytics.logger.debug("Network response inbound")
         
         let endTime = NSDate.timeIntervalSinceReferenceDate()
-        let roundTripTime = endTime - request.startTime
+        let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
         let bytesSent = request.requestBody?.length ?? 0
         
         // Data for analytics logging

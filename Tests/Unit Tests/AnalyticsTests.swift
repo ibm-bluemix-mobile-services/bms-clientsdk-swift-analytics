@@ -289,16 +289,28 @@ class AnalyticsTests: XCTestCase {
     }
     
     
-    func testUserIdUpdatesCorrectly() {
+    func testUserIdentityUpdatesCorrectly() {
         
         XCTAssertNotNil(Analytics.userIdentity)
         XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)
+        
+        Analytics.logSessionStart() // Required for userIdentity data to show up on Analytics console
         
         Analytics.userIdentity = "test user"
         XCTAssertEqual(Analytics.userIdentity, "test user")
         XCTAssertNotEqual(Analytics.userIdentity, Analytics.deviceId)
         
         Analytics.userIdentity = nil
+        XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)
+    }
+    
+    func testUserIdentityFailsWithoutSessionId() {
+        
+        Analytics.userIdentity = nil
+        Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] = nil
+        
+        Analytics.userIdentity = "fail"
+        XCTAssertNotEqual(Analytics.userIdentity, "fail")
         XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)
     }
     

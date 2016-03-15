@@ -38,6 +38,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationDidBecomeActive() {
         
         Analytics.recordApplicationDidBecomeActive()
+        Analytics.userIdentity = "Some user name"
     }
 
     func applicationWillResignActive() {

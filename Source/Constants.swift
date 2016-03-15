@@ -87,6 +87,7 @@ internal struct Constants {
             static let appSession = "appSession"
             static let deviceId = "deviceId"
             static let user = "userSwitch"
+            static let userId = "$userID"
             static let timestamp = "$timestamp"
         }
     }

@@ -38,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.logStoreEnabled = true
         Logger.sdkDebugLoggingEnabled = true
         
+        Analytics.userIdentity = "Some user name"
+        
         return true
     }
 }
