@@ -35,7 +35,7 @@ class LogSenderTests: XCTestCase {
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
         Analytics.initializeForBluemix(appName: "testAppName", apiKey: "testApiKey")
-        let url = "https://" + Constants.AnalyticsServer.Bluemix.hostName + "." + BMSClient.REGION_US_SOUTH + Constants.AnalyticsServer.Bluemix.uploadPath
+        let url = "https://" + Constants.AnalyticsServer.hostName + BMSClient.REGION_US_SOUTH + Constants.AnalyticsServer.uploadPath
         
         Analytics.initializeForBluemix(appName: APP_NAME, apiKey: API_KEY)
         
@@ -153,24 +153,8 @@ class LogSenderTests: XCTestCase {
         XCTAssertNotNil(bmsRequest)
         XCTAssertTrue(bmsRequest is Request)
         
-        let bmsLogUploadUrl = "https://" + Constants.AnalyticsServer.Bluemix.hostName + "." + "ng.bluemix.net" + Constants.AnalyticsServer.Bluemix.uploadPath
+        let bmsLogUploadUrl = "https://" + Constants.AnalyticsServer.hostName + ".ng.bluemix.net" + Constants.AnalyticsServer.uploadPath
         XCTAssertEqual(bmsRequest!.resourceUrl, bmsLogUploadUrl)
-    }
-    
-    
-    func testBuildLogSendRequestForFoundation() {
-        
-        let mfpClient = MFPClient.sharedInstance
-        mfpClient.initializeWithUrlComponents(mfpProtocol: "http", mfpHost: "localhost", mfpPort: "9080")
-        Analytics.initializeForBluemix(appName: "testAppName", apiKey: "1234")
-        
-        let mfpRequest = LogSender.buildLogSendRequest() { (response, error) -> Void in
-        }
-        
-        XCTAssertNotNil(mfpRequest)
-        
-        let mfpLogUploadUrl = "http://localhost:9080" + Constants.AnalyticsServer.Foundation.uploadPath
-        XCTAssertEqual(mfpRequest!.resourceUrl, mfpLogUploadUrl)
     }
     
     

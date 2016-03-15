@@ -33,16 +33,8 @@ internal struct Constants {
     
     struct AnalyticsServer {
         
-        struct Bluemix {
-            
-            static let hostName = "mobile-analytics-dashboard"
-            static let uploadPath =  "/analytics-service/rest/data/events/clientlogs/"
-        }
-        
-        struct Foundation {
-            
-            static let uploadPath =  "/mfp/api/loguploader/"
-        }
+        static let hostName = "mobile-analytics-dashboard"
+        static let uploadPath =  "/analytics-service/rest/data/events/clientlogs/"
     }
     
     

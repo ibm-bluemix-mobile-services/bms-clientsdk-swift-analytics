@@ -125,11 +125,10 @@ internal class LogSender {
     internal static func buildLogSendRequest(callback: MfpCompletionHandler) -> BaseRequest? {
         
         let bmsClient = BMSClient.sharedInstance
-        let mfpClient = MFPClient.sharedInstance
         var headers: [String: String] = ["Content-Type": "text/plain"]
         var logUploadUrl = ""
         
-        // Check that the BMSClient or MFPClient classes have been initialized before building the upload URL
+        // Check that the BMSClient class has been initialized before building the upload URL
         
         // Bluemix request
         // Only the region is required to communicate with the Analytics service. App route and GUID are not required.
@@ -140,19 +139,13 @@ internal class LogSender {
             }
             headers[Constants.analyticsApiKey] = Analytics.apiKey!
             
-            logUploadUrl = "https://" + Constants.AnalyticsServer.Bluemix.hostName + "." + bmsClient.bluemixRegion! + Constants.AnalyticsServer.Bluemix.uploadPath
+            logUploadUrl = "https://" + Constants.AnalyticsServer.hostName + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadPath
             
             // Request class is specific to Bluemix (since it uses Bluemix authorization managers)
             return Request(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
         }
-        // MFP request
-        else if let mfpProtocol = mfpClient.mfpProtocol, mfpHost = mfpClient.mfpHost, mfpPort = mfpClient.mfpPort {
-            logUploadUrl = mfpProtocol + "://" + mfpHost + ":" + mfpPort + Constants.AnalyticsServer.Foundation.uploadPath
-
-            return BaseRequest(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
-        }
         else {
-            Logger.internalLogger.error("Failed to send logs because the client was not yet initialized. Make sure that either the BMSClient or the MFPClient class has been initialized.")
+            Logger.internalLogger.error("Failed to send logs because the client was not yet initialized. Make sure that either the BMSClient class has been initialized.")
             return nil
         }
     }

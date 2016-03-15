@@ -54,24 +54,6 @@ class AnalyticsTests: XCTestCase {
     }
     
     
-    func testInitializeWithAppNameMfpClientInitialized() {
-        
-        XCTAssertNil(Analytics.apiKey)
-        XCTAssertNil(Analytics.appName)
-        XCTAssertNil(Request.requestAnalyticsData)
-        
-        let mfpClientDeviceMetadata = "{example: metadata}"
-        
-        MFPClient.sharedInstance.initializeWithUrlComponents(mfpProtocol: "http", mfpHost: "localhost", mfpPort: "9080")
-        MFPClient.sharedInstance.deviceMetadata = mfpClientDeviceMetadata
-        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
-        
-        XCTAssertEqual(Analytics.apiKey, "1234")
-        XCTAssertEqual(Analytics.appName, "Unit Test App")
-        XCTAssertEqual(Request.requestAnalyticsData, mfpClientDeviceMetadata)
-    }
-    
-    
     func testInitializeWithAppNameRegistersUncaughtExceptionHandler() {
         
         Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")

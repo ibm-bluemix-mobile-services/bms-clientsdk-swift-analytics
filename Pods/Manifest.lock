@@ -1,10 +1,10 @@
 PODS:
-  - BMSCore (0.0.21)
+  - BMSCore (0.0.24)
 
 DEPENDENCIES:
-  - BMSCore (~> 0.0.21)
+  - BMSCore (~> 0.0.24)
 
 SPEC CHECKSUMS:
-  BMSCore: 27b14b65e2c3ce8aece5ea9357d1e02878efee91
+  BMSCore: 1910f1e531072a5cd537d625d2dc8a0a7151bdd2
 
 COCOAPODS: 0.39.0
