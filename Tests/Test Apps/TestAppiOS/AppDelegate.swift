@@ -14,7 +14,7 @@
 
 import UIKit
 import BMSCore
-import BMSAnalytics
+import MFPAnalytics
 
 
 @UIApplicationMain

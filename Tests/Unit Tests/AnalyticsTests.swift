@@ -14,7 +14,7 @@
 
 import XCTest
 import BMSCore
-@testable import BMSAnalytics
+@testable import MFPAnalytics
 
 
 class AnalyticsTests: XCTestCase {

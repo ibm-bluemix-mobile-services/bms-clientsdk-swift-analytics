@@ -14,7 +14,7 @@
 
 import XCTest
 import BMSCore
-@testable import BMSAnalytics
+@testable import MFPAnalytics
 
 
 class LogSenderTests: XCTestCase {
@@ -164,15 +164,15 @@ class LogSenderTests: XCTestCase {
             XCTAssertNil(response)
             XCTAssertNotNil(error)
             XCTAssertEqual(error!.code, BMSCoreError.ClientNotInitialized.rawValue)
-            XCTAssertEqual(error!.domain, BMSAnalyticsError.domain)
+            XCTAssertEqual(error!.domain, MFPAnalyticsError.domain)
         }
         
         // Analytics initialization
         LogSender.returnInitializationError("Analytics", missingValue:"test") { (response, error) -> Void in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
-            XCTAssertEqual(error!.code, BMSAnalyticsError.AnalyticsNotInitialized.rawValue)
-            XCTAssertEqual(error!.domain, BMSAnalyticsError.domain)
+            XCTAssertEqual(error!.code, MFPAnalyticsError.AnalyticsNotInitialized.rawValue)
+            XCTAssertEqual(error!.domain, MFPAnalyticsError.domain)
         }
         
         // Unknown initialization
@@ -180,7 +180,7 @@ class LogSenderTests: XCTestCase {
             XCTAssertNil(response)
             XCTAssertNotNil(error)
             XCTAssertEqual(error!.code, -1)
-            XCTAssertEqual(error!.domain, BMSAnalyticsError.domain)
+            XCTAssertEqual(error!.domain, MFPAnalyticsError.domain)
         }
     }
     

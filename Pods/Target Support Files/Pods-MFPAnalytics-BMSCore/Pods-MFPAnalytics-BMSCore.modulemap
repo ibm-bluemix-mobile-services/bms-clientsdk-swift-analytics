@@ -1,0 +1,6 @@
+framework module BMSCore {
+  umbrella header "Pods-MFPAnalytics-BMSCore-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -23,15 +23,15 @@ end
 
 # Targets
 
-target 'BMSAnalytics' do
+target 'MFPAnalytics' do
 	import_pods_iOS
 end
 
-target 'BMSAnalyticsTests' do
+target 'MFPAnalyticsTests' do
     import_pods_iOS
 end
 
-target 'BMSAnalyticsWatchOS' do
+target 'MFPAnalyticsWatchOS' do
 	import_pods_watchOS
 end
 

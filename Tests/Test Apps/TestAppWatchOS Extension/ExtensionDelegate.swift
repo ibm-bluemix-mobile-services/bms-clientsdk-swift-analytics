@@ -13,7 +13,7 @@
 
 
 import WatchKit
-import BMSAnalyticsWatchOS
+import MFPAnalyticsWatchOS
 import BMSCore
 
 

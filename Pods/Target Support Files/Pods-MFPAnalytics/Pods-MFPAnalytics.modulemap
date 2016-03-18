@@ -1,0 +1,6 @@
+framework module Pods_MFPAnalytics {
+  umbrella header "Pods-MFPAnalytics-umbrella.h"
+
+  export *
+  module * { export * }
+}
