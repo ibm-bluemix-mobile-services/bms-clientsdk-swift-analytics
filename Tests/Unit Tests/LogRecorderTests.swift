@@ -82,7 +82,7 @@ class LogRecorderTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -159,7 +159,7 @@ class LogRecorderTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Analytics.enabled = true
         Logger.logLevelFilter = LogLevel.Debug
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -214,7 +214,7 @@ class LogRecorderTests: XCTestCase {
         let bundle = NSBundle(forClass: self.dynamicType)
         let path = bundle.pathForResource("LargeData", ofType: "txt")
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         guard let largeData = LoggerTests.getFileContents(path!) else {
             XCTFail()
             return
@@ -315,7 +315,7 @@ class LogRecorderTests: XCTestCase {
         }
         
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.sdkDebugLoggingEnabled = false
         Logger.logLevelFilter = LogLevel.Debug

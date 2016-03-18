@@ -62,7 +62,7 @@ class LoggerTests: XCTestCase {
             print("Could not delete " + pathToFile)
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Analytics
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -101,7 +101,7 @@ class LoggerTests: XCTestCase {
             print("Could not delete " + pathToFile)
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logLevelFilter = LogLevel.Analytics
         Analytics.enabled = false
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -125,7 +125,7 @@ class LoggerTests: XCTestCase {
             print("Could not delete " + pathToFile)
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -189,7 +189,7 @@ class LoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -253,7 +253,7 @@ class LoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.None
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -278,7 +278,7 @@ class LoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Fatal
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -304,7 +304,7 @@ class LoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = false
         Logger.logLevelFilter = LogLevel.Debug
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize

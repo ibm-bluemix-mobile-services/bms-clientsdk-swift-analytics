@@ -71,7 +71,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             break
         }
         
-        let logger = Logger.getLoggerForName(loggerNameField.text ?? "TestAppiOS")
+        let logger = Logger.loggerForName(loggerNameField.text ?? "TestAppiOS")
         
         switch currentLogLevel {
         case "None":

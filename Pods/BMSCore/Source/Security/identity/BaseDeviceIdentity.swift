@@ -22,11 +22,38 @@ public class BaseDeviceIdentity : DeviceIdentity {
 	public static let OS_VERSION = "osVersion";
     public static let MODEL = "model"
     
-    public var jsonData : [String:String] = ([:])
-    
+    public internal(set) var jsonData : [String:String] = ([:])
+	
+	public var id:String? {
+		get{
+			return jsonData[BaseDeviceIdentity.ID]
+		}
+	}
+	
+	public var OS:String? {
+		get{
+			return jsonData[BaseDeviceIdentity.OS]
+		}
+	}
+
+	
+	public var OSVersion:String? {
+		get{
+			return jsonData[BaseDeviceIdentity.OS_VERSION]
+		}
+	}
+
+	
+	public var model:String? {
+		get{
+			return jsonData[BaseDeviceIdentity.MODEL]
+		}
+	}
+
+	
     public init() {
 		#if os(watchOS)
-			jsonData[BaseDeviceIdentity.ID] = nil
+			jsonData[BaseDeviceIdentity.ID] = "Not Available"
 			jsonData[BaseDeviceIdentity.OS] =  WKInterfaceDevice.currentDevice().systemName
 			jsonData[BaseDeviceIdentity.OS_VERSION] = WKInterfaceDevice.currentDevice().systemVersion
 			jsonData[BaseDeviceIdentity.MODEL] =  WKInterfaceDevice.currentDevice().model
@@ -38,33 +65,14 @@ public class BaseDeviceIdentity : DeviceIdentity {
 		#endif
 		
 	}
-	
-    public func getAsJson() -> [String:String]{
-        return jsonData
-    }
     
-    public init(map: AnyObject?) {
-        guard let json = map as? Dictionary<String, String> else {
+    public init(map: [String:AnyObject]?) {
+        guard let json = map as? [String:String] else {
             jsonData = ([:])
             return
         }
         
         jsonData = json
     }
-    
-    public func getId() ->String? {
-        return jsonData[BaseDeviceIdentity.ID]
-    }
-    
-    public func getOS() -> String? {
-        return jsonData[BaseDeviceIdentity.OS]
-    }
-    
-	public func getOSVersion() -> String? {
-		return nil;
-	}
 
-	public func getModel() -> String? {
-        return jsonData[BaseDeviceIdentity.MODEL]
-    }
 }

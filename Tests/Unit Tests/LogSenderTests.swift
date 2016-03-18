@@ -55,7 +55,7 @@ class LogSenderTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -98,7 +98,7 @@ class LogSenderTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -203,7 +203,7 @@ class LogSenderTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize
@@ -250,7 +250,7 @@ class LogSenderTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.getLoggerForName(fakePKG)
+        let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         Logger.maxLogStoreSize = Constants.File.defaultMaxSize

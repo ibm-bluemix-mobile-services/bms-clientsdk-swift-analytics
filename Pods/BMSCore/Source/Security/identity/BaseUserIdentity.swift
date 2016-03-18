@@ -16,33 +16,38 @@ public class BaseUserIdentity : UserIdentity {
     public static let ID = "id"
     public static let AUTH_BY = "authBy"
     public static let DISPLAY_NAME = "displayName"
+	
+    public private(set) var jsonData : [String:String] = ([:])
     
-    public var jsonData : [String:String] = ([:])
-    
-    public init() {
+	public var id:String? {
+		get {
+			return jsonData[BaseUserIdentity.ID]
+		}
+	}
+	
+	public var authBy:String? {
+		get {
+			return jsonData[BaseUserIdentity.AUTH_BY]
+		}
+	}
+	
+	public var displayName:String? {
+		get {
+			return jsonData[BaseUserIdentity.DISPLAY_NAME]
+		}
+	}
+	
+	public init() {
 
     }
     
-    public init(map: AnyObject?) {
-        guard let json = map as? Dictionary<String, String> else {
+    public init(map: [String:AnyObject]?) {
+        guard let json = map as? [String:String] else {
             jsonData = ([:])
             return
         }
-        
         jsonData = json
     }
+	
 
-    
-    public func getId() ->String? {
-        return jsonData[BaseUserIdentity.AUTH_BY]
-    }
-    
-    public func getAuthBy() ->String? {
-        return jsonData[BaseUserIdentity.ID]
-    }
-
-    
-    public func getDisplayName() -> String? {
-        return jsonData[BaseUserIdentity.DISPLAY_NAME]
-    }
 }

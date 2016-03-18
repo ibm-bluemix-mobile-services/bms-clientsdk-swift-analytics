@@ -79,7 +79,7 @@ public class Analytics {
 
     // MARK: Properties (internal/private)
 
-    internal static let logger = Logger.getLoggerForName(Constants.Package.analytics)
+    internal static let logger = Logger.loggerForName(Constants.Package.analytics)
     
     // Stores metadata (including a duration timer) for each app session
     // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)

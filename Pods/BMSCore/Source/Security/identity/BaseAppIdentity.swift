@@ -18,32 +18,31 @@ public class BaseAppIdentity : AppIdentity{
 
     public static let VERSION = "version"
     
-    public var jsonData : [String:String] = ([:])
+    public internal(set) var jsonData : [String:String] = ([:])
     
-    public init() {
+	public var id:String? {
+		get{
+			return jsonData[BaseAppIdentity.ID]
+		}
+	}
+	public var version:String? {
+		get{
+			return jsonData[BaseAppIdentity.VERSION]
+		}
+	}
+	
+	public init() {
 		jsonData[BaseAppIdentity.ID] = NSBundle(forClass:object_getClass(self)).bundleIdentifier;
 		jsonData[BaseAppIdentity.VERSION] = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String;
 	}
 	
-    public func getAsJson() -> [String:String]{
-        return jsonData
-    }
-    
-    public init(map: AnyObject?) {
-        guard let json = map as? Dictionary<String, String> else {
+    public init(map: [String:AnyObject]?) {
+        guard let json = map as? [String:String] else {
             jsonData = ([:])
             return
         }
 
         jsonData = json
     }
-    
-    public func getId() ->String? {
-        return jsonData[BaseAppIdentity.ID]
-    }
-    
-    public func getVersion() -> String? {
-        return jsonData[BaseAppIdentity.VERSION]
-    }
-    
+
 }

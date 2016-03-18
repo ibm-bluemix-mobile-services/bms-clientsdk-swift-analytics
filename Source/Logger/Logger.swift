@@ -44,7 +44,7 @@ extension Logger {
     // MARK: Properties (internal/private)
     
     // Internal instrumentation for troubleshooting issues in BMSCore
-    internal static let internalLogger = Logger.getLoggerForName(Constants.Package.logger)
+    internal static let internalLogger = Logger.loggerForName(Constants.Package.logger)
     
     
     
@@ -124,7 +124,7 @@ extension Logger {
     
     internal static func logException(exception: NSException) {
         
-        let logger = Logger.getLoggerForName(Constants.Package.logger)
+        let logger = Logger.loggerForName(Constants.Package.logger)
         var exceptionString = "Uncaught Exception: \(exception.name)."
         if let reason = exception.reason {
             exceptionString += " Reason: \(reason)."

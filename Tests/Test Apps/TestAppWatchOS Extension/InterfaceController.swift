@@ -23,7 +23,7 @@ class InterfaceController: WKInterfaceController {
     @IBAction func sendAnalyticsButtonPressed() {
         
         Logger.logLevelFilter = LogLevel.Debug
-        let logger = Logger.getLoggerForName("TestAppWatchOS")
+        let logger = Logger.loggerForName("TestAppWatchOS")
         logger.debug("Send analytics button pressed")
         
         Analytics.log(["buttonPressed": "recordLog"])
