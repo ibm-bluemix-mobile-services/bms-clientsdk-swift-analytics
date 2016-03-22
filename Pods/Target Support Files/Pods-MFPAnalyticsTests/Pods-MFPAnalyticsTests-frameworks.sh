@@ -84,8 +84,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-MFPAnalyticsTests/BMSAnalyticsSpec.framework"
   install_framework "Pods-MFPAnalyticsTests/BMSCore.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-MFPAnalyticsTests/BMSAnalyticsSpec.framework"
   install_framework "Pods-MFPAnalyticsTests/BMSCore.framework"
 fi

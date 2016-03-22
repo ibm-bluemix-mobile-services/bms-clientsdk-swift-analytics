@@ -11,7 +11,6 @@
 *     limitations under the License.
 */
 
-import Foundation
 
 /**
     Used in the `Logger` class, the `LogLevel` denotes the log severity.
@@ -46,41 +45,50 @@ public enum LogLevel: Int {
 
 
 // Stores logs on the device's file system
-// This protocol is implemented in the BMSAnalytics framework
+// This protocol is implemented in the MFPAnalytics framework
 public protocol LogRecorderProtocol {
     
     func logMessageToFile(message: String, level: LogLevel, loggerName: String, calledFile: String, calledFunction: String, calledLineNumber: Int, additionalMetadata: [String: AnyObject]?)
 }
 
 
+// Sends logs to the analytics server
+// This protocol is implemented in the MFPAnalytics framework
+public protocol LogSenderProtocol {
+    
+    func send(completionHandler userCallback: AnyObject?)
+    func sendAnalytics(completionHandler userCallback: AnyObject?)
+}
+
+
 /**
     `Logger` provides a wrapper to Swift's `print()` function, with additional information such as the file, function, and line where the log was called.
     It supports logging at different levels of verbosity (see the `LogLevel` enum) and filtering by `LogLevel` to limit the log output to the console.
-    
+
     Multiple `Logger` instances can be created with different package names using the `loggerForName` method.
- 
-    - Important: All of the below functionality will be added to `Logger` if the `BMSAnalytics` framework is added to your project. `BMSAnalytics` extends `Logger` to allow storing log messages and sending them to an analytics server.
+
+    - Important: All of the below functionality will be added to `Logger` if the `MFPAnalytics` framework is added to your project. `MFPAnalytics` extends `Logger` to allow storing log messages and sending them to an analytics server.
 
     When the `enabled` property is set to `true` (which is the default value), logs will be persisted to a file on the client device in the following JSON format:
 
-        {
-            "timestamp"    : "17-02-2013 13:54:27:123",   // "dd-MM-yyyy hh:mm:ss:S"
-            "level"        : "ERROR",                     // FATAL || ERROR || WARN || INFO || DEBUG
-            "name"         : "your_logger_name",          // The name of the Logger (typically a class name or app name)
-            "msg"          : "the message",               // Some log message
-            "metadata"     : {"some key": "some value"},  // Additional JSON metadata (only for Analytics logging)
-        }
+    {
+    "timestamp"    : "17-02-2013 13:54:27:123",   // "dd-MM-yyyy hh:mm:ss:S"
+    "level"        : "ERROR",                     // FATAL || ERROR || WARN || INFO || DEBUG
+    "name"         : "your_logger_name",          // The name of the Logger (typically a class name or app name)
+    "msg"          : "the message",               // Some log message
+    "metadata"     : {"some key": "some value"},  // Additional JSON metadata (only for Analytics logging)
+    }
 
     Logs are accumulated persistently to the log file until the file size is greater than the `Logger.maxLogStoreSize` property. At this point, half of the old logs will be deleted to make room for new log data.
 
     Log file data is sent to the Bluemix server when the Logger `send()` method is called, provided that the file is not empty and the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method. When the log data is successfully uploaded, the persisted local log data is deleted.
 
     - Note: The `Logger` class sets an uncaught exception handler to log application crashes. If you wish to set your own exception handler, do so **before** calling `Logger.loggerForName()` or the `Logger` exception handler will be overwritten.
-*/
+ */
 public class Logger {
     
     
-    // MARK: Properties (Public)
+    // MARK: Properties (API)
     
     /// The name that identifies this Logger instance
     public let name: String
@@ -94,32 +102,54 @@ public class Logger {
     /// If set to `false`, the internal BMSCore debug logs will not be displayed on the console.
     public static var sdkDebugLoggingEnabled: Bool = false
     
+    /// Determines whether logs get written to file on the client device.
+    /// Must be set to `true` to be able to send logs to the Bluemix server.
+    public static var logStoreEnabled: Bool = false
+    
+    /// The maximum file size (in bytes) for log storage.
+    /// Both the Analytics and Logger log files are limited by `maxLogStoreSize`.
+    public static var maxLogStoreSize: UInt64 = 100000
+    
+    /// True if the app crashed recently due to an uncaught exception.
+    /// This property will be set back to `false` if the logs are sent to the server.
+    public static var isUncaughtExceptionDetected: Bool {
+        get {
+            return NSUserDefaults.standardUserDefaults().boolForKey(Constants.uncaughtException)
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Constants.uncaughtException)
+        }
+    }
+    
+    
+    
+    // MARK: Properties (internal)
+    
     // Used to persist all logs to the device's file system
-    // Public access required by BMSAnalytics framework
-    // This will obtain a value when the Analytics class from BMSAnalytics is initialized
+    // Public access required by MFPAnalytics framework, which is required to initialize this property
     public static var logRecorder: LogRecorderProtocol?
+    
+    // Used to send logs to the analytics server
+    // Public access required by MFPAnalytics framework, which is required to initialize this property
+    public static var logSender: LogSenderProtocol?
+    
+    // Each logger instance is distinguished only by its "name" property
+    internal static var loggerInstances: [String: Logger] = [:]
     
     // Prefix for all internal logger names
     public static let mfpLoggerPrefix = "mfpsdk."
     
     
     
-    // MARK: Properties (internal/private)
-    
-    // Each logger instance is distinguished only by its "name" property
-    internal static var loggerInstances: [String: Logger] = [:]
-    
-    
-    
     // MARK: Initializers
     
     /**
-    Create a Logger instance that will be identified by the supplied name.
-    If a Logger instance with that name already exists, the existing instance will be returned.
-    
-    - parameter loggerName: The name that identifies this Logger instance
-    
-    - returns: A Logger instance
+        Create a Logger instance that will be identified by the supplied name.
+        If a Logger instance with that name already exists, the existing instance will be returned.
+        
+        - parameter loggerName: The name that identifies this Logger instance
+        
+        - returns: A Logger instance
     */
     public static func loggerForName(loggerName: String) -> Logger {
         
@@ -143,11 +173,11 @@ public class Logger {
     // MARK: Log methods (API)
     
     /**
-    Log at the Debug LogLevel.
-    
-    - parameter message: The message to log
-    
-    - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
+        Log at the Debug LogLevel.
+        
+        - parameter message: The message to log
+        
+        - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
     */
     public func debug(message: String, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
         
@@ -155,11 +185,11 @@ public class Logger {
     }
     
     /**
-     Log at the Info LogLevel.
-     
-     - parameter message: The message to log
-     
-     - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
+         Log at the Info LogLevel.
+         
+         - parameter message: The message to log
+         
+         - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
      */
     public func info(message: String, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
         
@@ -167,11 +197,11 @@ public class Logger {
     }
     
     /**
-     Log at the Warn LogLevel.
-     
-     - parameter message: The message to log
-     
-     - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
+         Log at the Warn LogLevel.
+         
+         - parameter message: The message to log
+         
+         - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
      */
     public func warn(message: String, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
         
@@ -179,11 +209,11 @@ public class Logger {
     }
     
     /**
-     Log at the Error LogLevel.
+         Log at the Error LogLevel.
      
-     - parameter message: The message to log
-     
-     - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
+         - parameter message: The message to log
+         
+         - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
      */
     public func error(message: String, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
         
@@ -191,15 +221,37 @@ public class Logger {
     }
     
     /**
-     Log at the Fatal LogLevel.
-     
-     - parameter message: The message to log
-     
-     - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
+         Log at the Fatal LogLevel.
+         
+         - parameter message: The message to log
+         
+         - Note: Do not supply values for the `file`, `function`, or `line` parameters. These parameters take default values to automatically record the file, function, and line in which this method was called.
      */
     public func fatal(message: String, file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
         
         logMessage(message, level: LogLevel.Fatal, calledFile: file, calledFunction: function, calledLineNumber: line)
+    }
+    
+    /**
+         Send the accumulated logs to the Bluemix server.
+         
+         Logger logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
+         
+         - parameter completionHandler:  Optional callback containing the results of the send request
+     */
+    public static func send(completionHandler userCallback: AnyObject? = nil) {
+        
+        Logger.logSender?.send(completionHandler: userCallback)
+    }
+    
+    
+    
+    // MARK: Analytics
+    
+    // Equivalent to the other log methods, but this method accepts data as JSON rather than a string
+    internal func analytics(metadata: [String: AnyObject], file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
+        
+        logMessage("", level: LogLevel.Analytics, calledFile: file, calledFunction: function, calledLineNumber: line, additionalMetadata: metadata)
     }
     
     
@@ -232,8 +284,9 @@ public class Logger {
         // Suppress console log output for apps that are being released to the App Store
         #if !RELEASE_BUILD
             if level != LogLevel.Analytics {
-                    print("[\(level.stringValue)] [\(loggerName)] \(calledFunction) in \(calledFile):\(calledLineNumber) :: \(logMessage)")
+                print("[\(level.stringValue)] [\(loggerName)] \(calledFunction) in \(calledFile):\(calledLineNumber) :: \(logMessage)")
             }
         #endif
     }
 }
+

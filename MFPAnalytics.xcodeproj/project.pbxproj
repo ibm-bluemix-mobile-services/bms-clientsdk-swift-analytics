@@ -155,6 +155,41 @@
 			remoteGlobalIDString = 493F53C055D907D3EB7A65E2D0C2D321;
 			remoteInfo = "Pods-TestAppWatchOS Extension-BMSCore";
 		};
+		92E876C51CA1E5BF005C77B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 980D9ABE5774F40D640C931EC1282040;
+			remoteInfo = "Pods-MFPAnalytics-BMSAnalyticsSpec";
+		};
+		92E876C71CA1E5BF005C77B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 980D9ABE5774F40D640C931EC1282040;
+			remoteInfo = "Pods-MFPAnalyticsTests-BMSAnalyticsSpec";
+		};
+		92E876C91CA1E5BF005C77B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 980D9ABE5774F40D640C931EC1282040;
+			remoteInfo = "Pods-MFPAnalyticsWatchOS-BMSAnalyticsSpec";
+		};
+		92E876CB1CA1E5BF005C77B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 980D9ABE5774F40D640C931EC1282040;
+			remoteInfo = "Pods-TestAppiOS-BMSAnalyticsSpec";
+		};
+		92E876CD1CA1E5BF005C77B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 980D9ABE5774F40D640C931EC1282040;
+			remoteInfo = "Pods-TestAppWatchOS Extension-BMSAnalyticsSpec";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -634,14 +669,19 @@
 			isa = PBXGroup;
 			children = (
 				92D539BE1C9C5C9D004FD69F /* Pods_MFPAnalytics.framework */,
+				92E876C61CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */,
 				92787D3D1C6D1DCB00D97FAA /* BMSCore.framework */,
 				92D539C01C9C5C9D004FD69F /* Pods_MFPAnalyticsTests.framework */,
+				92E876C81CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */,
 				928113DC1C6D5B0400B38048 /* BMSCore.framework */,
 				92D539C21C9C5C9D004FD69F /* Pods_MFPAnalyticsWatchOS.framework */,
+				92E876CA1CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */,
 				92D539C41C9C5C9D004FD69F /* BMSCore.framework */,
 				92787D3B1C6D1DCB00D97FAA /* Pods_TestAppiOS.framework */,
+				92E876CC1CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */,
 				92D539C61C9C5C9D004FD69F /* BMSCore.framework */,
 				928113DA1C6D5B0400B38048 /* Pods_TestAppWatchOS_Extension.framework */,
+				92E876CE1CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */,
 				92D539C81C9C5C9D004FD69F /* BMSCore.framework */,
 			);
 			name = Products;
@@ -1023,6 +1063,41 @@
 			fileType = wrapper.framework;
 			path = BMSCore.framework;
 			remoteRef = 92D539C71C9C5C9D004FD69F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		92E876C61CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMSAnalyticsSpec.framework;
+			remoteRef = 92E876C51CA1E5BF005C77B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		92E876C81CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMSAnalyticsSpec.framework;
+			remoteRef = 92E876C71CA1E5BF005C77B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		92E876CA1CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMSAnalyticsSpec.framework;
+			remoteRef = 92E876C91CA1E5BF005C77B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		92E876CC1CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMSAnalyticsSpec.framework;
+			remoteRef = 92E876CB1CA1E5BF005C77B3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		92E876CE1CA1E5BF005C77B3 /* BMSAnalyticsSpec.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BMSAnalyticsSpec.framework;
+			remoteRef = 92E876CD1CA1E5BF005C77B3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

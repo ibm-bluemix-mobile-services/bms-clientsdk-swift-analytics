@@ -84,8 +84,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-TestAppWatchOS Extension/BMSAnalyticsSpec.framework"
   install_framework "Pods-TestAppWatchOS Extension/BMSCore.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-TestAppWatchOS Extension/BMSAnalyticsSpec.framework"
   install_framework "Pods-TestAppWatchOS Extension/BMSCore.framework"
 fi

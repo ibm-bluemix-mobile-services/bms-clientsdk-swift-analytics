@@ -40,6 +40,7 @@ internal struct Constants {
     
     struct File {
         
+        // TODO: Remove defaultMaxSize
         static let defaultMaxSize: UInt64 = 100000
         static let unknown = "[Unknown]"
         
