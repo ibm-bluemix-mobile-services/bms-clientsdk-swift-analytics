@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "BMSAnalyticsSpec": [
-      "~> 0.0.2"
+      "~> 0.0.3"
     ]
   },
   "requires_arc": true,
