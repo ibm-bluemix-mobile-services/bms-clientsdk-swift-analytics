@@ -12,7 +12,7 @@
 */
 
 
-import BMSCore
+import BMSAnalyticsSpec
 
 
 // Stores all logs (for both Logger and Analytics) to the device's file system

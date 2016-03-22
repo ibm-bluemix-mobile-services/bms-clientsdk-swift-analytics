@@ -13,6 +13,7 @@
 
 
 import BMSCore
+import BMSAnalyticsSpec
 
 
 /**
