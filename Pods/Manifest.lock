@@ -1,24 +1,24 @@
 PODS:
-  - BMSAnalyticsSpec (0.0.3)
+  - BMSAnalyticsSpec (0.0.4)
   - BMSCore (0.0.30):
-    - BMSAnalyticsSpec (~> 0.0.3)
+    - BMSAnalyticsSpec (~> 0.0.4)
 
 DEPENDENCIES:
   - BMSCore (from `https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git`,
-    commit `5028457f95b93ee16c894e9cec6f7371f4afd413`)
+    commit `6abd2efafd7b78f53fbea72b2cd982ab9e99d5ab`)
 
 EXTERNAL SOURCES:
   BMSCore:
-    :commit: 5028457f95b93ee16c894e9cec6f7371f4afd413
+    :commit: 6abd2efafd7b78f53fbea72b2cd982ab9e99d5ab
     :git: https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git
 
 CHECKOUT OPTIONS:
   BMSCore:
-    :commit: 5028457f95b93ee16c894e9cec6f7371f4afd413
+    :commit: 6abd2efafd7b78f53fbea72b2cd982ab9e99d5ab
     :git: https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git
 
 SPEC CHECKSUMS:
-  BMSAnalyticsSpec: a23fc6d6cc32870b43f91abec075ed80d69bdab4
-  BMSCore: b1a1fa7b5ee7c0d27366e73849dd62c7962af8be
+  BMSAnalyticsSpec: 974213d9c396707af4d956e227d29f152795cb97
+  BMSCore: a9a3bdfc7fb7af9683bef67705526802d2de7030
 
 COCOAPODS: 0.39.0
