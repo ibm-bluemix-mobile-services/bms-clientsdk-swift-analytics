@@ -19,7 +19,7 @@ import BMSAnalyticsSpec
 /**
     `BMSAnalytics` provides the internal implementation of the BMSAnalyticsSpec `Analytics` API.
 */
-public class BMSAnalytics {
+public class BMSAnalytics: AnalyticsDelegate {
     
     
     // MARK: Properties (public)
@@ -32,11 +32,11 @@ public class BMSAnalytics {
     
     /// Identifies the current application user.
     /// To reset the userId, set the value to nil.
-    public static var userIdentity: String? = BMSAnalytics.deviceId {
+    public var userIdentity: String? = BMSAnalytics.deviceId {
         didSet {
             if userIdentity != nil {
                 
-                if let sessionId = lifecycleEvents[Constants.Metadata.Analytics.sessionId] {
+                if let sessionId = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] {
                     
                     let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
                     
@@ -114,8 +114,9 @@ public class BMSAnalytics {
             BMSAnalytics.apiKey = apiKey
         }
         
-        // Register the LogRecorder so that logs can start being stored on the device
+        // Link all of the BMSAnalytics implementation to the BMSAnalyticsSpec APIs
         Logger.delegate = BMSLogger()
+        Analytics.delegate = BMSAnalytics()
         
         BMSLogger.startCapturingUncaughtExceptions()
         
@@ -230,7 +231,7 @@ public class BMSAnalytics {
         requestMetadata["osVersion"] = osVersion
         requestMetadata["model"] = model
         requestMetadata["deviceID"] = deviceId
-        requestMetadata["mfpAppName"] = Analytics.appName
+        requestMetadata["mfpAppName"] = BMSAnalytics.appName
         requestMetadata["appStoreLabel"] = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? ""
         requestMetadata["appStoreId"] = NSBundle.mainBundle().bundleIdentifier ?? ""
         requestMetadata["appVersionCode"] = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String ?? ""
