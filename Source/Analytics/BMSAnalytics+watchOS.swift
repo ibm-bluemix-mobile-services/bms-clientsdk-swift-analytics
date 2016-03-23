@@ -26,7 +26,7 @@ public extension BMSAnalytics {
      */
     public static func recordApplicationDidBecomeActive() {
         
-        Analytics.logSessionStart()
+        BMSAnalytics.logSessionStart()
     }
     
     
@@ -38,7 +38,7 @@ public extension BMSAnalytics {
      */
     public static func recordApplicationWillResignActive() {
         
-        Analytics.logSessionEnd()
+        BMSAnalytics.logSessionEnd()
     }
     
     
