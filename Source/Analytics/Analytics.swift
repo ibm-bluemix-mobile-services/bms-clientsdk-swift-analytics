@@ -32,7 +32,7 @@ public enum DeviceEvent {
 /**
     `Analytics` provides a means of capturing analytics data and sending the data to the mobile analytics service.
 */
-public class Analytics {
+public class AnalyticsImplementer {
     
     
     // MARK: Properties (public)
@@ -133,7 +133,7 @@ public class Analytics {
         }
         
         // Register the LogRecorder so that logs can start being stored on the device
-        Logger.logRecorder = LogRecorder()
+        Logger.delegate = LogRecorder()
         
         Logger.startCapturingUncaughtExceptions()
         
