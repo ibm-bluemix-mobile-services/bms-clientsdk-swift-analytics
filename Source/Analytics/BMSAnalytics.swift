@@ -32,7 +32,7 @@ public enum DeviceEvent {
 /**
     `Analytics` provides a means of capturing analytics data and sending the data to the mobile analytics service.
 */
-public class AnalyticsImplementer {
+public class BMSAnalytics {
     
     
     // MARK: Properties (public)

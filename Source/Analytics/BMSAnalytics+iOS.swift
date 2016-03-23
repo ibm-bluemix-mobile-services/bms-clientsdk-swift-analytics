@@ -16,7 +16,7 @@
 //import UIKit
 
 
-public extension Analytics {
+public extension BMSAnalytics {
     
     
     // Records the duration of the app's lifecycle from when it enters the foreground to when it goes to the background.

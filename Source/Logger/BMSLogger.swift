@@ -16,7 +16,7 @@ import BMSCore
 import BMSAnalyticsSpec
 
 
-extension Logger {
+public class BMSLogger {
 
     
     // MARK: Properties (API)

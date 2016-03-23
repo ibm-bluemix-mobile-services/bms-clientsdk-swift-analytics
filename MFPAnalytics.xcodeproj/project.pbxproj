@@ -21,9 +21,9 @@
 		9221C0331C4ED379007FA9D0 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0201C4ED26F007FA9D0 /* ExtensionDelegate.swift */; };
 		9221C0341C4ED37B007FA9D0 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0211C4ED26F007FA9D0 /* InterfaceController.swift */; };
 		9221C0351C4ED37F007FA9D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0231C4ED26F007FA9D0 /* Assets.xcassets */; };
-		9221C0461C4ED9AF007FA9D0 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* Analytics.swift */; };
-		9221C0481C4ED9AF007FA9D0 /* Analytics+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0441C4ED9AF007FA9D0 /* Analytics+iOS.swift */; };
-		9221C04D1C4ED9BC007FA9D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04C1C4ED9BC007FA9D0 /* Logger.swift */; };
+		9221C0461C4ED9AF007FA9D0 /* BMSAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* BMSAnalytics.swift */; };
+		9221C0481C4ED9AF007FA9D0 /* BMSAnalytics+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0441C4ED9AF007FA9D0 /* BMSAnalytics+iOS.swift */; };
+		9221C04D1C4ED9BC007FA9D0 /* BMSLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04C1C4ED9BC007FA9D0 /* BMSLogger.swift */; };
 		9221C0501C4ED9CF007FA9D0 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04F1C4ED9CF007FA9D0 /* LoggerTests.swift */; };
 		9221C0521C4EDA9C007FA9D0 /* AnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0511C4EDA9C007FA9D0 /* AnalyticsTests.swift */; };
 		9221C0541C4EDACC007FA9D0 /* LargeData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0531C4EDACC007FA9D0 /* LargeData.txt */; };
@@ -41,9 +41,9 @@
 		9276B4671C6A621F00E61F45 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B4651C6A621F00E61F45 /* Constants.swift */; };
 		9276B48C1C6C0CA200E61F45 /* LogDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9276B48B1C6C0CA200E61F45 /* LogDisplayViewController.swift */; };
 		929E62381C504712001E8880 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0DB1C4EE159007FA9D0 /* Error.swift */; };
-		929E62391C504715001E8880 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* Analytics.swift */; };
-		929E623A1C504717001E8880 /* Analytics+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0451C4ED9AF007FA9D0 /* Analytics+watchOS.swift */; };
-		929E623B1C50471C001E8880 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04C1C4ED9BC007FA9D0 /* Logger.swift */; };
+		929E62391C504715001E8880 /* BMSAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* BMSAnalytics.swift */; };
+		929E623A1C504717001E8880 /* BMSAnalytics+watchOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0451C4ED9AF007FA9D0 /* BMSAnalytics+watchOS.swift */; };
+		929E623B1C50471C001E8880 /* BMSLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04C1C4ED9BC007FA9D0 /* BMSLogger.swift */; };
 		CE0B0448956D846141F8283B /* Pods_MFPAnalyticsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0183E9F6E123D5195240EFA /* Pods_MFPAnalyticsTests.framework */; };
 		ED58CCC4EB81DEE8EDD9FBED /* Pods_MFPAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F2A6100CF3310C8989D7E1D /* Pods_MFPAnalytics.framework */; };
 		F1BFE4EE3D33826FE982251E /* Pods_TestAppWatchOS_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B0B7B2A70E6395D8A8A7B0 /* Pods_TestAppWatchOS_Extension.framework */; };
@@ -242,10 +242,10 @@
 		9221C0231C4ED26F007FA9D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9221C0241C4ED26F007FA9D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9221C0281C4ED26F007FA9D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9221C0431C4ED9AF007FA9D0 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
-		9221C0441C4ED9AF007FA9D0 /* Analytics+iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Analytics+iOS.swift"; sourceTree = "<group>"; };
-		9221C0451C4ED9AF007FA9D0 /* Analytics+watchOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Analytics+watchOS.swift"; sourceTree = "<group>"; };
-		9221C04C1C4ED9BC007FA9D0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		9221C0431C4ED9AF007FA9D0 /* BMSAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMSAnalytics.swift; sourceTree = "<group>"; };
+		9221C0441C4ED9AF007FA9D0 /* BMSAnalytics+iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BMSAnalytics+iOS.swift"; sourceTree = "<group>"; };
+		9221C0451C4ED9AF007FA9D0 /* BMSAnalytics+watchOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BMSAnalytics+watchOS.swift"; sourceTree = "<group>"; };
+		9221C04C1C4ED9BC007FA9D0 /* BMSLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMSLogger.swift; sourceTree = "<group>"; };
 		9221C04F1C4ED9CF007FA9D0 /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		9221C0511C4EDA9C007FA9D0 /* AnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsTests.swift; sourceTree = "<group>"; };
 		9221C0531C4EDACC007FA9D0 /* LargeData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LargeData.txt; sourceTree = "<group>"; };
@@ -436,9 +436,9 @@
 		9221C0061C4ED26F007FA9D0 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				9221C0431C4ED9AF007FA9D0 /* Analytics.swift */,
-				9221C0441C4ED9AF007FA9D0 /* Analytics+iOS.swift */,
-				9221C0451C4ED9AF007FA9D0 /* Analytics+watchOS.swift */,
+				9221C0431C4ED9AF007FA9D0 /* BMSAnalytics.swift */,
+				9221C0441C4ED9AF007FA9D0 /* BMSAnalytics+iOS.swift */,
+				9221C0451C4ED9AF007FA9D0 /* BMSAnalytics+watchOS.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -446,7 +446,7 @@
 		9221C0071C4ED26F007FA9D0 /* Logger */ = {
 			isa = PBXGroup;
 			children = (
-				9221C04C1C4ED9BC007FA9D0 /* Logger.swift */,
+				9221C04C1C4ED9BC007FA9D0 /* BMSLogger.swift */,
 				9276B45E1C69508400E61F45 /* LogRecorder.swift */,
 				9276B45A1C69506D00E61F45 /* LogSender.swift */,
 			);
@@ -1360,10 +1360,10 @@
 				9221C0DC1C4EE159007FA9D0 /* Error.swift in Sources */,
 				9276B45B1C69506D00E61F45 /* LogSender.swift in Sources */,
 				9276B45F1C69508400E61F45 /* LogRecorder.swift in Sources */,
-				9221C0481C4ED9AF007FA9D0 /* Analytics+iOS.swift in Sources */,
+				9221C0481C4ED9AF007FA9D0 /* BMSAnalytics+iOS.swift in Sources */,
 				9276B4661C6A621F00E61F45 /* Constants.swift in Sources */,
-				9221C04D1C4ED9BC007FA9D0 /* Logger.swift in Sources */,
-				9221C0461C4ED9AF007FA9D0 /* Analytics.swift in Sources */,
+				9221C04D1C4ED9BC007FA9D0 /* BMSLogger.swift in Sources */,
+				9221C0461C4ED9AF007FA9D0 /* BMSAnalytics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1382,12 +1382,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				929E623B1C50471C001E8880 /* Logger.swift in Sources */,
+				929E623B1C50471C001E8880 /* BMSLogger.swift in Sources */,
 				9276B45D1C69506D00E61F45 /* LogSender.swift in Sources */,
 				9276B4601C69508400E61F45 /* LogRecorder.swift in Sources */,
-				929E623A1C504717001E8880 /* Analytics+watchOS.swift in Sources */,
+				929E623A1C504717001E8880 /* BMSAnalytics+watchOS.swift in Sources */,
 				9276B4671C6A621F00E61F45 /* Constants.swift in Sources */,
-				929E62391C504715001E8880 /* Analytics.swift in Sources */,
+				929E62391C504715001E8880 /* BMSAnalytics.swift in Sources */,
 				929E62381C504712001E8880 /* Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

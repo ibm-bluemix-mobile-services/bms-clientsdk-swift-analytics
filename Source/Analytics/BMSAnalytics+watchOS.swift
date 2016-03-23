@@ -15,7 +15,7 @@
 import WatchKit
 
 
-public extension Analytics {
+public extension BMSAnalytics {
     
     
     /**
