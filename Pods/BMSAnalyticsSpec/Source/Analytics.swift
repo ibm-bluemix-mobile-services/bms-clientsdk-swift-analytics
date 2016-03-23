@@ -29,8 +29,6 @@ public enum DeviceEvent {
 public protocol AnalyticsDelegate {
     
     var userIdentity: String? { get set }
-    
-    func initializeForBluemix(appName appName: String?, apiKey: String?, deviceEvents: DeviceEvent...)
 }
 
 
