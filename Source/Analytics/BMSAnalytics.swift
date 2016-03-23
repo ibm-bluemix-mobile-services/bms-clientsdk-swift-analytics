@@ -24,9 +24,15 @@ public class BMSAnalytics {
     
     // MARK: Properties (public)
     
+    /// The name of the iOS/WatchOS app
+    public private(set) static var appName: String?
+    
+    /// The unique ID used to send logs to the Analytics server
+    public private(set) static var apiKey: String?
+    
     /// Identifies the current application user.
     /// To reset the userId, set the value to nil.
-    public static var userIdentity: String? = Analytics.deviceId {
+    public static var userIdentity: String? = BMSAnalytics.deviceId {
         didSet {
             if userIdentity != nil {
                 
@@ -44,12 +50,12 @@ public class BMSAnalytics {
                 }
                 else {
                     Analytics.logger.warn("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
-                    userIdentity = Analytics.deviceId
+                    userIdentity = BMSAnalytics.deviceId
                 }
             }
             else {
                 // If the user sets to nil, change the value back to the deviceId
-                userIdentity = Analytics.deviceId
+                userIdentity = BMSAnalytics.deviceId
             }
         }
     }
@@ -102,23 +108,23 @@ public class BMSAnalytics {
     */
     public static func initializeForBluemix(appName appName: String?, apiKey: String?, deviceEvents: DeviceEvent...) {
 
-        Analytics.appName = appName
+        BMSAnalytics.appName = appName
 
         if apiKey != nil {
-            Analytics.apiKey = apiKey
+            BMSAnalytics.apiKey = apiKey
         }
         
         // Register the LogRecorder so that logs can start being stored on the device
-        Logger.delegate = LogRecorder()
+        Logger.delegate = BMSLogger()
         
-        Logger.startCapturingUncaughtExceptions()
+        BMSLogger.startCapturingUncaughtExceptions()
         
         // Registering device events
         for event in deviceEvents {
             switch event {
             case .LIFECYCLE:
                 #if os(iOS)
-                    Analytics.startRecordingApplicationLifecycle()
+                    BMSAnalytics.startRecordingApplicationLifecycle()
                 #else
                     Analytics.logger.warn("The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
                 #endif
@@ -128,7 +134,7 @@ public class BMSAnalytics {
         // Package analytics metadata in a header for each request
         // Outbound request metadata is identical for all requests made on the same device from the same app
         if BMSClient.sharedInstance.bluemixRegion != nil {
-            Request.requestAnalyticsData = Analytics.generateOutboundRequestMetadata()
+            Request.requestAnalyticsData = BMSAnalytics.generateOutboundRequestMetadata()
         }
         else {
             Analytics.logger.warn("Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
@@ -147,11 +153,11 @@ public class BMSAnalytics {
         
         // If this method is called before logSessionEnd() gets called, exit early so that the original startTime and metadata from the previous session start do not get discarded.
         guard lifecycleEvents.isEmpty else {
-            logger.info("A new session is starting before previous session ended. Data for this new session will be discarded.")
+            Analytics.logger.info("A new session is starting before previous session ended. Data for this new session will be discarded.")
             return
         }
         
-        Analytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
+        BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
         lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
     }
     
@@ -165,8 +171,8 @@ public class BMSAnalytics {
         // If logSessionStart() has not been called yet, the app session is ending before it starts.
         //      This may occur if the app crashes while launching. In this case, set the session duration to 0.
         var sessionDuration: Int64 = 0
-        if !lifecycleEvents.isEmpty && Analytics.startTime > 0 {
-            sessionDuration = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) - Analytics.startTime
+        if !lifecycleEvents.isEmpty && BMSAnalytics.startTime > 0 {
+            sessionDuration = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) - BMSAnalytics.startTime
         }
         
         lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
@@ -174,7 +180,7 @@ public class BMSAnalytics {
         lifecycleEvents[Constants.Metadata.Analytics.duration] = Int(sessionDuration)
         
         // Let the Analytics service know how the app was last closed
-        if Logger.exceptionHasBeenCalled {
+        if BMSLogger.exceptionHasBeenCalled {
             lifecycleEvents[Constants.Metadata.Analytics.closedBy] = AppClosedBy.CRASH.rawValue
             Logger.isUncaughtExceptionDetected = true
         }
@@ -183,10 +189,10 @@ public class BMSAnalytics {
             Logger.isUncaughtExceptionDetected = false
         }
         
-        logger.analytics(lifecycleEvents)
+        Analytics.log(lifecycleEvents)
         
         lifecycleEvents = [:]
-        Analytics.startTime = 0
+        BMSAnalytics.startTime = 0
     }
     
     
@@ -210,15 +216,15 @@ public class BMSAnalytics {
         var osVersion = "", model = "", deviceId = ""
         
         #if os(iOS)
-            (osVersion, model, deviceId) = Analytics.getiOSDeviceInfo()
+            (osVersion, model, deviceId) = BMSAnalytics.getiOSDeviceInfo()
             requestMetadata["os"] = "iOS"
         #elseif os(watchOS)
-            (osVersion, model, deviceId) = Analytics.getWatchOSDeviceInfo()
+            (osVersion, model, deviceId) = BMSAnalytics.getWatchOSDeviceInfo()
             requestMetadata["os"] = "watchOS"
         #endif
         
         // deviceId is the default value for Analytics.userId
-        Analytics.deviceId = deviceId
+        BMSAnalytics.deviceId = deviceId
 
         requestMetadata["brand"] = "Apple"
         requestMetadata["osVersion"] = osVersion
@@ -286,8 +292,8 @@ private enum AppClosedBy: String {
 internal extension Analytics {
     
     internal static func uninitialize() {
-        Analytics.apiKey = nil
-        Analytics.appName = nil
+        BMSAnalytics.apiKey = nil
+        BMSAnalytics.appName = nil
         NSSetUncaughtExceptionHandler(nil)
     }
 }

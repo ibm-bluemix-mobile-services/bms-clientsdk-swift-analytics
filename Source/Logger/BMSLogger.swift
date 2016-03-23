@@ -33,7 +33,7 @@ public class BMSLogger {
     
     // By default, the dateFormater will convert to the local time zone, but we want to send the date based on UTC
     // so that logs from all clients in all timezones are normalized to the same GMT timezone.
-    internal static let dateFormatter: NSDateFormatter = Logger.generateDateFormatter()
+    internal static let dateFormatter: NSDateFormatter = BMSLogger.generateDateFormatter()
     
     private static func generateDateFormatter() -> NSDateFormatter {
         
@@ -75,14 +75,14 @@ public class BMSLogger {
         
         NSSetUncaughtExceptionHandler { (caughtException: NSException) -> Void in
             
-            if (!Logger.exceptionHasBeenCalled) {
+            if (!BMSLogger.exceptionHasBeenCalled) {
                 // Persist a flag so that when the app starts back up, we can see if an exception occurred in the last session
-                Logger.exceptionHasBeenCalled = true
+                BMSLogger.exceptionHasBeenCalled = true
                 
-                Logger.logException(caughtException)
-                Analytics.logSessionEnd()
+                BMSLogger.logException(caughtException)
+                BMSAnalytics.logSessionEnd()
                 
-                Logger.existingUncaughtExceptionHandler?(caughtException)
+                BMSLogger.existingUncaughtExceptionHandler?(caughtException)
             }
         }
     }
@@ -134,23 +134,23 @@ public class BMSLogger {
         }
         
         // Get file names and the dispatch queue needed to access those files
-        let (logFile, logOverflowFile, fileDispatchQueue) = LogRecorder.getFilesForLogLevel(level)
+        let (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFilesForLogLevel(level)
         
         dispatch_group_async(group, fileDispatchQueue) { () -> Void in
             // Check if the log file is larger than the maxLogStoreSize. If so, move the log file to the "overflow" file, and start logging to a new log file. If an overflow file already exists, those logs get overwritten.
-            if LogRecorder.fileLogIsFull(logFile) {
+            if BMSLogger.fileLogIsFull(logFile) {
                 do {
-                    try LogRecorder.moveOldLogsToOverflowFile(logFile, overflowFile: logOverflowFile)
+                    try BMSLogger.moveOldLogsToOverflowFile(logFile, overflowFile: logOverflowFile)
                 }
                 catch let error {
-                    let logFileName = LogRecorder.extractFileNameFromPath(logFile)
+                    let logFileName = BMSLogger.extractFileNameFromPath(logFile)
                     print("Log file \(logFileName) is full but the old logs could not be removed. Try sending the logs. Error: \(error)")
                     return
                 }
             }
             
-            let timeStampString = Logger.dateFormatter.stringFromDate(NSDate())
-            var logAsJsonString = LogRecorder.convertLogToJson(message, level: level, loggerName: loggerName, timeStamp: timeStampString, additionalMetadata: additionalMetadata)
+            let timeStampString = BMSLogger.dateFormatter.stringFromDate(NSDate())
+            var logAsJsonString = BMSLogger.convertLogToJson(message, level: level, loggerName: loggerName, timeStamp: timeStampString, additionalMetadata: additionalMetadata)
             
             guard logAsJsonString != nil else {
                 let errorMessage = "Failed to write logs to file. This is likely because the analytics metadata could not be parsed."
@@ -160,7 +160,7 @@ public class BMSLogger {
             
             logAsJsonString! += "," // Logs must be comma-separated
             
-            LogRecorder.writeToFile(logFile, logMessage: logAsJsonString!, loggerName: loggerName)
+            BMSLogger.writeToFile(logFile, logMessage: logAsJsonString!, loggerName: loggerName)
             
         }
         
@@ -175,19 +175,19 @@ public class BMSLogger {
     // Get the full path to the log file and overflow file, and get the dispatch queue that they need to be operated on.
     internal static func getFilesForLogLevel(level: LogLevel) -> (String, String, dispatch_queue_t) {
         
-        var logFile: String = Logger.logsDocumentPath
-        var logOverflowFile: String = Logger.logsDocumentPath
+        var logFile: String = BMSLogger.logsDocumentPath
+        var logOverflowFile: String = BMSLogger.logsDocumentPath
         var fileDispatchQueue: dispatch_queue_t
         
         if level == LogLevel.Analytics {
             logFile += Constants.File.Analytics.logs
             logOverflowFile += Constants.File.Analytics.overflowLogs
-            fileDispatchQueue = LogRecorder.analyticsFileIOQueue
+            fileDispatchQueue = BMSLogger.analyticsFileIOQueue
         }
         else {
             logFile += Constants.File.Logger.logs
             logOverflowFile += Constants.File.Logger.overflowLogs
-            fileDispatchQueue = LogRecorder.loggerFileIOQueue
+            fileDispatchQueue = BMSLogger.loggerFileIOQueue
         }
         
         return (logFile, logOverflowFile, fileDispatchQueue)
@@ -198,7 +198,7 @@ public class BMSLogger {
     // Logs are actually distributed evenly between a "normal" log file and an "overflow" file, but we only care if the "normal" log file is full (half of the total maxLogStoreSize)
     internal static func fileLogIsFull(logFileName: String) -> Bool {
         
-        if (Logger.fileManager.fileExistsAtPath(logFileName)) {
+        if (BMSLogger.fileManager.fileExistsAtPath(logFileName)) {
             
             do {
                 let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(logFileName)
@@ -207,7 +207,7 @@ public class BMSLogger {
                 }
             }
             catch let error {
-                let logFile = LogRecorder.extractFileNameFromPath(logFileName)
+                let logFile = BMSLogger.extractFileNameFromPath(logFileName)
                 print("Cannot determine the size of file:\(logFile) due to error: \(error). In case the file size is greater than the specified max log storage size, logs will not be written to file.")
             }
         }
@@ -219,10 +219,10 @@ public class BMSLogger {
     // When the log file is full, the old logs are moved to the overflow file to make room for new logs
     internal static func moveOldLogsToOverflowFile(logFile: String, overflowFile: String) throws {
         
-        if Logger.fileManager.fileExistsAtPath(overflowFile) && Logger.fileManager.isDeletableFileAtPath(overflowFile) {
-            try Logger.fileManager.removeItemAtPath(overflowFile)
+        if BMSLogger.fileManager.fileExistsAtPath(overflowFile) && BMSLogger.fileManager.isDeletableFileAtPath(overflowFile) {
+            try BMSLogger.fileManager.removeItemAtPath(overflowFile)
         }
-        try Logger.fileManager.moveItemAtPath(logFile, toPath: overflowFile)
+        try BMSLogger.fileManager.moveItemAtPath(logFile, toPath: overflowFile)
     }
     
     
@@ -253,8 +253,8 @@ public class BMSLogger {
     // Append log message to the end of the log file
     internal static func writeToFile(file: String, logMessage: String, loggerName: String) {
         
-        if !Logger.fileManager.fileExistsAtPath(file) {
-            Logger.fileManager.createFileAtPath(file, contents: nil, attributes: nil)
+        if !BMSLogger.fileManager.fileExistsAtPath(file) {
+            BMSLogger.fileManager.createFileAtPath(file, contents: nil, attributes: nil)
         }
         
         let fileHandle = NSFileHandle(forWritingAtPath: file)
@@ -307,21 +307,21 @@ public class BMSLogger {
         let logSendCallback: MfpCompletionHandler = { (response: Response?, error: NSError?) in
             
             if error == nil && response?.statusCode == 201 {
-                Logger.internalLogger.debug("Client logs successfully sent to the server.")
+                BMSLogger.internalLogger.debug("Client logs successfully sent to the server.")
                 
                 deleteFile(Constants.File.Logger.outboundLogs)
                 // Remove the uncaught exception flag since the logs containing the exception(s) have just been sent to the server
                 NSUserDefaults.standardUserDefaults().setBool(false, forKey: Constants.uncaughtException)
             }
             else {
-                Logger.internalLogger.error("Request to send client logs has failed.")
+                BMSLogger.internalLogger.error("Request to send client logs has failed.")
             }
             
             userCallback?(response, error)
         }
         
         // Use a serial queue to ensure that the same logs do not get sent more than once
-        dispatch_async(LogSender.sendLogsToServerQueue) { () -> Void in
+        dispatch_async(BMSLogger.sendLogsToServerQueue) { () -> Void in
             do {
                 // Gather the logs and put them in a JSON object
                 let logsToSend: String? = try getLogs(fileName: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
@@ -331,7 +331,7 @@ public class BMSLogger {
                     logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
                 }
                 else {
-                    Logger.internalLogger.info("There are no logs to send.")
+                    BMSLogger.internalLogger.info("There are no logs to send.")
                 }
                 
                 // Send the request, even if there are no logs to send (to keep track of device info)
@@ -365,7 +365,7 @@ public class BMSLogger {
         }
         
         // Use a serial queue to ensure that the same analytics data do not get sent more than once
-        dispatch_async(LogSender.sendAnalyticsToServerQueue) { () -> Void in
+        dispatch_async(BMSLogger.sendAnalyticsToServerQueue) { () -> Void in
             do {
                 // Gather the logs and put them in a JSON object
                 let logsToSend: String? = try getLogs(fileName: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
@@ -414,7 +414,7 @@ public class BMSLogger {
             return Request(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
         }
         else {
-            Logger.internalLogger.error("Failed to send logs because the client was not yet initialized. Make sure that either the BMSClient class has been initialized.")
+            BMSLogger.internalLogger.error("Failed to send logs because the client was not yet initialized. Make sure that either the BMSClient class has been initialized.")
             return nil
         }
     }
@@ -423,7 +423,7 @@ public class BMSLogger {
     // If this is reached, the user most likely failed to initialize BMSClient or Analytics
     internal static func returnInitializationError(uninitializedClass: String, missingValue: String, callback: MfpCompletionHandler) {
         
-        Logger.internalLogger.error("No value found for the \(uninitializedClass) \(missingValue) property.")
+        BMSLogger.internalLogger.error("No value found for the \(uninitializedClass) \(missingValue) property.")
         let errorMessage = "Must initialize \(uninitializedClass) before sending logs to the server."
         
         var errorCode: Int
@@ -445,27 +445,27 @@ public class BMSLogger {
     // Read the logs from file, move them to the "send" buffer file, and return the logs
     internal static func getLogs(fileName fileName: String, overflowFileName: String, bufferFileName: String) throws -> String? {
         
-        let logFile = Logger.logsDocumentPath + fileName // Original log file
-        let overflowLogFile = Logger.logsDocumentPath + overflowFileName // Extra file in case original log file got full
-        let bufferLogFile = Logger.logsDocumentPath + bufferFileName // Temporary file for sending logs
+        let logFile = BMSLogger.logsDocumentPath + fileName // Original log file
+        let overflowLogFile = BMSLogger.logsDocumentPath + overflowFileName // Extra file in case original log file got full
+        let bufferLogFile = BMSLogger.logsDocumentPath + bufferFileName // Temporary file for sending logs
         
         // First check if the "*.log.send" buffer file already contains logs. This will be the case if the previous attempt to send logs failed.
-        if Logger.fileManager.isReadableFileAtPath(bufferLogFile) {
+        if BMSLogger.fileManager.isReadableFileAtPath(bufferLogFile) {
             return try readLogsFromFile(bufferLogFile)
         }
-        else if Logger.fileManager.isReadableFileAtPath(logFile) {
+        else if BMSLogger.fileManager.isReadableFileAtPath(logFile) {
             // Merge the logs from the normal log file and the overflow log file (if necessary)
-            if Logger.fileManager.isReadableFileAtPath(overflowLogFile) {
+            if BMSLogger.fileManager.isReadableFileAtPath(overflowLogFile) {
                 let fileContents = try NSString(contentsOfFile: overflowLogFile, encoding: NSUTF8StringEncoding) as String
-                LogRecorder.writeToFile(logFile, logMessage: fileContents, loggerName: Logger.internalLogger.name)
+                BMSLogger.writeToFile(logFile, logMessage: fileContents, loggerName: BMSLogger.internalLogger.name)
             }
             
             // Since the buffer log is empty, we move the log file to the buffer file in preparation of sending the logs. When new logs are recorded, a new log file gets created to replace it.
-            try Logger.fileManager.moveItemAtPath(logFile, toPath: bufferLogFile)
+            try BMSLogger.fileManager.moveItemAtPath(logFile, toPath: bufferLogFile)
             return try readLogsFromFile(bufferLogFile)
         }
         else {
-            Logger.internalLogger.error("Cannot send data to server. Unable to read file: \(fileName).")
+            BMSLogger.internalLogger.error("Cannot send data to server. Unable to read file: \(fileName).")
             return nil
         }
     }
@@ -474,8 +474,8 @@ public class BMSLogger {
     // We should only be sending logs from a buffer file, which is a copy of the normal log file. This way, if the logs fail to get sent to the server, we can hold onto them until the send succeeds, while continuing to log to the normal log file.
     internal static func readLogsFromFile(bufferLogFile: String) throws -> String? {
         
-        let analyticsOutboundLogs: String = Logger.logsDocumentPath + Constants.File.Analytics.outboundLogs
-        let loggerOutboundLogs: String = Logger.logsDocumentPath + Constants.File.Logger.outboundLogs
+        let analyticsOutboundLogs: String = BMSLogger.logsDocumentPath + Constants.File.Analytics.outboundLogs
+        let loggerOutboundLogs: String = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
         
         
         var fileContents: String?
@@ -484,15 +484,15 @@ public class BMSLogger {
             // Before sending the logs, we need to read them from the file. This is done in a serial dispatch queue to prevent conflicts if the log file is simulatenously being written to.
             switch bufferLogFile {
             case analyticsOutboundLogs:
-                try dispatch_sync_throwable(LogRecorder.analyticsFileIOQueue, block: { () -> () in
+                try dispatch_sync_throwable(BMSLogger.analyticsFileIOQueue, block: { () -> () in
                     fileContents = try NSString(contentsOfFile: bufferLogFile, encoding: NSUTF8StringEncoding) as String
                 })
             case loggerOutboundLogs:
-                try dispatch_sync_throwable(LogRecorder.loggerFileIOQueue, block: { () -> () in
+                try dispatch_sync_throwable(BMSLogger.loggerFileIOQueue, block: { () -> () in
                     fileContents = try NSString(contentsOfFile: bufferLogFile, encoding: NSUTF8StringEncoding) as String
                 })
             default:
-                Logger.internalLogger.error("Cannot send data to server. Unrecognized file: \(bufferLogFile).")
+                BMSLogger.internalLogger.error("Cannot send data to server. Unrecognized file: \(bufferLogFile).")
             }
         }
         
@@ -503,14 +503,14 @@ public class BMSLogger {
     // For deleting files where only the file name is supplied, not the full path
     internal static func deleteFile(fileName: String) {
         
-        let pathToFile = Logger.logsDocumentPath + fileName
+        let pathToFile = BMSLogger.logsDocumentPath + fileName
         
-        if Logger.fileManager.fileExistsAtPath(pathToFile) && Logger.fileManager.isDeletableFileAtPath(pathToFile) {
+        if BMSLogger.fileManager.fileExistsAtPath(pathToFile) && BMSLogger.fileManager.isDeletableFileAtPath(pathToFile) {
             do {
-                try Logger.fileManager.removeItemAtPath(pathToFile)
+                try BMSLogger.fileManager.removeItemAtPath(pathToFile)
             }
             catch let error {
-                Logger.internalLogger.error("Failed to delete log file \(fileName) after sending. Error: \(error)")
+                BMSLogger.internalLogger.error("Failed to delete log file \(fileName) after sending. Error: \(error)")
             }
         }
     }
