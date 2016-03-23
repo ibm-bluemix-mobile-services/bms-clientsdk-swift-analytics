@@ -18,30 +18,6 @@ import WatchKit
 public extension BMSAnalytics {
     
     
-    /**
-        Starts a timer to record the length of time the WatchOS app is being used before becoming inactive.
-        This event will be recorded and sent to the Analytics console, provided that the `Analytics.enabled` property is set to `true`.
-        
-        This should be called in the `ExtensionDelegate applicationDidBecomeActive` method.
-    */
-    public static func recordApplicationDidBecomeActive() {
-        
-        Analytics.logSessionStart()
-    }
-    
-    
-    /**
-        Ends the timer started by the `Analytics startRecordingApplicationLifecycleEvents` method.
-        This event will be recorded and sent to the Analytics console, provided that the `Analytics.enabled` property is set to `true`.
-        
-        This should be called in the `ExtensionDelegate applicationWillResignActive` method.
-    */
-    public static func recordApplicationWillResignActive() {
-        
-        Analytics.logSessionEnd()
-    }
-    
-    
     internal static func getWatchOSDeviceInfo() -> (String, String, String) {
         
         var osVersion = "", model = "", deviceId = ""

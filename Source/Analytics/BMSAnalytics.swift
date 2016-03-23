@@ -17,34 +17,12 @@ import BMSAnalyticsSpec
 
 
 /**
-    Set of device events that the `Analytics` class will listen for. Whenever an event of the specified type occurs, analytics data for that event get recorded.
- 
-    - Note: Register DeviceEvents in the `Analytics.initializeWithAppName()` method
-*/
-public enum DeviceEvent {
-    
-    /// Records the duration of the app's lifecycle from when it enters the foreground to when it goes to the background.
-    /// - Note: Only available for iOS apps. For watchOS apps, manually call the `recordApplicationDidBecomeActive()` and `recordApplicationWillResignActive()` methods in the appropriate `ExtensionDelegate` methods.
-    case LIFECYCLE
-}
-
-
-/**
-    `Analytics` provides a means of capturing analytics data and sending the data to the mobile analytics service.
+    `BMSAnalytics` provides the internal implementation of the BMSAnalyticsSpec `Analytics` API.
 */
 public class BMSAnalytics {
     
     
     // MARK: Properties (public)
-    
-    /// Determines whether analytics logs will be persisted to file.
-    public static var enabled: Bool = true
-    
-    /// The unique ID used to send logs to the Analytics server
-    public private(set) static var apiKey: String?
-    
-    /// The name of the iOS/WatchOS app
-    public private(set) static var appName: String?
     
     /// Identifies the current application user.
     /// To reset the userId, set the value to nil.
@@ -79,8 +57,6 @@ public class BMSAnalytics {
     
 
     // MARK: Properties (internal/private)
-
-    internal static let logger = Logger.loggerForName(Constants.Package.analytics)
     
     // Stores metadata (including a duration timer) for each app session
     // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)
@@ -160,36 +136,8 @@ public class BMSAnalytics {
     }
     
     
-    /**
-        Write analytics data to file. 
     
-        Similar to the `Logger` class logging methods, old logs will be removed if the file size exceeds the `Logger.maxLogStoreSize` property.
-    
-        When ready, use the `Analytics.send()` method to send the logs to the Bluemix server.
-    
-         - parameter metadata:  The analytics data
-    */
-    public static func log(metadata: [String: AnyObject]) {
-        
-        logger.analytics(metadata)
-    }
-    
-    
-    /**
-        Send the accumulated analytics logs to the Bluemix server.
-    
-        Analytics logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
-        
-        - parameter completionHandler:  Optional callback containing the results of the send request
-    */
-    public static func send(completionHandler userCallback: MfpCompletionHandler? = nil) {
-        
-        LogSender.sendAnalytics(completionHandler: userCallback)
-    }
-    
-    
-    
-    // MARK: Sessions
+    // MARK: - App sessions
     
     // Log that the app is starting a new session, and start a timer to record the session duration
     // This method should be called when the app starts up.
@@ -249,7 +197,7 @@ public class BMSAnalytics {
     
     
     
-    // MARK: Request analytics
+    // MARK: - Request analytics
     
     // Create a JSON string containing device/app data for the Analytics server to use
     // This data gets added to a Request header

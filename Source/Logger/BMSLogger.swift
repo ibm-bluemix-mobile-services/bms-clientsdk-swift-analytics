@@ -16,19 +16,10 @@ import BMSCore
 import BMSAnalyticsSpec
 
 
+/**
+    `BMSLogger` provides the internal implementation of the BMSAnalyticsSpec `Logger` API.
+ */
 public class BMSLogger {
-
-    
-    // MARK: Properties (API)
-    
-    /// Determines whether logs get written to file on the client device.
-    /// Must be set to `true` to be able to send logs to the Bluemix server.
-    public static var logStoreEnabled: Bool = false
-    
-    /// The maximum file size (in bytes) for log storage.
-    /// Both the Analytics and Logger log files are limited by `maxLogStoreSize`.
-    public static var maxLogStoreSize: UInt64 = Constants.File.defaultMaxSize
-    
     
     
     // MARK: Properties (internal/private)
@@ -58,32 +49,6 @@ public class BMSLogger {
     internal static let logsDocumentPath: String = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/"
     
     internal static let fileManager = NSFileManager.defaultManager()
-    
-    
-    
-    // MARK: Methods (API)
-    
-    /**
-        Send the accumulated logs to the Bluemix server.
-        
-        Logger logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
-        
-        - parameter completionHandler:  Optional callback containing the results of the send request
-    */
-    public static func send(completionHandler userCallback: MfpCompletionHandler? = nil) {
-     
-        LogSender.send(completionHandler: userCallback)
-    }
-
-    
-    
-    // MARK: Log methods (helpers)
-    
-    // Equivalent to the other log methods, but this method accepts data as JSON rather than a string
-    internal func analytics(metadata: [String: AnyObject], file: String = __FILE__, function: String = __FUNCTION__, line: Int = __LINE__) {
-        
-        logMessage("", level: LogLevel.Analytics, calledFile: file, calledFunction: function, calledLineNumber: line, additionalMetadata: metadata)
-    }
     
     
     
