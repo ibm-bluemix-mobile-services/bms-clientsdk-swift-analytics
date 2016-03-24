@@ -18,7 +18,7 @@ import BMSAnalyticsSpec
 @testable import MFPAnalytics
 
 
-class LoggerTests: XCTestCase {
+class BMSLoggerTests: XCTestCase {
     
     
     override func tearDown() {
@@ -83,13 +83,13 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
 
-        guard let formattedContents = LoggerTests.getFileContents(pathToFile) else {
+        guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
             return
         }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -147,13 +147,13 @@ class LoggerTests: XCTestCase {
         loggerInstance.fatal("StephenColbert")
     
         
-        guard let formattedContents = LoggerTests.getFileContents(pathToFile) else {
+        guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
             return
         }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -280,7 +280,7 @@ class LoggerTests: XCTestCase {
         
         BMSLogger.logException(e)
         
-        guard let formattedContents = LoggerTests.getFileContents(pathToFile) else {
+        guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
             return
         }
@@ -288,7 +288,7 @@ class LoggerTests: XCTestCase {
         let reason = e.reason!
         let errorMessage = "Uncaught Exception: \(e.name)." + " Reason: \(reason)."
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -378,7 +378,7 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        guard let logs: String = LoggerTests.getLogs(LogFileType.LOGGER) else {
+        guard let logs: String = BMSLoggerTests.getLogs(LogFileType.LOGGER) else {
             XCTFail()
             return
         }
@@ -388,7 +388,7 @@ class LoggerTests: XCTestCase {
         let fileContents = "[\(logs)]"
         
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -450,7 +450,7 @@ class LoggerTests: XCTestCase {
         
         Analytics.log(meta)
         
-        guard let logs: String = LoggerTests.getLogs(LogFileType.ANALYTICS) else {
+        guard let logs: String = BMSLoggerTests.getLogs(LogFileType.ANALYTICS) else {
             XCTFail()
             return
         }
@@ -462,7 +462,7 @@ class LoggerTests: XCTestCase {
         let fileContents = "[\(logs)]"
         
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -498,7 +498,7 @@ class LoggerTests: XCTestCase {
         let path = bundle.pathForResource("LargeData", ofType: "txt")
         
         let loggerInstance = Logger.loggerForName(fakePKG)
-        guard let largeData = LoggerTests.getFileContents(path!) else {
+        guard let largeData = BMSLoggerTests.getFileContents(path!) else {
             XCTFail()
             return
         }
@@ -516,13 +516,13 @@ class LoggerTests: XCTestCase {
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToOverflow))
         
-        guard let formattedContents = LoggerTests.getFileContents(pathToFile) else {
+        guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
             return
         }
         var fileContents = "[\(formattedContents)]"
         var logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -551,13 +551,13 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.timestamp] != nil)
         XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.level] == "FATAL")
         
-        guard let newFormattedContents = LoggerTests.getFileContents(pathToOverflow) else {
+        guard let newFormattedContents = BMSLoggerTests.getFileContents(pathToOverflow) else {
             XCTFail()
             return
         }
         fileContents = "[\(newFormattedContents)]"
         logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let newJsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let newJsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -592,7 +592,7 @@ class LoggerTests: XCTestCase {
         let bundle = NSBundle(forClass: self.dynamicType)
         let path = bundle.pathForResource("LargeData", ofType: "txt")
         
-        guard let largeData = LoggerTests.getFileContents(path!) else {
+        guard let largeData = BMSLoggerTests.getFileContents(path!) else {
             XCTFail()
             return
         }
@@ -613,7 +613,7 @@ class LoggerTests: XCTestCase {
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToOverflow))
         
-        guard let formattedContents = LoggerTests.getFileContents(pathToOverflow) else {
+        guard let formattedContents = BMSLoggerTests.getFileContents(pathToOverflow) else {
             XCTFail()
             return
         }
@@ -621,7 +621,7 @@ class LoggerTests: XCTestCase {
         
         var fileContents = "[\(formattedContents)]"
         var logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -631,13 +631,13 @@ class LoggerTests: XCTestCase {
         loggerInstance.debug(largeData)
         
         
-        guard let newFormattedContents = LoggerTests.getFileContents(pathToOverflow) else {
+        guard let newFormattedContents = BMSLoggerTests.getFileContents(pathToOverflow) else {
             XCTFail()
             return
         }
         fileContents = "[\(newFormattedContents)]"
         logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let newJsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let newJsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -732,7 +732,7 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        guard let _ = LoggerTests.getLogs(LogFileType.LOGGER) else {
+        guard let _ = BMSLoggerTests.getLogs(LogFileType.LOGGER) else {
             XCTFail()
             return
         }
@@ -744,14 +744,14 @@ class LoggerTests: XCTestCase {
         
         XCTAssertNil(request)
         
-        guard let formattedContents = LoggerTests.getFileContents(pathToFile) else {
+        guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
             return
         }
         let fileContents = "[\(formattedContents)]"
         let logDict  = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
         
-        guard let newJsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let newJsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }
@@ -833,7 +833,7 @@ class LoggerTests: XCTestCase {
         
         loggerInstance.debug("Hello world")
         
-        guard let logs: String = LoggerTests.getLogs(LogFileType.LOGGER) else {
+        guard let logs: String = BMSLoggerTests.getLogs(LogFileType.LOGGER) else {
             XCTFail()
             return
         }
@@ -884,7 +884,7 @@ class LoggerTests: XCTestCase {
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
         
-        guard let _ = LoggerTests.getLogs(LogFileType.LOGGER) else {
+        guard let _ = BMSLoggerTests.getLogs(LogFileType.LOGGER) else {
             XCTFail()
             return
         }

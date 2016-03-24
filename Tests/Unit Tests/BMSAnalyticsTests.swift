@@ -18,7 +18,7 @@ import BMSAnalyticsSpec
 @testable import MFPAnalytics
 
 
-class AnalyticsTests: XCTestCase {
+class BMSAnalyticsTests: XCTestCase {
     
     override func tearDown() {
         BMSAnalytics.lifecycleEvents = [:]
@@ -318,13 +318,13 @@ class AnalyticsTests: XCTestCase {
         
         Analytics.log(meta)
         
-        guard let formattedContents = LoggerTests.getFileContents(pathToFile) else {
+        guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
             return
         }
         let fileContents = "[\(formattedContents)]"
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
-        guard let jsonDict = LoggerTests.convertLogsToJson(logDict) else {
+        guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()
             return
         }

@@ -24,8 +24,8 @@
 		9221C0461C4ED9AF007FA9D0 /* BMSAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0431C4ED9AF007FA9D0 /* BMSAnalytics.swift */; };
 		9221C0481C4ED9AF007FA9D0 /* BMSAnalytics+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0441C4ED9AF007FA9D0 /* BMSAnalytics+iOS.swift */; };
 		9221C04D1C4ED9BC007FA9D0 /* BMSLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04C1C4ED9BC007FA9D0 /* BMSLogger.swift */; };
-		9221C0501C4ED9CF007FA9D0 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04F1C4ED9CF007FA9D0 /* LoggerTests.swift */; };
-		9221C0521C4EDA9C007FA9D0 /* AnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0511C4EDA9C007FA9D0 /* AnalyticsTests.swift */; };
+		9221C0501C4ED9CF007FA9D0 /* BMSLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C04F1C4ED9CF007FA9D0 /* BMSLoggerTests.swift */; };
+		9221C0521C4EDA9C007FA9D0 /* BMSAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0511C4EDA9C007FA9D0 /* BMSAnalyticsTests.swift */; };
 		9221C0541C4EDACC007FA9D0 /* LargeData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9221C0531C4EDACC007FA9D0 /* LargeData.txt */; };
 		9221C0DC1C4EE159007FA9D0 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9221C0DB1C4EE159007FA9D0 /* Error.swift */; };
 		926CF8191C4ECC330084355B /* MFPAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 926CF80E1C4ECC330084355B /* MFPAnalytics.framework */; };
@@ -240,8 +240,8 @@
 		9221C0441C4ED9AF007FA9D0 /* BMSAnalytics+iOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BMSAnalytics+iOS.swift"; sourceTree = "<group>"; };
 		9221C0451C4ED9AF007FA9D0 /* BMSAnalytics+watchOS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BMSAnalytics+watchOS.swift"; sourceTree = "<group>"; };
 		9221C04C1C4ED9BC007FA9D0 /* BMSLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMSLogger.swift; sourceTree = "<group>"; };
-		9221C04F1C4ED9CF007FA9D0 /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
-		9221C0511C4EDA9C007FA9D0 /* AnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsTests.swift; sourceTree = "<group>"; };
+		9221C04F1C4ED9CF007FA9D0 /* BMSLoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMSLoggerTests.swift; sourceTree = "<group>"; };
+		9221C0511C4EDA9C007FA9D0 /* BMSAnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMSAnalyticsTests.swift; sourceTree = "<group>"; };
 		9221C0531C4EDACC007FA9D0 /* LargeData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LargeData.txt; sourceTree = "<group>"; };
 		9221C0DB1C4EE159007FA9D0 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9221C0E21C5030CC007FA9D0 /* BMSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BMSCore.framework; path = "Pods/../build/Debug-watchos/Pods-BMSAnalyticsWatchOS/BMSCore.framework"; sourceTree = "<group>"; };
@@ -533,8 +533,8 @@
 		9221C0251C4ED26F007FA9D0 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
-				9221C0511C4EDA9C007FA9D0 /* AnalyticsTests.swift */,
-				9221C04F1C4ED9CF007FA9D0 /* LoggerTests.swift */,
+				9221C0511C4EDA9C007FA9D0 /* BMSAnalyticsTests.swift */,
+				9221C04F1C4ED9CF007FA9D0 /* BMSLoggerTests.swift */,
 				9221C0271C4ED26F007FA9D0 /* Resources */,
 			);
 			path = "Unit Tests";
@@ -1355,8 +1355,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9221C0521C4EDA9C007FA9D0 /* AnalyticsTests.swift in Sources */,
-				9221C0501C4ED9CF007FA9D0 /* LoggerTests.swift in Sources */,
+				9221C0521C4EDA9C007FA9D0 /* BMSAnalyticsTests.swift in Sources */,
+				9221C0501C4ED9CF007FA9D0 /* BMSLoggerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
