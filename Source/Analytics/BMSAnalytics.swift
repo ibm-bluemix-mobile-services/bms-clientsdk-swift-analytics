@@ -290,7 +290,7 @@ private enum AppClosedBy: String {
 
 
 // For unit testing only
-internal extension Analytics {
+internal extension BMSAnalytics {
     
     internal static func uninitialize() {
         BMSAnalytics.apiKey = nil

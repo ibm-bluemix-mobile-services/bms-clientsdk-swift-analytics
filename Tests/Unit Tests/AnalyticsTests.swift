@@ -21,9 +21,9 @@ import BMSAnalyticsSpec
 class AnalyticsTests: XCTestCase {
     
     override func tearDown() {
-        Analytics.lifecycleEvents = [:]
-        Analytics.startTime = 0
-        Analytics.uninitialize()
+        BMSAnalytics.lifecycleEvents = [:]
+        BMSAnalytics.startTime = 0
+        BMSAnalytics.uninitialize()
         
         Request.requestAnalyticsData = nil
     }
@@ -31,33 +31,33 @@ class AnalyticsTests: XCTestCase {
 
     func testinitializeForBluemix() {
      
-        XCTAssertNil(Analytics.apiKey)
-        XCTAssertNil(Analytics.appName)
+        XCTAssertNil(BMSAnalytics.apiKey)
+        XCTAssertNil(BMSAnalytics.appName)
         
-        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
-        XCTAssertEqual(Analytics.apiKey, "1234")
-        XCTAssertEqual(Analytics.appName, "Unit Test App")
+        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
+        XCTAssertEqual(BMSAnalytics.apiKey, "1234")
+        XCTAssertEqual(BMSAnalytics.appName, "Unit Test App")
     }
     
     
     func testInitializeWithAppNameWithBmsClientInitialized() {
         
-        XCTAssertNil(Analytics.apiKey)
-        XCTAssertNil(Analytics.appName)
+        XCTAssertNil(BMSAnalytics.apiKey)
+        XCTAssertNil(BMSAnalytics.appName)
         XCTAssertNil(Request.requestAnalyticsData)
         
         BMSClient.sharedInstance.initializeWithBluemixAppRoute("http://example.com", bluemixAppGUID: "1234", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
+        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
         
-        XCTAssertEqual(Analytics.apiKey, "1234")
-        XCTAssertEqual(Analytics.appName, "Unit Test App")
+        XCTAssertEqual(BMSAnalytics.apiKey, "1234")
+        XCTAssertEqual(BMSAnalytics.appName, "Unit Test App")
         XCTAssertNotNil(Request.requestAnalyticsData)
     }
     
     
     func testInitializeWithAppNameRegistersUncaughtExceptionHandler() {
         
-        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
+        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
         XCTAssertNotNil(NSGetUncaughtExceptionHandler())
     }
     
@@ -66,21 +66,21 @@ class AnalyticsTests: XCTestCase {
         
         let referenceTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000)
         
-        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
         
-        // When registering LIFECYCLE events, the Analytics.logSessionStart() method should get called immediately, assigning a new value to Analytics.startTime and Analytics.lifecycleEvents
-        XCTAssertTrue(Analytics.startTime >= referenceTime)
+        // When registering LIFECYCLE events, the BMSAnalytics.logSessionStart() method should get called immediately, assigning a new value to BMSAnalytics.startTime and BMSAnalytics.lifecycleEvents
+        XCTAssertTrue(BMSAnalytics.startTime >= referenceTime)
     }
     
 
     func testLogSessionStartTwiceDoesNothing() {
         
-        XCTAssertTrue(Analytics.lifecycleEvents.isEmpty)
-        XCTAssertEqual(Analytics.startTime, 0)
+        XCTAssertTrue(BMSAnalytics.lifecycleEvents.isEmpty)
+        XCTAssertEqual(BMSAnalytics.startTime, 0)
         
-        Analytics.logSessionStart()
+        BMSAnalytics.logSessionStart()
         
-        let firstSessionStartTime = Analytics.startTime
+        let firstSessionStartTime = BMSAnalytics.startTime
         XCTAssert(firstSessionStartTime > 0)
         
         let newSessionExpectation = expectationWithDescription("New session start time")
@@ -92,8 +92,8 @@ class AnalyticsTests: XCTestCase {
         }
 
         waitForExpectationsWithTimeout(0.01) { (error: NSError?) -> Void in
-            Analytics.logSessionStart()
-            let secondSessionStartTime = Analytics.startTime
+            BMSAnalytics.logSessionStart()
+            let secondSessionStartTime = BMSAnalytics.startTime
             
             XCTAssertTrue(secondSessionStartTime == firstSessionStartTime)
         }
@@ -101,26 +101,26 @@ class AnalyticsTests: XCTestCase {
     
     
     /**
-        1) Call logSessionStart(), which should update Analytics.lifecycleEvents.
-        2) Call logSessionEnd(). This should reset Analytics.lifecycleEvents by removing the session ID.
-        3) Call logSessionStart() again. This should cause Analytics.lifecycleEvents to be updated:
+        1) Call logSessionStart(), which should update BMSAnalytics.lifecycleEvents.
+        2) Call logSessionEnd(). This should reset BMSAnalytics.lifecycleEvents by removing the session ID.
+        3) Call logSessionStart() again. This should cause BMSAnalytics.lifecycleEvents to be updated:
             - The original start time should be replaced with the new start time.
             - The session (TAG_CATEGORY_APP_SESSION) is a unique ID that should contain a different value each time logSessionStart()
                 is called.
      */
     func testLogSessionAfterCompleteSession() {
         
-        XCTAssertTrue(Analytics.lifecycleEvents.isEmpty)
-        XCTAssertEqual(Analytics.startTime, 0)
+        XCTAssertTrue(BMSAnalytics.lifecycleEvents.isEmpty)
+        XCTAssertEqual(BMSAnalytics.startTime, 0)
         
-        Analytics.logSessionStart()
+        BMSAnalytics.logSessionStart()
         
-        let firstSessionStartTime = Analytics.startTime
+        let firstSessionStartTime = BMSAnalytics.startTime
         
-        Analytics.logSessionEnd()
+        BMSAnalytics.logSessionEnd()
         
-        XCTAssertTrue(Analytics.lifecycleEvents.isEmpty)
-        XCTAssertEqual(Analytics.startTime, 0)
+        XCTAssertTrue(BMSAnalytics.lifecycleEvents.isEmpty)
+        XCTAssertEqual(BMSAnalytics.startTime, 0)
         
         let newSessionExpectation = expectationWithDescription("New session start time")
         
@@ -131,8 +131,8 @@ class AnalyticsTests: XCTestCase {
         }
         
         waitForExpectationsWithTimeout(0.01) { (error: NSError?) -> Void in
-            Analytics.logSessionStart()
-            let secondSessionStartTime = Analytics.startTime
+            BMSAnalytics.logSessionStart()
+            let secondSessionStartTime = BMSAnalytics.startTime
             
             XCTAssertTrue(secondSessionStartTime > firstSessionStartTime)
         }
@@ -145,17 +145,17 @@ class AnalyticsTests: XCTestCase {
      */
     func testlogSessionEndBeforeLogSessionStart() {
         
-        XCTAssertTrue(Analytics.lifecycleEvents.isEmpty)
-        XCTAssertEqual(Analytics.startTime, 0)
+        XCTAssertTrue(BMSAnalytics.lifecycleEvents.isEmpty)
+        XCTAssertEqual(BMSAnalytics.startTime, 0)
         
-        Analytics.logSessionEnd()
+        BMSAnalytics.logSessionEnd()
         
-        XCTAssertTrue(Analytics.lifecycleEvents.isEmpty)
-        XCTAssertEqual(Analytics.startTime, 0)
+        XCTAssertTrue(BMSAnalytics.lifecycleEvents.isEmpty)
+        XCTAssertEqual(BMSAnalytics.startTime, 0)
         
-        Analytics.logSessionStart()
+        BMSAnalytics.logSessionStart()
         
-        let sessionStartTime = Analytics.startTime
+        let sessionStartTime = BMSAnalytics.startTime
         
         XCTAssert(sessionStartTime > 0)
     }
@@ -163,9 +163,9 @@ class AnalyticsTests: XCTestCase {
     
     func testGenerateOutboundRequestMetadata() {
         
-        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
+        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
         
-        guard let outboundMetadata: String = Analytics.generateOutboundRequestMetadata() else {
+        guard let outboundMetadata: String = BMSAnalytics.generateOutboundRequestMetadata() else {
             XCTFail()
             return
         }
@@ -182,12 +182,12 @@ class AnalyticsTests: XCTestCase {
     
     func testGenerateOutboundRequestMetadataWithoutAnalyticsAppName() {
         
-        Analytics.uninitialize()
+        BMSAnalytics.uninitialize()
         
-        let requestMetadata = Analytics.generateOutboundRequestMetadata()
+        let requestMetadata = BMSAnalytics.generateOutboundRequestMetadata()
         
         XCTAssertNotNil(requestMetadata)
-        // Since Analytics has not been initialized, there will be no app name.
+        // Since BMSAnalytics has not been initialized, there will be no app name.
         // In a real app, this should default to the bundle ID. Unit tests have no bundle ID.
         XCTAssert(!requestMetadata!.containsString("mfpAppName"))
     }
@@ -195,12 +195,12 @@ class AnalyticsTests: XCTestCase {
     
     func testAddAnalyticsMetadataToRequestWithAnalyticsAppName() {
         
-        Analytics.initializeForBluemix(appName: "Test app", apiKey: "1234")
+        BMSAnalytics.initializeForBluemix(appName: "Test app", apiKey: "1234")
         
-        let requestMetadata = Analytics.generateOutboundRequestMetadata()
+        let requestMetadata = BMSAnalytics.generateOutboundRequestMetadata()
         
         XCTAssertNotNil(requestMetadata)
-        // Since Analytics has not been initialized, there will be no app name.
+        // Since BMSAnalytics has not been initialized, there will be no app name.
         // In a real app, this should default to the bundle ID. Unit tests have no bundle ID.
         XCTAssert(requestMetadata!.containsString("\"mfpAppName\":\"Test app\""))
     }
@@ -237,7 +237,7 @@ class AnalyticsTests: XCTestCase {
         let urlResponse = NSHTTPURLResponse(URL: NSURL(string: "http://example.com")!, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: ["key": "value"])
         let response = Response(responseData: responseInfo, httpResponse: urlResponse, isRedirect: false)
         
-        let responseMetadata = Analytics.generateInboundResponseMetadata(request, response: response, url: requestUrl)
+        let responseMetadata = BMSAnalytics.generateInboundResponseMetadata(request, response: response, url: requestUrl)
         
         let outboundTime = responseMetadata["$outboundTimestamp"] as? NSTimeInterval
         let inboundTime = responseMetadata["$inboundTimestamp"] as? NSTimeInterval
@@ -262,39 +262,103 @@ class AnalyticsTests: XCTestCase {
         mfpUserDefaults?.removeObjectForKey("deviceId")
         
         // Generate new ID
-        let generatedId = Analytics.uniqueDeviceId
+        let generatedId = BMSAnalytics.uniqueDeviceId
         
         // Since an ID was already created, this method should keep returning the same one
-        let retrievedId = Analytics.uniqueDeviceId
+        let retrievedId = BMSAnalytics.uniqueDeviceId
         XCTAssertEqual(retrievedId, generatedId)
-        let retrievedId2 = Analytics.uniqueDeviceId
+        let retrievedId2 = BMSAnalytics.uniqueDeviceId
         XCTAssertEqual(retrievedId2, generatedId)
     }
     
     
     func testUserIdentityUpdatesCorrectly() {
         
-        XCTAssertNotNil(Analytics.userIdentity)
-        XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)
+        let analyticsInstance = BMSAnalytics()
         
-        Analytics.logSessionStart() // Required for userIdentity data to show up on Analytics console
+        XCTAssertNotNil(analyticsInstance.userIdentity)
+        XCTAssertEqual(analyticsInstance.userIdentity, BMSAnalytics.deviceId)
         
-        Analytics.userIdentity = "test user"
-        XCTAssertEqual(Analytics.userIdentity, "test user")
-        XCTAssertNotEqual(Analytics.userIdentity, Analytics.deviceId)
+        BMSAnalytics.logSessionStart() // Required for userIdentity data to show up on Analytics console
         
-        Analytics.userIdentity = nil
-        XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)
+        analyticsInstance.userIdentity = "test user"
+        XCTAssertEqual(analyticsInstance.userIdentity, "test user")
+        XCTAssertNotEqual(analyticsInstance.userIdentity, BMSAnalytics.deviceId)
+        
+        analyticsInstance.userIdentity = nil
+        XCTAssertEqual(analyticsInstance.userIdentity, BMSAnalytics.deviceId)
     }
+    
     
     func testUserIdentityFailsWithoutSessionId() {
         
-        Analytics.userIdentity = nil
-        Analytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] = nil
+        let analyticsInstance = BMSAnalytics()
         
-        Analytics.userIdentity = "fail"
-        XCTAssertNotEqual(Analytics.userIdentity, "fail")
-        XCTAssertEqual(Analytics.userIdentity, Analytics.deviceId)
+        analyticsInstance.userIdentity = nil
+        BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] = nil
+        
+        analyticsInstance.userIdentity = "fail"
+        XCTAssertNotEqual(analyticsInstance.userIdentity, "fail")
+        XCTAssertEqual(analyticsInstance.userIdentity, BMSAnalytics.deviceId)
     }
+    
+    
+    func testAnalyticsLog(){
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Analytics.logs
+        
+        do {
+            try NSFileManager().removeItemAtPath(pathToFile)
+        } catch {
+            print("Could not delete " + pathToFile)
+        }
+        
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Analytics
+        let meta = ["hello": 1]
+        
+        Analytics.log(meta)
+        
+        guard let formattedContents = LoggerTests.getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
+        let fileContents = "[\(formattedContents)]"
+        let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
+        guard let jsonDict = LoggerTests.convertLogsToJson(logDict) else {
+            XCTFail()
+            return
+        }
+        
+        let debugMessage = jsonDict[0]
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.message] == "")
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.package] == Logger.mfpLoggerPrefix + "analytics")
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.level] == "ANALYTICS")
+        print(debugMessage[Constants.Metadata.Logger.metadata])
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.metadata] == meta)
+    }
+    
+    
+    func testDisableAnalyticsLogging(){
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Analytics.logs
+        
+        do {
+            try NSFileManager().removeItemAtPath(pathToFile)
+        } catch {
+            print("Could not delete " + pathToFile)
+        }
+        
+        Analytics.enabled = false
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Analytics
+        let meta = ["hello": 1]
+        
+        Analytics.log(meta)
+        
+        let fileExists = NSFileManager().fileExistsAtPath(pathToFile)
+        
+        XCTAssertFalse(fileExists)
+    }
+
     
 }
