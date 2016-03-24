@@ -15,6 +15,7 @@
 import UIKit
 import BMSCore
 import MFPAnalytics
+import BMSAnalyticsSpec
 
 
 class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {

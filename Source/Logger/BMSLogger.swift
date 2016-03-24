@@ -302,7 +302,7 @@ public class BMSLogger: LoggerDelegate {
     // MARK: Methods
     
     // Build the request completion handler, extract logs from file, and send logs to the server
-    public func send(completionHandler userCallback: AnyObject? = nil) {
+    public func send(completionHandler userCallback: Any? = nil) {
         
         let logSendCallback: MfpCompletionHandler = { (response: Response?, error: NSError?) in
             
@@ -350,7 +350,7 @@ public class BMSLogger: LoggerDelegate {
     
     
     // Same as the other send() method but for analytics
-    public func sendAnalytics(completionHandler userCallback: AnyObject? = nil) {
+    public func sendAnalytics(completionHandler userCallback: Any? = nil) {
         
         // Internal completion handler - wraps around the user supplied completion handler (if supplied)
         let analyticsSendCallback: MfpCompletionHandler = { (response: Response?, error: NSError?) in

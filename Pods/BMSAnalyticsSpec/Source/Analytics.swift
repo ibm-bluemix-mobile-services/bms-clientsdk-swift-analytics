@@ -89,7 +89,7 @@ public class Analytics {
          
          - parameter completionHandler:  Optional callback containing the results of the send request
      */
-    public static func send(completionHandler userCallback: AnyObject? = nil) {
+    public static func send(completionHandler userCallback: Any? = nil) {
         
         Logger.delegate?.sendAnalytics(completionHandler: userCallback)
     }

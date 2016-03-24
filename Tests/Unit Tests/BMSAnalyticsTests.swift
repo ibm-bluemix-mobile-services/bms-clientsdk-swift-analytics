@@ -34,7 +34,7 @@ class BMSAnalyticsTests: XCTestCase {
         XCTAssertNil(BMSAnalytics.apiKey)
         XCTAssertNil(BMSAnalytics.appName)
         
-        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
+        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
         XCTAssertEqual(BMSAnalytics.apiKey, "1234")
         XCTAssertEqual(BMSAnalytics.appName, "Unit Test App")
     }
@@ -47,7 +47,7 @@ class BMSAnalyticsTests: XCTestCase {
         XCTAssertNil(Request.requestAnalyticsData)
         
         BMSClient.sharedInstance.initializeWithBluemixAppRoute("http://example.com", bluemixAppGUID: "1234", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
+        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
         
         XCTAssertEqual(BMSAnalytics.apiKey, "1234")
         XCTAssertEqual(BMSAnalytics.appName, "Unit Test App")
@@ -57,7 +57,7 @@ class BMSAnalyticsTests: XCTestCase {
     
     func testInitializeWithAppNameRegistersUncaughtExceptionHandler() {
         
-        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
+        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
         XCTAssertNotNil(NSGetUncaughtExceptionHandler())
     }
     
@@ -66,7 +66,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         let referenceTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000)
         
-        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
         
         // When registering LIFECYCLE events, the BMSAnalytics.logSessionStart() method should get called immediately, assigning a new value to BMSAnalytics.startTime and BMSAnalytics.lifecycleEvents
         XCTAssertTrue(BMSAnalytics.startTime >= referenceTime)
@@ -163,7 +163,7 @@ class BMSAnalyticsTests: XCTestCase {
     
     func testGenerateOutboundRequestMetadata() {
         
-        BMSAnalytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
+        Analytics.initializeForBluemix(appName: "Unit Test App", apiKey: "1234")
         
         guard let outboundMetadata: String = BMSAnalytics.generateOutboundRequestMetadata() else {
             XCTFail()
@@ -195,7 +195,7 @@ class BMSAnalyticsTests: XCTestCase {
     
     func testAddAnalyticsMetadataToRequestWithAnalyticsAppName() {
         
-        BMSAnalytics.initializeForBluemix(appName: "Test app", apiKey: "1234")
+        Analytics.initializeForBluemix(appName: "Test app", apiKey: "1234")
         
         let requestMetadata = BMSAnalytics.generateOutboundRequestMetadata()
         

@@ -6,7 +6,7 @@ use_frameworks!
 # Methods
 
 def import_pods
-    pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :commit => '951b2e6fb37ffa4bbc2d1df2dd20e93a03cd1ff9'
+    pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :commit => 'a92709ff549fffedfeb7b76077fbdb26d2e237a1'
 end
 
 def import_pods_iOS
