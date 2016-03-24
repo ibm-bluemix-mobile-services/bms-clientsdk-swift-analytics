@@ -13,10 +13,10 @@
 
 
 import WatchKit
+import BMSAnalyticsSpec
 
 
-public extension BMSAnalytics {
-    
+public extension Analytics {
     
     /**
         Starts a timer to record the length of time the WatchOS app is being used before becoming inactive.
@@ -40,6 +40,11 @@ public extension BMSAnalytics {
         
         BMSAnalytics.logSessionEnd()
     }
+    
+}
+
+
+public extension BMSAnalytics {
     
     
     internal static func getWatchOSDeviceInfo() -> (String, String, String) {

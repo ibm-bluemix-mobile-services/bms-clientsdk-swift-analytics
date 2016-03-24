@@ -94,56 +94,6 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     
     
-    // MARK: Methods (public)
-    
-    
-    /**
-        The required initializer for the `Analytics` class when communicating with a Bluemix analytics service.
-        
-        This method must be called after the `BMSClient.initializeWithBluemixAppRoute()` method and before calling `Analytics.send()` or `Logger.send()`.
-        
-        - parameter appName:        The application name.  Should be consistent across platforms (e.g. Android and iOS).
-        - parameter apiKey:         A unique ID used to authenticate with the Bluemix analytics service
-        - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
-    */
-    public static func initializeForBluemix(appName appName: String?, apiKey: String?, deviceEvents: DeviceEvent...) {
-
-        BMSAnalytics.appName = appName
-
-        if apiKey != nil {
-            BMSAnalytics.apiKey = apiKey
-        }
-        
-        // Link all of the BMSAnalytics implementation to the BMSAnalyticsSpec APIs
-        Logger.delegate = BMSLogger()
-        Analytics.delegate = BMSAnalytics()
-        
-        BMSLogger.startCapturingUncaughtExceptions()
-        
-        // Registering device events
-        for event in deviceEvents {
-            switch event {
-            case .LIFECYCLE:
-                #if os(iOS)
-                    BMSAnalytics.startRecordingApplicationLifecycle()
-                #else
-                    Analytics.logger.warn("The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
-                #endif
-            }
-        }
-        
-        // Package analytics metadata in a header for each request
-        // Outbound request metadata is identical for all requests made on the same device from the same app
-        if BMSClient.sharedInstance.bluemixRegion != nil {
-            Request.requestAnalyticsData = BMSAnalytics.generateOutboundRequestMetadata()
-        }
-        else {
-            Analytics.logger.warn("Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
-        }
-    }
-    
-    
-    
     // MARK: - App sessions
     
     // Log that the app is starting a new session, and start a timer to record the session duration
@@ -287,6 +237,59 @@ private enum AppClosedBy: String {
     case USER
     case CRASH
 }
+
+
+public extension Analytics {
+    
+    /**
+     The required initializer for the `Analytics` class when communicating with a Bluemix analytics service.
+     
+     This method must be called after the `BMSClient.initializeWithBluemixAppRoute()` method and before calling `Analytics.send()` or `Logger.send()`.
+     
+     - parameter appName:        The application name.  Should be consistent across platforms (e.g. Android and iOS).
+     - parameter apiKey:         A unique ID used to authenticate with the Bluemix analytics service
+     - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
+     */
+    public static func initializeForBluemix(appName appName: String?, apiKey: String?, deviceEvents: DeviceEvent...) {
+        
+        BMSAnalytics.appName = appName
+        
+        if apiKey != nil {
+            BMSAnalytics.apiKey = apiKey
+        }
+        
+        // Link all of the BMSAnalytics implementation to the BMSAnalyticsSpec APIs
+        Logger.delegate = BMSLogger()
+        Analytics.delegate = BMSAnalytics()
+        
+        BMSLogger.startCapturingUncaughtExceptions()
+        
+        // Registering device events
+        for event in deviceEvents {
+            switch event {
+            case .LIFECYCLE:
+                #if os(iOS)
+                    BMSAnalytics.startRecordingApplicationLifecycle()
+                #else
+                    Analytics.logger.warn("The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
+                #endif
+            }
+        }
+        
+        // Package analytics metadata in a header for each request
+        // Outbound request metadata is identical for all requests made on the same device from the same app
+        if BMSClient.sharedInstance.bluemixRegion != nil {
+            Request.requestAnalyticsData = BMSAnalytics.generateOutboundRequestMetadata()
+        }
+        else {
+            Analytics.logger.warn("Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
+        }
+    }
+    
+}
+
+
+// MARK: - Unit testing extension
 
 
 // For unit testing only
