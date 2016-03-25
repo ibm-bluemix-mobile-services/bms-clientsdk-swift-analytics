@@ -72,16 +72,16 @@ public class BMSAnalytics: AnalyticsDelegate {
     // Currently only used for Apple Watch devices
     internal static var uniqueDeviceId: String {
         // First, check if a UUID was already created
-        let mfpUserDefaults = NSUserDefaults(suiteName: Constants.userDefaultsSuiteName)
-        guard mfpUserDefaults != nil else {
+        let bmsUserDefaults = NSUserDefaults(suiteName: Constants.userDefaultsSuiteName)
+        guard bmsUserDefaults != nil else {
             Analytics.logger.error("Failed to get an ID for this device.")
             return ""
         }
         
-        var deviceId = mfpUserDefaults!.stringForKey(Constants.Metadata.Analytics.deviceId)
+        var deviceId = bmsUserDefaults!.stringForKey(Constants.Metadata.Analytics.deviceId)
         if deviceId == nil {
             deviceId = NSUUID().UUIDString
-            mfpUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
+            bmsUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
         }
         return deviceId!
     }

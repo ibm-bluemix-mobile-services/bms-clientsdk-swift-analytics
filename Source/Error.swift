@@ -13,12 +13,12 @@
 
 
 /**
-    These error codes indicate a failure that occurred within the MFPAnalytics framework.
+    These error codes indicate a failure that occurred within the BMSAnalytics framework.
  */
-public enum MFPAnalyticsError: Int {
+public enum BMSAnalyticsError: Int {
     
-    // Start at 100 so that MFPAnalytics errors are distinguishable from BMSCore errors (which start at 0)
+    // Start at 100 so that BMSAnalytics errors are distinguishable from BMSCore errors (which start at 0)
     case AnalyticsNotInitialized = 100
     
-    static let domain = "com.ibm.mobilefirstplatform.clientsdk.swift.MFPAnalytics"
+    static let domain = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics"
 }

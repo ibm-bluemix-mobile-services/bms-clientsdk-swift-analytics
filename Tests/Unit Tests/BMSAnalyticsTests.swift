@@ -15,7 +15,7 @@
 import XCTest
 import BMSCore
 import BMSAnalyticsSpec
-@testable import MFPAnalytics
+@testable import BMSAnalytics
 
 
 class BMSAnalyticsTests: XCTestCase {
@@ -258,8 +258,8 @@ class BMSAnalyticsTests: XCTestCase {
 
     func testUniqueDeviceId() {
         
-        let mfpUserDefaults = NSUserDefaults(suiteName: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore")
-        mfpUserDefaults?.removeObjectForKey("deviceId")
+        let bmsUserDefaults = NSUserDefaults(suiteName: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore")
+        bmsUserDefaults?.removeObjectForKey("deviceId")
         
         // Generate new ID
         let generatedId = BMSAnalytics.uniqueDeviceId

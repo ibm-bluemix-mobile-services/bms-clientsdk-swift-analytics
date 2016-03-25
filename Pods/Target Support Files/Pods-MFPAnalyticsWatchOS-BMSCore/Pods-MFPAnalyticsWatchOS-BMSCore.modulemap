@@ -1,6 +1,0 @@
-framework module BMSCore {
-  umbrella header "Pods-MFPAnalyticsWatchOS-BMSCore-umbrella.h"
-
-  export *
-  module * { export * }
-}

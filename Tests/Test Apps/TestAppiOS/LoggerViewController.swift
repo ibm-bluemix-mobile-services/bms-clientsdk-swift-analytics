@@ -14,7 +14,7 @@
 
 import UIKit
 import BMSCore
-import MFPAnalytics
+import BMSAnalytics
 import BMSAnalyticsSpec
 
 
@@ -133,7 +133,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         Analytics.log(["buttonPressed": "triggerUncaughtException"])
         
-        NSException(name: "Test crash", reason: "Ensure that MFPAnalytics framework is catching uncaught exceptions", userInfo: nil).raise()
+        NSException(name: "Test crash", reason: "Ensure that BMSAnalytics framework is catching uncaught exceptions", userInfo: nil).raise()
     }
     
     

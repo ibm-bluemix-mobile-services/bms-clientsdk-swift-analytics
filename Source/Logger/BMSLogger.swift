@@ -435,14 +435,14 @@ public class BMSLogger: LoggerDelegate {
         var errorCode: Int
         switch uninitializedClass {
         case "Analytics":
-            errorCode = MFPAnalyticsError.AnalyticsNotInitialized.rawValue
+            errorCode = BMSAnalyticsError.AnalyticsNotInitialized.rawValue
         case "BMSClient":
             errorCode = BMSCoreError.ClientNotInitialized.rawValue
         default:
             errorCode = -1
         }
         
-        let error = NSError(domain: MFPAnalyticsError.domain, code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+        let error = NSError(domain: BMSAnalyticsError.domain, code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
         
         callback(nil, error)
     }

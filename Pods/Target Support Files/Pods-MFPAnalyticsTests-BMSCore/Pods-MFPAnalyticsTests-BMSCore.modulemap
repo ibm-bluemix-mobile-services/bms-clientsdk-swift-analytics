@@ -1,6 +1,0 @@
-framework module BMSCore {
-  umbrella header "Pods-MFPAnalyticsTests-BMSCore-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -14,7 +14,7 @@
 
 import UIKit
 import BMSCore
-import MFPAnalytics
+import BMSAnalytics
 
 
 class LogDisplayViewController: UIViewController {
