@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
         
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-        Analytics.initializeForBluemix(appName: "TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
         
         Analytics.enabled = true
         Logger.logStoreEnabled = true

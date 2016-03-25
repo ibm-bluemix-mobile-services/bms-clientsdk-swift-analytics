@@ -250,7 +250,7 @@ public extension Analytics {
      - parameter apiKey:         A unique ID used to authenticate with the Bluemix analytics service
      - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
      */
-    public static func initializeForBluemix(appName appName: String?, apiKey: String?, deviceEvents: DeviceEvent...) {
+    public static func initializeWithAppName(appName: String?, apiKey: String?, deviceEvents: DeviceEvent...) {
         
         BMSAnalytics.appName = appName
         

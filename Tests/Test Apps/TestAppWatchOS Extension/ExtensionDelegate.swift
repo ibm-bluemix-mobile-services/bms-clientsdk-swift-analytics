@@ -25,7 +25,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
 
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-        Analytics.initializeForBluemix(appName: "TestAppWatchOS", apiKey: "1234")
+        Analytics.initializeWithAppName("TestAppWatchOS", apiKey: "1234")
         
         Analytics.enabled = true
         Logger.logStoreEnabled = true

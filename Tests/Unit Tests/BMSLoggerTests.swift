@@ -657,10 +657,10 @@ class BMSLoggerTests: XCTestCase {
         let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        Analytics.initializeForBluemix(appName: "testAppName", apiKey: "testApiKey")
+        Analytics.initializeWithAppName("testAppName", apiKey: "testApiKey")
         let url = "https://" + Constants.AnalyticsServer.hostName + BMSClient.REGION_US_SOUTH + Constants.AnalyticsServer.uploadPath
         
-        Analytics.initializeForBluemix(appName: APP_NAME, apiKey: API_KEY)
+        Analytics.initializeWithAppName(APP_NAME, apiKey: API_KEY)
         
         let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: API_KEY]
         
@@ -705,7 +705,7 @@ class BMSLoggerTests: XCTestCase {
         let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        Analytics.initializeForBluemix(appName: "testAppName", apiKey: "")
+        Analytics.initializeWithAppName("testAppName", apiKey: "")
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
@@ -768,7 +768,7 @@ class BMSLoggerTests: XCTestCase {
         
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        Analytics.initializeForBluemix(appName: "testAppName", apiKey: "1234")
+        Analytics.initializeWithAppName("testAppName", apiKey: "1234")
         
         let bmsRequest = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
         }
