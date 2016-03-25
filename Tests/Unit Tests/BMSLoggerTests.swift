@@ -469,7 +469,7 @@ class BMSLoggerTests: XCTestCase {
         
         let analyticsMessage = jsonDict[0]
         XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.message] == "")
-        XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.package] == Logger.mfpLoggerPrefix + "analytics")
+        XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.package] == Logger.bmsLoggerPrefix + "analytics")
         XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.timestamp] != nil)
         XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.level] == "ANALYTICS")
         XCTAssertTrue(analyticsMessage[Constants.Metadata.Logger.metadata] == meta)
@@ -809,7 +809,7 @@ class BMSLoggerTests: XCTestCase {
     
     
     func testDeleteFileFail(){
-        let fakePKG = "mfpsdk.logger"
+        let fakePKG = "bmssdk.logger"
         let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
         let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
         do {

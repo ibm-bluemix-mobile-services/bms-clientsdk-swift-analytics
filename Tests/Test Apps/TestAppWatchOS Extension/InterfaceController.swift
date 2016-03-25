@@ -29,7 +29,7 @@ class InterfaceController: WKInterfaceController {
         
         Analytics.log(["buttonPressed": "recordLog"])
         
-        func completionHandler(sendType: String) -> MfpCompletionHandler {
+        func completionHandler(sendType: String) -> BmsCompletionHandler {
             return {
                 (response: Response?, error: NSError?) -> Void in
                 if let response = response {

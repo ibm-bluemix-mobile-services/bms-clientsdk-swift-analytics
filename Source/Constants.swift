@@ -27,8 +27,8 @@ internal struct Constants {
     
     struct Package {
         
-        static let logger = Logger.mfpLoggerPrefix + "logger"
-        static let analytics = Logger.mfpLoggerPrefix + "analytics"
+        static let logger = Logger.bmsLoggerPrefix + "logger"
+        static let analytics = Logger.bmsLoggerPrefix + "analytics"
     }
     
     

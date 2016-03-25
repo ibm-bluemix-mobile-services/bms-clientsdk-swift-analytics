@@ -331,7 +331,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         let debugMessage = jsonDict[0]
         XCTAssertTrue(debugMessage[Constants.Metadata.Logger.message] == "")
-        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.package] == Logger.mfpLoggerPrefix + "analytics")
+        XCTAssertTrue(debugMessage[Constants.Metadata.Logger.package] == Logger.bmsLoggerPrefix + "analytics")
         XCTAssertTrue(debugMessage[Constants.Metadata.Logger.timestamp] != nil)
         XCTAssertTrue(debugMessage[Constants.Metadata.Logger.level] == "ANALYTICS")
         print(debugMessage[Constants.Metadata.Logger.metadata])

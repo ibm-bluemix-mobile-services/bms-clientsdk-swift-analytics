@@ -96,7 +96,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func sendLogs(sender: UIButton) {
         
-        func completionHandler(sendType: String) -> MfpCompletionHandler {
+        func completionHandler(sendType: String) -> BmsCompletionHandler {
             return {
                 (response: Response?, error: NSError?) -> Void in
                 if let response = response {
@@ -120,7 +120,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         Analytics.log(["buttonPressed": "deleteLogs"])
         
         let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/"
-        let fileName = "mfpsdk.logger.log"
+        let fileName = "bmssdk.logger.log"
         do {
             try NSFileManager().removeItemAtPath(filePath + fileName)
             print("Successfully deleted logs!")

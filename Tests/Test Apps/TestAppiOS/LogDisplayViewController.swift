@@ -37,7 +37,7 @@ class LogDisplayViewController: UIViewController {
         
         // Populate text view with all stored logs
         let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/"
-        let fileName = "mfpsdk.logger.log"
+        let fileName = "bmssdk.logger.log"
         let pathToFile = filePath + fileName
         
         do {

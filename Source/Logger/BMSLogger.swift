@@ -304,7 +304,7 @@ public class BMSLogger: LoggerDelegate {
     // Build the request completion handler, extract logs from file, and send logs to the server
     public func send(completionHandler userCallback: Any? = nil) {
         
-        let logSendCallback: MfpCompletionHandler = { (response: Response?, error: NSError?) in
+        let logSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
             
             if error == nil && response?.statusCode == 201 {
                 BMSLogger.internalLogger.debug("Client logs successfully sent to the server.")
@@ -317,8 +317,8 @@ public class BMSLogger: LoggerDelegate {
                 BMSLogger.internalLogger.error("Request to send client logs has failed.")
             }
             
-            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the MfpCompletionHandlerType (since it is defined in BMSCore)
-            if let callback = userCallback as? MfpCompletionHandler {
+            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the BmsCompletionHandlerType (since it is defined in BMSCore)
+            if let callback = userCallback as? BmsCompletionHandler {
                 callback(response, error)
             }
         }
@@ -353,7 +353,7 @@ public class BMSLogger: LoggerDelegate {
     public func sendAnalytics(completionHandler userCallback: Any? = nil) {
         
         // Internal completion handler - wraps around the user supplied completion handler (if supplied)
-        let analyticsSendCallback: MfpCompletionHandler = { (response: Response?, error: NSError?) in
+        let analyticsSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
             
             if error == nil && response?.statusCode == 201 {
                 Analytics.logger.debug("Analytics data successfully sent to the server.")
@@ -364,8 +364,8 @@ public class BMSLogger: LoggerDelegate {
                 Analytics.logger.error("Request to send analytics data to the server has failed.")
             }
             
-            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the MfpCompletionHandlerType (since it is defined in BMSCore)
-            if let callback = userCallback as? MfpCompletionHandler {
+            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the BmsCompletionHandlerType (since it is defined in BMSCore)
+            if let callback = userCallback as? BmsCompletionHandler {
                 callback(response, error)
             }
         }
@@ -397,7 +397,7 @@ public class BMSLogger: LoggerDelegate {
     
     
     // Build the Request object that will be used to send the logs to the server
-    internal static func buildLogSendRequest(callback: MfpCompletionHandler) -> BaseRequest? {
+    internal static func buildLogSendRequest(callback: BmsCompletionHandler) -> BaseRequest? {
         
         let bmsClient = BMSClient.sharedInstance
         var headers: [String: String] = ["Content-Type": "text/plain"]
@@ -427,7 +427,7 @@ public class BMSLogger: LoggerDelegate {
     
     
     // If this is reached, the user most likely failed to initialize BMSClient or Analytics
-    internal static func returnInitializationError(uninitializedClass: String, missingValue: String, callback: MfpCompletionHandler) {
+    internal static func returnInitializationError(uninitializedClass: String, missingValue: String, callback: BmsCompletionHandler) {
         
         BMSLogger.internalLogger.error("No value found for the \(uninitializedClass) \(missingValue) property.")
         let errorMessage = "Must initialize \(uninitializedClass) before sending logs to the server."
