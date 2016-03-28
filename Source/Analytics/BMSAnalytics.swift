@@ -72,7 +72,7 @@ public extension Analytics {
          
          - parameter completionHandler:  Optional callback containing the results of the send request
      */
-    public static func send(completionHandler userCallback: Any? = nil) {
+    public static func send(completionHandler userCallback: BmsCompletionHandler? = nil) {
         
         Logger.sendAnalytics(completionHandler: userCallback)
     }

@@ -26,7 +26,7 @@ public extension Logger {
          
          - parameter completionHandler:  Optional callback containing the results of the send request
      */
-    public static func send(completionHandler userCallback: Any? = nil) {
+    public static func send(completionHandler userCallback: BmsCompletionHandler? = nil) {
         
         let logSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
             
@@ -41,10 +41,7 @@ public extension Logger {
                 BMSLogger.internalLogger.error("Request to send client logs has failed.")
             }
             
-            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the BmsCompletionHandlerType (since it is defined in BMSCore)
-            if let callback = userCallback as? BmsCompletionHandler {
-                callback(response, error)
-            }
+            userCallback?(response, error)
         }
         
         // Use a serial queue to ensure that the same logs do not get sent more than once
@@ -74,7 +71,7 @@ public extension Logger {
     
     
     // Same as the other send() method but for analytics
-    internal static func sendAnalytics(completionHandler userCallback: Any? = nil) {
+    internal static func sendAnalytics(completionHandler userCallback: BmsCompletionHandler? = nil) {
         
         // Internal completion handler - wraps around the user supplied completion handler (if supplied)
         let analyticsSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
@@ -88,10 +85,7 @@ public extension Logger {
                 Analytics.logger.error("Request to send analytics data to the server has failed.")
             }
             
-            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the BmsCompletionHandlerType (since it is defined in BMSCore)
-            if let callback = userCallback as? BmsCompletionHandler {
-                callback(response, error)
-            }
+            userCallback?(response, error)
         }
         
         // Use a serial queue to ensure that the same analytics data do not get sent more than once
