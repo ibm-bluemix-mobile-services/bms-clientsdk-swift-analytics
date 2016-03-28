@@ -16,6 +16,112 @@ import BMSCore
 import BMSAnalyticsSpec
 
 
+// Send methods
+public extension Logger {
+    
+    /**
+         Send the accumulated logs to the Bluemix server.
+         
+         Logger logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
+         
+         - parameter completionHandler:  Optional callback containing the results of the send request
+     */
+    public static func send(completionHandler userCallback: Any? = nil) {
+        
+        let logSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
+            
+            if error == nil && response?.statusCode == 201 {
+                BMSLogger.internalLogger.debug("Client logs successfully sent to the server.")
+                
+                BMSLogger.deleteFile(Constants.File.Logger.outboundLogs)
+                // Remove the uncaught exception flag since the logs containing the exception(s) have just been sent to the server
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: Constants.uncaughtException)
+            }
+            else {
+                BMSLogger.internalLogger.error("Request to send client logs has failed.")
+            }
+            
+            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the BmsCompletionHandlerType (since it is defined in BMSCore)
+            if let callback = userCallback as? BmsCompletionHandler {
+                callback(response, error)
+            }
+        }
+        
+        // Use a serial queue to ensure that the same logs do not get sent more than once
+        dispatch_async(BMSLogger.sendLogsToServerQueue) { () -> Void in
+            do {
+                // Gather the logs and put them in a JSON object
+                let logsToSend: String? = try BMSLogger.getLogs(fileName: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
+                var logPayloadData = try NSJSONSerialization.dataWithJSONObject([], options: [])
+                if let logPayload = logsToSend {
+                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
+                    logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
+                }
+                else {
+                    BMSLogger.internalLogger.info("There are no logs to send.")
+                }
+                
+                // Send the request, even if there are no logs to send (to keep track of device info)
+                if let request: BaseRequest = BMSLogger.buildLogSendRequest(logSendCallback) {
+                    request.sendData(logPayloadData, withCompletionHandler: logSendCallback)
+                }
+            }
+            catch let error as NSError {
+                logSendCallback(nil, error)
+            }
+        }
+    }
+    
+    
+    // Same as the other send() method but for analytics
+    internal static func sendAnalytics(completionHandler userCallback: Any? = nil) {
+        
+        // Internal completion handler - wraps around the user supplied completion handler (if supplied)
+        let analyticsSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
+            
+            if error == nil && response?.statusCode == 201 {
+                Analytics.logger.debug("Analytics data successfully sent to the server.")
+                
+                BMSLogger.deleteFile(Constants.File.Analytics.outboundLogs)
+            }
+            else {
+                Analytics.logger.error("Request to send analytics data to the server has failed.")
+            }
+            
+            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the BmsCompletionHandlerType (since it is defined in BMSCore)
+            if let callback = userCallback as? BmsCompletionHandler {
+                callback(response, error)
+            }
+        }
+        
+        // Use a serial queue to ensure that the same analytics data do not get sent more than once
+        dispatch_async(BMSLogger.sendAnalyticsToServerQueue) { () -> Void in
+            do {
+                // Gather the logs and put them in a JSON object
+                let logsToSend: String? = try BMSLogger.getLogs(fileName: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
+                var logPayloadData = try NSJSONSerialization.dataWithJSONObject([], options: [])
+                if let logPayload = logsToSend {
+                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
+                    logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
+                }
+                else {
+                    Analytics.logger.info("There are no analytics data to send.")
+                }
+                
+                // Send the request, even if there are no logs to send (to keep track of device info)
+                if let request: BaseRequest = BMSLogger.buildLogSendRequest(analyticsSendCallback) {
+                    request.sendData(logPayloadData, withCompletionHandler: analyticsSendCallback)
+                }
+            }
+            catch let error as NSError {
+                analyticsSendCallback(nil, error)
+            }
+        }
+    }
+    
+}
+
+
 /**
     `BMSLogger` provides the internal implementation of the BMSAnalyticsSpec `Logger` API.
  */
@@ -310,101 +416,6 @@ public class BMSLogger: LoggerDelegate {
     
     
     // MARK: Methods
-    
-    // Build the request completion handler, extract logs from file, and send logs to the server
-    public func send(completionHandler userCallback: Any? = nil) {
-        
-        let logSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
-            
-            if error == nil && response?.statusCode == 201 {
-                BMSLogger.internalLogger.debug("Client logs successfully sent to the server.")
-                
-                BMSLogger.deleteFile(Constants.File.Logger.outboundLogs)
-                // Remove the uncaught exception flag since the logs containing the exception(s) have just been sent to the server
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: Constants.uncaughtException)
-            }
-            else {
-                BMSLogger.internalLogger.error("Request to send client logs has failed.")
-            }
-            
-            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the BmsCompletionHandlerType (since it is defined in BMSCore)
-            if let callback = userCallback as? BmsCompletionHandler {
-                callback(response, error)
-            }
-        }
-        
-        // Use a serial queue to ensure that the same logs do not get sent more than once
-        dispatch_async(BMSLogger.sendLogsToServerQueue) { () -> Void in
-            do {
-                // Gather the logs and put them in a JSON object
-                let logsToSend: String? = try BMSLogger.getLogs(fileName: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
-                var logPayloadData = try NSJSONSerialization.dataWithJSONObject([], options: [])
-                if let logPayload = logsToSend {
-                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
-                    logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
-                }
-                else {
-                    BMSLogger.internalLogger.info("There are no logs to send.")
-                }
-                
-                // Send the request, even if there are no logs to send (to keep track of device info)
-                if let request: BaseRequest = BMSLogger.buildLogSendRequest(logSendCallback) {
-                    request.sendData(logPayloadData, withCompletionHandler: logSendCallback)
-                }
-            }
-            catch let error as NSError {
-                logSendCallback(nil, error)
-            }
-        }
-    }
-    
-    
-    // Same as the other send() method but for analytics
-    public func sendAnalytics(completionHandler userCallback: Any? = nil) {
-        
-        // Internal completion handler - wraps around the user supplied completion handler (if supplied)
-        let analyticsSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
-            
-            if error == nil && response?.statusCode == 201 {
-                Analytics.logger.debug("Analytics data successfully sent to the server.")
-                
-                BMSLogger.deleteFile(Constants.File.Analytics.outboundLogs)
-            }
-            else {
-                Analytics.logger.error("Request to send analytics data to the server has failed.")
-            }
-            
-            // The userCallback must be of AnyObject type because it is defined in BMSAnalyticsSpec, which is not aware of the BmsCompletionHandlerType (since it is defined in BMSCore)
-            if let callback = userCallback as? BmsCompletionHandler {
-                callback(response, error)
-            }
-        }
-        
-        // Use a serial queue to ensure that the same analytics data do not get sent more than once
-        dispatch_async(BMSLogger.sendAnalyticsToServerQueue) { () -> Void in
-            do {
-                // Gather the logs and put them in a JSON object
-                let logsToSend: String? = try BMSLogger.getLogs(fileName: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
-                var logPayloadData = try NSJSONSerialization.dataWithJSONObject([], options: [])
-                if let logPayload = logsToSend {
-                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
-                    logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
-                }
-                else {
-                    Analytics.logger.info("There are no analytics data to send.")
-                }
-                
-                // Send the request, even if there are no logs to send (to keep track of device info)
-                if let request: BaseRequest = BMSLogger.buildLogSendRequest(analyticsSendCallback) {
-                    request.sendData(logPayloadData, withCompletionHandler: analyticsSendCallback)
-                }
-            }
-            catch let error as NSError {
-                analyticsSendCallback(nil, error)
-            }
-        }
-    }
-    
     
     // Build the Request object that will be used to send the logs to the server
     internal static func buildLogSendRequest(callback: BmsCompletionHandler) -> BaseRequest? {
