@@ -40,12 +40,9 @@ class BMSLoggerTests: XCTestCase {
     
     func testSetGetMaxLogStoreSize(){
     
-        let size1 = Logger.maxLogStoreSize
-        XCTAssertTrue(size1 == Constants.File.defaultMaxSize)
-
         Logger.maxLogStoreSize = 12345678 as UInt64
-        let size3 = Logger.maxLogStoreSize
-        XCTAssertTrue(size3 == 12345678)
+        let size = Logger.maxLogStoreSize
+        XCTAssertTrue(size == 12345678)
     }
 
     
@@ -74,7 +71,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         Logger.sdkDebugLoggingEnabled = false
         
         loggerInstance.debug("Hello world")
@@ -138,7 +134,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
 
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -202,7 +197,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.None
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -227,7 +221,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Fatal
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -253,7 +246,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = false
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -370,7 +362,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -506,7 +497,6 @@ class BMSLoggerTests: XCTestCase {
         Logger.logStoreEnabled = true
         Logger.sdkDebugLoggingEnabled = false
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug(largeData)
         loggerInstance.info("1242342342343243242342")
@@ -602,7 +592,6 @@ class BMSLoggerTests: XCTestCase {
         Logger.logStoreEnabled = true
         Logger.sdkDebugLoggingEnabled = false
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug(largeData)
         loggerInstance.info(largeData)
@@ -681,7 +670,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -724,7 +712,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
@@ -829,7 +816,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         
@@ -876,7 +862,6 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.loggerForName(fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-        Logger.maxLogStoreSize = Constants.File.defaultMaxSize
         
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
