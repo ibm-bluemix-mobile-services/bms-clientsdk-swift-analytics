@@ -1,13 +1,13 @@
 PODS:
-  - BMSAnalyticsSpec (0.0.14)
-  - BMSCore (0.0.35):
-    - BMSAnalyticsSpec (~> 0.0.14)
+  - BMSAnalyticsSpec (0.0.15)
+  - BMSCore (0.0.38):
+    - BMSAnalyticsSpec (= 0.0.15)
 
 DEPENDENCIES:
-  - BMSCore (~> 0.0.35)
+  - BMSCore (~> 0.0.38)
 
 SPEC CHECKSUMS:
-  BMSAnalyticsSpec: ec8ad09e1b45b6c289ab86b237f81451e1c0510c
-  BMSCore: 0b02c6d0f4292b7e014b0274f26e63439122014a
+  BMSAnalyticsSpec: 23711ca2251451f0530aef4e83940c3f830f7222
+  BMSCore: 4b717f7bc6541409f9638f757ac875895925e493
 
 COCOAPODS: 0.39.0
