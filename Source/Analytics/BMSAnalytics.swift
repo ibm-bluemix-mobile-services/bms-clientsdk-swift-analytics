@@ -13,7 +13,6 @@
 
 
 import BMSCore
-import BMSAnalyticsSpec
 
 
 // Initializer and send methods

@@ -1,6 +1,0 @@
-framework module BMSCore {
-  umbrella header "Pods-TestAppWatchOS Extension-BMSCore-umbrella.h"
-
-  export *
-  module * { export * }
-}

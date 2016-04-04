@@ -13,7 +13,7 @@
 
 
 import WatchKit
-import BMSAnalyticsSpec
+import BMSCore
 
 
 public extension Analytics {

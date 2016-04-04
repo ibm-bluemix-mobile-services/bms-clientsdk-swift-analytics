@@ -13,7 +13,6 @@
 
 
 import BMSCore
-import BMSAnalyticsSpec
 
 
 internal struct Constants {

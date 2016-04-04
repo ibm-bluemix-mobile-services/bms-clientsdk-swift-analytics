@@ -14,7 +14,6 @@
 
 import XCTest
 import BMSCore
-import BMSAnalyticsSpec
 @testable import BMSAnalytics
 
 

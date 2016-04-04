@@ -13,7 +13,6 @@
 
 
 import BMSCore
-import BMSAnalyticsSpec
 
 
 // Send methods

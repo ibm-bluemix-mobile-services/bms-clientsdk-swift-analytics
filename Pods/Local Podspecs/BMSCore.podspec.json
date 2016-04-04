@@ -1,6 +1,6 @@
 {
   "name": "BMSCore",
-  "version": "0.0.30",
+  "version": "0.0.40",
   "summary": "The core component of the Swift client SDK for IBM Bluemix Mobile Services",
   "homepage": "https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core",
   "license": "Apache License, Version 2.0",
@@ -9,18 +9,28 @@
   },
   "source": {
     "git": "https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git",
-    "tag": "v0.0.30"
+    "tag": "v0.0.40"
   },
   "source_files": "Source/**/*.swift",
   "ios": {
-    "exclude_files": "Source/**/*watchOS*.swift"
+    "exclude_files": "Source/**/*watchOS*.swift",
+    "source_files": [
+      "Source/Resources/iOS.modulemap",
+      "Source/Resources/BMSCore.h"
+    ],
+    "module_map": "Source/Resources/iOS.modulemap"
   },
   "watchos": {
-    "exclude_files": "Source/**/*iOS*.swift"
+    "exclude_files": "Source/**/*iOS*.swift",
+    "source_files": [
+      "Source/Resources/watchOS.modulemap",
+      "Source/Resources/BMSCoreWatchOS.h"
+    ],
+    "module_map": "Source/Resources/watchOS.modulemap"
   },
   "dependencies": {
     "BMSAnalyticsSpec": [
-      "~> 0.0.9"
+      "0.0.15"
     ]
   },
   "requires_arc": true,
