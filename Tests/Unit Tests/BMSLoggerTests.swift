@@ -767,6 +767,38 @@ class BMSLoggerTests: XCTestCase {
     }
     
     
+    func testPreventSimultaneousSendRequests() {
+        
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
+        Analytics.initializeWithAppName("testAppName", apiKey: "1234")
+        
+        XCTAssertFalse(Logger.currentlySendingLoggerLogs)
+        XCTAssertFalse(Logger.currentlySendingAnalyticsLogs)
+        
+        let loggerSendFinished = expectationWithDescription("Logger send complete")
+        let analyticsSendFinished = expectationWithDescription("Analytics send complete")
+        
+        Logger.send { (_: Response?, _: NSError?) in
+            XCTAssertFalse(Logger.currentlySendingLoggerLogs)
+            loggerSendFinished.fulfill()
+        }
+        Analytics.send { (_: Response?, _: NSError?) in
+            XCTAssertFalse(Logger.currentlySendingAnalyticsLogs)
+            analyticsSendFinished.fulfill()
+        }
+        
+        XCTAssertTrue(Logger.currentlySendingLoggerLogs)
+        XCTAssertTrue(Logger.currentlySendingAnalyticsLogs)
+        
+        waitForExpectationsWithTimeout(10.0) { (error: NSError?) -> Void in
+            if error != nil {
+                XCTFail("Expectation failed with error: \(error)")
+            }
+        }
+    }
+    
+    
     func testReturnInitializationError(){
         // BMSClient initialization
         BMSLogger.returnInitializationError("BMSClient", missingValue:"test") { (response, error) -> Void in
@@ -940,8 +972,3 @@ enum LogFileType: String {
     case LOGGER
     case ANALYTICS
 }
-
-
-
-
-

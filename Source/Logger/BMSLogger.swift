@@ -18,16 +18,30 @@ import BMSCore
 // Send methods
 public extension Logger {
     
+    
+    internal static var currentlySendingLoggerLogs = false
+    internal static var currentlySendingAnalyticsLogs = false
+    
+    
     /**
-         Send the accumulated logs to the Bluemix server.
-         
-         Logger logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
-         
-         - parameter completionHandler:  Optional callback containing the results of the send request
+        Send the accumulated logs to the Bluemix server.
+
+        Logger logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
+
+        - parameter completionHandler:  Optional callback containing the results of the send request
      */
     public static func send(completionHandler userCallback: BmsCompletionHandler? = nil) {
         
+        guard !currentlySendingLoggerLogs else {
+            BMSLogger.internalLogger.fatal("Ignoring Logger.send() until the previous send request finishes.")
+            return
+        }
+        
+        currentlySendingLoggerLogs = true
+        
         let logSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
+            
+            currentlySendingLoggerLogs = false
             
             if error == nil && response?.statusCode == 201 {
                 BMSLogger.internalLogger.debug("Client logs successfully sent to the server.")
@@ -44,7 +58,7 @@ public extension Logger {
         }
         
         // Use a serial queue to ensure that the same logs do not get sent more than once
-        dispatch_async(BMSLogger.sendLogsToServerQueue) { () -> Void in
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { () -> Void in
             do {
                 // Gather the logs and put them in a JSON object
                 let logsToSend: String? = try BMSLogger.getLogs(fileName: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
@@ -72,8 +86,17 @@ public extension Logger {
     // Same as the other send() method but for analytics
     internal static func sendAnalytics(completionHandler userCallback: BmsCompletionHandler? = nil) {
         
+        guard !currentlySendingAnalyticsLogs else {
+            Analytics.logger.fatal("Ignoring Analytics.send() until the previous send request finishes.")
+            return
+        }
+        
+        currentlySendingAnalyticsLogs = true
+        
         // Internal completion handler - wraps around the user supplied completion handler (if supplied)
         let analyticsSendCallback: BmsCompletionHandler = { (response: Response?, error: NSError?) in
+            
+            currentlySendingAnalyticsLogs = false
             
             if error == nil && response?.statusCode == 201 {
                 Analytics.logger.debug("Analytics data successfully sent to the server.")
@@ -88,7 +111,7 @@ public extension Logger {
         }
         
         // Use a serial queue to ensure that the same analytics data do not get sent more than once
-        dispatch_async(BMSLogger.sendAnalyticsToServerQueue) { () -> Void in
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { () -> Void in
             do {
                 // Gather the logs and put them in a JSON object
                 let logsToSend: String? = try BMSLogger.getLogs(fileName: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
@@ -391,15 +414,6 @@ public class BMSLogger: LoggerDelegate {
     
     
     // MARK: - Sending logs
-    
-    // We use serial queues to prevent race conditions when multiple threads try to read/modify the same file
-    
-    internal static let sendLogsToServerQueue: dispatch_queue_t = dispatch_queue_create("com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore.Logger.sendLogsToServerQueue", DISPATCH_QUEUE_SERIAL)
-    
-    
-    internal static let sendAnalyticsToServerQueue: dispatch_queue_t = dispatch_queue_create("com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore.Logger.sendAnalyticsToServerQueue", DISPATCH_QUEUE_SERIAL)
-    
-    
     
     // MARK: Methods
     
