@@ -13,7 +13,7 @@ https://console.ng.bluemix.net/solutions/mobilefirst
 
 ## Installation
 The Bluemix Mobile Services Swift SDK is available via [Cocoapods](http://cocoapods.org/). 
-To install, add the `MFPAnalytics` pod to your `Podfile`.
+To install, add the `BMSAnalytics` pod to your `Podfile`.
 
 ##### iOS
 ```ruby
@@ -21,7 +21,7 @@ use_frameworks!
 
 target 'MyApp' do
     platform :ios, '8.0'
-    pod 'MFPAnalytics'
+    pod 'BMSAnalytics'
 end
 ```
 
@@ -31,7 +31,7 @@ use_frameworks!
 
 target 'MyApp WatchKit Extension' do
     platform :watchos, '2.0'
-    pod 'MFPAnalytics'
+    pod 'BMSAnalytics'
 end
 ```
 
