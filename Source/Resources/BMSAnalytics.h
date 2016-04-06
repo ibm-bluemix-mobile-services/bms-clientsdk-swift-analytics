@@ -12,14 +12,10 @@
  */
 
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 
 //! Project version number for BMSAnalytics.
 FOUNDATION_EXPORT double BMSAnalyticsVersionNumber;
 
 //! Project version string for BMSAnalytics.
 FOUNDATION_EXPORT const unsigned char BMSAnalyticsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <BMSAnalytics/PublicHeader.h>
-
-
