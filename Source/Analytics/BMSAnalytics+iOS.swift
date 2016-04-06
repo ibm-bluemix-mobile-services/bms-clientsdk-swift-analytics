@@ -48,6 +48,9 @@ public extension BMSAnalytics {
 }
 
 
+
+// MARK: -
+
 // Get the device type as a human-readable string
 // http://stackoverflow.com/questions/26028918/ios-how-to-determine-iphone-model-in-swift
 internal extension UIDevice {

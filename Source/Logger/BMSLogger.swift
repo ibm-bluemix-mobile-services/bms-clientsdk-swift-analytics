@@ -138,20 +138,23 @@ public extension Logger {
 }
 
 
+
+// MARK: -
+
 /**
     `BMSLogger` provides the internal implementation of the BMSAnalyticsSpec `Logger` API.
  */
 public class BMSLogger: LoggerDelegate {
     
     
-    // MARK: Properties (internal/private)
+    // MARK: Properties (internal)
     
     // Internal instrumentation for troubleshooting issues in BMSCore
     internal static let internalLogger = Logger.loggerForName(Constants.Package.logger)
     
     
     
-    // MARK: Class constants (internal/private)
+    // MARK: Class constants (internal)
     
     // By default, the dateFormater will convert to the local time zone, but we want to send the date based on UTC
     // so that logs from all clients in all timezones are normalized to the same GMT timezone.
@@ -232,12 +235,8 @@ public class BMSLogger: LoggerDelegate {
     internal static let analyticsFileIOQueue: dispatch_queue_t = dispatch_queue_create("com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore.Logger.analyticsFileIOQueue", DISPATCH_QUEUE_SERIAL)
     
     
-    
-    // MARK: Methods (public)
-    
     // This is the master function that handles all of the logging, including level checking, printing to console, and writing to file
     // All other log functions below this one are helpers for this function
-    
     public func logMessageToFile(message: String, level: LogLevel, loggerName: String, calledFile: String, calledFunction: String, calledLineNumber: Int, additionalMetadata: [String: AnyObject]? = nil) {
         
         let group :dispatch_group_t = dispatch_group_create()
@@ -292,9 +291,6 @@ public class BMSLogger: LoggerDelegate {
         dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
     }
     
-    
-    
-    // MARK: Methods (internal/private)
     
     // Get the full path to the log file and overflow file, and get the dispatch queue that they need to be operated on.
     internal static func getFilesForLogLevel(level: LogLevel) -> (String, String, dispatch_queue_t) {
@@ -414,8 +410,6 @@ public class BMSLogger: LoggerDelegate {
     
     
     // MARK: - Sending logs
-    
-    // MARK: Methods
     
     // Build the Request object that will be used to send the logs to the server
     internal static func buildLogSendRequest(callback: BmsCompletionHandler) -> BaseRequest? {
@@ -544,6 +538,8 @@ public class BMSLogger: LoggerDelegate {
 
 }
 
+
+// MARK: - Helper
 
 // Custom dispatch_sync that can incorporate throwable statements
 internal func dispatch_sync_throwable(queue: dispatch_queue_t, block: () throws -> ()) throws {

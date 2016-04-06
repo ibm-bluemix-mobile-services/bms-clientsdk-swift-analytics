@@ -79,13 +79,16 @@ public extension Analytics {
 }
 
 
+
+// MARK: -
+
 /**
     `BMSAnalytics` provides the internal implementation of the BMSAnalyticsSpec `Analytics` API.
 */
 public class BMSAnalytics: AnalyticsDelegate {
     
     
-    // MARK: Properties (public)
+    // MARK: Properties (API)
     
     /// The name of the iOS/WatchOS app
     public private(set) static var appName: String?
@@ -125,7 +128,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     
 
-    // MARK: Properties (internal/private)
+    // MARK: Properties (internal)
     
     // Stores metadata (including a duration timer) for each app session
     // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)
@@ -302,8 +305,8 @@ private enum AppClosedBy: String {
 }
 
 
-// MARK: - Unit testing extension
 
+// MARK: -
 
 // For unit testing only
 internal extension BMSAnalytics {
