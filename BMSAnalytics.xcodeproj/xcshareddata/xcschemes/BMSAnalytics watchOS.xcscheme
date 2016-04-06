@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "926CF80D1C4ECC330084355B"
-               BuildableName = "BMSAnalytics.framework"
-               BlueprintName = "BMSAnalytics"
+               BlueprintIdentifier = "926CF82C1C4ECD930084355B"
+               BuildableName = "BMSAnalyticsWatchOS.framework"
+               BlueprintName = "BMSAnalytics watchOS"
                ReferencedContainer = "container:BMSAnalytics.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "926CF80D1C4ECC330084355B"
-            BuildableName = "BMSAnalytics.framework"
-            BlueprintName = "BMSAnalytics"
+            BlueprintIdentifier = "926CF82C1C4ECD930084355B"
+            BuildableName = "BMSAnalyticsWatchOS.framework"
+            BlueprintName = "BMSAnalytics watchOS"
             ReferencedContainer = "container:BMSAnalytics.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "926CF80D1C4ECC330084355B"
-            BuildableName = "BMSAnalytics.framework"
-            BlueprintName = "BMSAnalytics"
+            BlueprintIdentifier = "926CF82C1C4ECD930084355B"
+            BuildableName = "BMSAnalyticsWatchOS.framework"
+            BlueprintName = "BMSAnalytics watchOS"
             ReferencedContainer = "container:BMSAnalytics.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

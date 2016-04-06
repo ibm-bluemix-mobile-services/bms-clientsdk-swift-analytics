@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "926CF8381C4ECDBD0084355B"
-               BuildableName = "TestAppiOS.app"
-               BlueprintName = "TestAppiOS"
+               BlueprintIdentifier = "926CF80D1C4ECC330084355B"
+               BuildableName = "BMSAnalytics.framework"
+               BlueprintName = "BMSAnalytics iOS"
                ReferencedContainer = "container:BMSAnalytics.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "926CF8381C4ECDBD0084355B"
-            BuildableName = "TestAppiOS.app"
-            BlueprintName = "TestAppiOS"
-            ReferencedContainer = "container:BMSAnalytics.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -51,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "926CF8381C4ECDBD0084355B"
-            BuildableName = "TestAppiOS.app"
-            BlueprintName = "TestAppiOS"
+            BlueprintIdentifier = "926CF80D1C4ECC330084355B"
+            BuildableName = "BMSAnalytics.framework"
+            BlueprintName = "BMSAnalytics iOS"
             ReferencedContainer = "container:BMSAnalytics.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -70,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "926CF8381C4ECDBD0084355B"
-            BuildableName = "TestAppiOS.app"
-            BlueprintName = "TestAppiOS"
+            BlueprintIdentifier = "926CF80D1C4ECC330084355B"
+            BuildableName = "BMSAnalytics.framework"
+            BlueprintName = "BMSAnalytics iOS"
             ReferencedContainer = "container:BMSAnalytics.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

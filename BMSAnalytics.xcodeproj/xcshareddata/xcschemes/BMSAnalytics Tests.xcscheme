@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -18,7 +18,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "926CF8171C4ECC330084355B"
                BuildableName = "BMSAnalyticsTests.xctest"
-               BlueprintName = "BMSAnalyticsTests"
+               BlueprintName = "BMSAnalytics Tests"
                ReferencedContainer = "container:BMSAnalytics.xcodeproj">
             </BuildableReference>
          </TestableReference>
