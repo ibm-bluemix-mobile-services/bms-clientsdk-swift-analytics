@@ -25,9 +25,9 @@ public extension BMSAnalytics {
         // By now, the app will have already passed the "will enter foreground" event. Therefore, we must manually start the timer for the current session.
         logSessionStart()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BMSAnalytics.logSessionStart), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "logSessionStart", name: UIApplicationWillEnterForegroundNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BMSAnalytics.logSessionEnd), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "logSessionEnd", name: UIApplicationDidEnterBackgroundNotification, object: nil)
     }
     
     
