@@ -23,26 +23,26 @@ end
 
 # Targets
 
-target 'BMSAnalytics' do
+target 'BMSAnalytics iOS' do
 	import_pods_iOS
 end
 
-target 'BMSAnalyticsTests' do
+target 'BMSAnalytics watchOS' do
+    import_pods_watchOS
+end
+
+target 'BMSAnalytics Tests' do
     import_pods_iOS
 end
 
-target 'BMSAnalyticsWatchOS' do
-	import_pods_watchOS
-end
-
-target 'TestAppiOS' do
+target 'TestApp iOS' do
 	import_pods_iOS
 end
 
-target 'TestAppWatchOS' do
+target 'TestApp watchOS' do
 
 end
 
-target 'TestAppWatchOS Extension' do
+target 'TestApp watchOS Extension' do
 	import_pods_watchOS
 end
