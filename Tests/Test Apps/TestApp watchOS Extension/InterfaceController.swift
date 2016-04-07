@@ -13,8 +13,8 @@
 
 
 import WatchKit
-import BMSAnalyticsWatchOS
 import BMSCore
+import BMSAnalytics
 
 
 class InterfaceController: WKInterfaceController {
@@ -23,7 +23,7 @@ class InterfaceController: WKInterfaceController {
     @IBAction func sendAnalyticsButtonPressed() {
         
         Logger.logLevelFilter = LogLevel.Debug
-        let logger = Logger.loggerForName("TestAppWatchOS")
+        let logger = Logger.logger(forName: "TestAppWatchOS")
         logger.debug("Send analytics button pressed")
         
         Analytics.log(["buttonPressed": "recordLog"])

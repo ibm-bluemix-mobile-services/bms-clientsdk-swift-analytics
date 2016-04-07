@@ -67,7 +67,7 @@ class BMSLoggerTests: XCTestCase {
             print("Could not delete " + pathToFile)
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         Logger.sdkDebugLoggingEnabled = false
@@ -130,7 +130,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
 
@@ -193,7 +193,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.None
         
@@ -217,7 +217,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Fatal
         
@@ -242,7 +242,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = false
         Logger.logLevelFilter = LogLevel.Debug
         
@@ -358,7 +358,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         
@@ -487,7 +487,7 @@ class BMSLoggerTests: XCTestCase {
         let bundle = NSBundle(forClass: self.dynamicType)
         let path = bundle.pathForResource("LargeData", ofType: "txt")
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         guard let largeData = BMSLoggerTests.getFileContents(path!) else {
             XCTFail()
             return
@@ -587,7 +587,7 @@ class BMSLoggerTests: XCTestCase {
         }
         
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.sdkDebugLoggingEnabled = false
         Logger.logLevelFilter = LogLevel.Debug
@@ -666,7 +666,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         
@@ -708,7 +708,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         
@@ -844,7 +844,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         
@@ -890,7 +890,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        let loggerInstance = Logger.loggerForName(fakePKG)
+        let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
         

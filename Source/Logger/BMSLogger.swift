@@ -73,7 +73,7 @@ public extension Logger {
                 
                 // Send the request, even if there are no logs to send (to keep track of device info)
                 if let request: BaseRequest = BMSLogger.buildLogSendRequest(logSendCallback) {
-                    request.sendData(logPayloadData, withCompletionHandler: logSendCallback)
+                    request.sendData(logPayloadData, completionHandler: logSendCallback)
                 }
             }
             catch let error as NSError {
@@ -126,7 +126,7 @@ public extension Logger {
                 
                 // Send the request, even if there are no logs to send (to keep track of device info)
                 if let request: BaseRequest = BMSLogger.buildLogSendRequest(analyticsSendCallback) {
-                    request.sendData(logPayloadData, withCompletionHandler: analyticsSendCallback)
+                    request.sendData(logPayloadData, completionHandler: analyticsSendCallback)
                 }
             }
             catch let error as NSError {
@@ -150,7 +150,7 @@ public class BMSLogger: LoggerDelegate {
     // MARK: Properties (internal)
     
     // Internal instrumentation for troubleshooting issues in BMSCore
-    internal static let internalLogger = Logger.loggerForName(Constants.Package.logger)
+    internal static let internalLogger = Logger.logger(forName: Constants.Package.logger)
     
     
     
@@ -215,7 +215,7 @@ public class BMSLogger: LoggerDelegate {
     
     internal static func logException(exception: NSException) {
         
-        let logger = Logger.loggerForName(Constants.Package.logger)
+        let logger = Logger.logger(forName: Constants.Package.logger)
         var exceptionString = "Uncaught Exception: \(exception.name)."
         if let reason = exception.reason {
             exceptionString += " Reason: \(reason)."

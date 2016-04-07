@@ -6,7 +6,7 @@ use_frameworks!
 # Methods
 
 def import_pods
-    pod 'BMSCore', '~> 0.0.45'
+    pod 'BMSCore', '~> 0.0'
 end
 
 def import_pods_iOS
