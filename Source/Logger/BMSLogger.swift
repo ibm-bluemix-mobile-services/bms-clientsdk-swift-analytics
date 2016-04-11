@@ -435,7 +435,7 @@ public class BMSLogger: LoggerDelegate {
             return Request(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
         }
         else {
-            BMSLogger.internalLogger.error("Failed to send logs because the client was not yet initialized. Make sure that either the BMSClient class has been initialized.")
+            BMSLogger.internalLogger.error("Failed to send logs because the client was not yet initialized. Make sure that the BMSClient class has been initialized.")
             return nil
         }
     }
