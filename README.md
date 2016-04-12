@@ -1,9 +1,7 @@
 IBM Bluemix Mobile Services - Client SDK Swift Analytics
 ===================================================
 
-This is the analytics and logger component of the Swift SDK for IBM Bluemix Mobile Services. 
-
-https://console.ng.bluemix.net/solutions/mobilefirst
+This is the analytics and logger component of the Swift SDK for [IBM Bluemix Mobile Services](https://console.ng.bluemix.net/docs/services/mobile.html).
 
 
 ## Requirements
@@ -12,10 +10,11 @@ https://console.ng.bluemix.net/solutions/mobilefirst
 
 
 ## Installation
-The Bluemix Mobile Services Swift SDK is available via [Cocoapods](http://cocoapods.org/). 
-To install, add the `BMSAnalytics` pod to your `Podfile`.
+The Bluemix Mobile Services Swift SDKs are available via [Cocoapods](http://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage).
 
-##### iOS
+#### Cocoapods
+To install BMSAnalytics using Cocoapods, add it to your Podfile:
+
 ```ruby
 use_frameworks!
 
@@ -25,15 +24,16 @@ target 'MyApp' do
 end
 ```
 
-##### watchOS
-```ruby
-use_frameworks!
+Then run the `pod install` command.
 
-target 'MyApp WatchKit Extension' do
-    platform :watchos, '2.0'
-    pod 'BMSAnalytics'
-end
+#### Carthage
+To install BMSAnalytics using Carthage, add it to your Cartfile: 
+
+```ogdl
+github "ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics"
 ```
+
+Then run the `carthage update` command. To complete the integration, follow the instructions [here](https://github.com/Carthage/Carthage#getting-started).
 
 
 =======================
