@@ -33,7 +33,9 @@ To install BMSAnalytics using Carthage, add it to your Cartfile:
 github "ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics"
 ```
 
-Then run the `carthage update` command. To complete the integration, follow the instructions [here](https://github.com/Carthage/Carthage#getting-started).
+Then run the `carthage update` command. Once the build is finished, drag the `BMSAnalytics.framework`, `BMSCore.framework`, and `BMSAnalyticsAPI.framework` files into your Xcode project. 
+
+To complete the integration, follow the instructions [here](https://github.com/Carthage/Carthage#getting-started).
 
 
 =======================
