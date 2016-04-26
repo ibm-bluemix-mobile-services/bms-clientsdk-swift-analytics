@@ -33,7 +33,7 @@ public extension Logger {
     public static func send(completionHandler userCallback: BmsCompletionHandler? = nil) {
         
         guard !currentlySendingLoggerLogs else {
-            BMSLogger.internalLogger.fatal("Ignoring Logger.send() until the previous send request finishes.")
+            BMSLogger.internalLogger.info("Ignoring Logger.send() until the previous send request finishes.")
             return
         }
         
