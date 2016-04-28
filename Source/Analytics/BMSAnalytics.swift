@@ -53,6 +53,9 @@ public extension Analytics {
             }
         }
         
+        // This is required for active user data to appear on the Analytics console even if the developer does not specify the user. userIdentity will be converted to the device ID.
+        Analytics.userIdentity = nil
+        
         // Package analytics metadata in a header for each request
         // Outbound request metadata is identical for all requests made on the same device from the same app
         if BMSClient.sharedInstance.bluemixRegion != nil {
@@ -98,30 +101,31 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     /// Identifies the current application user.
     /// To reset the userId, set the value to nil.
-    public var userIdentity: String? = BMSAnalytics.deviceId {
+    public var userIdentity: String? {
+        
+        // Note: The developer sets this value via Analytics.userIdentity
         didSet {
-            if userIdentity != nil {
-                
-                if let sessionId = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] {
-                    
-                    let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
-                    
-                    var userIdMetadata: [String: AnyObject] = [:]
-                    userIdMetadata[Constants.Metadata.Analytics.sessionId] = sessionId
-                    userIdMetadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
-                    userIdMetadata[Constants.Metadata.Analytics.userId] = userIdentity
-                    userIdMetadata[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.user
-                    
-                    Analytics.log(userIdMetadata)
-                }
-                else {
-                    Analytics.logger.warn("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
-                    userIdentity = BMSAnalytics.deviceId
-                }
+            
+            // If the user sets to nil, change the value back to the deviceId so that we can continue recording unique users by the device they are using
+            if userIdentity == nil {
+                userIdentity = BMSAnalytics.uniqueDeviceId
             }
-            else {
-                // If the user sets to nil, change the value back to the deviceId
-                userIdentity = BMSAnalytics.deviceId
+            
+            if let sessionId = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] {
+                
+                let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
+                
+                var userIdMetadata: [String: AnyObject] = [:]
+                userIdMetadata[Constants.Metadata.Analytics.sessionId] = sessionId
+                userIdMetadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
+                userIdMetadata[Constants.Metadata.Analytics.userId] = userIdentity
+                userIdMetadata[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.user
+                
+                Analytics.log(userIdMetadata)
+            }
+            else if userIdentity != BMSAnalytics.uniqueDeviceId {
+                Analytics.logger.warn("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
+                userIdentity = BMSAnalytics.uniqueDeviceId
             }
         }
     }
@@ -312,6 +316,7 @@ private enum AppClosedBy: String {
 internal extension BMSAnalytics {
     
     internal static func uninitialize() {
+        Analytics.delegate = nil
         BMSAnalytics.apiKey = nil
         BMSAnalytics.appName = nil
         NSSetUncaughtExceptionHandler(nil)

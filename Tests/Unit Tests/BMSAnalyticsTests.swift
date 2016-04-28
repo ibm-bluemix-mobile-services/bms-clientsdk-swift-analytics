@@ -271,21 +271,54 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
     
-    func testUserIdentityUpdatesCorrectly() {
+    func testUserIdentityApiWithLifecycleEvents() {
+        
+        XCTAssertNil(Analytics.userIdentity)
+        XCTAssertNil(Analytics.delegate)
+        
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        
+        Analytics.userIdentity = "test user"
+        XCTAssertEqual(Analytics.userIdentity, "test user")
+        XCTAssertEqual(Analytics.delegate?.userIdentity, "test user")
+        
+        Analytics.userIdentity = nil
+        XCTAssertNil(Analytics.userIdentity)
+        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
+    }
+    
+    
+    func testUserIdentityApiWithoutLifecycleEvents() {
+        
+        XCTAssertNil(Analytics.userIdentity)
+        XCTAssertNil(Analytics.delegate)
+        
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
+        
+        Analytics.userIdentity = "test user"
+        XCTAssertEqual(Analytics.userIdentity, "test user")
+        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
+        
+        Analytics.userIdentity = nil
+        XCTAssertNil(Analytics.userIdentity)
+        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
+    }
+    
+    
+    func testUserIdentityInternalUpdatesCorrectly() {
         
         let analyticsInstance = BMSAnalytics()
         
-        XCTAssertNotNil(analyticsInstance.userIdentity)
-        XCTAssertEqual(analyticsInstance.userIdentity, BMSAnalytics.deviceId)
+        XCTAssertNil(analyticsInstance.userIdentity)
         
-        BMSAnalytics.logSessionStart() // Required for userIdentity data to show up on Analytics console
+        BMSAnalytics.logSessionStart()
         
         analyticsInstance.userIdentity = "test user"
         XCTAssertEqual(analyticsInstance.userIdentity, "test user")
         XCTAssertNotEqual(analyticsInstance.userIdentity, BMSAnalytics.deviceId)
         
         analyticsInstance.userIdentity = nil
-        XCTAssertEqual(analyticsInstance.userIdentity, BMSAnalytics.deviceId)
+        XCTAssertEqual(analyticsInstance.userIdentity, BMSAnalytics.uniqueDeviceId)
     }
     
     
@@ -298,7 +331,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         analyticsInstance.userIdentity = "fail"
         XCTAssertNotEqual(analyticsInstance.userIdentity, "fail")
-        XCTAssertEqual(analyticsInstance.userIdentity, BMSAnalytics.deviceId)
+        XCTAssertEqual(analyticsInstance.userIdentity, BMSAnalytics.uniqueDeviceId)
     }
     
     
