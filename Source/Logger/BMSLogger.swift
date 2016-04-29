@@ -87,7 +87,7 @@ public extension Logger {
     internal static func sendAnalytics(completionHandler userCallback: BmsCompletionHandler? = nil) {
         
         guard !currentlySendingAnalyticsLogs else {
-            Analytics.logger.fatal("Ignoring Analytics.send() until the previous send request finishes.")
+            Analytics.logger.info("Ignoring Analytics.send() until the previous send request finishes.")
             return
         }
         
