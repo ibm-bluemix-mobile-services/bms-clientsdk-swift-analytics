@@ -1,0 +1,21 @@
+language: objective-c
+env:
+  global:
+  - PATH=/usr/local/bin:$PATH
+  - LC_TYPE=en_US.UTF-8
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode7.3
+      sudo: required
+before_script:
+  - mkdir -p /Users/travis/Library/Developer/CoreSimulator/Devices/5752202B-E7A2-4B6C-9D7B-B211C2F54654/data/Documents
+  - chmod -R 777 /Users/travis/Library/Developer/CoreSimulator
+script:
+  - pod setup
+  - pod spec lint --allow-warnings
+  - carthage update
+  - xcodebuild -scheme 'BMSAnalytics iOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  - xcodebuild -scheme 'BMSAnalytics watchOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  - xcodebuild test -scheme 'BMSAnalytics Tests' -destination 'platform=iOS Simulator,name=iPhone 6s'
+
