@@ -1,4 +1,8 @@
 language: objective-c
+branches:
+  only:
+    - master
+    - development
 env:
   global:
   - PATH=/usr/local/bin:$PATH
