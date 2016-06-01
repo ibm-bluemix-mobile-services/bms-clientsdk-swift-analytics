@@ -256,6 +256,7 @@ public class BMSAnalytics: AnalyticsDelegate {
         requestMetadata["appStoreId"] = NSBundle.mainBundle().bundleIdentifier ?? ""
         requestMetadata["appVersionCode"] = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String ?? ""
         requestMetadata["appVersionDisplay"] = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+        requestMetadata["sdkVersion"] = getSDKVersion()
         
         var requestMetadataString: String?
         do {
@@ -296,6 +297,13 @@ public class BMSAnalytics: AnalyticsDelegate {
         }
         
         return responseMetadata
+    }
+    
+    internal static func getSDKVersion() -> String {
+        if let bundle = NSBundle(identifier: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics") {
+            return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+        }
+        return ""
     }
     
 }
