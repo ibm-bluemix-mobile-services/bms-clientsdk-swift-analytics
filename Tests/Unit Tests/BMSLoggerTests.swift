@@ -650,7 +650,7 @@ class BMSLoggerTests: XCTestCase {
         
         Analytics.initializeWithAppName(APP_NAME, apiKey: API_KEY)
         
-        let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: API_KEY]
+        let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: API_KEY, Constants.analyticsP30ApiKey: "appID1"]
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)
