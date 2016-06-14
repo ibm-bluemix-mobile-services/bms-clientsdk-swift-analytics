@@ -173,6 +173,7 @@ class BMSAnalyticsTests: XCTestCase {
         XCTAssert(outboundMetadata.containsString("\"model\":\"Simulator\""))
         XCTAssert(outboundMetadata.containsString("\"mfpAppName\":\"Unit Test App\""))
         XCTAssert(!outboundMetadata.containsString("\"deviceID\":\"\"")) // Make sure deviceID is not empty
+        XCTAssert(!outboundMetadata.containsString("\"sdkVersion\":\"\"")) // Make sure sdkVersion is not empty
         
         let osVersion = UIDevice.currentDevice().systemVersion
         XCTAssert(outboundMetadata.containsString("\"osVersion\":\"" + "\(osVersion)" + "\""))
