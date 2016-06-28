@@ -67,9 +67,6 @@ public extension Logger {
                     let logPayloadJson = [Constants.outboundLogPayload: logPayload]
                     logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
                 }
-                else {
-                    BMSLogger.internalLogger.info("There are no logs to send.")
-                }
                 
                 // Send the request, even if there are no logs to send (to keep track of device info)
                 if let request: BaseRequest = BMSLogger.buildLogSendRequest(logSendCallback) {
@@ -119,9 +116,6 @@ public extension Logger {
                 if let logPayload = logsToSend {
                     let logPayloadJson = [Constants.outboundLogPayload: logPayload]
                     logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
-                }
-                else {
-                    Analytics.logger.info("There are no analytics data to send.")
                 }
                 
                 // Send the request, even if there are no logs to send (to keep track of device info)
@@ -487,7 +481,7 @@ public class BMSLogger: LoggerDelegate {
             return try readLogsFromFile(bufferLogFile)
         }
         else {
-            BMSLogger.internalLogger.error("Cannot send data to server. Unable to read file: \(fileName).")
+            BMSLogger.internalLogger.debug("Unable to read file: \(fileName). This is likely because either no analytics data or no logs have been recorded since they were last sent.")
             return nil
         }
     }
