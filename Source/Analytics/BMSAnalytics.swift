@@ -186,6 +186,8 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
         lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
+        lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
+        Analytics.log(lifecycleEvents)
     }
     
     
