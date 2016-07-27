@@ -270,7 +270,7 @@ public class BMSLogger: LoggerDelegate {
             guard logAsJsonString != nil else {
                 let errorMessage = "Failed to write logs to file. This is likely because the analytics metadata could not be parsed."
 
-                Logger.printToConsole(message: errorMessage, loggerName:loggerName, level: .Error, calledFunction: __FUNCTION__, calledFile: __FILE__, calledLineNumber: __LINE__)
+                Logger.printToConsole(message: errorMessage, loggerName:loggerName, level: .Error, calledFunction: #function, calledFile: #file, calledLineNumber: #line)
                 
                 
                 return
@@ -382,7 +382,7 @@ public class BMSLogger: LoggerDelegate {
         else {
             let errorMessage = "Cannot write to file: \(file)."
 
-            Logger.printToConsole(message: errorMessage, loggerName: loggerName, level: LogLevel.Error, calledFunction: __FUNCTION__, calledFile: __FILE__, calledLineNumber: __LINE__)
+            Logger.printToConsole(message: errorMessage, loggerName: loggerName, level: LogLevel.Error, calledFunction: #function, calledFile: #file, calledLineNumber: #line)
         }
         
     }
