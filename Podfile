@@ -8,11 +8,11 @@ target 'BMSAnalytics watchOS' do
     pod 'BMSCore', '~> 1.1'
 end
 
-target 'TestApp iOS' do
+target 'BMSAnalytics Tests' do
     pod 'BMSCore', '~> 1.1'
 end
 
-target 'TestApp watchOS' do
+target 'TestApp iOS' do
     pod 'BMSCore', '~> 1.1'
 end
 
