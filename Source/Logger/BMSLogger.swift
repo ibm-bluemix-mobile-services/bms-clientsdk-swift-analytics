@@ -231,7 +231,7 @@ public class BMSLogger: LoggerDelegate {
     
     // This is the master function that handles all of the logging, including level checking, printing to console, and writing to file
     // All other log functions below this one are helpers for this function
-    public func logMessageToFile(message: String, level: LogLevel, loggerName: String, calledFile: String, calledFunction: String, calledLineNumber: Int, additionalMetadata: [String: AnyObject]? = nil) {
+    public func logToFile(message logMessage: String, level: LogLevel, loggerName: String, calledFile: String, calledFunction: String, calledLineNumber: Int, additionalMetadata: [String: AnyObject]? = nil) {
         
         let group :dispatch_group_t = dispatch_group_create()
         
@@ -265,12 +265,13 @@ public class BMSLogger: LoggerDelegate {
             }
             
             let timeStampString = BMSLogger.dateFormatter.stringFromDate(NSDate())
-            var logAsJsonString = BMSLogger.convertLogToJson(message, level: level, loggerName: loggerName, timeStamp: timeStampString, additionalMetadata: additionalMetadata)
+            var logAsJsonString = BMSLogger.convertLogToJson(logMessage, level: level, loggerName: loggerName, timeStamp: timeStampString, additionalMetadata: additionalMetadata)
             
             guard logAsJsonString != nil else {
                 let errorMessage = "Failed to write logs to file. This is likely because the analytics metadata could not be parsed."
 
-                Logger.printLogToConsole(errorMessage, loggerName:loggerName, level: .Error, calledFunction: __FUNCTION__, calledFile: __FILE__, calledLineNumber: __LINE__)
+                Logger.printToConsole(message: errorMessage, loggerName:loggerName, level: .Error, calledFunction: __FUNCTION__, calledFile: __FILE__, calledLineNumber: __LINE__)
+                
                 
                 return
             }
@@ -381,7 +382,7 @@ public class BMSLogger: LoggerDelegate {
         else {
             let errorMessage = "Cannot write to file: \(file)."
 
-            Logger.printLogToConsole(errorMessage, loggerName: loggerName, level: LogLevel.Error, calledFunction: __FUNCTION__, calledFile: __FILE__, calledLineNumber: __LINE__)
+            Logger.printToConsole(message: errorMessage, loggerName: loggerName, level: LogLevel.Error, calledFunction: __FUNCTION__, calledFile: __FILE__, calledLineNumber: __LINE__)
         }
         
     }
