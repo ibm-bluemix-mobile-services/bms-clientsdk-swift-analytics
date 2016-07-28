@@ -942,11 +942,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = IBM;
 				TargetAttributes = {
 					926CF80D1C4ECC330084355B = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 					926CF8171C4ECC330084355B = {
 						CreatedOnToolsVersion = 7.2;
@@ -1572,6 +1573,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8628555198FF0AB89E27AAB7 /* Pods-BMSAnalytics iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1586,6 +1588,7 @@
 				PRODUCT_NAME = BMSAnalytics;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1593,6 +1596,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 32387ADA9B07DDBE82971EF9 /* Pods-BMSAnalytics iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1606,6 +1610,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics;
 				PRODUCT_NAME = BMSAnalytics;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1613,6 +1619,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57AE6AA5494B19A5BA0B8325 /* Pods-BMSAnalytics Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Tests/Unit Tests/Resources/Info.plist";
@@ -1627,12 +1634,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7F69878ACE7FA94ADFB641A1 /* Pods-BMSAnalytics Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Tests/Unit Tests/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics-Tests";
 				PRODUCT_NAME = "BMSAnalytics Tests";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -1640,6 +1649,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BAB27FA8EB17FBAE6EA19D9A /* Pods-BMSAnalytics watchOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -1664,6 +1674,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8E870A0F2223398AA4A2B8FB /* Pods-BMSAnalytics watchOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -1678,6 +1689,7 @@
 				PRODUCT_NAME = BMSAnalytics;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.1;
 			};
@@ -1687,6 +1699,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57A87ECA3D8B69F84A27DEA5 /* Pods-TestApp iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Tests/Test Apps/TestApp iOS/Resources/Info.plist";
@@ -1701,6 +1714,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 992194A4B59CE9033CB53429 /* Pods-TestApp iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Tests/Test Apps/TestApp iOS/Resources/Info.plist";
@@ -1708,6 +1722,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -1715,6 +1730,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7BD0FBB32E1FD5982480E8B8 /* Pods-TestApp watchOS Extension.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Tests/Test Apps/TestApp watchOS Extension/Resources/Info.plist";
@@ -1732,6 +1748,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5F0DC4D1DA1B97831D2A48D /* Pods-TestApp watchOS Extension.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Tests/Test Apps/TestApp watchOS Extension/Resources/Info.plist";
@@ -1740,6 +1757,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.1;
 			};
@@ -1748,8 +1766,8 @@
 		926CF86D1C4ECDF80084355B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = TestAppWatchOS_Extension;
 				INFOPLIST_FILE = "Tests/Test Apps/TestApp watchOS/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp;
@@ -1764,8 +1782,8 @@
 		926CF86E1C4ECDF80084355B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = TestAppWatchOS_Extension;
 				INFOPLIST_FILE = "Tests/Test Apps/TestApp watchOS/Resources/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.mobilefirstplatform.clientsdk.swift.TestAppiOS.watchkitapp;
