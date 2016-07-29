@@ -115,7 +115,6 @@ public class Logger {
     /// This property will be set back to `false` if the logs are sent to the server.
     public static var isUncaughtExceptionDetected: Bool {
         get {
-            let asdf = Logger.delegate
             return Logger.delegate?.isUncaughtExceptionDetected ?? false
         }
         set {
