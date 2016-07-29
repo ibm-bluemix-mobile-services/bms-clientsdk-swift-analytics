@@ -24,9 +24,14 @@ class InterfaceController: WKInterfaceController {
         
         Logger.logLevelFilter = LogLevel.Debug
         let logger = Logger.logger(forName: "TestAppWatchOS")
-        logger.debug("Send analytics button pressed")
         
-        Analytics.log(["buttonPressed": "recordLog"])
+        #if swift(>=3.0)
+            logger.debug(message: "Send analytics button pressed")
+            Analytics.log(metadata: ["buttonPressed": "recordLog"])
+        #else
+            logger.debug("Send analytics button pressed")
+            Analytics.log(["buttonPressed": "recordLog"])
+        #endif
         
         func completionHandler(sendType: String) -> BmsCompletionHandler {
             return {
@@ -42,8 +47,12 @@ class InterfaceController: WKInterfaceController {
             }
         }
         
-        Logger.send(completionHandler: completionHandler("Logs"))
-        
-        Analytics.send(completionHandler: completionHandler("Analytics"))
+        #if swift(>=3.0)
+            Logger.send(completionHandler: completionHandler(sendType: "Logs"))
+            Analytics.send(completionHandler: completionHandler(sendType: "Analytics"))
+        #else
+            Logger.send(completionHandler: completionHandler("Logs"))
+            Analytics.send(completionHandler: completionHandler("Analytics"))
+        #endif
     }
 }

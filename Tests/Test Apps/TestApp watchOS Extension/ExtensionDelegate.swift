@@ -21,10 +21,17 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
         
-        BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
+        #if swift(>=3.0)
+            BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
 
-        // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-        Analytics.initializeWithAppName("TestAppWatchOS", apiKey: "1234")
+            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+            Analytics.initializeWithAppName(appName: "TestAppWatchOS", apiKey: "1234")
+        #else
+            BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
+            
+            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+            Analytics.initializeWithAppName("TestAppWatchOS", apiKey: "1234")
+        #endif
         
         Analytics.enabled = true
         Logger.logStoreEnabled = true

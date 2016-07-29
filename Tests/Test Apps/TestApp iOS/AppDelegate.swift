@@ -23,12 +23,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+#if swift(>=3.0)
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
+        #if swift(>=3.0)
         
-        // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-        Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+            BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
+            
+            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+            Analytics.initializeWithAppName(appName: "TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+            
+        #else
+            
+            BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
+            
+            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+            Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+            
+        #endif
         
         Analytics.enabled = true
         Logger.logStoreEnabled = true
@@ -38,5 +51,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+#else
+    
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        #if swift(>=3.0)
+            
+            BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
+            
+            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+            Analytics.initializeWithAppName(appName: "TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+            
+        #else
+            
+            BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
+            
+            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+            Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+            
+        #endif
+        
+        Analytics.enabled = true
+        Logger.logStoreEnabled = true
+        Logger.sdkDebugLoggingEnabled = true
+        
+        Analytics.userIdentity = "Some user name"
+        
+        return true
+    }
+
+#endif
 }
 
