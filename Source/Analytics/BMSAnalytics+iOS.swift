@@ -25,9 +25,19 @@ public extension BMSAnalytics {
         // By now, the app will have already passed the "will enter foreground" event. Therefore, we must manually start the timer for the current session.
         logSessionStart()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(logSessionStart), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        #if swift(>=3.0)
+            
+            NotificationCenter.default().addObserver(self, selector: #selector(logSessionStart), name: .UIApplicationWillEnterForeground, object: nil)
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(logSessionEnd), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+            NotificationCenter.default().addObserver(self, selector: #selector(logSessionEnd), name: .UIApplicationWillEnterForeground, object: nil)
+            
+        #else
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(logSessionStart), name: UIApplicationWillEnterForegroundNotification, object: nil)
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(logSessionEnd), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+            
+        #endif
     }
     
     
@@ -37,9 +47,15 @@ public extension BMSAnalytics {
         
         var osVersion = "", model = "", deviceId = ""
         
-        let device = UIDevice.currentDevice()
-        osVersion = device.systemVersion
-        deviceId = device.identifierForVendor?.UUIDString ?? "unknown"
+        #if swift(>=3.0)
+            let device = UIDevice.current()
+            osVersion = device.systemVersion
+            deviceId = device.identifierForVendor?.uuidString ?? "unknown"
+        #else
+            let device = UIDevice.currentDevice()
+            osVersion = device.systemVersion
+            deviceId = device.identifierForVendor?.UUIDString ?? "unknown"
+        #endif
         model = device.modelName
         
         return (osVersion, model, deviceId)

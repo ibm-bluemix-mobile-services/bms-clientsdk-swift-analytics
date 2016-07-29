@@ -48,7 +48,11 @@ public extension Analytics {
                 #if os(iOS)
                     BMSAnalytics.startRecordingApplicationLifecycle()
                 #else
-                    Analytics.logger.warn("The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
+                    #if swift(>=3.0)
+                        Analytics.logger.warn(message: "The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
+                    #else
+                        Analytics.logger.warn("The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
+                    #endif
                 #endif
             }
         }
@@ -62,7 +66,11 @@ public extension Analytics {
             Request.requestAnalyticsData = BMSAnalytics.generateOutboundRequestMetadata()
         }
         else {
-            Analytics.logger.warn("Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
+            #if swift(>=3.0)
+                Analytics.logger.warn(message: "Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
+            #else
+                Analytics.logger.warn("Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
+            #endif
         }
     }
     
@@ -117,14 +125,26 @@ public class BMSAnalytics: AnalyticsDelegate {
                 
                 var userIdMetadata: [String: AnyObject] = [:]
                 userIdMetadata[Constants.Metadata.Analytics.sessionId] = sessionId
-                userIdMetadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
+                #if swift(>=3.0)
+                    userIdMetadata[Constants.Metadata.Analytics.timestamp] = NSNumber(value: currentTime)
+                #else
+                    userIdMetadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
+                #endif
                 userIdMetadata[Constants.Metadata.Analytics.userId] = userIdentity
                 userIdMetadata[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.user
                 
-                Analytics.log(userIdMetadata)
+                #if swift(>=3.0)
+                    Analytics.log(metadata: userIdMetadata)
+                #else
+                    Analytics.log(userIdMetadata)
+                #endif
             }
             else if userIdentity != BMSAnalytics.uniqueDeviceId {
-                Analytics.logger.warn("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
+                #if swift(>=3.0)
+                    Analytics.logger.warn(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
+                #else
+                    Analytics.logger.warn("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
+                #endif
                 userIdentity = BMSAnalytics.uniqueDeviceId
             }
         }
@@ -140,18 +160,38 @@ public class BMSAnalytics: AnalyticsDelegate {
     // Create a UUID for the current device and save it to the keychain
     // Currently only used for Apple Watch devices
     internal static var uniqueDeviceId: String {
-        // First, check if a UUID was already created
-        let bmsUserDefaults = NSUserDefaults(suiteName: Constants.userDefaultsSuiteName)
-        guard bmsUserDefaults != nil else {
-            Analytics.logger.error("Failed to get an ID for this device.")
-            return ""
-        }
         
-        var deviceId = bmsUserDefaults!.stringForKey(Constants.Metadata.Analytics.deviceId)
-        if deviceId == nil {
-            deviceId = NSUUID().UUIDString
-            bmsUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
-        }
+        // First, check if a UUID was already created
+        #if swift(>=3.0)
+            
+            let bmsUserDefaults = UserDefaults(suiteName: Constants.userDefaultsSuiteName)
+            guard bmsUserDefaults != nil else {
+                Analytics.logger.error(message: "Failed to get an ID for this device.")
+                return ""
+            }
+            
+            var deviceId = bmsUserDefaults!.string(forKey: Constants.Metadata.Analytics.deviceId)
+            if deviceId == nil {
+                deviceId = NSUUID().uuidString
+                bmsUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
+            }
+            
+        #else
+            
+            let bmsUserDefaults = NSUserDefaults(suiteName: Constants.userDefaultsSuiteName)
+            guard bmsUserDefaults != nil else {
+                Analytics.logger.error("Failed to get an ID for this device.")
+                return ""
+            }
+            
+            var deviceId = bmsUserDefaults!.stringForKey(Constants.Metadata.Analytics.deviceId)
+            if deviceId == nil {
+                deviceId = NSUUID().UUIDString
+                bmsUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
+            }
+            
+        #endif
+        
         return deviceId!
     }
     
@@ -162,9 +202,16 @@ public class BMSAnalytics: AnalyticsDelegate {
     internal static var deviceId: String = ""
     
     internal static var sdkVersion: String {
-        if let bundle = NSBundle(identifier: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics") {
-            return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
-        }
+        #if swift(>=3.0)
+            if let bundle = Bundle(identifier: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics") {
+                return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+            }
+        #else
+            if let bundle = NSBundle(identifier: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics") {
+                return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+            }
+        #endif
+        
         return ""
     }
     
@@ -179,15 +226,32 @@ public class BMSAnalytics: AnalyticsDelegate {
     dynamic static internal func logSessionStart() {
         
         // If this method is called before logSessionEnd() gets called, exit early so that the original startTime and metadata from the previous session start do not get discarded.
-        guard lifecycleEvents.isEmpty else {
-            Analytics.logger.info("A new session is starting before previous session ended. Data for this new session will be discarded.")
-            return
-        }
         
-        BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
-        lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
-        lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
-        Analytics.log(lifecycleEvents)
+        #if swift(>=3.0)
+            
+            guard lifecycleEvents.isEmpty else {
+                Analytics.logger.info(message: "A new session is starting before previous session ended. Data for this new session will be discarded.")
+                return
+            }
+            
+            BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
+            lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().uuidString
+            lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
+            Analytics.log(metadata: lifecycleEvents)
+            
+        #else
+        
+            guard lifecycleEvents.isEmpty else {
+                Analytics.logger.info("A new session is starting before previous session ended. Data for this new session will be discarded.")
+                return
+            }
+            
+            BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
+            lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
+            lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
+            Analytics.log(lifecycleEvents)
+        
+        #endif
     }
     
     
@@ -218,7 +282,11 @@ public class BMSAnalytics: AnalyticsDelegate {
             Logger.isUncaughtExceptionDetected = false
         }
         
-        Analytics.log(lifecycleEvents)
+        #if swift(>=3.0)
+            Analytics.log(metadata: lifecycleEvents)
+        #else
+            Analytics.log(lifecycleEvents)
+        #endif
         
         lifecycleEvents = [:]
         BMSAnalytics.startTime = 0
@@ -227,7 +295,11 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     // Remove the observers registered in the Analytics+iOS "startRecordingApplicationLifecycleEvents" method
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        #if swift(>=3.0)
+            NotificationCenter.default().removeObserver(self)
+        #else
+            NSNotificationCenter.defaultCenter().removeObserver(self)
+        #endif
     }
     
     
@@ -260,20 +332,41 @@ public class BMSAnalytics: AnalyticsDelegate {
         requestMetadata["model"] = model
         requestMetadata["deviceID"] = deviceId
         requestMetadata["mfpAppName"] = BMSAnalytics.appName
-        requestMetadata["appStoreLabel"] = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? ""
-        requestMetadata["appStoreId"] = NSBundle.mainBundle().bundleIdentifier ?? ""
-        requestMetadata["appVersionCode"] = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String ?? ""
-        requestMetadata["appVersionDisplay"] = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+        #if swift(>=3.0)
+            requestMetadata["appStoreLabel"] = Bundle.main().infoDictionary?["CFBundleName"] as? String ?? ""
+            requestMetadata["appStoreId"] = Bundle.main().bundleIdentifier ?? ""
+            requestMetadata["appVersionCode"] = Bundle.main().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String ?? ""
+            requestMetadata["appVersionDisplay"] = Bundle.main().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+        #else
+            requestMetadata["appStoreLabel"] = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? ""
+            requestMetadata["appStoreId"] = NSBundle.mainBundle().bundleIdentifier ?? ""
+            requestMetadata["appVersionCode"] = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String ?? ""
+            requestMetadata["appVersionDisplay"] = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+        #endif
         requestMetadata["sdkVersion"] = sdkVersion
         
         var requestMetadataString: String?
-        do {
-            let requestMetadataJson = try NSJSONSerialization.dataWithJSONObject(requestMetadata, options: [])
-            requestMetadataString = String(data: requestMetadataJson, encoding: NSUTF8StringEncoding)
-        }
-        catch let error {
-            Analytics.logger.error("Failed to append analytics metadata to request. Error: \(error)")
-        }
+
+        #if swift(>=3.0)
+            do {
+                let requestMetadataJson = try JSONSerialization.data(withJSONObject: requestMetadata, options: [])
+                requestMetadataString = String(data: requestMetadataJson, encoding: .utf8)
+            }
+            catch let error {
+                Analytics.logger.error(message: "Failed to append analytics metadata to request. Error: \(error)")
+            }
+            
+        #else
+            
+            do {
+                let requestMetadataJson = try NSJSONSerialization.dataWithJSONObject(requestMetadata, options: [])
+                requestMetadataString = String(data: requestMetadataJson, encoding: NSUTF8StringEncoding)
+            }
+            catch let error {
+                Analytics.logger.error("Failed to append analytics metadata to request. Error: \(error)")
+            }
+            
+        #endif
         
         return requestMetadataString
     }
@@ -282,11 +375,20 @@ public class BMSAnalytics: AnalyticsDelegate {
     // Gather response data as JSON to be recorded in an analytics log
     internal static func generateInboundResponseMetadata(request: Request, response: Response, url: String) -> [String: AnyObject] {
         
-        Analytics.logger.debug("Network response inbound")
+        #if swift(>=3.0)
+            Analytics.logger.debug(message: "Network response inbound")
+        #else
+            Analytics.logger.debug("Network response inbound")
+        #endif
         
         let endTime = NSDate.timeIntervalSinceReferenceDate()
         let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
-        let bytesSent = request.requestBody?.length ?? 0
+        
+        #if swift(>=3.0)
+            let bytesSent = request.requestBody?.count ?? 0
+        #else
+            let bytesSent = request.requestBody?.length ?? 0
+        #endif
         
         // Data for analytics logging
         var responseMetadata: [String: AnyObject] = [:]
@@ -301,7 +403,11 @@ public class BMSAnalytics: AnalyticsDelegate {
         responseMetadata["$bytesSent"] = bytesSent
         
         if (response.responseText != nil && !response.responseText!.isEmpty) {
-            responseMetadata["$bytesReceived"] = response.responseText?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+            #if swift(>=3.0)
+                responseMetadata["$bytesReceived"] = response.responseText?.lengthOfBytes(using: .utf8)
+            #else
+                responseMetadata["$bytesReceived"] = response.responseText?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+            #endif
         }
         
         return responseMetadata

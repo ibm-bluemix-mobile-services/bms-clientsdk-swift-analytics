@@ -20,8 +20,11 @@ import BMSCore
 class BMSLoggerTests: XCTestCase {
     
     
+// MARK: Swift 3.0
+#if swift(>=3.0)
+    
     override func tearDown() {
-        BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: "")
+        BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: nil, bluemixAppGUID: nil, bluemixRegion: "")
         BMSAnalytics.uninitialize()
     }
     
@@ -62,6 +65,959 @@ class BMSLoggerTests: XCTestCase {
         let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
         
         do {
+            try FileManager().removeItem(atPath: pathToFile)
+        } catch {
+            print("Could not delete " + pathToFile)
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Debug
+        Logger.sdkDebugLoggingEnabled = false
+        
+        loggerInstance.debug(message: "Hello world")
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        loggerInstance.fatal(message: "StephenColbert")
+
+        guard let formattedContents = BMSLoggerTests.getContents(ofFile: pathToFile) else {
+            XCTFail()
+            return
+        }
+        let fileContents = "[\(formattedContents)]"
+        let logDict = fileContents.data(using: .utf8)!
+        guard let jsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+        
+        let debugMessage = jsonDict[0]
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.message] == "Hello world")
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.level] == "DEBUG")
+        
+        let infoMessage = jsonDict[1]
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.message] == "1242342342343243242342")
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.level] == "INFO")
+        
+        let warnMessage = jsonDict[2]
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.message] == "Str: heyoooooo")
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.level] == "WARN")
+        
+        let errorMessage = jsonDict[3]
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.message] == "1 2 3 4")
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.level] == "ERROR")
+        
+        let fatalMessage = jsonDict[4]
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.message] == "StephenColbert")
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.timestamp] != nil)
+    }
+
+    
+    func testLogMethods(){
+        let fakePKG = "MYPKG"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+        } catch {
+            
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Debug
+
+        loggerInstance.debug(message: "Hello world")
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        loggerInstance.fatal(message: "StephenColbert")
+    
+        
+        guard let formattedContents = BMSLoggerTests.getContents(ofFile: pathToFile) else {
+            XCTFail()
+            return
+        }
+        let fileContents = "[\(formattedContents)]"
+        let logDict = fileContents.data(using: .utf8)!
+        guard let jsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+
+        let debugMessage = jsonDict[0]
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.message] == "Hello world")
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.level] == "DEBUG")
+
+        let infoMessage = jsonDict[1]
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.message] == "1242342342343243242342")
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.level] == "INFO")
+
+        let warnMessage = jsonDict[2]
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.message] == "Str: heyoooooo")
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.level] == "WARN")
+
+        let errorMessage = jsonDict[3]
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.message] == "1 2 3 4")
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.level] == "ERROR")
+
+        let fatalMessage = jsonDict[4]
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.message] == "StephenColbert")
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.timestamp] != nil)
+    }
+    
+    
+    func testLogWithNone(){
+        let fakePKG = "MYPKG"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+        } catch {
+            
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.None
+        
+        loggerInstance.debug(message: "Hello world")
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        loggerInstance.fatal(message: "StephenColbert")
+        
+        XCTAssertFalse(FileManager().fileExists(atPath: pathToFile))
+    }
+    
+    
+    func testIncorrectLogLevel(){
+        let fakePKG = "MYPKG"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+        } catch {
+            
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Fatal
+        
+        loggerInstance.debug(message: "Hello world")
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        
+        let fileExists = FileManager().fileExists(atPath: pathToFile)
+        
+        XCTAssertFalse(fileExists)
+    }
+    
+    
+    func testDisableLogging(){
+        let fakePKG = "MYPKG"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+        } catch {
+            
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = false
+        Logger.logLevelFilter = LogLevel.Debug
+        
+        loggerInstance.debug(message: "Hello world")
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        loggerInstance.fatal(message: "StephenColbert")
+        
+        let fileExists = FileManager().fileExists(atPath: pathToFile)
+        
+        XCTAssertFalse(fileExists)
+    }
+    
+    
+    func testLogException(){
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+        } catch {
+            
+        }
+        
+        let e = NSException(name: NSExceptionName("crashApp"), reason: "No reason at all just doing it for fun", userInfo: ["user":"nana"])
+        
+        BMSLogger.log(exception: e)
+        
+        guard let formattedContents = BMSLoggerTests.getContents(ofFile: pathToFile) else {
+            XCTFail()
+            return
+        }
+        let fileContents = "[\(formattedContents)]"
+        let reason = e.reason!
+        let errorMessage = "Uncaught Exception: \(e.name)." + " Reason: \(reason)."
+        let logDict = fileContents.data(using: .utf8)!
+        guard let jsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+        
+        let exception = jsonDict[0]
+        XCTAssertTrue(exception?[Constants.Metadata.Logger.message] == errorMessage)
+        XCTAssertTrue(exception?[Constants.Metadata.Logger.package] == Constants.Package.logger)
+        XCTAssertTrue(exception?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(exception?[Constants.Metadata.Logger.level] == "FATAL")
+    }
+    
+    
+    
+    // MARK: - Writing logs to file
+    
+    func testGetFilesForLogLevel(){
+        let pathToLoggerFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToAnalyticsFile = BMSLogger.logsDocumentPath + Constants.File.Analytics.logs
+        let pathToLoggerFileOverflow = BMSLogger.logsDocumentPath + Constants.File.Logger.overflowLogs
+        let pathToAnalyticsFileOverflow = BMSLogger.logsDocumentPath + Constants.File.Analytics.overflowLogs
+        
+        var (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Debug)
+        
+        XCTAssertTrue(logFile == pathToLoggerFile)
+        XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
+        XCTAssertNotNil(fileDispatchQueue)
+        
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Error)
+        
+        XCTAssertTrue(logFile == pathToLoggerFile)
+        XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
+        XCTAssertNotNil(fileDispatchQueue)
+        
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Fatal)
+        
+        XCTAssertTrue(logFile == pathToLoggerFile)
+        XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
+        XCTAssertNotNil(fileDispatchQueue)
+        
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Info)
+        
+        XCTAssertTrue(logFile == pathToLoggerFile)
+        XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
+        XCTAssertNotNil(fileDispatchQueue)
+        
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Error)
+        
+        XCTAssertTrue(logFile == pathToLoggerFile)
+        XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
+        XCTAssertNotNil(fileDispatchQueue)
+        
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Analytics)
+        
+        XCTAssertTrue(logFile == pathToAnalyticsFile)
+        XCTAssertTrue(logOverflowFile == pathToAnalyticsFileOverflow)
+        XCTAssertNotNil(fileDispatchQueue)
+    }
+    
+    
+    func testGetLogs(){
+        let fakePKG = "MYPKG"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+            
+        } catch {
+            
+        }
+        
+        do {
+            try FileManager().removeItem(atPath: pathToBuffer)
+            
+        } catch {
+            
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Debug
+        
+        loggerInstance.debug(message: "Hello world")
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        loggerInstance.fatal(message: "StephenColbert")
+        
+        guard let logs: String = BMSLoggerTests.getLogs(fromFile: LogFileType.LOGGER) else {
+            XCTFail()
+            return
+        }
+        
+        XCTAssertTrue(FileManager().fileExists(atPath: pathToBuffer))
+        
+        let fileContents = "[\(logs)]"
+        
+        let logDict  = fileContents.data(using: .utf8)!
+        guard let jsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+        
+        let debugMessage = jsonDict[0]
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.message] == "Hello world")
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.level] == "DEBUG")
+        
+        let infoMessage = jsonDict[1]
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.message] == "1242342342343243242342")
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.level] == "INFO")
+        
+        let warnMessage = jsonDict[2]
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.message] == "Str: heyoooooo")
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.level] == "WARN")
+        
+        let errorMessage = jsonDict[3]
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.message] == "1 2 3 4")
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.level] == "ERROR")
+        
+        let fatalMessage = jsonDict[4]
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.message] == "StephenColbert")
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.level] == "FATAL")
+    }
+    
+    
+    func testGetLogWithAnalytics(){
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Analytics.logs
+        let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Analytics.outboundLogs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+            
+        } catch {
+            
+        }
+        
+        do {
+            try FileManager().removeItem(atPath: pathToBuffer)
+            
+        } catch {
+            
+        }
+        
+        Analytics.enabled = true
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Analytics
+        let meta = ["hello": 1]
+        
+        Analytics.log(metadata: meta)
+        
+        guard let logs: String = BMSLoggerTests.getLogs(fromFile: LogFileType.ANALYTICS) else {
+            XCTFail()
+            return
+        }
+        
+        let bufferFile = FileManager().fileExists(atPath: pathToBuffer)
+        
+        XCTAssertTrue(bufferFile)
+        
+        let fileContents = "[\(logs)]"
+        
+        let logDict = fileContents.data(using: .utf8)!
+        guard let jsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+        
+        let analyticsMessage = jsonDict[0]
+        XCTAssertTrue(analyticsMessage?[Constants.Metadata.Logger.message] == "")
+        XCTAssertTrue(analyticsMessage?[Constants.Metadata.Logger.package] == Logger.bmsLoggerPrefix + "analytics")
+        XCTAssertTrue(analyticsMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(analyticsMessage?[Constants.Metadata.Logger.level] == "ANALYTICS")
+        XCTAssertTrue(analyticsMessage?[Constants.Metadata.Logger.metadata] == meta)
+    }
+    
+    
+    func testOverFlowLogging(){
+        let fakePKG = "MYPKG"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToOverflow = BMSLogger.logsDocumentPath + Constants.File.Logger.overflowLogs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+            
+        } catch {
+            
+        }
+        
+        do {
+            try FileManager().removeItem(atPath: pathToOverflow)
+        } catch {
+            
+        }
+        
+        let bundle = Bundle(for: self.dynamicType)
+        let path = bundle.pathForResource("LargeData", ofType: "txt")
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        guard let largeData = BMSLoggerTests.getContents(ofFile: path!) else {
+            XCTFail()
+            return
+        }
+        
+        Logger.logStoreEnabled = true
+        Logger.sdkDebugLoggingEnabled = false
+        Logger.logLevelFilter = LogLevel.Debug
+        
+        loggerInstance.debug(message: largeData)
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        loggerInstance.fatal(message: "StephenColbert")
+        
+        XCTAssertTrue(FileManager().fileExists(atPath: pathToOverflow))
+        
+        guard let formattedContents = BMSLoggerTests.getContents(ofFile: pathToFile) else {
+            XCTFail()
+            return
+        }
+        var fileContents = "[\(formattedContents)]"
+        var logDict = fileContents.data(using: .utf8)!
+        guard let jsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+        
+        let infoMessage = jsonDict[0]
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.message] == "1242342342343243242342")
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(infoMessage?[Constants.Metadata.Logger.level] == "INFO")
+        
+        let warnMessage = jsonDict[1]
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.message] == "Str: heyoooooo")
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(warnMessage?[Constants.Metadata.Logger.level] == "WARN")
+        
+        let errorMessage = jsonDict[2]
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.message] == "1 2 3 4")
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(errorMessage?[Constants.Metadata.Logger.level] == "ERROR")
+        
+        let fatalMessage = jsonDict[3]
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.message] == "StephenColbert")
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(fatalMessage?[Constants.Metadata.Logger.level] == "FATAL")
+        
+        guard let newFormattedContents = BMSLoggerTests.getContents(ofFile: pathToOverflow) else {
+            XCTFail()
+            return
+        }
+        fileContents = "[\(newFormattedContents)]"
+        logDict  = fileContents.data(using: .utf8)!
+        guard let newJsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+        
+        
+        let overflowMessage = newJsonDict[0]
+        XCTAssertTrue(overflowMessage?[Constants.Metadata.Logger.message] == largeData)
+        XCTAssertTrue(overflowMessage?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(overflowMessage?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(overflowMessage?[Constants.Metadata.Logger.level] == "DEBUG")
+    }
+    
+    
+    func testExistingOverflowFile(){
+        let fakePKG = "MYPKG"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToOverflow = BMSLogger.logsDocumentPath + Constants.File.Logger.overflowLogs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+            
+        } catch {
+            
+        }
+        
+        do {
+            try FileManager().removeItem(atPath: pathToOverflow)
+        } catch {
+            
+        }
+        
+        let bundle = Bundle(for: self.dynamicType)
+        let path = bundle.pathForResource("LargeData", ofType: "txt")
+        
+        guard let largeData = BMSLoggerTests.getContents(ofFile: path!) else {
+            XCTFail()
+            return
+        }
+        
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.sdkDebugLoggingEnabled = false
+        Logger.logLevelFilter = LogLevel.Debug
+        
+        loggerInstance.debug(message: largeData)
+        loggerInstance.info(message: largeData)
+        loggerInstance.warn(message: largeData)
+        loggerInstance.error(message: largeData)
+        loggerInstance.fatal(message: largeData)
+        
+        
+        XCTAssertTrue(FileManager().fileExists(atPath: pathToOverflow))
+        
+        guard let formattedContents = BMSLoggerTests.getContents(ofFile: pathToOverflow) else {
+            XCTFail()
+            return
+        }
+        
+        
+        var fileContents = "[\(formattedContents)]"
+        var logDict = fileContents.data(using: .utf8)!
+        guard let jsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+        
+        XCTAssertTrue(jsonDict.count == 1)
+        
+        loggerInstance.debug(message: largeData)
+        
+        
+        guard let newFormattedContents = BMSLoggerTests.getContents(ofFile: pathToOverflow) else {
+            XCTFail()
+            return
+        }
+        fileContents = "[\(newFormattedContents)]"
+        logDict  = fileContents.data(using: .utf8)!
+        guard let newJsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+        
+        XCTAssertTrue(newJsonDict.count == 1)
+    }
+    
+    
+    
+    // MARK: - Sending logs
+    
+    func testLogSendRequest(){
+        let fakePKG = "MYPKG"
+        let API_KEY = "apikey"
+        let APP_NAME = "myApp"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initializeWithBluemixAppRoute(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
+        Analytics.initializeWithAppName(appName: "testAppName", apiKey: "testApiKey")
+        let url = "https://" + Constants.AnalyticsServer.hostName + BMSClient.REGION_US_SOUTH + Constants.AnalyticsServer.uploadPath
+        
+        Analytics.initializeWithAppName(appName: APP_NAME, apiKey: API_KEY)
+        
+        let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: API_KEY, Constants.analyticsP30ApiKey: "appID1"]
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+            
+        } catch {
+            
+        }
+        
+        do {
+            try FileManager().removeItem(atPath: pathToBuffer)
+            
+        } catch {
+            
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Debug
+        
+        loggerInstance.debug(message: "Hello world")
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        loggerInstance.fatal(message: "StephenColbert")
+        
+        let request = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+            }!
+        
+        XCTAssertTrue(request.resourceUrl == url)
+        XCTAssertTrue(request.headers == headers)
+        XCTAssertNil(request.queryParameters)
+        XCTAssertTrue(request.httpMethod == HttpMethod.POST)
+    }
+    
+    
+    func testLogSendFailWithEmptyAPIKey(){
+        let fakePKG = Constants.Package.logger
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initializeWithBluemixAppRoute(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
+        Analytics.initializeWithAppName(appName: "testAppName", apiKey: "")
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+            
+        } catch {
+            
+        }
+        
+        do {
+            try FileManager().removeItem(atPath: pathToBuffer)
+            
+        } catch {
+            
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Debug
+        
+        loggerInstance.debug(message: "Hello world")
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        loggerInstance.fatal(message: "StephenColbert")
+        
+        guard let _ = BMSLoggerTests.getLogs(fromFile: LogFileType.LOGGER) else {
+            XCTFail()
+            return
+        }
+        
+        XCTAssertTrue(FileManager().fileExists(atPath: pathToBuffer))
+        
+        let request = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        }
+        
+        XCTAssertNil(request)
+        
+        guard let formattedContents = BMSLoggerTests.getContents(ofFile: pathToFile) else {
+            XCTFail()
+            return
+        }
+        let fileContents = "[\(formattedContents)]"
+        let logDict  = fileContents.data(using: .utf8)!
+        
+        guard let newJsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+        
+        let error = newJsonDict[0]
+        XCTAssertTrue(error?[Constants.Metadata.Logger.message] != nil)
+        XCTAssertTrue(error?[Constants.Metadata.Logger.package] == fakePKG)
+        XCTAssertTrue(error?[Constants.Metadata.Logger.timestamp] != nil)
+        XCTAssertTrue(error?[Constants.Metadata.Logger.level] == "ERROR")
+    }
+    
+    
+    func testBuildLogSendRequestForBluemix() {
+        
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initializeWithBluemixAppRoute(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
+        Analytics.initializeWithAppName(appName: "testAppName", apiKey: "1234")
+        
+        let bmsRequest = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        }
+        
+        XCTAssertNotNil(bmsRequest)
+        XCTAssertTrue(bmsRequest is Request)
+        
+        let bmsLogUploadUrl = "https://" + Constants.AnalyticsServer.hostName + ".ng.bluemix.net" + Constants.AnalyticsServer.uploadPath
+        XCTAssertEqual(bmsRequest!.resourceUrl, bmsLogUploadUrl)
+    }
+    
+    
+    func testPreventSimultaneousSendRequests() {
+        
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initializeWithBluemixAppRoute(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.REGION_US_SOUTH)
+        Analytics.initializeWithAppName(appName: "testAppName", apiKey: "1234")
+        
+        XCTAssertFalse(Logger.currentlySendingLoggerLogs)
+        XCTAssertFalse(Logger.currentlySendingAnalyticsLogs)
+        
+        let loggerSendFinished = expectation(withDescription: "Logger send complete")
+        let analyticsSendFinished = expectation(withDescription: "Analytics send complete")
+        
+        Logger.send { (_: Response?, _: NSError?) in
+            XCTAssertFalse(Logger.currentlySendingLoggerLogs)
+            loggerSendFinished.fulfill()
+        }
+        Analytics.send { (_: Response?, _: NSError?) in
+            XCTAssertFalse(Logger.currentlySendingAnalyticsLogs)
+            analyticsSendFinished.fulfill()
+        }
+        
+        XCTAssertTrue(Logger.currentlySendingLoggerLogs)
+        XCTAssertTrue(Logger.currentlySendingAnalyticsLogs)
+        
+        waitForExpectations(withTimeout: 10.0) { (error: NSError?) -> Void in
+            if error != nil {
+                XCTFail("Expectation failed with error: \(error)")
+            }
+        }
+    }
+    
+    
+    func testReturnInitializationError(){
+        // BMSClient initialization
+        BMSLogger.returnInitializationError(className: "BMSClient", missingValue:"test") { (response, error) -> Void in
+            XCTAssertNil(response)
+            XCTAssertNotNil(error)
+            XCTAssertEqual(error!.code, BMSCoreError.ClientNotInitialized.rawValue)
+            XCTAssertEqual(error!.domain, BMSAnalyticsError.domain)
+        }
+        
+        // Analytics initialization
+        BMSLogger.returnInitializationError(className: "Analytics", missingValue:"test") { (response, error) -> Void in
+            XCTAssertNil(response)
+            XCTAssertNotNil(error)
+            XCTAssertEqual(error!.code, BMSAnalyticsError.AnalyticsNotInitialized.rawValue)
+            XCTAssertEqual(error!.domain, BMSAnalyticsError.domain)
+        }
+        
+        // Unknown initialization
+        BMSLogger.returnInitializationError(className: "Unknown class", missingValue:"test") { (response, error) -> Void in
+            XCTAssertNil(response)
+            XCTAssertNotNil(error)
+            XCTAssertEqual(error!.code, -1)
+            XCTAssertEqual(error!.domain, BMSAnalyticsError.domain)
+        }
+    }
+    
+    
+    func testDeleteFileFail(){
+        let fakePKG = "bmssdk.logger"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+            
+        } catch {
+            
+        }
+        
+        do {
+            try FileManager().removeItem(atPath: pathToBuffer)
+            
+        } catch {
+            
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Debug
+        
+        loggerInstance.debug(message: "Hello world")
+        
+        guard let logs: String = BMSLoggerTests.getLogs(fromFile: LogFileType.LOGGER) else {
+            XCTFail()
+            return
+        }
+        
+        XCTAssertTrue(FileManager().fileExists(atPath: pathToBuffer))
+        
+        XCTAssertNotNil(logs)
+        
+        do {
+            try FileManager().removeItem(atPath: pathToBuffer)
+        } catch {
+            
+        }
+        
+        BMSLogger.delete(file: Constants.File.Logger.outboundLogs)
+        
+        XCTAssertFalse(FileManager().fileExists(atPath: pathToBuffer))
+    }
+    
+    
+    func testDeleteFile(){
+        let fakePKG = "MYPKG"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
+        
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+            
+        } catch {
+            
+        }
+        
+        do {
+            try FileManager().removeItem(atPath: pathToBuffer)
+            
+        } catch {
+            
+        }
+        
+        let loggerInstance = Logger.logger(forName: fakePKG)
+        Logger.logStoreEnabled = true
+        Logger.logLevelFilter = LogLevel.Debug
+        
+        loggerInstance.debug(message: "Hello world")
+        loggerInstance.info(message: "1242342342343243242342")
+        loggerInstance.warn(message: "Str: heyoooooo")
+        loggerInstance.error(message: "1 2 3 4")
+        loggerInstance.fatal(message: "StephenColbert")
+        
+        guard let _ = BMSLoggerTests.getLogs(fromFile: LogFileType.LOGGER) else {
+            XCTFail()
+            return
+        }
+        
+        XCTAssertTrue(FileManager().fileExists(atPath: pathToBuffer))
+        
+        BMSLogger.delete(file: Constants.File.Logger.outboundLogs)
+        
+        XCTAssertFalse(FileManager().fileExists(atPath: pathToBuffer))
+    }
+    
+    
+    func testExtractFileNameFromPath() {
+        
+        let logFile1 = "some/path/to/file.txt"
+        let logFile2 = "path//with///extra///slashes.log.txt"
+        let logFile3 = "/////"
+        let logFile4 = ""
+        let logFile5 = "pathWithoutSlashes"
+        
+        
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile1), "file.txt")
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile2), "slashes.log.txt")
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile3), "/")
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile4), Constants.File.unknown)
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile5), "pathWithoutSlashes")
+    }
+    
+    
+    
+    // MARK: - Helpers
+    
+    static func getContents(ofFile pathToFile: String) -> String? {
+        do {
+            return try String(contentsOfFile: pathToFile, encoding: .utf8)
+        }
+        catch {
+            return nil
+        }
+    }
+    
+    static func convertToJson(logs: Data) -> AnyObject? {
+        do {
+            return try JSONSerialization.jsonObject(with: logs, options: .mutableContainers)
+        }
+        catch {
+            return nil
+        }
+    }
+    
+    static func getLogs(fromFile logFile: LogFileType) -> String? {
+        do {
+            switch logFile {
+            case .LOGGER:
+                return try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
+            case .ANALYTICS:
+                return try BMSLogger.getLogs(fromFile: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
+            }
+        }
+        catch {
+            return nil
+        }
+    }
+    
+    
+    
+// MARK: Swift 2.x
+#else
+    
+    
+    
+    
+    override func tearDown() {
+        BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: "")
+        BMSAnalytics.uninitialize()
+    }
+    
+    
+    func testIsUncaughtExceptionUpdatesProperly(){
+        
+        let loggerInstance = BMSLogger()
+        
+        loggerInstance.isUncaughtExceptionDetected = false
+        XCTAssertFalse(Logger.isUncaughtExceptionDetected)
+        loggerInstance.isUncaughtExceptionDetected = true
+        XCTAssertTrue(Logger.isUncaughtExceptionDetected)
+    }
+    
+    
+    func testSetGetMaxLogStoreSize(){
+        
+        Logger.maxLogStoreSize = 12345678 as UInt64
+        let size = Logger.maxLogStoreSize
+        XCTAssertTrue(size == 12345678)
+    }
+    
+    
+    func testlogStoreEnabled(){
+        
+        let capture1 = Logger.logStoreEnabled
+        XCTAssertTrue(capture1, "should default to true");
+        
+        Logger.logStoreEnabled = false
+        
+        let capture2 = Logger.logStoreEnabled
+        XCTAssertFalse(capture2)
+    }
+    
+    
+    func testNoInternalLogging(){
+        let fakePKG = Constants.Package.logger
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        
+        do {
             try NSFileManager().removeItemAtPath(pathToFile)
         } catch {
             print("Could not delete " + pathToFile)
@@ -77,7 +1033,7 @@ class BMSLoggerTests: XCTestCase {
         loggerInstance.warn("Str: heyoooooo")
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
-
+        
         guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
             return
@@ -118,7 +1074,7 @@ class BMSLoggerTests: XCTestCase {
         XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.package] == fakePKG)
         XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.timestamp] != nil)
     }
-
+    
     
     func testLogMethods(){
         let fakePKG = "MYPKG"
@@ -133,13 +1089,13 @@ class BMSLoggerTests: XCTestCase {
         let loggerInstance = Logger.logger(forName: fakePKG)
         Logger.logStoreEnabled = true
         Logger.logLevelFilter = LogLevel.Debug
-
+        
         loggerInstance.debug("Hello world")
         loggerInstance.info("1242342342343243242342")
         loggerInstance.warn("Str: heyoooooo")
         loggerInstance.error("1 2 3 4")
         loggerInstance.fatal("StephenColbert")
-    
+        
         
         guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
@@ -151,31 +1107,31 @@ class BMSLoggerTests: XCTestCase {
             XCTFail()
             return
         }
-
+        
         let debugMessage = jsonDict[0]
         XCTAssertTrue(debugMessage[Constants.Metadata.Logger.message] == "Hello world")
         XCTAssertTrue(debugMessage[Constants.Metadata.Logger.package] == fakePKG)
         XCTAssertTrue(debugMessage[Constants.Metadata.Logger.timestamp] != nil)
         XCTAssertTrue(debugMessage[Constants.Metadata.Logger.level] == "DEBUG")
-
+        
         let infoMessage = jsonDict[1]
         XCTAssertTrue(infoMessage[Constants.Metadata.Logger.message] == "1242342342343243242342")
         XCTAssertTrue(infoMessage[Constants.Metadata.Logger.package] == fakePKG)
         XCTAssertTrue(infoMessage[Constants.Metadata.Logger.timestamp] != nil)
         XCTAssertTrue(infoMessage[Constants.Metadata.Logger.level] == "INFO")
-
+        
         let warnMessage = jsonDict[2]
         XCTAssertTrue(warnMessage[Constants.Metadata.Logger.message] == "Str: heyoooooo")
         XCTAssertTrue(warnMessage[Constants.Metadata.Logger.package] == fakePKG)
         XCTAssertTrue(warnMessage[Constants.Metadata.Logger.timestamp] != nil)
         XCTAssertTrue(warnMessage[Constants.Metadata.Logger.level] == "WARN")
-
+        
         let errorMessage = jsonDict[3]
         XCTAssertTrue(errorMessage[Constants.Metadata.Logger.message] == "1 2 3 4")
         XCTAssertTrue(errorMessage[Constants.Metadata.Logger.package] == fakePKG)
         XCTAssertTrue(errorMessage[Constants.Metadata.Logger.timestamp] != nil)
         XCTAssertTrue(errorMessage[Constants.Metadata.Logger.level] == "ERROR")
-
+        
         let fatalMessage = jsonDict[4]
         XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.message] == "StephenColbert")
         XCTAssertTrue(fatalMessage[Constants.Metadata.Logger.package] == fakePKG)
@@ -269,7 +1225,7 @@ class BMSLoggerTests: XCTestCase {
         
         let e = NSException(name:"crashApp", reason:"No reason at all just doing it for fun", userInfo:["user":"nana"])
         
-        BMSLogger.logException(e)
+        BMSLogger.log(exception: e)
         
         guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
@@ -301,37 +1257,37 @@ class BMSLoggerTests: XCTestCase {
         let pathToLoggerFileOverflow = BMSLogger.logsDocumentPath + Constants.File.Logger.overflowLogs
         let pathToAnalyticsFileOverflow = BMSLogger.logsDocumentPath + Constants.File.Analytics.overflowLogs
         
-        var (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFilesForLogLevel(LogLevel.Debug)
+        var (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Debug)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFilesForLogLevel(LogLevel.Error)
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Error)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFilesForLogLevel(LogLevel.Fatal)
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Fatal)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFilesForLogLevel(LogLevel.Info)
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Info)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFilesForLogLevel(LogLevel.Error)
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Error)
         
         XCTAssertTrue(logFile == pathToLoggerFile)
         XCTAssertTrue(logOverflowFile == pathToLoggerFileOverflow)
         XCTAssertNotNil(fileDispatchQueue)
         
-        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFilesForLogLevel(LogLevel.Analytics)
+        (logFile, logOverflowFile, fileDispatchQueue) = BMSLogger.getFiles(forLogLevel: LogLevel.Analytics)
         
         XCTAssertTrue(logFile == pathToAnalyticsFile)
         XCTAssertTrue(logOverflowFile == pathToAnalyticsFileOverflow)
@@ -801,7 +1757,7 @@ class BMSLoggerTests: XCTestCase {
     
     func testReturnInitializationError(){
         // BMSClient initialization
-        BMSLogger.returnInitializationError("BMSClient", missingValue:"test") { (response, error) -> Void in
+        BMSLogger.returnInitializationError(className: "BMSClient", missingValue:"test") { (response, error) -> Void in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
             XCTAssertEqual(error!.code, BMSCoreError.ClientNotInitialized.rawValue)
@@ -809,7 +1765,7 @@ class BMSLoggerTests: XCTestCase {
         }
         
         // Analytics initialization
-        BMSLogger.returnInitializationError("Analytics", missingValue:"test") { (response, error) -> Void in
+        BMSLogger.returnInitializationError(className: "Analytics", missingValue:"test") { (response, error) -> Void in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
             XCTAssertEqual(error!.code, BMSAnalyticsError.AnalyticsNotInitialized.rawValue)
@@ -817,7 +1773,7 @@ class BMSLoggerTests: XCTestCase {
         }
         
         // Unknown initialization
-        BMSLogger.returnInitializationError("Unknown class", missingValue:"test") { (response, error) -> Void in
+        BMSLogger.returnInitializationError(className: "Unknown class", missingValue:"test") { (response, error) -> Void in
             XCTAssertNil(response)
             XCTAssertNotNil(error)
             XCTAssertEqual(error!.code, -1)
@@ -865,7 +1821,7 @@ class BMSLoggerTests: XCTestCase {
             
         }
         
-        BMSLogger.deleteFile(Constants.File.Logger.outboundLogs)
+        BMSLogger.delete(file: Constants.File.Logger.outboundLogs)
         
         XCTAssertFalse(NSFileManager().fileExistsAtPath(pathToBuffer))
     }
@@ -907,7 +1863,7 @@ class BMSLoggerTests: XCTestCase {
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
-        BMSLogger.deleteFile(Constants.File.Logger.outboundLogs)
+        BMSLogger.delete(file: Constants.File.Logger.outboundLogs)
         
         XCTAssertFalse(NSFileManager().fileExistsAtPath(pathToBuffer))
     }
@@ -919,14 +1875,14 @@ class BMSLoggerTests: XCTestCase {
         let logFile2 = "path//with///extra///slashes.log.txt"
         let logFile3 = "/////"
         let logFile4 = ""
-        let logFile5 = "sdajfasldkfjalksfdj"
+        let logFile5 = "pathWithoutSlashes"
         
         
-        XCTAssertEqual(BMSLogger.extractFileNameFromPath(logFile1), "file.txt")
-        XCTAssertEqual(BMSLogger.extractFileNameFromPath(logFile2), "slashes.log.txt")
-        XCTAssertEqual(BMSLogger.extractFileNameFromPath(logFile3), Constants.File.unknown)
-        XCTAssertEqual(BMSLogger.extractFileNameFromPath(logFile4), Constants.File.unknown)
-        XCTAssertEqual(BMSLogger.extractFileNameFromPath(logFile5), Constants.File.unknown)
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile1), "file.txt")
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile2), "slashes.log.txt")
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile3), "/")
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile4), Constants.File.unknown)
+        XCTAssertEqual(BMSLogger.extractFileName(fromPath: logFile5), "pathWithoutSlashes")
     }
     
     
@@ -955,15 +1911,17 @@ class BMSLoggerTests: XCTestCase {
         do {
             switch logFile {
             case .LOGGER:
-                return try BMSLogger.getLogs(fileName: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
+                return try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
             case .ANALYTICS:
-                return try BMSLogger.getLogs(fileName: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
+                return try BMSLogger.getLogs(fromFile: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
             }
         }
         catch {
             return nil
         }
     }
+    
+#endif
 
 }
 

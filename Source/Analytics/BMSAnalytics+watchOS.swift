@@ -55,7 +55,12 @@ public extension BMSAnalytics {
         
         var osVersion = "", model = "", deviceId = ""
         
-        let device = WKInterfaceDevice.currentDevice()
+        #if swift(>=3.0)
+            let device = WKInterfaceDevice.current()
+        #else
+            let device = WKInterfaceDevice.currentDevice()
+        #endif
+        
         osVersion = device.systemVersion
         // There is no "identifierForVendor" property for Apple Watch, so we generate a random ID
         deviceId = BMSAnalytics.uniqueDeviceId
