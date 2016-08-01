@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = 'BMSAnalytics'
-  s.version      = '1.0.2'
+  s.version      = '1.1.0'
   s.summary      = 'The analytics component of the Swift client SDK for IBM Bluemix Mobile Services'
   s.homepage     = 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics'
   s.license      = 'Apache License, Version 2.0'
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.ios.exclude_files = 'Source/**/*watchOS*.swift'
   s.watchos.exclude_files = 'Source/**/*iOS*.swift'
 
-  s.dependency 'BMSCore', '1.0.3'
+  s.dependency 'BMSCore', '~> 1.1.0'
 
   s.requires_arc = true
 
