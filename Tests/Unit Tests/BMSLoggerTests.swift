@@ -488,7 +488,7 @@ class BMSLoggerTests: XCTestCase {
         }
         
         let bundle = Bundle(for: self.dynamicType)
-        let path = bundle.pathForResource("LargeData", ofType: "txt")
+        let path = bundle.path(forResource: "LargeData", ofType: "txt")
         
         let loggerInstance = Logger.logger(forName: fakePKG)
         guard let largeData = BMSLoggerTests.getContents(ofFile: path!) else {
@@ -582,7 +582,7 @@ class BMSLoggerTests: XCTestCase {
         }
         
         let bundle = Bundle(for: self.dynamicType)
-        let path = bundle.pathForResource("LargeData", ofType: "txt")
+        let path = bundle.path(forResource: "LargeData", ofType: "txt")
         
         guard let largeData = BMSLoggerTests.getContents(ofFile: path!) else {
             XCTFail()
@@ -779,8 +779,8 @@ class BMSLoggerTests: XCTestCase {
         XCTAssertFalse(Logger.currentlySendingLoggerLogs)
         XCTAssertFalse(Logger.currentlySendingAnalyticsLogs)
         
-        let loggerSendFinished = expectation(withDescription: "Logger send complete")
-        let analyticsSendFinished = expectation(withDescription: "Analytics send complete")
+        let loggerSendFinished = expectation(description: "Logger send complete")
+        let analyticsSendFinished = expectation(description: "Analytics send complete")
         
         Logger.send { (_: Response?, _: NSError?) in
             XCTAssertFalse(Logger.currentlySendingLoggerLogs)
@@ -794,7 +794,7 @@ class BMSLoggerTests: XCTestCase {
         XCTAssertTrue(Logger.currentlySendingLoggerLogs)
         XCTAssertTrue(Logger.currentlySendingAnalyticsLogs)
         
-        waitForExpectations(withTimeout: 10.0) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10.0) { (error: Error?) -> Void in
             if error != nil {
                 XCTFail("Expectation failed with error: \(error)")
             }

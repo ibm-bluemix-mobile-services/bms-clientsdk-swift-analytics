@@ -66,7 +66,7 @@ class BMSAnalyticsTests: XCTestCase {
     
     func testInitializeWithAppNameAndDeviceEvents() {
         
-        let referenceTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000)
+        let referenceTime = Int64(NSDate.timeIntervalSinceReferenceDate * 1000)
         
         Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
         
@@ -85,15 +85,15 @@ class BMSAnalyticsTests: XCTestCase {
         let firstSessionStartTime = BMSAnalytics.startTime
         XCTAssert(firstSessionStartTime > 0)
         
-        let newSessionExpectation = expectation(withDescription: "New session start time")
+        let newSessionExpectation = expectation(description: "New session start time")
         
         // Even after waiting 1 second, the session start time should not change; the original session data should be preserved
         let timeDelay = DispatchTime.now() + 1
-        DispatchQueue.main.after(when: timeDelay) {
+        DispatchQueue.main.asyncAfter(deadline: timeDelay) {
             newSessionExpectation.fulfill()
         }
 
-        waitForExpectations(withTimeout: 10.0) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10.0) { (error: Error?) -> Void in
             BMSAnalytics.logSessionStart()
             let secondSessionStartTime = BMSAnalytics.startTime
             
@@ -124,15 +124,15 @@ class BMSAnalyticsTests: XCTestCase {
         XCTAssertTrue(BMSAnalytics.lifecycleEvents.isEmpty)
         XCTAssertEqual(BMSAnalytics.startTime, 0)
         
-        let newSessionExpectation = expectation(withDescription: "New session start time")
+        let newSessionExpectation = expectation(description: "New session start time")
         
         // Need a little time delay so that the first and second sessions don't have the same start time
         let timeDelay = DispatchTime.now() + 1
-        DispatchQueue.main.after(when: timeDelay) {
+        DispatchQueue.main.asyncAfter(deadline: timeDelay) {
             newSessionExpectation.fulfill()
         }
         
-        waitForExpectations(withTimeout: 10.0) { (error: NSError?) -> Void in
+        waitForExpectations(timeout: 10.0) { (error: Error?) -> Void in
             BMSAnalytics.logSessionStart()
             let secondSessionStartTime = BMSAnalytics.startTime
             
@@ -178,7 +178,7 @@ class BMSAnalyticsTests: XCTestCase {
         XCTAssert(!outboundMetadata.contains("\"deviceID\":\"\"")) // Make sure deviceID is not empty
         XCTAssert(!outboundMetadata.contains("\"sdkVersion\":\"\"")) // Make sure sdkVersion is not empty
         
-        let osVersion = UIDevice.current().systemVersion
+        let osVersion = UIDevice.current.systemVersion
         XCTAssert(outboundMetadata.contains("\"osVersion\":\"" + "\(osVersion)" + "\""))
     }
     
