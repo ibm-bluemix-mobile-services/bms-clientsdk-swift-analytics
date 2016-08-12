@@ -60,7 +60,7 @@ public extension Logger {
                 
                 // Remove the uncaught exception flag since the logs containing the exception(s) have just been sent to the server
                 #if swift(>=3.0)
-                    UserDefaults.standard().set(false, forKey: Constants.uncaughtException)
+                    UserDefaults.standard.set(false, forKey: Constants.uncaughtException)
                 #else
                     NSUserDefaults.standardUserDefaults().setBool(false, forKey: Constants.uncaughtException)
                 #endif
@@ -79,7 +79,7 @@ public extension Logger {
         #if swift(>=3.0)
         
             // Use a serial queue to ensure that the same logs do not get sent more than once
-            DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async(execute: { 
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async(execute: {
                 do {
                     // Gather the logs and put them in a JSON object
                     let logsToSend: String? = try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
@@ -177,7 +177,7 @@ public extension Logger {
         #if swift(>=3.0)
         
             // Use a serial queue to ensure that the same logs do not get sent more than once
-            DispatchQueue.global(attributes: DispatchQueue.GlobalAttributes.qosBackground).async(execute: {
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async(execute: {
                 do {
                     // Gather the logs and put them in a JSON object
                     let logsToSend: String? = try BMSLogger.getLogs(fromFile: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
@@ -253,8 +253,8 @@ public class BMSLogger: LoggerDelegate {
     private static func generateDateFormatter() -> DateFormatter {
         
         let formatter = DateFormatter()
-        formatter.locale = Locale(localeIdentifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(name: "GMT")
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(abbreviation: "GMT")
         formatter.dateFormat = "dd-MM-yyyy HH:mm:ss:SSS"
         
         return formatter
@@ -263,7 +263,7 @@ public class BMSLogger: LoggerDelegate {
     // Path to the log files on the client device
     internal static let logsDocumentPath: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/"
     
-    internal static let fileManager = FileManager.default()
+    internal static let fileManager = FileManager.default
     
 #else
     
@@ -298,7 +298,7 @@ public class BMSLogger: LoggerDelegate {
         
         get {
             #if swift(>=3.0)
-                let asdf = UserDefaults.standard().bool(forKey: Constants.uncaughtException)
+                let asdf = UserDefaults.standard.bool(forKey: Constants.uncaughtException)
                 return asdf
             #else
                 return NSUserDefaults.standardUserDefaults().boolForKey(Constants.uncaughtException)
@@ -306,7 +306,7 @@ public class BMSLogger: LoggerDelegate {
         }
         set {
             #if swift(>=3.0)
-                UserDefaults.standard().set(newValue, forKey: Constants.uncaughtException)
+                UserDefaults.standard.set(newValue, forKey: Constants.uncaughtException)
             #else
                 NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: Constants.uncaughtException)
             #endif
@@ -359,9 +359,9 @@ public class BMSLogger: LoggerDelegate {
     
 #if swift(>=3.0)
     
-    internal static let loggerFileIOQueue = DispatchQueue(label: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore.Logger.loggerFileIOQueue", attributes: DispatchQueueAttributes.serial, target: nil)
+    internal static let loggerFileIOQueue = DispatchQueue(label: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore.Logger.loggerFileIOQueue")
     
-    internal static let analyticsFileIOQueue = DispatchQueue(label: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore.Logger.analyticsFileIOQueue", attributes: DispatchQueueAttributes.serial)
+    internal static let analyticsFileIOQueue = DispatchQueue(label: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSCore.Logger.analyticsFileIOQueue")
     
 #else
     
@@ -530,7 +530,7 @@ public class BMSLogger: LoggerDelegate {
             if (BMSLogger.fileManager.fileExists(atPath: logFile)) {
                 
                 do {
-                    let attr : NSDictionary? = try FileManager.default().attributesOfItem(atPath: logFile)
+                    let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: logFile)
                     if let currentLogFileSize = attr?.fileSize() {
                         return currentLogFileSize > Logger.maxLogStoreSize / 2 // Divide by 2 since the total log storage gets shared between the log file and the overflow file
                     }
@@ -668,13 +668,17 @@ public class BMSLogger: LoggerDelegate {
         
         #if swift(>=3.0)
             let fileUrl = URL(string: filePath)
+            
+            if let lastPathComponent = fileUrl?.lastPathComponent, lastPathComponent.characters.count > 0 {
+                logFileName = lastPathComponent
+            }
         #else
             let fileUrl = NSURL(string: filePath)
+            
+            if let lastPathComponent = fileUrl?.lastPathComponent where lastPathComponent.characters.count > 0 {
+                logFileName = lastPathComponent
+            }
         #endif
-        
-        if let lastPathComponent = fileUrl?.lastPathComponent where lastPathComponent.characters.count > 0 {
-            logFileName = lastPathComponent
-        }
         
         return logFileName
     }
@@ -883,7 +887,7 @@ public class BMSLogger: LoggerDelegate {
 // Custom dispatch_sync that can incorporate throwable statements
 internal func dispatch_sync_throwable(_ queue: DispatchQueue, block: () throws -> ()) throws {
     
-    var error: ErrorProtocol?
+    var error: Error?
     queue.sync(execute: {
         do {
             try block()

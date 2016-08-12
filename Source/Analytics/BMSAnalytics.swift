@@ -204,7 +204,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     internal static var sdkVersion: String {
         #if swift(>=3.0)
             if let bundle = Bundle(identifier: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics") {
-                return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+                return bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
             }
         #else
             if let bundle = NSBundle(identifier: "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics") {
@@ -234,7 +234,7 @@ public class BMSAnalytics: AnalyticsDelegate {
                 return
             }
             
-            BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
+            BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate * 1000) // milliseconds
             lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().uuidString
             lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
             Analytics.log(metadata: lifecycleEvents)
@@ -265,7 +265,11 @@ public class BMSAnalytics: AnalyticsDelegate {
         //      This may occur if the app crashes while launching. In this case, set the session duration to 0.
         var sessionDuration: Int64 = 0
         if !lifecycleEvents.isEmpty && BMSAnalytics.startTime > 0 {
-            sessionDuration = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) - BMSAnalytics.startTime
+            #if swift(>=3.0)
+                sessionDuration = Int64(NSDate.timeIntervalSinceReferenceDate * 1000) - BMSAnalytics.startTime
+            #else
+                sessionDuration = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) - BMSAnalytics.startTime
+            #endif
         }
         
         lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
@@ -296,7 +300,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     // Remove the observers registered in the Analytics+iOS "startRecordingApplicationLifecycleEvents" method
     deinit {
         #if swift(>=3.0)
-            NotificationCenter.default().removeObserver(self)
+            NotificationCenter.default.removeObserver(self)
         #else
             NSNotificationCenter.defaultCenter().removeObserver(self)
         #endif
@@ -333,10 +337,10 @@ public class BMSAnalytics: AnalyticsDelegate {
         requestMetadata["deviceID"] = deviceId
         requestMetadata["mfpAppName"] = BMSAnalytics.appName
         #if swift(>=3.0)
-            requestMetadata["appStoreLabel"] = Bundle.main().infoDictionary?["CFBundleName"] as? String ?? ""
-            requestMetadata["appStoreId"] = Bundle.main().bundleIdentifier ?? ""
-            requestMetadata["appVersionCode"] = Bundle.main().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String ?? ""
-            requestMetadata["appVersionDisplay"] = Bundle.main().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String ?? ""
+            requestMetadata["appStoreLabel"] = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""
+            requestMetadata["appStoreId"] = Bundle.main.bundleIdentifier ?? ""
+            requestMetadata["appVersionCode"] = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? ""
+            requestMetadata["appVersionDisplay"] = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
         #else
             requestMetadata["appStoreLabel"] = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String ?? ""
             requestMetadata["appStoreId"] = NSBundle.mainBundle().bundleIdentifier ?? ""
@@ -377,16 +381,17 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         #if swift(>=3.0)
             Analytics.logger.debug(message: "Network response inbound")
-        #else
-            Analytics.logger.debug("Network response inbound")
-        #endif
-        
-        let endTime = NSDate.timeIntervalSinceReferenceDate()
-        let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
-        
-        #if swift(>=3.0)
+            
+            let endTime = NSDate.timeIntervalSinceReferenceDate
+            let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
+            
             let bytesSent = request.requestBody?.count ?? 0
         #else
+            Analytics.logger.debug("Network response inbound")
+            
+            let endTime = NSDate.timeIntervalSinceReferenceDate()
+            let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
+            
             let bytesSent = request.requestBody?.length ?? 0
         #endif
         

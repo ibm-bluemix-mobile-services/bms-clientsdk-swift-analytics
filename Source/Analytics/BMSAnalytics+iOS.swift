@@ -27,9 +27,9 @@ public extension BMSAnalytics {
         
         #if swift(>=3.0)
             
-            NotificationCenter.default().addObserver(self, selector: #selector(logSessionStart), name: .UIApplicationWillEnterForeground, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(logSessionStart), name: .UIApplicationWillEnterForeground, object: nil)
 
-            NotificationCenter.default().addObserver(self, selector: #selector(logSessionEnd), name: .UIApplicationWillEnterForeground, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(logSessionEnd), name: .UIApplicationWillEnterForeground, object: nil)
             
         #else
             
@@ -48,7 +48,7 @@ public extension BMSAnalytics {
         var osVersion = "", model = "", deviceId = ""
         
         #if swift(>=3.0)
-            let device = UIDevice.current()
+            let device = UIDevice.current
             osVersion = device.systemVersion
             deviceId = device.identifierForVendor?.uuidString ?? "unknown"
         #else
@@ -76,7 +76,12 @@ internal extension UIDevice {
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
         let identifier = machineMirror.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8 where value != 0 else { return identifier }
+            
+            #if swift(>=3.0)
+                guard let value = element.value as? Int8, value != 0 else { return identifier }
+            #else
+                guard let value = element.value as? Int8 where value != 0 else { return identifier }
+            #endif
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         
