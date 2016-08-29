@@ -204,7 +204,7 @@ public extension Logger {
                 do {
                     // Gather the logs and put them in a JSON object
                     let logsToSend: String? = try BMSLogger.getLogs(fromFile: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
-                    var logPayloadData = try NSJSONSerialization.dataWithJSONObject([], options: [])
+                    var logPayloadData = try NSJSONSerialization.dataWithJSONObject(["":""], options: [])
                     if let logPayload = logsToSend {
                         let logPayloadJson = [Constants.outboundLogPayload: logPayload]
                         logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])

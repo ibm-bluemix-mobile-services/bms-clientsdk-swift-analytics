@@ -80,6 +80,7 @@ internal struct Constants {
             static let deviceId = "deviceId"
             static let user = "userSwitch"
             static let userId = "$userID"
+            static let initialContext = "initialCtx"
             static let timestamp = "$timestamp"
         }
     }

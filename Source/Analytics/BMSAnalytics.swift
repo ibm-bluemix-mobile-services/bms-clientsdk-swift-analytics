@@ -119,25 +119,9 @@ public class BMSAnalytics: AnalyticsDelegate {
                 userIdentity = BMSAnalytics.uniqueDeviceId
             }
             
-            if let sessionId = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] {
+            if BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] != nil {
                 
-                let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
-                
-                var userIdMetadata: [String: AnyObject] = [:]
-                userIdMetadata[Constants.Metadata.Analytics.sessionId] = sessionId
-                #if swift(>=3.0)
-                    userIdMetadata[Constants.Metadata.Analytics.timestamp] = NSNumber(value: currentTime)
-                #else
-                    userIdMetadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
-                #endif
-                userIdMetadata[Constants.Metadata.Analytics.userId] = userIdentity
-                userIdMetadata[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.user
-                
-                #if swift(>=3.0)
-                    Analytics.log(metadata: userIdMetadata)
-                #else
-                    Analytics.log(userIdMetadata)
-                #endif
+                BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
             }
             else if userIdentity != BMSAnalytics.uniqueDeviceId {
                 #if swift(>=3.0)
@@ -235,9 +219,13 @@ public class BMSAnalytics: AnalyticsDelegate {
             }
             
             BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate * 1000) // milliseconds
+            
             lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().uuidString
             lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
+            
             Analytics.log(metadata: lifecycleEvents)
+            
+            BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.initialContext)
             
         #else
         
@@ -247,10 +235,14 @@ public class BMSAnalytics: AnalyticsDelegate {
             }
             
             BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000) // milliseconds
+            
             lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
             lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
+            
             Analytics.log(lifecycleEvents)
-        
+            
+            BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.initialContext)
+            
         #endif
     }
     
@@ -418,6 +410,30 @@ public class BMSAnalytics: AnalyticsDelegate {
         return responseMetadata
     }
     
+    
+    
+    // MARK: - Helpers
+    
+    internal static func logInternal(event category: String) {
+        
+        let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
+        
+        var metadata: [String: AnyObject] = [:]
+        metadata[Constants.Metadata.Analytics.category] = category
+        metadata[Constants.Metadata.Analytics.userId] = Analytics.userIdentity
+        metadata[Constants.Metadata.Analytics.sessionId] = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId]
+        #if swift(>=3.0)
+            metadata[Constants.Metadata.Analytics.timestamp] = NSNumber(value: currentTime)
+        #else
+            metadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
+        #endif
+        
+        #if swift(>=3.0)
+            Analytics.log(metadata: metadata)
+        #else
+            Analytics.log(metadata)
+        #endif
+    }
 }
 
 
