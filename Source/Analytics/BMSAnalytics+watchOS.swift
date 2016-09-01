@@ -63,7 +63,7 @@ public extension BMSAnalytics {
         
         osVersion = device.systemVersion
         // There is no "identifierForVendor" property for Apple Watch, so we generate a random ID
-        deviceId = BMSAnalytics.uniqueDeviceId
+        deviceId = BMSAnalytics.generatedDeviceId
         model = device.model
         
         return (osVersion, model, deviceId)

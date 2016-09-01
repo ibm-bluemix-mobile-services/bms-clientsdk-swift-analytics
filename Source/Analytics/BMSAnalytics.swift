@@ -18,22 +18,30 @@ import BMSCore
 // Initializer and send methods
 public extension Analytics {
     
+    
+    static var automaticallyRecordUsers: Bool = true
+    
+    
+    
     /**
          The required initializer for the `Analytics` class when communicating with a Bluemix analytics service.
          
          This method must be called after the `BMSClient.initializeWithBluemixAppRoute()` method and before calling `Analytics.send()` or `Logger.send()`.
          
-         - parameter appName:        The application name.  Should be consistent across platforms (e.g. Android and iOS).
-         - parameter apiKey:         A unique ID used to authenticate with the Bluemix analytics service
-         - parameter deviceEvents:   Device events that will be recorded automatically by the `Analytics` class
+         - parameter appName:                   The application name.  Should be consistent across platforms (e.g. Android and iOS).
+         - parameter apiKey:                    A unique ID used to authenticate with the Bluemix analytics service
+         - parameter automaticallyRecordUsers:  If `true`, each device used will be automatically recorded as one unique user. If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `false`.
+         - parameter deviceEvents:              Device events that will be recorded automatically by the `Analytics` class
      */
-    public static func initializeWithAppName(appName: String?, apiKey: String?, deviceEvents: DeviceEvent...) {
+    public static func initializeWithAppName(appName: String?, apiKey: String?, automaticallyRecordUsers: Bool = true, deviceEvents: DeviceEvent...) {
         
         BMSAnalytics.appName = appName
         
         if apiKey != nil {
             BMSAnalytics.apiKey = apiKey
         }
+        
+        Analytics.automaticallyRecordUsers = automaticallyRecordUsers
         
         // Link all of the BMSAnalytics implementation to the BMSAnalyticsSpec APIs
         Logger.delegate = BMSLogger()
@@ -57,8 +65,11 @@ public extension Analytics {
             }
         }
         
-        // This is required for active user data to appear on the Analytics console even if the developer does not specify the user. userIdentity will be converted to the device ID.
-        Analytics.userIdentity = nil
+        // If the developer does not want to specify the user identities themselves, we do it for them.
+        if automaticallyRecordUsers {
+            // We associate each unique device with one unique user. As such, all users will be anonymous.
+            Analytics.userIdentity = BMSAnalytics.generatedDeviceId
+        }
         
         // Package analytics metadata in a header for each request
         // Outbound request metadata is identical for all requests made on the same device from the same app
@@ -114,22 +125,18 @@ public class BMSAnalytics: AnalyticsDelegate {
         // Note: The developer sets this value via Analytics.userIdentity
         didSet {
             
-            // If the user sets to nil, change the value back to the deviceId so that we can continue recording unique users by the device they are using
-            if userIdentity == nil {
-                userIdentity = BMSAnalytics.uniqueDeviceId
-            }
-            
             if BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] != nil {
                 
                 BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
             }
-            else if userIdentity != BMSAnalytics.uniqueDeviceId {
+            else if userIdentity != BMSAnalytics.generatedDeviceId {
                 #if swift(>=3.0)
                     Analytics.logger.warn(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
                 #else
                     Analytics.logger.warn("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
                 #endif
-                userIdentity = BMSAnalytics.uniqueDeviceId
+                
+                userIdentity = nil
             }
         }
     }
@@ -141,9 +148,9 @@ public class BMSAnalytics: AnalyticsDelegate {
     // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)
     internal static var lifecycleEvents: [String: AnyObject] = [:]
     
-    // Create a UUID for the current device and save it to the keychain
-    // Currently only used for Apple Watch devices
-    internal static var uniqueDeviceId: String {
+    // Create a UUID for the current device and save it to the keychain (for watchOS devices only)
+    // Also used for Analytics.userIdentity if the developer does not specify the userIdentity
+    internal static var generatedDeviceId: String {
         
         // First, check if a UUID was already created
         #if swift(>=3.0)
@@ -181,9 +188,6 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     // The timestamp for when the current session started
     internal static var startTime: Int64 = 0
-    
-    // This property only exists to provide a default value for Analytics.userId
-    internal static var deviceId: String = ""
     
     internal static var sdkVersion: String {
         #if swift(>=3.0)
@@ -319,9 +323,6 @@ public class BMSAnalytics: AnalyticsDelegate {
             (osVersion, model, deviceId) = BMSAnalytics.getWatchOSDeviceInfo()
             requestMetadata["os"] = "watchOS"
         #endif
-        
-        // deviceId is the default value for Analytics.userId
-        BMSAnalytics.deviceId = deviceId
 
         requestMetadata["brand"] = "Apple"
         requestMetadata["osVersion"] = osVersion
