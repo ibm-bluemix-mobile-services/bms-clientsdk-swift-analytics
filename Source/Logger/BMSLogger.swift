@@ -708,6 +708,16 @@ public class BMSLogger: LoggerDelegate {
             
             logUploadUrl = "https://" + Constants.AnalyticsServer.hostName + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadPath
             
+            #if swift(>=3.0)
+                if (bmsClient.bluemixRegion!.contains("localhost")) {
+                    logUploadUrl = "http://" + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadPath
+                }
+            #else
+                if (bmsClient.bluemixRegion!.containsString("localhost")) {
+                    logUploadUrl = "http://" + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadPath
+                }
+            #endif
+            
             // Request class is specific to Bluemix (since it uses Bluemix authorization managers)
             return Request(url: logUploadUrl, headers: headers, queryParameters: nil, method: HttpMethod.POST)
         }

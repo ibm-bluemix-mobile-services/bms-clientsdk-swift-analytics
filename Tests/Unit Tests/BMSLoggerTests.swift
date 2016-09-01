@@ -770,6 +770,23 @@ class BMSLoggerTests: XCTestCase {
     }
     
     
+    func testBuildLogSendRequestForLocalhost() {
+        
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initializeWithBluemixAppRoute(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: "localhost:8000")
+        Analytics.initializeWithAppName(appName: "testAppName", apiKey: "1234")
+        
+        let bmsRequest = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        }
+        
+        XCTAssertNotNil(bmsRequest)
+        XCTAssertTrue(bmsRequest is Request)
+        
+        let bmsLogUploadUrl = "http://" + "localhost:8000" + Constants.AnalyticsServer.uploadPath
+        XCTAssertEqual(bmsRequest!.resourceUrl, bmsLogUploadUrl)
+    }
+    
+    
     func testPreventSimultaneousSendRequests() {
         
         let bmsClient = BMSClient.sharedInstance
@@ -1719,6 +1736,23 @@ class BMSLoggerTests: XCTestCase {
         XCTAssertTrue(bmsRequest is Request)
         
         let bmsLogUploadUrl = "https://" + Constants.AnalyticsServer.hostName + ".ng.bluemix.net" + Constants.AnalyticsServer.uploadPath
+        XCTAssertEqual(bmsRequest!.resourceUrl, bmsLogUploadUrl)
+    }
+    
+    
+    func testBuildLogSendRequestForLocalhost() {
+    
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initializeWithBluemixAppRoute("bluemix", bluemixAppGUID: "appID1", bluemixRegion: "localhost:8000")
+        Analytics.initializeWithAppName("testAppName", apiKey: "1234")
+        
+        let bmsRequest = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        }
+        
+        XCTAssertNotNil(bmsRequest)
+        XCTAssertTrue(bmsRequest is Request)
+        
+        let bmsLogUploadUrl = "http://" + "localhost:8000" + Constants.AnalyticsServer.uploadPath
         XCTAssertEqual(bmsRequest!.resourceUrl, bmsLogUploadUrl)
     }
     
