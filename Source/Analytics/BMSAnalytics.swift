@@ -28,20 +28,19 @@ public extension Analytics {
          
          This method must be called after the `BMSClient.initializeWithBluemixAppRoute()` method and before calling `Analytics.send()` or `Logger.send()`.
          
-         - parameter appName:                   The application name.  Should be consistent across platforms (e.g. Android and iOS).
-         - parameter apiKey:                    A unique ID used to authenticate with the Bluemix analytics service
-         - parameter automaticallyRecordUsers:  If `true`, each device used will be automatically recorded as one unique user. If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `false`.
-         - parameter deviceEvents:              Device events that will be recorded automatically by the `Analytics` class
+         - parameter appName:         The application name.  Should be consistent across platforms (e.g. Android and iOS).
+         - parameter apiKey:          A unique ID used to authenticate with the Bluemix analytics service
+         - parameter hasUserContext:  If `true`, each device used will be automatically recorded as one unique user. 
+                                      If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `false`.
+         - parameter deviceEvents:    Device events that will be recorded automatically by the `Analytics` class
      */
-    public static func initializeWithAppName(appName: String?, apiKey: String?, automaticallyRecordUsers: Bool = true, deviceEvents: DeviceEvent...) {
+    public static func initializeWithAppName(appName: String?, apiKey: String?, hasUserContext: Bool = true, deviceEvents: DeviceEvent...) {
         
         BMSAnalytics.appName = appName
         
         if apiKey != nil {
             BMSAnalytics.apiKey = apiKey
         }
-        
-        Analytics.automaticallyRecordUsers = automaticallyRecordUsers
         
         // Link all of the BMSAnalytics implementation to the BMSAnalyticsSpec APIs
         Logger.delegate = BMSLogger()
@@ -64,6 +63,8 @@ public extension Analytics {
                 #endif
             }
         }
+        
+        Analytics.automaticallyRecordUsers = hasUserContext
         
         // If the developer does not want to specify the user identities themselves, we do it for them.
         if automaticallyRecordUsers {
@@ -125,18 +126,33 @@ public class BMSAnalytics: AnalyticsDelegate {
         // Note: The developer sets this value via Analytics.userIdentity
         didSet {
             
-            if BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] != nil {
+            // userIdentity is being set by the developer
+            if userIdentity != BMSAnalytics.generatedDeviceId {
                 
-                BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
-            }
-            else if userIdentity != BMSAnalytics.generatedDeviceId {
-                #if swift(>=3.0)
-                    Analytics.logger.warn(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
-                #else
-                    Analytics.logger.warn("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
-                #endif
+                guard !Analytics.automaticallyRecordUsers else {
+                    #if swift(>=3.0)
+                        Analytics.logger.error(message: "Before setting the userIdentity property, you must first set the hasUserContext parameter to true in the Analytics initializer.")
+                    #else
+                        Analytics.logger.error("Before setting the userIdentity property, you must first set the hasUserContext parameter to true in the Analytics initializer.")
+                    #endif
+                    
+                    userIdentity = BMSAnalytics.generatedDeviceId
+                    return
+                }
                 
-                userIdentity = nil
+                if BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] != nil {
+                    
+                    BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
+                }
+                else if userIdentity != BMSAnalytics.generatedDeviceId {
+                    #if swift(>=3.0)
+                        Analytics.logger.error(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
+                    #else
+                        Analytics.logger.error("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
+                    #endif
+                    
+                    userIdentity = nil
+                }
             }
         }
     }

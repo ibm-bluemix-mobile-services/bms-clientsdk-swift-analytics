@@ -279,7 +279,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", automaticallyRecordUsers: false, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
         
         Analytics.userIdentity = "test user"
         XCTAssertEqual(Analytics.delegate?.userIdentity, "test user")
@@ -293,12 +293,10 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", automaticallyRecordUsers: false)
+        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: false)
         
         Analytics.userIdentity = "test user"
         XCTAssertNil(Analytics.delegate?.userIdentity)
-        
-        Analytics.userIdentity = nil
     }
     
     
@@ -308,12 +306,8 @@ class BMSAnalyticsTests: XCTestCase {
         Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
         XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.generatedDeviceId)
         
-        Analytics.userIdentity = nil
-        
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", automaticallyRecordUsers: true, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
         XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.generatedDeviceId)
-        
-        Analytics.userIdentity = nil
     }
     
     
@@ -323,11 +317,12 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(analyticsInstance.userIdentity)
         
+        Analytics.automaticallyRecordUsers = false
         BMSAnalytics.logSessionStart()
         
         analyticsInstance.userIdentity = "test user"
-        XCTAssertEqual(analyticsInstance.userIdentity, "test user")
         XCTAssertNotEqual(analyticsInstance.userIdentity, BMSAnalytics.generatedDeviceId)
+        XCTAssertEqual(analyticsInstance.userIdentity, "test user")
         
         Analytics.userIdentity = nil
     }
@@ -341,7 +336,7 @@ class BMSAnalyticsTests: XCTestCase {
         BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] = nil
         
         analyticsInstance.userIdentity = "fail"
-        XCTAssertNil(analyticsInstance.userIdentity)
+        XCTAssertNotEqual(analyticsInstance.userIdentity, "fail")
     }
     
     
@@ -668,7 +663,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", automaticallyRecordUsers: false, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
         
         Analytics.userIdentity = "test user"
         XCTAssertEqual(Analytics.delegate?.userIdentity, "test user")
@@ -682,7 +677,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", automaticallyRecordUsers: false)
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: false)
         
         Analytics.userIdentity = "test user"
         XCTAssertNil(Analytics.delegate?.userIdentity)
@@ -699,7 +694,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         Analytics.userIdentity = nil
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", automaticallyRecordUsers: true, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
         XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.generatedDeviceId)
         
         Analytics.userIdentity = nil

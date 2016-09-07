@@ -25,12 +25,12 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
 
             // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-            Analytics.initializeWithAppName(appName: "TestAppWatchOS", apiKey: "1234", automaticallyRecordUsers: false)
+            Analytics.initializeWithAppName(appName: "TestAppWatchOS", apiKey: "1234", hasUserContext: false)
         #else
             BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
             
             // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-            Analytics.initializeWithAppName("TestAppWatchOS", apiKey: "1234", automaticallyRecordUsers: false)
+            Analytics.initializeWithAppName("TestAppWatchOS", apiKey: "1234", hasUserContext: false)
         #endif
         
         Analytics.enabled = true

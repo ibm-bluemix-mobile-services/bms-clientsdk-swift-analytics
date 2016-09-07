@@ -32,14 +32,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
             
             // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-            Analytics.initializeWithAppName(appName: "TestAppiOS", apiKey: "1234", automaticallyRecordUsers: false, deviceEvents: DeviceEvent.LIFECYCLE)
+            Analytics.initializeWithAppName(appName: "TestAppiOS", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
     
         #else
             
             BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
             
             // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-            Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", automaticallyRecordUsers: false, deviceEvents: DeviceEvent.LIFECYCLE)
+            Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
             
         #endif
         
