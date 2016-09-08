@@ -19,7 +19,7 @@ import BMSCore
 public extension Analytics {
     
     
-    static var automaticallyRecordUsers: Bool = true
+    internal static var automaticallyRecordUsers: Bool = true
     
     
     
@@ -30,11 +30,12 @@ public extension Analytics {
          
          - parameter appName:         The application name.  Should be consistent across platforms (e.g. Android and iOS).
          - parameter apiKey:          A unique ID used to authenticate with the Bluemix analytics service
-         - parameter hasUserContext:  If `true`, each device used will be automatically recorded as one unique user. 
-                                      If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `false`.
+         - parameter hasUserContext:  If `false`, user identities will be automatically recorded using
+                                      the device on which the app is installed.
+                                      If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
          - parameter deviceEvents:    Device events that will be recorded automatically by the `Analytics` class
      */
-    public static func initializeWithAppName(appName: String?, apiKey: String?, hasUserContext: Bool = true, deviceEvents: DeviceEvent...) {
+    public static func initializeWithAppName(appName: String?, apiKey: String?, hasUserContext: Bool = false, deviceEvents: DeviceEvent...) {
         
         BMSAnalytics.appName = appName
         
@@ -64,7 +65,7 @@ public extension Analytics {
             }
         }
         
-        Analytics.automaticallyRecordUsers = hasUserContext
+        Analytics.automaticallyRecordUsers = !hasUserContext
         
         // If the developer does not want to specify the user identities themselves, we do it for them.
         if automaticallyRecordUsers {
