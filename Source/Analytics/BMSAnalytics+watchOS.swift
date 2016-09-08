@@ -18,6 +18,7 @@ import BMSCore
 
 public extension Analytics {
     
+    
     /**
         Starts a timer to record the length of time the WatchOS app is being used before becoming inactive.
         This event will be recorded and sent to the Analytics console, provided that the `Analytics.enabled` property is set to `true`.
@@ -51,6 +52,46 @@ public extension Analytics {
 public extension BMSAnalytics {
     
     
+    // Create a UUID for the current device and save it to the keychain
+    // This is necessary because there is currently no API for programatically retrieving the UDID for watchOS devices
+    internal static var uniqueDeviceId: String? {
+        
+        // First, check if a UUID was already created
+        #if swift(>=3.0)
+            
+            let bmsUserDefaults = UserDefaults(suiteName: Constants.userDefaultsSuiteName)
+            guard bmsUserDefaults != nil else {
+                Analytics.logger.error(message: "Failed to get an ID for this device.")
+                return ""
+            }
+            
+            var deviceId = bmsUserDefaults!.string(forKey: Constants.Metadata.Analytics.deviceId)
+            if deviceId == nil {
+                deviceId = NSUUID().uuidString
+                bmsUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
+            }
+            
+        #else
+            
+            let bmsUserDefaults = NSUserDefaults(suiteName: Constants.userDefaultsSuiteName)
+            guard bmsUserDefaults != nil else {
+                Analytics.logger.error("Failed to get an ID for this device.")
+                return ""
+            }
+            
+            var deviceId = bmsUserDefaults!.stringForKey(Constants.Metadata.Analytics.deviceId)
+            if deviceId == nil {
+                deviceId = NSUUID().UUIDString
+                bmsUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
+            }
+            
+        #endif
+        
+        return deviceId!
+    }
+    
+    
+    
     internal static func getWatchOSDeviceInfo() -> (String, String, String) {
         
         var osVersion = "", model = "", deviceId = ""
@@ -62,9 +103,8 @@ public extension BMSAnalytics {
         #endif
         
         osVersion = device.systemVersion
-        // There is no "identifierForVendor" property for Apple Watch, so we generate a random ID
-        deviceId = BMSAnalytics.generatedDeviceId
         model = device.model
+        deviceId = BMSAnalytics.getDeviceId(from: BMSAnalytics.uniqueDeviceId)
         
         return (osVersion, model, deviceId)
     }

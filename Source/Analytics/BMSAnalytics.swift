@@ -70,7 +70,7 @@ public extension Analytics {
         // If the developer does not want to specify the user identities themselves, we do it for them.
         if automaticallyRecordUsers {
             // We associate each unique device with one unique user. As such, all users will be anonymous.
-            Analytics.userIdentity = BMSAnalytics.generatedDeviceId
+            Analytics.userIdentity = BMSAnalytics.uniqueDeviceId
         }
         
         // Package analytics metadata in a header for each request
@@ -128,7 +128,7 @@ public class BMSAnalytics: AnalyticsDelegate {
         didSet {
             
             // userIdentity is being set by the developer
-            if userIdentity != BMSAnalytics.generatedDeviceId {
+            if userIdentity != BMSAnalytics.uniqueDeviceId {
                 
                 guard !Analytics.automaticallyRecordUsers else {
                     #if swift(>=3.0)
@@ -137,7 +137,7 @@ public class BMSAnalytics: AnalyticsDelegate {
                         Analytics.logger.error("Before setting the userIdentity property, you must first set the hasUserContext parameter to true in the Analytics initializer.")
                     #endif
                     
-                    userIdentity = BMSAnalytics.generatedDeviceId
+                    userIdentity = BMSAnalytics.uniqueDeviceId
                     return
                 }
                 
@@ -145,7 +145,7 @@ public class BMSAnalytics: AnalyticsDelegate {
                     
                     BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
                 }
-                else if userIdentity != BMSAnalytics.generatedDeviceId {
+                else if userIdentity != BMSAnalytics.uniqueDeviceId {
                     #if swift(>=3.0)
                         Analytics.logger.error(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
                     #else
@@ -164,44 +164,6 @@ public class BMSAnalytics: AnalyticsDelegate {
     // Stores metadata (including a duration timer) for each app session
     // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)
     internal static var lifecycleEvents: [String: AnyObject] = [:]
-    
-    // Create a UUID for the current device and save it to the keychain (for watchOS devices only)
-    // Also used for Analytics.userIdentity if the developer does not specify the userIdentity
-    internal static var generatedDeviceId: String {
-        
-        // First, check if a UUID was already created
-        #if swift(>=3.0)
-            
-            let bmsUserDefaults = UserDefaults(suiteName: Constants.userDefaultsSuiteName)
-            guard bmsUserDefaults != nil else {
-                Analytics.logger.error(message: "Failed to get an ID for this device.")
-                return ""
-            }
-            
-            var deviceId = bmsUserDefaults!.string(forKey: Constants.Metadata.Analytics.deviceId)
-            if deviceId == nil {
-                deviceId = NSUUID().uuidString
-                bmsUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
-            }
-            
-        #else
-            
-            let bmsUserDefaults = NSUserDefaults(suiteName: Constants.userDefaultsSuiteName)
-            guard bmsUserDefaults != nil else {
-                Analytics.logger.error("Failed to get an ID for this device.")
-                return ""
-            }
-            
-            var deviceId = bmsUserDefaults!.stringForKey(Constants.Metadata.Analytics.deviceId)
-            if deviceId == nil {
-                deviceId = NSUUID().UUIDString
-                bmsUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
-            }
-            
-        #endif
-        
-        return deviceId!
-    }
     
     // The timestamp for when the current session started
     internal static var startTime: Int64 = 0
@@ -451,6 +413,24 @@ public class BMSAnalytics: AnalyticsDelegate {
         #else
             Analytics.log(metadata)
         #endif
+    }
+    
+    
+    // Retrieve the unique device ID, or return "unknown" if it is unattainable.
+    internal static func getDeviceId(from uniqueDeviceId: String?) -> String {
+        
+        if let id = uniqueDeviceId {
+            return id
+        }
+        else {
+            #if swift(>=3.0)
+                Analytics.logger.warn(message: "Cannot determine the unique ID for this device, so the recorded analytics data will not include it.")
+            #else
+                Analytics.logger.warn("Cannot determine the unique ID for this device, so the recorded analytics data will not include it.")
+            #endif
+            
+            return "unknown"
+        }
     }
 }
 

@@ -259,19 +259,29 @@ class BMSAnalyticsTests: XCTestCase {
     }
 
 
-    func testGeneratedDeviceId() {
+    func testUniqueDeviceId() {
         
         let bmsUserDefaults = UserDefaults(suiteName: Constants.userDefaultsSuiteName)
         bmsUserDefaults?.removeObject(forKey: "deviceId")
         
         // Generate new ID
-        let generatedId = BMSAnalytics.generatedDeviceId
+        let generatedId = BMSAnalytics.uniqueDeviceId
         
         // Since an ID was already created, this method should keep returning the same one
-        let retrievedId = BMSAnalytics.generatedDeviceId
+        let retrievedId = BMSAnalytics.uniqueDeviceId
         XCTAssertEqual(retrievedId, generatedId)
-        let retrievedId2 = BMSAnalytics.generatedDeviceId
+        let retrievedId2 = BMSAnalytics.uniqueDeviceId
         XCTAssertEqual(retrievedId2, generatedId)
+    }
+    
+    
+    func testGetDeviceId() {
+        
+        let realDeviceId = "1234"
+        XCTAssertEqual(BMSAnalytics.getDeviceId(from: realDeviceId), realDeviceId)
+        
+        let unknownDeviceId: String? = nil
+        XCTAssertEqual(BMSAnalytics.getDeviceId(from: unknownDeviceId), "unknown")
     }
     
     
@@ -279,13 +289,10 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
         
         Analytics.userIdentity = "test user"
         XCTAssertEqual(Analytics.delegate?.userIdentity, "test user")
-        
-        Analytics.userIdentity = nil
-        XCTAssertNil(Analytics.delegate?.userIdentity)
     }
     
     
@@ -293,7 +300,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: false)
+        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: true)
         
         Analytics.userIdentity = "test user"
         XCTAssertNil(Analytics.delegate?.userIdentity)
@@ -304,10 +311,14 @@ class BMSAnalyticsTests: XCTestCase {
         
         // Without specifying the `automaticallyRecordUsers` parameter, we should get automatic users
         Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
-        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.generatedDeviceId)
+        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
-        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.generatedDeviceId)
+        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
+        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
+        
+        // If hasUserContext is false, the developer should not be able to set Analytics.userIdentity themselves
+        Analytics.userIdentity = "test user"
+        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
     }
     
     
@@ -321,10 +332,8 @@ class BMSAnalyticsTests: XCTestCase {
         BMSAnalytics.logSessionStart()
         
         analyticsInstance.userIdentity = "test user"
-        XCTAssertNotEqual(analyticsInstance.userIdentity, BMSAnalytics.generatedDeviceId)
+        XCTAssertNotEqual(analyticsInstance.userIdentity, BMSAnalytics.uniqueDeviceId)
         XCTAssertEqual(analyticsInstance.userIdentity, "test user")
-        
-        Analytics.userIdentity = nil
     }
     
     
@@ -643,19 +652,29 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
     
-    func testGeneratedDeviceId() {
+    func testUniqueDeviceId() {
         
         let bmsUserDefaults = NSUserDefaults(suiteName: Constants.userDefaultsSuiteName)
         bmsUserDefaults?.removeObjectForKey("deviceId")
         
         // Generate new ID
-        let generatedId = BMSAnalytics.generatedDeviceId
+        let generatedId = BMSAnalytics.uniqueDeviceId
         
         // Since an ID was already created, this method should keep returning the same one
-        let retrievedId = BMSAnalytics.generatedDeviceId
+        let retrievedId = BMSAnalytics.uniqueDeviceId
         XCTAssertEqual(retrievedId, generatedId)
-        let retrievedId2 = BMSAnalytics.generatedDeviceId
+        let retrievedId2 = BMSAnalytics.uniqueDeviceId
         XCTAssertEqual(retrievedId2, generatedId)
+    }
+    
+    
+    func testGetDeviceId() {
+        
+        let realDeviceId = "1234"
+        XCTAssertEqual(BMSAnalytics.getDeviceId(from: realDeviceId), realDeviceId)
+        
+        let unknownDeviceId: String? = nil
+        XCTAssertEqual(BMSAnalytics.getDeviceId(from: unknownDeviceId), "unknown")
     }
     
     
@@ -663,13 +682,10 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
         
         Analytics.userIdentity = "test user"
         XCTAssertEqual(Analytics.delegate?.userIdentity, "test user")
-        
-        Analytics.userIdentity = nil
-        XCTAssertNil(Analytics.delegate?.userIdentity)
     }
     
     
@@ -677,12 +693,10 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: false)
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: true)
         
         Analytics.userIdentity = "test user"
         XCTAssertNil(Analytics.delegate?.userIdentity)
-        
-        Analytics.userIdentity = nil
     }
     
     
@@ -690,14 +704,14 @@ class BMSAnalyticsTests: XCTestCase {
         
         // Without specifying the `automaticallyRecordUsers` parameter, we should get automatic users
         Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
-        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.generatedDeviceId)
+        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
         
-        Analytics.userIdentity = nil
-        
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
-        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.generatedDeviceId)
-        
-        Analytics.userIdentity = nil
+        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
+        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
+    
+        // If hasUserContext is false, the developer should not be able to set Analytics.userIdentity themselves
+        Analytics.userIdentity = "test user"
+        XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
     }
     
     
@@ -711,9 +725,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         analyticsInstance.userIdentity = "test user"
         XCTAssertEqual(analyticsInstance.userIdentity, "test user")
-        XCTAssertNotEqual(analyticsInstance.userIdentity, BMSAnalytics.generatedDeviceId)
-        
-        Analytics.userIdentity = nil
+        XCTAssertNotEqual(analyticsInstance.userIdentity, BMSAnalytics.uniqueDeviceId)
     }
     
     

@@ -19,6 +19,20 @@ import UIKit
 public extension BMSAnalytics {
     
     
+#if swift(>=3.0)
+    
+    // The device ID for iOS devices, unique to each bundle ID on each device.
+    // Apps installed with different bundle IDs on the same device will receive different device IDs.
+    internal static let uniqueDeviceId: String? = UIDevice.current.identifierForVendor?.uuidString
+
+#else
+    
+    // The device ID for iOS devices, unique to each bundle ID on each device.
+    // Apps installed with different bundle IDs on the same device will receive different device IDs.
+    internal static let uniqueDeviceId: String? = UIDevice.currentDevice().identifierForVendor?.UUIDString
+    
+#endif
+    
     // Records the duration of the app's lifecycle from when it enters the foreground to when it goes to the background.
     internal static func startRecordingApplicationLifecycle() {
         
@@ -49,14 +63,13 @@ public extension BMSAnalytics {
         
         #if swift(>=3.0)
             let device = UIDevice.current
-            osVersion = device.systemVersion
-            deviceId = device.identifierForVendor?.uuidString ?? "unknown"
         #else
             let device = UIDevice.currentDevice()
-            osVersion = device.systemVersion
-            deviceId = device.identifierForVendor?.UUIDString ?? "unknown"
         #endif
+        
+        osVersion = device.systemVersion
         model = device.modelName
+        deviceId = BMSAnalytics.getDeviceId(from: BMSAnalytics.uniqueDeviceId)
         
         return (osVersion, model, deviceId)
     }
