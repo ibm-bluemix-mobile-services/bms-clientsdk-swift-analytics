@@ -66,10 +66,26 @@ public extension Logger {
                 #endif
             }
             else {
+                
+                var debugMessage = ""
+                if let response = response {
+                    if let statusCode = response.statusCode {
+                        debugMessage += "Status code: \(statusCode). "
+                    }
+                    if let responseText = response.responseText {
+                        debugMessage += "Response: \(responseText). "
+                    }
+                }
+                if let error = error {
+                    debugMessage += " Error: \(error.debugDescription)."
+                }
+
                 #if swift(>=3.0)
-                    BMSLogger.internalLogger.error(message: "Request to send client logs has failed.")
+                    BMSLogger.internalLogger.error(message: "Request to send client logs has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send the logs with a completion handler to retrieve the response and error.")
+                    BMSLogger.internalLogger.debug(message: debugMessage)
                 #else
-                    BMSLogger.internalLogger.error("Request to send client logs has failed.")
+                    BMSLogger.internalLogger.error("Request to send client logs has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send the logs with a completion handler to retrieve the response and error.")
+                    BMSLogger.internalLogger.debug(debugMessage)
                 #endif
             }
             
@@ -155,7 +171,27 @@ public extension Logger {
                     BMSLogger.delete(file: Constants.File.Analytics.outboundLogs)
                 }
                 else {
-                    Analytics.logger.error(message: "Request to send analytics data to the server has failed.")
+                    
+                    var debugMessage = ""
+                    if let response = response {
+                        if let statusCode = response.statusCode {
+                            debugMessage += "Status code: \(statusCode). "
+                        }
+                        if let responseText = response.responseText {
+                            debugMessage += "Response: \(responseText). "
+                        }
+                    }
+                    if let error = error {
+                        debugMessage += " Error: \(error.debugDescription)."
+                    }
+                    
+                    #if swift(>=3.0)
+                        BMSLogger.internalLogger.error(message: "Request to send analytics data has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send analytics with a completion handler to retrieve the response and error.")
+                        BMSLogger.internalLogger.debug(message: debugMessage)
+                    #else
+                        BMSLogger.internalLogger.error("Request to send analytics data has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send analytics with a completion handler to retrieve the response and error.")
+                        BMSLogger.internalLogger.debug(debugMessage)
+                    #endif
                 }
                 
             #else
@@ -786,7 +822,7 @@ public class BMSLogger: LoggerDelegate {
                 return try readLogs(fromFile: bufferLogFile)
             }
             else {
-                BMSLogger.internalLogger.debug(message: "Unable to read file: \(fileName). This is likely because either no analytics data or no logs have been recorded since they were last sent.")
+                BMSLogger.internalLogger.debug(message: "No logs have been recorded since they were last sent to the server.")
                 return nil
             }
             
@@ -808,7 +844,7 @@ public class BMSLogger: LoggerDelegate {
                 return try readLogs(fromFile: bufferLogFile)
             }
             else {
-                BMSLogger.internalLogger.debug("Unable to read file: \(fileName). This is likely because either no analytics data or no logs have been recorded since they were last sent.")
+                BMSLogger.internalLogger.debug("No logs have been recorded since they were last sent to the server.")
                 return nil
             }
 
