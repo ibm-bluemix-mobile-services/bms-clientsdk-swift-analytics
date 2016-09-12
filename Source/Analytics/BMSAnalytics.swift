@@ -127,9 +127,12 @@ public class BMSAnalytics: AnalyticsDelegate {
         // Note: The developer sets this value via Analytics.userIdentity
         didSet {
             
+            // userIdentity is being set by the SDK
+            if userIdentity == BMSAnalytics.uniqueDeviceId {
+                BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
+            }
             // userIdentity is being set by the developer
-            if userIdentity != BMSAnalytics.uniqueDeviceId {
-                
+            else {
                 guard !Analytics.automaticallyRecordUsers else {
                     #if swift(>=3.0)
                         Analytics.logger.error(message: "Before setting the userIdentity property, you must first set the hasUserContext parameter to true in the Analytics initializer.")
@@ -145,7 +148,7 @@ public class BMSAnalytics: AnalyticsDelegate {
                     
                     BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
                 }
-                else if userIdentity != BMSAnalytics.uniqueDeviceId {
+                else {
                     #if swift(>=3.0)
                         Analytics.logger.error(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
                     #else
