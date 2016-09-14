@@ -336,8 +336,7 @@ public class BMSLogger: LoggerDelegate {
         
         get {
             #if swift(>=3.0)
-                let asdf = UserDefaults.standard.bool(forKey: Constants.uncaughtException)
-                return asdf
+                return UserDefaults.standard.bool(forKey: Constants.uncaughtException)
             #else
                 return NSUserDefaults.standardUserDefaults().boolForKey(Constants.uncaughtException)
             #endif
@@ -377,14 +376,18 @@ public class BMSLogger: LoggerDelegate {
     internal static func log(exception uncaughtException: NSException) {
         
         let logger = Logger.logger(forName: Constants.Package.logger)
-        var exceptionString = "Uncaught Exception: \(uncaughtException.name)."
+        var exceptionString = "Uncaught Exception: \(uncaughtException.name). "
         if let reason = uncaughtException.reason {
-            exceptionString += " Reason: \(reason)."
+            exceptionString += "Reason: \(reason). "
         }
         
         #if swift(>=3.0)
+            exceptionString += "Stack trace: \(uncaughtException.callStackSymbols.joined(separator: ", "))."
+            
             logger.fatal(message: exceptionString)
         #else
+            exceptionString += "Stack trace: \(uncaughtException.callStackSymbols.joinWithSeparator(", "))."
+            
             logger.fatal(exceptionString)
         #endif
     }
