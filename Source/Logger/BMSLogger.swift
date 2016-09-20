@@ -378,16 +378,12 @@ public class BMSLogger: LoggerDelegate {
         let logger = Logger.logger(forName: Constants.Package.logger)
         var exceptionString = "Uncaught Exception: \(uncaughtException.name). "
         if let reason = uncaughtException.reason {
-            exceptionString += "Reason: \(reason). "
+            exceptionString += "Reason: \(reason)."
         }
         
         #if swift(>=3.0)
-            exceptionString += "Stack trace: \(uncaughtException.callStackSymbols.joined(separator: ", "))."
-            
             logger.fatal(message: exceptionString)
         #else
-            exceptionString += "Stack trace: \(uncaughtException.callStackSymbols.joinWithSeparator(", "))."
-            
             logger.fatal(exceptionString)
         #endif
     }
