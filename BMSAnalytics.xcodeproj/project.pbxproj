@@ -44,48 +44,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		920144051D494140007BD26D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A35FEF399C0983C4FE8E61B30AD49E42;
-			remoteInfo = "BMSAnalyticsAPI-iOS8.0";
-		};
-		920144071D494140007BD26D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D76D5572F140C7DCED3308545A7A969E;
-			remoteInfo = "BMSAnalyticsAPI-iOS9.0";
-		};
-		920144091D494140007BD26D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 76C43CC3A1CB73B1B6B2ED94F64EAF0E;
-			remoteInfo = "BMSAnalyticsAPI-watchOS2.1";
-		};
-		9201440B1D494140007BD26D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 36D8B10953B43347E9D9167C146071CD;
-			remoteInfo = "BMSCore-iOS8.0";
-		};
-		9201440D1D494140007BD26D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E32FE0B27BAA7E6B30D66C536FB397EC;
-			remoteInfo = "BMSCore-iOS9.0";
-		};
-		9201440F1D494140007BD26D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B14492E8A8012339B8B12DC4963C1E80;
-			remoteInfo = "BMSCore-watchOS2.1";
-		};
 		926CF81A1C4ECC330084355B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 926CF8051C4ECC330084355B /* Project object */;
@@ -107,6 +65,34 @@
 			remoteGlobalIDString = 926CF84C1C4ECDF80084355B;
 			remoteInfo = TestAppWatchOS;
 		};
+		9272D6581D95C5880065F3AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E6375367017D3029EE4AAD349C7FCC92;
+			remoteInfo = "BMSAnalyticsAPI-iOS";
+		};
+		9272D65A1D95C5880065F3AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FCD4A072C53D3A536D4702C7139EC6F5;
+			remoteInfo = "BMSAnalyticsAPI-watchOS";
+		};
+		9272D65C1D95C5880065F3AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9B1AED951C5A957F9AC9D0FD2C591771;
+			remoteInfo = "BMSCore-iOS";
+		};
+		9272D65E1D95C5880065F3AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5B29B7B63400C6A066E66370A5250814;
+			remoteInfo = "BMSCore-watchOS";
+		};
 		9276B5161C6D445A00E61F45 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 926CF8051C4ECC330084355B /* Project object */;
@@ -120,20 +106,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 926CF82C1C4ECD930084355B;
 			remoteInfo = BMSAnalyticsWatchOS;
-		};
-		929935581D49468700A6DC79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E8EFC383916ED61B4F480942FE8CE01;
-			remoteInfo = "BMSAnalyticsAPI-iOS9.2";
-		};
-		9299355A1D49468700A6DC79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9276B4C91C6D1D9E00E61F45 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E7629C90F70895F77618CCF7FB5EF43D;
-			remoteInfo = "BMSCore-iOS9.2";
 		};
 		9299355C1D49468700A6DC79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -651,14 +623,10 @@
 		9276B4CA1C6D1D9E00E61F45 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				920144061D494140007BD26D /* BMSAnalyticsAPI.framework */,
-				920144081D494140007BD26D /* BMSAnalyticsAPI.framework */,
-				929935591D49468700A6DC79 /* BMSAnalyticsAPI.framework */,
-				9201440A1D494140007BD26D /* BMSAnalyticsAPI.framework */,
-				9201440C1D494140007BD26D /* BMSCore.framework */,
-				9201440E1D494140007BD26D /* BMSCore.framework */,
-				9299355B1D49468700A6DC79 /* BMSCore.framework */,
-				920144101D494140007BD26D /* BMSCore.framework */,
+				9272D6591D95C5880065F3AB /* BMSAnalyticsAPI.framework */,
+				9272D65B1D95C5880065F3AB /* BMSAnalyticsAPI.framework */,
+				9272D65D1D95C5880065F3AB /* BMSCore.framework */,
+				9272D65F1D95C5880065F3AB /* BMSCore.framework */,
 				92E7AACA1CB700E500FEC069 /* Pods_BMSAnalytics_iOS.framework */,
 				9299355D1D49468700A6DC79 /* Pods_BMSAnalytics_Tests.framework */,
 				92E7AACE1CB700E500FEC069 /* Pods_BMSAnalytics_watchOS.framework */,
@@ -995,60 +963,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		920144061D494140007BD26D /* BMSAnalyticsAPI.framework */ = {
+		9272D6591D95C5880065F3AB /* BMSAnalyticsAPI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = BMSAnalyticsAPI.framework;
-			remoteRef = 920144051D494140007BD26D /* PBXContainerItemProxy */;
+			remoteRef = 9272D6581D95C5880065F3AB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		920144081D494140007BD26D /* BMSAnalyticsAPI.framework */ = {
+		9272D65B1D95C5880065F3AB /* BMSAnalyticsAPI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = BMSAnalyticsAPI.framework;
-			remoteRef = 920144071D494140007BD26D /* PBXContainerItemProxy */;
+			remoteRef = 9272D65A1D95C5880065F3AB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9201440A1D494140007BD26D /* BMSAnalyticsAPI.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BMSAnalyticsAPI.framework;
-			remoteRef = 920144091D494140007BD26D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9201440C1D494140007BD26D /* BMSCore.framework */ = {
+		9272D65D1D95C5880065F3AB /* BMSCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = BMSCore.framework;
-			remoteRef = 9201440B1D494140007BD26D /* PBXContainerItemProxy */;
+			remoteRef = 9272D65C1D95C5880065F3AB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9201440E1D494140007BD26D /* BMSCore.framework */ = {
+		9272D65F1D95C5880065F3AB /* BMSCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = BMSCore.framework;
-			remoteRef = 9201440D1D494140007BD26D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		920144101D494140007BD26D /* BMSCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BMSCore.framework;
-			remoteRef = 9201440F1D494140007BD26D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		929935591D49468700A6DC79 /* BMSAnalyticsAPI.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BMSAnalyticsAPI.framework;
-			remoteRef = 929935581D49468700A6DC79 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9299355B1D49468700A6DC79 /* BMSCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BMSCore.framework;
-			remoteRef = 9299355A1D49468700A6DC79 /* PBXContainerItemProxy */;
+			remoteRef = 9272D65E1D95C5880065F3AB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		9299355D1D49468700A6DC79 /* Pods_BMSAnalytics_Tests.framework */ = {
@@ -1168,7 +1108,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		0BC5376DB92DB22077FC6FBA /* [CP] Copy Pods Resources */ = {
@@ -1213,7 +1153,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		63AB019A66D9C2413788B811 /* [CP] Embed Pods Frameworks */ = {
@@ -1273,7 +1213,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9AA38FBB1B119942CB8E0117 /* [CP] Check Pods Manifest.lock */ = {
@@ -1288,7 +1228,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A5A063ED2B27288D7B84A4A6 /* [CP] Copy Pods Resources */ = {
@@ -1318,7 +1258,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		EE6349EA5BE1BC83075D1146 /* [CP] Embed Pods Frameworks */ = {

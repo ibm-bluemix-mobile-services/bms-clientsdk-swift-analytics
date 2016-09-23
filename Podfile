@@ -1,21 +1,26 @@
 use_frameworks!
 
 target 'BMSAnalytics iOS' do
-    pod 'BMSCore', '~> 1.1'
+    platform :ios, '9.0'
+	pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'development'
 end
 
 target 'BMSAnalytics watchOS' do
-    pod 'BMSCore', '~> 1.1'
+    platform :watchos, '2.0'
+	pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'development'
 end
 
 target 'BMSAnalytics Tests' do
-    pod 'BMSCore', '~> 1.1'
+    platform :ios, '9.0'
+	pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'development'
 end
 
 target 'TestApp iOS' do
-    pod 'BMSCore', '~> 1.1'
+    platform :ios, '9.0'
+	pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'development'
 end
 
 target 'TestApp watchOS Extension' do
-    pod 'BMSCore', '~> 1.1'
+    platform :watchos, '2.0'
+	pod 'BMSCore', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git', :branch => 'development'
 end

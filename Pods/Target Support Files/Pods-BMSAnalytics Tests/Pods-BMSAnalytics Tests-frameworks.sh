@@ -84,10 +84,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/BMSAnalyticsAPI-iOS9.2/BMSAnalyticsAPI.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/BMSCore-iOS9.2/BMSCore.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BMSCore-iOS/BMSCore.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/BMSAnalyticsAPI-iOS9.2/BMSAnalyticsAPI.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/BMSCore-iOS9.2/BMSCore.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/BMSCore-iOS/BMSCore.framework"
 fi
