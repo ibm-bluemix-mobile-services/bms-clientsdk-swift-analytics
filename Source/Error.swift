@@ -12,10 +12,12 @@
 */
 
 
+// MARK: - Swift 3
 
 #if swift(>=3.0)
-    
 
+    
+    
 /**
     These error codes indicate a failure that occurred within the BMSAnalytics framework.
 */
@@ -28,9 +30,21 @@ public enum BMSAnalyticsError: Error {
 }
 
 
-#else
+    
+    
+    
+/**************************************************************************************************/
+    
+    
     
 
+    
+// MARK: - Swift 2
+    
+#else
+    
+    
+    
 /**
     These error codes indicate a failure that occurred within the BMSAnalytics framework.
 */
@@ -42,5 +56,6 @@ public enum BMSAnalyticsError: Int, ErrorType {
     static let domain = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics"
 }
 
-
+    
+    
 #endif
