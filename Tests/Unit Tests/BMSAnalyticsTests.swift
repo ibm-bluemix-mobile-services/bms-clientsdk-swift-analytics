@@ -17,10 +17,15 @@ import BMSCore
 @testable import BMSAnalytics
 
 
+
+// MARK: - Swift 3
+
+#if swift(>=3.0)
+
+
+    
 class BMSAnalyticsTests: XCTestCase {
     
-// MARK: Swift 3.0
-#if swift(>=3.0)
     
     override func tearDown() {
         BMSAnalytics.lifecycleEvents = [:]
@@ -405,14 +410,26 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertFalse(fileExists)
     }
-
+    
+}
 
     
     
-// MARK: Swift 2.x
+    
+    
+/**************************************************************************************************/
+    
+    
+    
+    
+
+// MARK: - Swift 2
+    
 #else
     
     
+    
+class BMSAnalyticsTests: XCTestCase {
     
     
     override func tearDown() {
@@ -797,7 +814,9 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertFalse(fileExists)
     }
-    
-#endif
-    
+
 }
+
+
+
+#endif

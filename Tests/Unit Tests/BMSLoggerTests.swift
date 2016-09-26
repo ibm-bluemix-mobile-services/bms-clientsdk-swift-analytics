@@ -17,11 +17,15 @@ import BMSCore
 @testable import BMSAnalytics
 
 
-class BMSLoggerTests: XCTestCase {
-    
-    
-// MARK: Swift 3.0
+
+// MARK: - Swift 3
+
 #if swift(>=3.0)
+    
+
+
+class BMSLoggerTests: XCTestCase {
+
     
     override func tearDown() {
         BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: nil, bluemixAppGUID: nil, bluemixRegion: "")
@@ -984,13 +988,32 @@ class BMSLoggerTests: XCTestCase {
             return nil
         }
     }
+}
     
     
     
-// MARK: Swift 2.x
+enum LogFileType: String {
+    case LOGGER
+    case ANALYTICS
+}
+    
+    
+    
+    
+    
+/**************************************************************************************************/
+    
+    
+    
+    
+    
+// MARK: - Swift 2
+    
 #else
     
+
     
+class BMSLoggerTests: XCTestCase {
     
     
     override func tearDown() {
@@ -1955,12 +1978,15 @@ class BMSLoggerTests: XCTestCase {
         }
     }
     
-#endif
-
 }
-
+    
+    
 
 enum LogFileType: String {
     case LOGGER
     case ANALYTICS
 }
+
+
+
+#endif
