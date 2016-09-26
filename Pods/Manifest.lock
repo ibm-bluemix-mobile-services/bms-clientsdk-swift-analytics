@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BMSCore:
-    :commit: 1bc25756f4afa2bf45640f564e2d9d7e12699d23
+    :commit: 8dc7461212980ccc21d0cef5b17990c8f3d0aa25
     :git: https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git
 
 SPEC CHECKSUMS:
