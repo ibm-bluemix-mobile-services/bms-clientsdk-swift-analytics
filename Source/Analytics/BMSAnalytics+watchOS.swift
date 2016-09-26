@@ -67,7 +67,7 @@ public extension BMSAnalytics {
             
             var deviceId = bmsUserDefaults!.string(forKey: Constants.Metadata.Analytics.deviceId)
             if deviceId == nil {
-                deviceId = NSUUID().uuidString
+                deviceId = UUID().uuidString
                 bmsUserDefaults!.setValue(deviceId, forKey: Constants.Metadata.Analytics.deviceId)
             }
             
@@ -75,7 +75,7 @@ public extension BMSAnalytics {
             
             let bmsUserDefaults = NSUserDefaults(suiteName: Constants.userDefaultsSuiteName)
             guard bmsUserDefaults != nil else {
-                Analytics.logger.error("Failed to get an ID for this device.")
+                Analytics.logger.error(message: "Failed to get an ID for this device.")
                 return ""
             }
             

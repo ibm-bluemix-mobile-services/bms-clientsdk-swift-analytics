@@ -35,7 +35,7 @@ public extension Analytics {
                                       If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
          - parameter deviceEvents:    Device events that will be recorded automatically by the `Analytics` class
      */
-    public static func initializeWithAppName(appName: String?, apiKey: String?, hasUserContext: Bool = false, deviceEvents: DeviceEvent...) {
+    public static func initialize(appName: String?, apiKey: String?, hasUserContext: Bool = false, deviceEvents: DeviceEvent...) {
         
         BMSAnalytics.appName = appName
         
@@ -52,15 +52,11 @@ public extension Analytics {
         // Registering device events
         for event in deviceEvents {
             switch event {
-            case .LIFECYCLE:
+            case .lifecycle:
                 #if os(iOS)
                     BMSAnalytics.startRecordingApplicationLifecycle()
                 #else
-                    #if swift(>=3.0)
-                        Analytics.logger.warn(message: "The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
-                    #else
-                        Analytics.logger.warn("The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
-                    #endif
+                    Analytics.logger.warn(message: "The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
                 #endif
             }
         }
@@ -79,11 +75,7 @@ public extension Analytics {
             Request.requestAnalyticsData = BMSAnalytics.generateOutboundRequestMetadata()
         }
         else {
-            #if swift(>=3.0)
-                Analytics.logger.warn(message: "Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
-            #else
-                Analytics.logger.warn("Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
-            #endif
+            Analytics.logger.warn(message: "Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
         }
     }
     
@@ -95,7 +87,7 @@ public extension Analytics {
          
          - parameter completionHandler:  Optional callback containing the results of the send request
      */
-    public static func send(completionHandler userCallback: BmsCompletionHandler? = nil) {
+    public static func send(completionHandler userCallback: BMSCompletionHandler? = nil) {
         
         Logger.sendAnalytics(completionHandler: userCallback)
     }
@@ -114,11 +106,23 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     // MARK: Properties (API)
     
+#if swift(>=3.0)
+    
+    /// The name of the iOS/WatchOS app
+    public fileprivate(set) static var appName: String?
+    
+    /// The unique ID used to send logs to the Analytics server
+    public fileprivate(set) static var apiKey: String?
+    
+#else
+    
     /// The name of the iOS/WatchOS app
     public private(set) static var appName: String?
     
     /// The unique ID used to send logs to the Analytics server
     public private(set) static var apiKey: String?
+    
+#endif
     
     /// Identifies the current application user.
     /// To reset the userId, set the value to nil.
@@ -134,11 +138,8 @@ public class BMSAnalytics: AnalyticsDelegate {
             // userIdentity is being set by the developer
             else {
                 guard !Analytics.automaticallyRecordUsers else {
-                    #if swift(>=3.0)
-                        Analytics.logger.error(message: "Before setting the userIdentity property, you must first set the hasUserContext parameter to true in the Analytics initializer.")
-                    #else
-                        Analytics.logger.error("Before setting the userIdentity property, you must first set the hasUserContext parameter to true in the Analytics initializer.")
-                    #endif
+                    
+                    Analytics.logger.error(message: "Before setting the userIdentity property, you must first set the hasUserContext parameter to true in the Analytics initializer.")
                     
                     userIdentity = BMSAnalytics.uniqueDeviceId
                     return
@@ -149,11 +150,7 @@ public class BMSAnalytics: AnalyticsDelegate {
                     BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
                 }
                 else {
-                    #if swift(>=3.0)
-                        Analytics.logger.error(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
-                    #else
-                        Analytics.logger.error("To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
-                    #endif
+                    Analytics.logger.error(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
                     
                     userIdentity = nil
                 }
@@ -164,9 +161,16 @@ public class BMSAnalytics: AnalyticsDelegate {
 
     // MARK: Properties (internal)
     
+    
+#if swift(>=3.0)
+    // Stores metadata (including a duration timer) for each app session
+    // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)
+    internal static var lifecycleEvents: [String: Any] = [:]
+#else
     // Stores metadata (including a duration timer) for each app session
     // An app session is roughly defined as the time during which an app is being used (from becoming active to going inactive)
     internal static var lifecycleEvents: [String: AnyObject] = [:]
+#endif
     
     // The timestamp for when the current session started
     internal static var startTime: Int64 = 0
@@ -204,9 +208,9 @@ public class BMSAnalytics: AnalyticsDelegate {
                 return
             }
             
-            BMSAnalytics.startTime = Int64(NSDate.timeIntervalSinceReferenceDate * 1000) // milliseconds
+            BMSAnalytics.startTime = Int64(Date.timeIntervalSinceReferenceDate * 1000) // milliseconds
             
-            lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().uuidString
+            lifecycleEvents[Constants.Metadata.Analytics.sessionId] = UUID().uuidString
             lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
             
             Analytics.log(metadata: lifecycleEvents)
@@ -216,7 +220,7 @@ public class BMSAnalytics: AnalyticsDelegate {
         #else
         
             guard lifecycleEvents.isEmpty else {
-                Analytics.logger.info("A new session is starting before previous session ended. Data for this new session will be discarded.")
+                Analytics.logger.info(message: "A new session is starting before previous session ended. Data for this new session will be discarded.")
                 return
             }
             
@@ -225,7 +229,7 @@ public class BMSAnalytics: AnalyticsDelegate {
             lifecycleEvents[Constants.Metadata.Analytics.sessionId] = NSUUID().UUIDString
             lifecycleEvents[Constants.Metadata.Analytics.category] = Constants.Metadata.Analytics.appSession
             
-            Analytics.log(lifecycleEvents)
+            Analytics.log(metadata: lifecycleEvents)
             
             BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.initialContext)
             
@@ -256,20 +260,15 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         // Let the Analytics service know how the app was last closed
         if BMSLogger.exceptionHasBeenCalled {
-            lifecycleEvents[Constants.Metadata.Analytics.closedBy] = AppClosedBy.CRASH.rawValue
+            lifecycleEvents[Constants.Metadata.Analytics.closedBy] = AppClosedBy.crash.rawValue
             Logger.isUncaughtExceptionDetected = true
         }
         else {
-            lifecycleEvents[Constants.Metadata.Analytics.closedBy] = AppClosedBy.USER.rawValue
+            lifecycleEvents[Constants.Metadata.Analytics.closedBy] = AppClosedBy.user.rawValue
             Logger.isUncaughtExceptionDetected = false
         }
         
-        #if swift(>=3.0)
-            Analytics.log(metadata: lifecycleEvents)
-        #else
-            Analytics.log(lifecycleEvents)
-        #endif
-        
+        Analytics.log(metadata: lifecycleEvents)
         lifecycleEvents = [:]
         BMSAnalytics.startTime = 0
     }
@@ -326,54 +325,39 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         var requestMetadataString: String?
 
-        #if swift(>=3.0)
-            do {
+        do {
+            #if swift(>=3.0)
                 let requestMetadataJson = try JSONSerialization.data(withJSONObject: requestMetadata, options: [])
                 requestMetadataString = String(data: requestMetadataJson, encoding: .utf8)
-            }
-            catch let error {
-                Analytics.logger.error(message: "Failed to append analytics metadata to request. Error: \(error)")
-            }
-            
-        #else
-            
-            do {
+            #else
                 let requestMetadataJson = try NSJSONSerialization.dataWithJSONObject(requestMetadata, options: [])
                 requestMetadataString = String(data: requestMetadataJson, encoding: NSUTF8StringEncoding)
-            }
-            catch let error {
-                Analytics.logger.error("Failed to append analytics metadata to request. Error: \(error)")
-            }
-            
-        #endif
+            #endif
+        }
+        catch let error {
+            Analytics.logger.error(message: "Failed to append analytics metadata to request. Error: \(error)")
+        }
         
         return requestMetadataString
     }
     
     
+#if swift(>=3.0)
+    
     // Gather response data as JSON to be recorded in an analytics log
-    internal static func generateInboundResponseMetadata(request: Request, response: Response, url: String) -> [String: AnyObject] {
+    internal static func generateInboundResponseMetadata(request: Request, response: Response, url: String) -> [String: Any] {
         
-        #if swift(>=3.0)
-            Analytics.logger.debug(message: "Network response inbound")
-            
-            let endTime = NSDate.timeIntervalSinceReferenceDate
-            let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
-            
-            let bytesSent = request.requestBody?.count ?? 0
-        #else
-            Analytics.logger.debug("Network response inbound")
-            
-            let endTime = NSDate.timeIntervalSinceReferenceDate()
-            let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
-            
-            let bytesSent = request.requestBody?.length ?? 0
-        #endif
+        Analytics.logger.debug(message: "Network response inbound")
+        
+        let endTime = NSDate.timeIntervalSinceReferenceDate
+        let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
+        
+        let bytesSent = request.requestBody?.count ?? 0
         
         // Data for analytics logging
-        var responseMetadata: [String: AnyObject] = [:]
+        var responseMetadata: [String: Any] = [:]
         
-        responseMetadata["$category"] = "network"
+        responseMetadata["$category"] = "network" as AnyObject
         responseMetadata["$path"] = url
         responseMetadata["$trackingId"] = request.trackingId
         responseMetadata["$outboundTimestamp"] = request.startTime
@@ -383,16 +367,61 @@ public class BMSAnalytics: AnalyticsDelegate {
         responseMetadata["$bytesSent"] = bytesSent
         
         if (response.responseText != nil && !response.responseText!.isEmpty) {
-            #if swift(>=3.0)
-                responseMetadata["$bytesReceived"] = response.responseText?.lengthOfBytes(using: .utf8)
-            #else
-                responseMetadata["$bytesReceived"] = response.responseText?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
-            #endif
+            responseMetadata["$bytesReceived"] = response.responseText?.lengthOfBytes(using: .utf8)
         }
         
         return responseMetadata
     }
     
+    
+    // MARK: - Helpers
+    
+    internal static func logInternal(event category: String) {
+        
+        let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
+        
+        var metadata: [String: Any] = [:]
+        metadata[Constants.Metadata.Analytics.category] = category
+        metadata[Constants.Metadata.Analytics.userId] = Analytics.userIdentity
+        metadata[Constants.Metadata.Analytics.sessionId] = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId]
+        metadata[Constants.Metadata.Analytics.timestamp] = NSNumber(value: currentTime)
+        
+        Analytics.log(metadata: metadata)
+    }
+
+    
+#else
+    
+    
+    // Gather response data as JSON to be recorded in an analytics log
+    internal static func generateInboundResponseMetadata(request: Request, response: Response, url: String) -> [String: AnyObject] {
+    
+        Analytics.logger.debug(message: "Network response inbound")
+        
+        let endTime = NSDate.timeIntervalSinceReferenceDate()
+        let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
+        
+        let bytesSent = request.requestBody?.length ?? 0
+
+        
+        // Data for analytics logging
+        var responseMetadata: [String: AnyObject] = [:]
+        
+        responseMetadata["$category"] = "network" as AnyObject
+        responseMetadata["$path"] = url
+        responseMetadata["$trackingId"] = request.trackingId
+        responseMetadata["$outboundTimestamp"] = request.startTime
+        responseMetadata["$inboundTimestamp"] = endTime
+        responseMetadata["$roundTripTime"] = roundTripTime
+        responseMetadata["$responseCode"] = response.statusCode
+        responseMetadata["$bytesSent"] = bytesSent
+        
+        if (response.responseText != nil && !response.responseText!.isEmpty) {
+            responseMetadata["$bytesReceived"] = response.responseText?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+        }
+        
+        return responseMetadata
+    }
     
     
     // MARK: - Helpers
@@ -405,18 +434,14 @@ public class BMSAnalytics: AnalyticsDelegate {
         metadata[Constants.Metadata.Analytics.category] = category
         metadata[Constants.Metadata.Analytics.userId] = Analytics.userIdentity
         metadata[Constants.Metadata.Analytics.sessionId] = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId]
-        #if swift(>=3.0)
-            metadata[Constants.Metadata.Analytics.timestamp] = NSNumber(value: currentTime)
-        #else
-            metadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
-        #endif
-        
-        #if swift(>=3.0)
-            Analytics.log(metadata: metadata)
-        #else
-            Analytics.log(metadata)
-        #endif
+        metadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
+    
+        Analytics.log(metadata: metadata)
     }
+
+    
+#endif
+    
     
     
     // Retrieve the unique device ID, or return "unknown" if it is unattainable.
@@ -426,11 +451,7 @@ public class BMSAnalytics: AnalyticsDelegate {
             return id
         }
         else {
-            #if swift(>=3.0)
-                Analytics.logger.warn(message: "Cannot determine the unique ID for this device, so the recorded analytics data will not include it.")
-            #else
-                Analytics.logger.warn("Cannot determine the unique ID for this device, so the recorded analytics data will not include it.")
-            #endif
+            Analytics.logger.warn(message: "Cannot determine the unique ID for this device, so the recorded analytics data will not include it.")
             
             return "unknown"
         }
@@ -441,8 +462,8 @@ public class BMSAnalytics: AnalyticsDelegate {
 // How the last app session ended
 private enum AppClosedBy: String {
     
-    case USER
-    case CRASH
+    case user = "USER"
+    case crash = "CRASH"
 }
 
 
