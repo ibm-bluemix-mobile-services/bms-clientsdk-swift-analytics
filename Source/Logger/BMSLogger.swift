@@ -363,8 +363,8 @@ public class BMSLogger: LoggerDelegate {
         if (BMSLogger.fileManager.fileExists(atPath: logFile)) {
         
             do {   
-                let attribute : Dictionary? = try FileManager.default.attributesOfItem(atPath: logFile)
-                if let currentLogFileSize = attribute?[FileAttributeKey.size] as? UInt64 {
+                let attribute : NSDictionary? = try FileManager.default.attributesOfItem(atPath: logFile) as NSDictionary?
+                if let currentLogFileSize = attribute?.fileSize() {
                     return currentLogFileSize > Logger.maxLogStoreSize / 2 // Divide by 2 since the total log storage gets shared between the log file and the overflow file
                 }
             }

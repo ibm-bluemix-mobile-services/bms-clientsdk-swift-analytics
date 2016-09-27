@@ -36,25 +36,25 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
 
-    func testinitializeWithAppName() {
+    func testinitialize() {
      
         XCTAssertNil(BMSAnalytics.apiKey)
         XCTAssertNil(BMSAnalytics.appName)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234")
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234")
         XCTAssertEqual(BMSAnalytics.apiKey, "1234")
         XCTAssertEqual(BMSAnalytics.appName, "Unit Test App")
     }
     
     
-    func testInitializeWithAppNameWithBmsClientInitialized() {
+    func testinitializeWithBmsClientInitialized() {
         
         XCTAssertNil(BMSAnalytics.apiKey)
         XCTAssertNil(BMSAnalytics.appName)
         XCTAssertNil(Request.requestAnalyticsData)
         
-        BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: "http://example.com", bluemixAppGUID: "1234", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234")
+        BMSClient.sharedInstance.initialize(bluemixAppRoute: "http://example.com", bluemixAppGUID: "1234", bluemixRegion: BMSClient.Region.usSouth)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234")
         
         XCTAssertEqual(BMSAnalytics.apiKey, "1234")
         XCTAssertEqual(BMSAnalytics.appName, "Unit Test App")
@@ -62,18 +62,18 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
     
-    func testInitializeWithAppNameRegistersUncaughtExceptionHandler() {
+    func testinitializeRegistersUncaughtExceptionHandler() {
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234")
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234")
         XCTAssertNotNil(NSGetUncaughtExceptionHandler())
     }
     
     
-    func testInitializeWithAppNameAndDeviceEvents() {
+    func testinitializeAndDeviceEvents() {
         
         let referenceTime = Int64(NSDate.timeIntervalSinceReferenceDate * 1000)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.lifecycle)
         
         // When registering LIFECYCLE events, the BMSAnalytics.logSessionStart() method should get called immediately, assigning a new value to BMSAnalytics.startTime and BMSAnalytics.lifecycleEvents
         XCTAssertTrue(BMSAnalytics.startTime >= referenceTime)
@@ -170,7 +170,7 @@ class BMSAnalyticsTests: XCTestCase {
     
     func testGenerateOutboundRequestMetadata() {
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234")
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234")
         
         guard let outboundMetadata: String = BMSAnalytics.generateOutboundRequestMetadata() else {
             XCTFail()
@@ -203,7 +203,7 @@ class BMSAnalyticsTests: XCTestCase {
     
     func testAddAnalyticsMetadataToRequestWithAnalyticsAppName() {
         
-        Analytics.initializeWithAppName(appName: "Test app", apiKey: "1234")
+        Analytics.initialize(appName: "Test app", apiKey: "1234")
         
         let requestMetadata = BMSAnalytics.generateOutboundRequestMetadata()
         
@@ -247,16 +247,17 @@ class BMSAnalyticsTests: XCTestCase {
         
         let responseMetadata = BMSAnalytics.generateInboundResponseMetadata(request: request, response: response, url: requestUrl)
         
-        let outboundTime = responseMetadata["$outboundTimestamp"] as? TimeInterval
-        let inboundTime = responseMetadata["$inboundTimestamp"] as? TimeInterval
+        let outboundTimestamp = responseMetadata["$outboundTimestamp"] as? TimeInterval
+        let inboundTimestamp = responseMetadata["$inboundTimestamp"] as? TimeInterval
         let roundTripTime = responseMetadata["$roundTripTime"] as? TimeInterval
         
-        XCTAssertNotNil(outboundTime)
-        XCTAssertNotNil(inboundTime)
-        XCTAssertNotNil(roundTripTime)
+        guard let outboundTime = outboundTimestamp, let inboundTime = inboundTimestamp, let roundTrip = roundTripTime else {
+            XCTFail("The inbound, outbound, and roundtrip times for the request should all have values")
+            return
+        }
         
         XCTAssert(inboundTime > outboundTime)
-        XCTAssert(roundTripTime > 0)
+        XCTAssert(roundTrip > 0)
         
         let responseBytes = responseMetadata["$bytesReceived"] as? Int
         XCTAssertNotNil(responseBytes)
@@ -294,7 +295,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle)
         
         Analytics.userIdentity = "test user"
         XCTAssertEqual(Analytics.delegate?.userIdentity, "test user")
@@ -305,7 +306,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: true)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", hasUserContext: true)
         
         Analytics.userIdentity = "test user"
         XCTAssertNil(Analytics.delegate?.userIdentity)
@@ -315,10 +316,10 @@ class BMSAnalyticsTests: XCTestCase {
     func testUserIdentityWithAutomaticUsers() {
         
         // Without specifying the `automaticallyRecordUsers` parameter, we should get automatic users
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.lifecycle)
         XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
         
-        Analytics.initializeWithAppName(appName: "Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.lifecycle)
         XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
         
         // If hasUserContext is false, the developer should not be able to set Analytics.userIdentity themselves
@@ -363,8 +364,8 @@ class BMSAnalyticsTests: XCTestCase {
             print("Could not delete " + pathToFile)
         }
         
-        Logger.logStoreEnabled = true
-        Logger.logLevelFilter = LogLevel.Analytics
+        Logger.isLogStorageEnabled = true
+        Logger.logLevelFilter = LogLevel.analytics
         let meta = ["hello": 1]
         
         Analytics.log(metadata: meta)
@@ -380,13 +381,18 @@ class BMSAnalyticsTests: XCTestCase {
             return
         }
         
-        let debugMessage = jsonDict[0]
-        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.message] == "")
-        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.package] == Logger.bmsLoggerPrefix + "analytics")
-        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.timestamp] != nil)
-        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.level] == "ANALYTICS")
-        print(debugMessage?[Constants.Metadata.Logger.metadata])
-        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.metadata] == meta)
+        let debugMessage: [String: Any]? = jsonDict[0]
+        XCTAssertEqual(debugMessage?[Constants.Metadata.Logger.message] as? String, "")
+        XCTAssertEqual(debugMessage?[Constants.Metadata.Logger.package] as? String, Logger.bmsLoggerPrefix + "analytics")
+        XCTAssertTrue(debugMessage?[Constants.Metadata.Logger.timestamp] as? String != nil)
+        XCTAssertEqual(debugMessage?[Constants.Metadata.Logger.level] as? String, "ANALYTICS")
+        
+        if let recordedMetadata = debugMessage?[Constants.Metadata.Logger.metadata] as? [String: Int] {
+            XCTAssertEqual(recordedMetadata, meta)
+        }
+        else {
+            XCTFail("Should have recorded metadata from Analytics.log().")
+        }
     }
     
     
@@ -399,9 +405,9 @@ class BMSAnalyticsTests: XCTestCase {
             print("Could not delete " + pathToFile)
         }
         
-        Analytics.enabled = false
-        Logger.logStoreEnabled = true
-        Logger.logLevelFilter = LogLevel.Analytics
+        Analytics.isEnabled = false
+        Logger.isLogStorageEnabled = true
+        Logger.logLevelFilter = LogLevel.analytics
         let meta = ["hello": 1]
         
         Analytics.log(metadata: meta)
@@ -441,25 +447,25 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
     
-    func testinitializeWithAppName() {
+    func testinitialize() {
         
         XCTAssertNil(BMSAnalytics.apiKey)
         XCTAssertNil(BMSAnalytics.appName)
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234")
         XCTAssertEqual(BMSAnalytics.apiKey, "1234")
         XCTAssertEqual(BMSAnalytics.appName, "Unit Test App")
     }
     
     
-    func testInitializeWithAppNameWithBmsClientInitialized() {
+    func testinitializeWithBmsClientInitialized() {
         
         XCTAssertNil(BMSAnalytics.apiKey)
         XCTAssertNil(BMSAnalytics.appName)
         XCTAssertNil(Request.requestAnalyticsData)
         
-        BMSClient.sharedInstance.initializeWithBluemixAppRoute("http://example.com", bluemixAppGUID: "1234", bluemixRegion: BMSClient.REGION_US_SOUTH)
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
+        BMSClient.sharedInstance.initialize(bluemixAppRoute: "http://example.com", bluemixAppGUID: "1234", bluemixRegion: BMSClient.Region.usSouth)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234")
         
         XCTAssertEqual(BMSAnalytics.apiKey, "1234")
         XCTAssertEqual(BMSAnalytics.appName, "Unit Test App")
@@ -467,18 +473,18 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
     
-    func testInitializeWithAppNameRegistersUncaughtExceptionHandler() {
+    func testinitializeRegistersUncaughtExceptionHandler() {
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234")
         XCTAssertNotNil(NSGetUncaughtExceptionHandler())
     }
     
     
-    func testInitializeWithAppNameAndDeviceEvents() {
+    func testinitializeAndDeviceEvents() {
         
         let referenceTime = Int64(NSDate.timeIntervalSinceReferenceDate() * 1000)
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.lifecycle)
         
         // When registering LIFECYCLE events, the BMSAnalytics.logSessionStart() method should get called immediately, assigning a new value to BMSAnalytics.startTime and BMSAnalytics.lifecycleEvents
         XCTAssertTrue(BMSAnalytics.startTime >= referenceTime)
@@ -575,7 +581,7 @@ class BMSAnalyticsTests: XCTestCase {
     
     func testGenerateOutboundRequestMetadata() {
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234")
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234")
         
         guard let outboundMetadata: String = BMSAnalytics.generateOutboundRequestMetadata() else {
             XCTFail()
@@ -608,7 +614,7 @@ class BMSAnalyticsTests: XCTestCase {
     
     func testAddAnalyticsMetadataToRequestWithAnalyticsAppName() {
         
-        Analytics.initializeWithAppName("Test app", apiKey: "1234")
+        Analytics.initialize(appName: "Test app", apiKey: "1234")
         
         let requestMetadata = BMSAnalytics.generateOutboundRequestMetadata()
         
@@ -644,7 +650,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         let requestUrl = "http://example.com"
         let request = MockRequest()
-        request.sendWithCompletionHandler(nil)
+        request.send(completionHandler: nil)
         
         let responseInfo = "{\"key1\": \"value1\", \"key2\": \"value2\"}".dataUsingEncoding(NSUTF8StringEncoding)
         let urlResponse = NSHTTPURLResponse(URL: NSURL(string: "http://example.com")!, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: ["key": "value"])
@@ -699,7 +705,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle)
         
         Analytics.userIdentity = "test user"
         XCTAssertEqual(Analytics.delegate?.userIdentity, "test user")
@@ -710,7 +716,7 @@ class BMSAnalyticsTests: XCTestCase {
         
         XCTAssertNil(Analytics.delegate)
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: true)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", hasUserContext: true)
         
         Analytics.userIdentity = "test user"
         XCTAssertNil(Analytics.delegate?.userIdentity)
@@ -720,10 +726,10 @@ class BMSAnalyticsTests: XCTestCase {
     func testUserIdentityWithAutomaticUsers() {
         
         // Without specifying the `automaticallyRecordUsers` parameter, we should get automatic users
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.lifecycle)
         XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
         
-        Analytics.initializeWithAppName("Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.LIFECYCLE)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", hasUserContext: false, deviceEvents: DeviceEvent.lifecycle)
         XCTAssertEqual(Analytics.delegate?.userIdentity, BMSAnalytics.uniqueDeviceId)
     
         // If hasUserContext is false, the developer should not be able to set Analytics.userIdentity themselves
@@ -767,11 +773,11 @@ class BMSAnalyticsTests: XCTestCase {
             print("Could not delete " + pathToFile)
         }
         
-        Logger.logStoreEnabled = true
-        Logger.logLevelFilter = LogLevel.Analytics
+        Logger.isLogStorageEnabled = true
+        Logger.logLevelFilter = LogLevel.analytics
         let meta = ["hello": 1]
         
-        Analytics.log(meta)
+        Analytics.log(metadata: meta)
         
         guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
             XCTFail()
@@ -803,12 +809,12 @@ class BMSAnalyticsTests: XCTestCase {
             print("Could not delete " + pathToFile)
         }
         
-        Analytics.enabled = false
-        Logger.logStoreEnabled = true
-        Logger.logLevelFilter = LogLevel.Analytics
+        Analytics.isEnabled = false
+        Logger.isLogStorageEnabled = true
+        Logger.logLevelFilter = LogLevel.analytics
         let meta = ["hello": 1]
         
-        Analytics.log(meta)
+        Analytics.log(metadata: meta)
         
         let fileExists = NSFileManager().fileExistsAtPath(pathToFile)
         
