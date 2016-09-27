@@ -403,7 +403,7 @@ public extension Analytics {
         If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
         - parameter deviceEvents:    Device events that will be recorded automatically by the `Analytics` class
     */
-    public static func initialize(appName: String?, apiKey: String?, hasUserContext: Bool = false, deviceEvents: DeviceEvent...) {
+    public static func initialize(appName appName: String?, apiKey: String?, hasUserContext: Bool = false, deviceEvents: DeviceEvent...) {
         
         BMSAnalytics.appName = appName
         
