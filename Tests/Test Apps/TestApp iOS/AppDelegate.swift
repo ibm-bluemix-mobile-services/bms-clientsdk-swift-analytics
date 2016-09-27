@@ -25,27 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 #if swift(>=3.0)
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
-        #if swift(>=3.0)
+        BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1-dev.ng.bluemix.net")
         
-            BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
-            
-            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-            Analytics.initializeWithAppName(appName: "TestAppiOS", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
-    
-        #else
-            
-            BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
-            
-            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-            Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.LIFECYCLE)
-            
-        #endif
+        // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+        Analytics.initialize(appName: "TestAppiOS", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle)
         
-        Analytics.enabled = true
-        Logger.logStoreEnabled = true
-        Logger.sdkDebugLoggingEnabled = true
+        Analytics.isEnabled = true
+        Logger.isLogStorageEnabled = true
+        Logger.isInternalDebugLoggingEnabled = true
         
         Analytics.userIdentity = "Some user name"
         
@@ -56,25 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        #if swift(>=3.0)
-            
-            BMSClient.sharedInstance.initializeWithBluemixAppRoute(bluemixAppRoute: nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
-            
-            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-            Analytics.initializeWithAppName(appName: "TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
-            
-        #else
-            
-            BMSClient.sharedInstance.initializeWithBluemixAppRoute(nil, bluemixAppGUID: nil, bluemixRegion: ".stage1-dev.ng.bluemix.net")
-            
-            // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-            Analytics.initializeWithAppName("TestAppiOS", apiKey: "1234", deviceEvents: DeviceEvent.LIFECYCLE)
-            
-        #endif
+        BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1-dev.ng.bluemix.net")
         
-        Analytics.enabled = true
-        Logger.logStoreEnabled = true
-        Logger.sdkDebugLoggingEnabled = true
+        // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
+        Analytics.initialize(appName: "TestAppiOS", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle)
+        
+        Analytics.isEnabled = true
+        Logger.isLogStorageEnabled = true
+        Logger.isInternalDebugLoggingEnabled = true
         
         Analytics.userIdentity = "Some user name"
         
@@ -82,5 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 #endif
+    
 }
 

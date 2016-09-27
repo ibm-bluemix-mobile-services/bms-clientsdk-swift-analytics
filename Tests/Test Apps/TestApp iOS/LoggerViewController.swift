@@ -44,140 +44,109 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
     @IBAction func recordLog(_ sender: UIButton) {
         
-        #if swift(>=3.0)
-            Analytics.log(metadata: ["buttonPressed": "recordLog"])
-        #else
-            Analytics.log(["buttonPressed": "recordLog"])
-        #endif
+        Analytics.log(metadata: ["buttonPressed": "recordLog"])
         
         if let maxStoreSize = maxStoreSizeField.text {
             Logger.maxLogStoreSize = UInt64(maxStoreSize) ?? 100000
         }
         
         #if swift(>=3.0)
-            Logger.logStoreEnabled = logStorageEnabledSwitch.isOn
-            Logger.sdkDebugLoggingEnabled = internalSdkLoggingSwitch.isOn
+            Logger.isLogStorageEnabled = logStorageEnabledSwitch.isOn
+            Logger.isInternalDebugLoggingEnabled = internalSdkLoggingSwitch.isOn
         #else
-            Logger.logStoreEnabled = logStorageEnabledSwitch.on
-            Logger.sdkDebugLoggingEnabled = internalSdkLoggingSwitch.on
+            Logger.isLogStorageEnabled = logStorageEnabledSwitch.on
+            Logger.isInternalDebugLoggingEnabled = internalSdkLoggingSwitch.on
         #endif
         
         switch currentLogLevelFilter {
         case "None":
-            Logger.logLevelFilter = LogLevel.None
+            Logger.logLevelFilter = LogLevel.none
         case "Analytics":
-            Logger.logLevelFilter = LogLevel.Analytics
+            Logger.logLevelFilter = LogLevel.analytics
         case "Fatal":
-            Logger.logLevelFilter = LogLevel.Fatal
+            Logger.logLevelFilter = LogLevel.fatal
         case "Error":
-            Logger.logLevelFilter = LogLevel.Error
+            Logger.logLevelFilter = LogLevel.error
         case "Warn":
-            Logger.logLevelFilter = LogLevel.Warn
+            Logger.logLevelFilter = LogLevel.warn
         case "Info":
-            Logger.logLevelFilter = LogLevel.Info
+            Logger.logLevelFilter = LogLevel.info
         case "Debug":
-            Logger.logLevelFilter = LogLevel.Debug
+            Logger.logLevelFilter = LogLevel.debug
         default:
             break
         }
         
-        let logger = Logger.logger(forName:loggerNameField.text ?? "TestAppiOS")
+        let logger = Logger.logger(name:loggerNameField.text ?? "TestAppiOS")
         
-        #if swift(>=3.0)
-            
-            switch currentLogLevel {
-            case "None":
-                print("Cannot log at the 'None' level")
-            case "Analytics":
-                print("Cannot log at the 'Analytics' level")
-            case "Fatal":
-                logger.fatal(message: logMessageField.text ?? "")
-            case "Error":
-                logger.error(message: logMessageField.text ?? "")
-            case "Warn":
-                logger.warn(message: logMessageField.text ?? "")
-            case "Info":
-                logger.info(message: logMessageField.text ?? "")
-            case "Debug":
-                logger.debug(message: logMessageField.text ?? "")
-            default:
-                break
-            }
-            
-        #else
-        
-            switch currentLogLevel {
-            case "None":
-                print("Cannot log at the 'None' level")
-            case "Analytics":
-                print("Cannot log at the 'Analytics' level")
-            case "Fatal":
-                logger.fatal(logMessageField.text ?? "")
-            case "Error":
-                logger.error(logMessageField.text ?? "")
-            case "Warn":
-                logger.warn(logMessageField.text ?? "")
-            case "Info":
-                logger.info(logMessageField.text ?? "")
-            case "Debug":
-                logger.debug(logMessageField.text ?? "")
-            default:
-                break
-            }
-        
-        #endif
+        switch currentLogLevel {
+        case "None":
+            print("Cannot log at the 'None' level")
+        case "Analytics":
+            print("Cannot log at the 'Analytics' level")
+        case "Fatal":
+            logger.fatal(message: logMessageField.text ?? "")
+        case "Error":
+            logger.error(message: logMessageField.text ?? "")
+        case "Warn":
+            logger.warn(message: logMessageField.text ?? "")
+        case "Info":
+            logger.info(message: logMessageField.text ?? "")
+        case "Debug":
+            logger.debug(message: logMessageField.text ?? "")
+        default:
+            break
+        }
     }
     
     // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
     @IBAction func sendLogs(_ sender: UIButton) {
-        
-        #if swift(>=3.0)
              
-            func completionHandler(_ sendType: String) -> BmsCompletionHandler {
-                return {
-                    (response: Response?, error: NSError?) -> Void in
-                    if let response = response {
-                        print("\n\(sendType) sent successfully: " + String(response.isSuccessful))
-                        print("Status code: " + String(response.statusCode))
-                        if let responseText = response.responseText {
-                            print("Response text: " + responseText)
+            func completionHandler(sentUsing sendType: String) -> BMSCompletionHandler {
+                
+                #if swift(>=3.0)
+                    
+                    return {
+                        (response: Response?, error: Error?) -> Void in
+                        if let response = response {
+                            print("\n\(sendType) sent successfully: " + String(response.isSuccessful))
+                            print("Status code: " + String(describing: response.statusCode))
+                            if let responseText = response.responseText {
+                                print("Response text: " + responseText)
+                            }
+                            print("\n")
                         }
-                        print("\n")
                     }
-                }
-            }
+                
+                #else
             
-        #else
-            
-            func completionHandler(sendType: String) -> BmsCompletionHandler {
-                return {
-                    (response: Response?, error: NSError?) -> Void in
-                    if let response = response {
-                        print("\n\(sendType) sent successfully: " + String(response.isSuccessful))
-                        print("Status code: " + String(response.statusCode))
-                        if let responseText = response.responseText {
-                            print("Response text: " + responseText)
+                    return {
+                        (response: Response?, error: NSError?) -> Void in
+                        if let response = response {
+                            print("\n\(sendType) sent successfully: " + String(response.isSuccessful))
+                            print("Status code: " + String(response.statusCode))
+                            if let responseText = response.responseText {
+                                print("Response text: " + responseText)
+                            }
+                            print("\n")
                         }
-                        print("\n")
                     }
-                }
-            }
             
-        #endif
+            #endif
         
+            }
         
-        
-        Logger.send(completionHandler: completionHandler("Logs"))
-        Analytics.send(completionHandler: completionHandler("Analytics"))
+        Logger.send(completionHandler: completionHandler(sentUsing: "Logs"))
+        Analytics.send(completionHandler: completionHandler(sentUsing: "Analytics"))
     }
     
     // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
     @IBAction func deleteLogs(_ sender: UIButton) {
         
+        Analytics.log(metadata: ["buttonPressed": "deleteLogs"])
+        
         #if swift(>=3.0)
-            
-            Analytics.log(metadata: ["buttonPressed": "deleteLogs"])
-            
+        
             let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/"
             let fileName = "bmssdk.logger.log"
             do {
@@ -188,8 +157,6 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             }
         
         #else
-        
-            Analytics.log(["buttonPressed": "deleteLogs"])
             
             let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/"
             let fileName = "bmssdk.logger.log"
@@ -206,11 +173,11 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
     @IBAction func triggerUncaughtException(_ sender: UIButton) {
         
+        Analytics.log(metadata: ["buttonPressed": "triggerUncaughtException"])
+        
         #if swift(>=3.0)
-            Analytics.log(metadata: ["buttonPressed": "triggerUncaughtException"])
             NSException(name: NSExceptionName("Test crash"), reason: "Ensure that BMSAnalytics framework is catching uncaught exceptions", userInfo: nil).raise()
         #else
-            Analytics.log(["buttonPressed": "triggerUncaughtException"])
             NSException(name: "Test crash", reason: "Ensure that BMSAnalytics framework is catching uncaught exceptions", userInfo: nil).raise()
         #endif
     }

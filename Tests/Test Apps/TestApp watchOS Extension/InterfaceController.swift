@@ -22,37 +22,46 @@ class InterfaceController: WKInterfaceController {
     
     @IBAction func sendAnalyticsButtonPressed() {
         
-        Logger.logLevelFilter = LogLevel.Debug
-        let logger = Logger.logger(forName: "TestAppWatchOS")
+        Logger.logLevelFilter = LogLevel.debug
+        let logger = Logger.logger(name: "TestAppWatchOS")
         
-        #if swift(>=3.0)
-            logger.debug(message: "Send analytics button pressed")
-            Analytics.log(metadata: ["buttonPressed": "recordLog"])
-        #else
-            logger.debug("Send analytics button pressed")
-            Analytics.log(["buttonPressed": "recordLog"])
-        #endif
+        logger.debug(message: "Send analytics button pressed")
+        Analytics.log(metadata: ["buttonPressed": "recordLog"])
         
-        func completionHandler(sendType: String) -> BmsCompletionHandler {
-            return {
-                (response: Response?, error: NSError?) -> Void in
-                if let response = response {
-                    print("\(sendType) sent successfully: " + String(response.isSuccessful))
-                    print("Status code: " + String(response.statusCode))
-                    if let responseText = response.responseText {
-                        print("Response text: " + responseText)
+        func completionHandler(sentUsing sendType: String) -> BMSCompletionHandler {
+            
+            #if swift(>=3.0)
+                
+                return {
+                    (response: Response?, error: Error?) -> Void in
+                    if let response = response {
+                        print("\(sendType) sent successfully: " + String(response.isSuccessful))
+                        print("Status code: " + String(describing: response.statusCode))
+                        if let responseText = response.responseText {
+                            print("Response text: " + responseText)
+                        }
+                        print("\n")
                     }
-                    print("\n")
                 }
-            }
+                
+            #else
+                
+                return {
+                    (response: Response?, error: NSError?) -> Void in
+                    if let response = response {
+                        print("\(sendType) sent successfully: " + String(response.isSuccessful))
+                        print("Status code: " + String(response.statusCode))
+                        if let responseText = response.responseText {
+                            print("Response text: " + responseText)
+                        }
+                        print("\n")
+                    }
+                }
+                
+            #endif
         }
         
-        #if swift(>=3.0)
-            Logger.send(completionHandler: completionHandler(sendType: "Logs"))
-            Analytics.send(completionHandler: completionHandler(sendType: "Analytics"))
-        #else
-            Logger.send(completionHandler: completionHandler("Logs"))
-            Analytics.send(completionHandler: completionHandler("Analytics"))
-        #endif
+        Logger.send(completionHandler: completionHandler(sentUsing: "Logs"))
+        Analytics.send(completionHandler: completionHandler(sentUsing: "Analytics"))
     }
 }
