@@ -17,6 +17,11 @@ import BMSCore
 import BMSAnalytics
 
 
+
+#if swift(>=3.0)
+
+    
+
 class LogDisplayViewController: UIViewController {
     
     
@@ -31,31 +36,19 @@ class LogDisplayViewController: UIViewController {
     // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
     @IBAction func dismissViewController(_ sender: UIButton) {
         
-        #if swift(>=3.0)
-            self.dismiss(animated: true) { () -> Void in }
-        #else
-            self.dismissViewControllerAnimated(true) { () -> Void in }
-        #endif
+        self.dismiss(animated: true) { () -> Void in }
     }
     
     func populateLogTextView() {
         
         // Populate text view with all stored logs
-        #if swift(>=3.0)
-            let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/"
-        #else
-            let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/"
-        #endif
+        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/"
         
         let fileName = "bmssdk.logger.log"
         let pathToFile = filePath + fileName
         
         do {
-            #if swift(>=3.0)
-                logsTextView.text = try String(contentsOfFile: pathToFile, encoding: .utf8)
-            #else
-                logsTextView.text = try String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
-            #endif
+            logsTextView.text = try String(contentsOfFile: pathToFile, encoding: .utf8)
         } catch {
             logsTextView.text = "No logs!"
         }
@@ -76,3 +69,71 @@ class LogDisplayViewController: UIViewController {
     
     
 }
+    
+    
+    
+    
+    
+/**************************************************************************************************/
+    
+    
+    
+    
+    
+// MARK: - Swift 2
+    
+#else
+    
+    
+
+class LogDisplayViewController: UIViewController {
+    
+    
+    // MARK: Outlets
+    
+    @IBOutlet var logsTextView: UITextView!
+    
+    
+    
+    // MARK: Button presses
+    
+    // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
+    @IBAction func dismissViewController(_ sender: UIButton) {
+        
+        self.dismissViewControllerAnimated(true) { () -> Void in }
+    }
+    
+    func populateLogTextView() {
+        
+        // Populate text view with all stored logs
+        let filePath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "/"
+        
+        let fileName = "bmssdk.logger.log"
+        let pathToFile = filePath + fileName
+        
+        do {
+            logsTextView.text = try String(contentsOfFile: pathToFile, encoding: NSUTF8StringEncoding)
+        } catch {
+            logsTextView.text = "No logs!"
+        }
+    }
+    
+    
+    
+    // MARK: UIViewController protocol
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        logsTextView.layer.borderWidth = 1
+        
+        populateLogTextView()
+    }
+    
+    
+    
+}
+
+
+
+#endif

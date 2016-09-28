@@ -17,6 +17,11 @@ import BMSCore
 import BMSAnalytics
 
 
+
+#if swift(>=3.0)
+
+
+
 class InterfaceController: WKInterfaceController {
 
     
@@ -48,14 +53,14 @@ class InterfaceController: WKInterfaceController {
                 
                 return {
                     (response: Response?, error: NSError?) -> Void in
-                    if let response = response {
-                        print("\(sendType) sent successfully: " + String(response.isSuccessful))
-                        print("Status code: " + String(response.statusCode))
-                        if let responseText = response.responseText {
-                            print("Response text: " + responseText)
+                        if let response = response {
+                            print("\(sendType) sent successfully: " + String(response.isSuccessful))
+                            print("Status code: " + String(response.statusCode))
+                            if let responseText = response.responseText {
+                                print("Response text: " + responseText)
+                            }
+                            print("\n")
                         }
-                        print("\n")
-                    }
                 }
                 
             #endif
@@ -65,3 +70,55 @@ class InterfaceController: WKInterfaceController {
         Analytics.send(completionHandler: completionHandler(sentUsing: "Analytics"))
     }
 }
+    
+    
+    
+    
+    
+/**************************************************************************************************/
+    
+    
+    
+    
+    
+// MARK: - Swift 2
+    
+#else
+    
+    
+    
+
+class InterfaceController: WKInterfaceController {
+    
+    
+    @IBAction func sendAnalyticsButtonPressed() {
+        
+        Logger.logLevelFilter = LogLevel.debug
+        let logger = Logger.logger(name: "TestAppWatchOS")
+        
+        logger.debug(message: "Send analytics button pressed")
+        Analytics.log(metadata: ["buttonPressed": "recordLog"])
+        
+        func completionHandler(sentUsing sendType: String) -> BMSCompletionHandler {
+            
+            return {
+                (response: Response?, error: NSError?) -> Void in
+                    if let response = response {
+                        print("\(sendType) sent successfully: " + String(response.isSuccessful))
+                        print("Status code: " + String(response.statusCode))
+                        if let responseText = response.responseText {
+                            print("Response text: " + responseText)
+                        }
+                        print("\n")
+                    }
+            }
+        }
+        
+        Logger.send(completionHandler: completionHandler(sentUsing: "Logs"))
+        Analytics.send(completionHandler: completionHandler(sentUsing: "Analytics"))
+    }
+}
+
+
+
+#endif

@@ -17,13 +17,16 @@ import BMSCore
 import BMSAnalytics
 
 
+
+#if swift(>=3.0)
+
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
-#if swift(>=3.0)
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -41,7 +44,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+}
+    
+    
+    
+    
+    
+/**************************************************************************************************/
+    
+    
+    
+    
+    
+// MARK: - Swift 2
+    
 #else
+    
+    
+    
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
+    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -58,8 +83,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
-#endif
     
 }
 
+
+
+#endif
