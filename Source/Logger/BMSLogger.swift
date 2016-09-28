@@ -88,7 +88,8 @@ public extension Logger {
             do {
                 // Gather the logs and put them in a JSON object
                 let logsToSend: String? = try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
-                var logPayloadData = try JSONSerialization.data(withJSONObject: [], options: [])
+                
+                var logPayloadData = "{}".data(using: .utf8)! // If no logs exist
                 if let logPayload = logsToSend {
                     let logPayloadJson = [Constants.outboundLogPayload: logPayload]
                     logPayloadData = try JSONSerialization.data(withJSONObject: logPayloadJson, options: [])
@@ -756,7 +757,8 @@ public extension Logger {
             do {
                 // Gather the logs and put them in a JSON object
                 let logsToSend: String? = try BMSLogger.getLogs(fromFile: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
-                var logPayloadData = try NSJSONSerialization.dataWithJSONObject(["":""], options: [])
+    
+                var logPayloadData = ("{}" as NSString).dataUsingEncoding(NSUTF8StringEncoding)! // If no logs exist
                 if let logPayload = logsToSend {
                     let logPayloadJson = [Constants.outboundLogPayload: logPayload]
                     logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
