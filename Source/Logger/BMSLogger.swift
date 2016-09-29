@@ -15,6 +15,7 @@
 import BMSCore
 
 
+
 // MARK: - Swift 3
 
 #if swift(>=3.0)
@@ -32,9 +33,9 @@ public extension Logger {
     /**
         Send the accumulated logs to the Bluemix server.
 
-        Logger logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
+        Logger logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)`.
 
-        - parameter completionHandler:  Optional callback containing the results of the send request
+        - parameter completionHandler:  Optional callback containing the results of the send request.
     */
     public static func send(completionHandler userCallback: BMSCompletionHandler? = nil) {
         
@@ -185,7 +186,7 @@ public extension Logger {
 // MARK: -
 
 /**
-    `BMSLogger` provides the internal implementation of the BMSAnalyticsSpec `Logger` API.
+    Provides the internal implementation of the `Logger` class in the BMSAnalyticsAPI framework.
 */
 public class BMSLogger: LoggerDelegate {
     
@@ -634,7 +635,7 @@ public extension Logger {
     /**
         Send the accumulated logs to the Bluemix server.
 
-        Logger logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
+       Logger logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)`.
 
         - parameter completionHandler:  Optional callback containing the results of the send request
     */
@@ -786,7 +787,7 @@ public extension Logger {
 // MARK: -
 
 /**
-    `BMSLogger` provides the internal implementation of the BMSAnalyticsSpec `Logger` API.
+    Provides the internal implementation of the `Logger` class in the BMSAnalyticsAPI framework.
 */
 public class BMSLogger: LoggerDelegate {
     

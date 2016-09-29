@@ -15,6 +15,7 @@
 import BMSCore
 
 
+
 // MARK: - Swift 3
 
 #if swift(>=3.0)
@@ -30,16 +31,16 @@ public extension Analytics {
     
     
     /**
-        The required initializer for the `Analytics` class when communicating with a Bluemix analytics service.
+        The required initializer for the `Analytics` class when communicating with a Mobile Analytics Service.
 
-        This method must be called after the `BMSClient.initializeWithBluemixAppRoute()` method and before calling `Analytics.send()` or `Logger.send()`.
+        This method must be called after the `BMSClient.sharedInstance.initialize(bluemixRegion:)` method and before calling `Analytics.send()` or `Logger.send()`.
 
         - parameter appName:         The application name.  Should be consistent across platforms (e.g. Android and iOS).
-        - parameter apiKey:          A unique ID used to authenticate with the Bluemix analytics service
+        - parameter apiKey:          A unique ID used to authenticate with the Mobile Analytics Service.
         - parameter hasUserContext:  If `false`, user identities will be automatically recorded using
-                                  the device on which the app is installed.
-                                  If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
-        - parameter deviceEvents:    Device events that will be recorded automatically by the `Analytics` class
+                                        the device on which the app is installed.
+                                        If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
+        - parameter deviceEvents:    Device events that will be recorded automatically by the `Analytics` class.
     */
     public static func initialize(appName: String?, apiKey: String?, hasUserContext: Bool = false, deviceEvents: DeviceEvent...) {
         
@@ -87,11 +88,11 @@ public extension Analytics {
     
     
     /**
-        Send the accumulated analytics logs to the Bluemix server.
+        Send the accumulated analytics logs to the Mobile Analytics Service.
 
-        Analytics logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
+        Analytics logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)`.
 
-        - parameter completionHandler:  Optional callback containing the results of the send request
+        - parameter completionHandler:  Optional callback containing the results of the send request.
     */
     public static func send(completionHandler userCallback: BMSCompletionHandler? = nil) {
         
@@ -105,17 +106,17 @@ public extension Analytics {
 // MARK: -
 
 /**
-    `BMSAnalytics` provides the internal implementation of the BMSAnalyticsSpec `Analytics` API.
+    Provides the internal implementation of the `Logger` class in the BMSAnalyticsAPI framework.
 */
 public class BMSAnalytics: AnalyticsDelegate {
     
     
     // MARK: Properties (API)
     
-    /// The name of the iOS/WatchOS app
+    /// The name of the iOS/WatchOS app.
     public fileprivate(set) static var appName: String?
     
-    /// The unique ID used to send logs to the Analytics server
+    /// The unique ID used to send logs to the Mobile Analytics Service.
     public fileprivate(set) static var apiKey: String?
     
     /// Identifies the current application user.
@@ -392,16 +393,16 @@ public extension Analytics {
     
     
     /**
-        The required initializer for the `Analytics` class when communicating with a Bluemix analytics service.
+        The required initializer for the `Analytics` class when communicating with a Mobile Analytics Service.
 
-        This method must be called after the `BMSClient.initializeWithBluemixAppRoute()` method and before calling `Analytics.send()` or `Logger.send()`.
+        This method must be called after the `BMSClient.sharedInstance.initialize(bluemixRegion:)` method and before calling `Analytics.send()` or `Logger.send()`.
 
         - parameter appName:         The application name.  Should be consistent across platforms (e.g. Android and iOS).
-        - parameter apiKey:          A unique ID used to authenticate with the Bluemix analytics service
+        - parameter apiKey:          A unique ID used to authenticate with the Mobile Analytics Service.
         - parameter hasUserContext:  If `false`, user identities will be automatically recorded using
-        the device on which the app is installed.
-        If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
-        - parameter deviceEvents:    Device events that will be recorded automatically by the `Analytics` class
+                                        the device on which the app is installed.
+                                        If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
+        - parameter deviceEvents:    Device events that will be recorded automatically by the `Analytics` class.
     */
     public static func initialize(appName appName: String?, apiKey: String?, hasUserContext: Bool = false, deviceEvents: DeviceEvent...) {
         
@@ -449,11 +450,11 @@ public extension Analytics {
     
     
     /**
-        Send the accumulated analytics logs to the Bluemix server.
+         Send the accumulated analytics logs to the Mobile Analytics Service.
+     
+         Analytics logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)`.
 
-        Analytics logs can only be sent if the BMSClient was initialized via the `initializeWithBluemixAppRoute()` method.
-
-        - parameter completionHandler:  Optional callback containing the results of the send request
+        - parameter completionHandler:  Optional callback containing the results of the send request.
     */
     public static func send(completionHandler userCallback: BMSCompletionHandler? = nil) {
         
@@ -467,17 +468,17 @@ public extension Analytics {
 // MARK: -
 
 /**
-    `BMSAnalytics` provides the internal implementation of the BMSAnalyticsSpec `Analytics` API.
+    Provides the internal implementation of the `Analytics` class in the BMSAnalyticsAPI framework.
 */
 public class BMSAnalytics: AnalyticsDelegate {
     
     
     // MARK: Properties (API)
     
-    /// The name of the iOS/WatchOS app
+    /// The name of the iOS/WatchOS app.
     public private(set) static var appName: String?
     
-    /// The unique ID used to send logs to the Analytics server
+    /// The unique ID used to send logs to the Mobile Analytics Service.
     public private(set) static var apiKey: String?
     
     /// Identifies the current application user.

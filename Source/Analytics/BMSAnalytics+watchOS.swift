@@ -16,6 +16,7 @@ import WatchKit
 import BMSCore
 
 
+
 // MARK: - Swift 3
 
 #if swift(>=3.0)
@@ -26,10 +27,10 @@ public extension Analytics {
     
     
     /**
-        Starts a timer to record the length of time the WatchOS app is being used before becoming inactive.
-        This event will be recorded and sent to the Analytics console, provided that the `Analytics.enabled` property is set to `true`.
+        Starts a timer to record the length of time the watchOS app is being used before becoming inactive.
+        This event will be recorded and sent to the Mobile Analytics Service, provided that the `Analytics.enabled` property is set to `true`.
 
-        This should be called in the `ExtensionDelegate applicationDidBecomeActive` method.
+        This should be called in the `ExtensionDelegate` `applicationDidBecomeActive()` method.
     */
     public static func recordApplicationDidBecomeActive() {
         
@@ -39,9 +40,9 @@ public extension Analytics {
     
     /**
         Ends the timer started by the `Analytics startRecordingApplicationLifecycleEvents` method.
-        This event will be recorded and sent to the Analytics console, provided that the `Analytics.enabled` property is set to `true`.
+        This event will be recorded and sent to the Mobile Analytics Service, provided that the `Analytics.enabled` property is set to `true`.
 
-        This should be called in the `ExtensionDelegate applicationWillResignActive` method.
+        This should be called in the `ExtensionDelegate` `applicationWillResignActive()` method.
     */
     public static func recordApplicationWillResignActive() {
         
@@ -113,10 +114,10 @@ public extension Analytics {
     
     
     /**
-        Starts a timer to record the length of time the WatchOS app is being used before becoming inactive.
-        This event will be recorded and sent to the Analytics console, provided that the `Analytics.enabled` property is set to `true`.
+        Starts a timer to record the length of time the watchOS app is being used before becoming inactive.
+        This event will be recorded and sent to the Mobile Analytics Service, provided that the `Analytics.enabled` property is set to `true`.
 
-        This should be called in the `ExtensionDelegate applicationDidBecomeActive` method.
+        This should be called in the `ExtensionDelegate` `applicationDidBecomeActive()` method.
     */
     public static func recordApplicationDidBecomeActive() {
         
@@ -126,9 +127,9 @@ public extension Analytics {
     
     /**
         Ends the timer started by the `Analytics startRecordingApplicationLifecycleEvents` method.
-        This event will be recorded and sent to the Analytics console, provided that the `Analytics.enabled` property is set to `true`.
+        This event will be recorded and sent to the Mobile Analytics Service, provided that the `Analytics.enabled` property is set to `true`.
 
-        This should be called in the `ExtensionDelegate applicationWillResignActive` method.
+        This should be called in the `ExtensionDelegate` `applicationWillResignActive()` method.
     */
     public static func recordApplicationWillResignActive() {
         
