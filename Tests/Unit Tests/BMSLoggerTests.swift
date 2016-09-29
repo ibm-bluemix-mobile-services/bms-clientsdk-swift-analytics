@@ -694,7 +694,7 @@ class BMSLoggerTests: XCTestCase {
         loggerInstance.error(message: "1 2 3 4")
         loggerInstance.fatal(message: "StephenColbert")
         
-        let request = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        let request = try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in
             }!
         
         XCTAssertTrue(request.resourceUrl == url)
@@ -743,7 +743,7 @@ class BMSLoggerTests: XCTestCase {
         
         XCTAssertTrue(FileManager().fileExists(atPath: pathToBuffer))
         
-        let request = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        let request = try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in
         }
         
         XCTAssertNil(request)
@@ -774,7 +774,7 @@ class BMSLoggerTests: XCTestCase {
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
         Analytics.initialize(appName: "testAppName", apiKey: "1234")
         
-        let bmsRequest = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        let bmsRequest = try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in
         }
         
         XCTAssertNotNil(bmsRequest)
@@ -791,7 +791,7 @@ class BMSLoggerTests: XCTestCase {
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: "localhost:8000")
         Analytics.initialize(appName: "testAppName", apiKey: "1234")
         
-        let bmsRequest = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        let bmsRequest = try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in
         }
         
         XCTAssertNotNil(bmsRequest)
@@ -1677,7 +1677,7 @@ class BMSLoggerTests: XCTestCase {
         loggerInstance.error(message: "1 2 3 4")
         loggerInstance.fatal(message: "StephenColbert")
         
-        let request = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        let request = try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in
             }!
         
         XCTAssertTrue(request.resourceUrl == url)
@@ -1726,7 +1726,7 @@ class BMSLoggerTests: XCTestCase {
         
         XCTAssertTrue(NSFileManager().fileExistsAtPath(pathToBuffer))
         
-        let request = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        let request = try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in
         }
         
         XCTAssertNil(request)
@@ -1757,7 +1757,7 @@ class BMSLoggerTests: XCTestCase {
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
         Analytics.initialize(appName: "testAppName", apiKey: "1234")
         
-        let bmsRequest = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        let bmsRequest = try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in
         }
         
         XCTAssertNotNil(bmsRequest)
@@ -1774,7 +1774,7 @@ class BMSLoggerTests: XCTestCase {
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: "localhost:8000")
         Analytics.initialize(appName: "testAppName", apiKey: "1234")
         
-        let bmsRequest = BMSLogger.buildLogSendRequest() { (response, error) -> Void in
+        let bmsRequest = try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in
         }
         
         XCTAssertNotNil(bmsRequest)

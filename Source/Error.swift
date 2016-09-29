@@ -23,8 +23,11 @@
 */
 public enum BMSAnalyticsError: Error {
     
-    // Start at 100 so that BMSAnalytics errors are distinguishable from BMSCore errors (which start at 0)
+    /// Analytics must be initialized with the `Analytics.initialize(appName:apiKey:hasUserContext:deviceEvents:)` method before calling `Analytics.send()` or `Logger.send()`.
     case analyticsNotInitialized
+    
+    /// If there are no logs or analytics data recorded, there is nothing to send to Bluemix.
+    case noLogsToSend
     
     static let domain = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics"
 }
@@ -50,8 +53,12 @@ public enum BMSAnalyticsError: Error {
 */
 public enum BMSAnalyticsError: Int, ErrorType {
     
-    // Start at 100 so that BMSAnalytics errors are distinguishable from BMSCore errors (which start at 0)
-    case analyticsNotInitialized
+    // Start at 100 so that BMSAnalytics errors are distinguishable from BMSCore errors (which start at 0).
+    /// Analytics must be initialized with the `Analytics.initialize(appName:apiKey:hasUserContext:deviceEvents:)` method before calling `Analytics.send()` or `Logger.send()`.
+    case analyticsNotInitialized = 100
+    
+    /// If there are no logs or analytics data recorded, there is nothing to send to Bluemix.
+    case noLogsToSend = 101
     
     static let domain = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics"
 }

@@ -87,17 +87,17 @@ public extension Logger {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async(execute: {
             do {
                 // Gather the logs and put them in a JSON object
-                let logsToSend: String? = try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
-                
-                var logPayloadData = "{}".data(using: .utf8)! // If no logs exist
-                if let logPayload = logsToSend {
-                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
-                    logPayloadData = try JSONSerialization.data(withJSONObject: logPayloadJson, options: [])
+                if let logsToSend: String = try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs) {
+                    
+                    let logPayloadJson = [Constants.outboundLogPayload: logsToSend]
+                    let logPayloadData = try JSONSerialization.data(withJSONObject: logPayloadJson, options: [])
+                    
+                    if let request: BaseRequest = try BMSLogger.buildLogSendRequest(completionHandler: logSendCallback) {
+                        request.send(requestBody: logPayloadData, completionHandler: logSendCallback)
+                    }
                 }
-                
-                // Send the request, even if there are no logs to send (to keep track of device info)
-                if let request: BaseRequest = BMSLogger.buildLogSendRequest(completionHandler: logSendCallback) {
-                    request.send(requestBody: logPayloadData, completionHandler: logSendCallback)
+                else {
+                    logSendCallback(nil, BMSAnalyticsError.noLogsToSend)
                 }
             }
             catch let error as NSError {
@@ -157,18 +157,20 @@ public extension Logger {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async(execute: {
             do {
                 // Gather the logs and put them in a JSON object
-                let logsToSend: String? = try BMSLogger.getLogs(fromFile: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
-                
-                var logPayloadData = "{}".data(using: .utf8)! // If no logs exist
-                if let logPayload = logsToSend {
-                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
-                    logPayloadData = try JSONSerialization.data(withJSONObject: logPayloadJson, options: [])
+                if let logsToSend: String = try BMSLogger.getLogs(fromFile: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs) {
+                    
+                    let logPayloadJson = [Constants.outboundLogPayload: logsToSend]
+                    let logPayloadData = try JSONSerialization.data(withJSONObject: logPayloadJson, options: [])
+                    
+                    if let request: BaseRequest = try BMSLogger.buildLogSendRequest(completionHandler: analyticsSendCallback) {
+                        request.send(requestBody: logPayloadData, completionHandler: analyticsSendCallback)
+                    }
+                }
+                else {
+                    analyticsSendCallback(nil, BMSAnalyticsError.noLogsToSend)
                 }
                 
-                // Send the request, even if there are no logs to send (to keep track of device info)
-                if let request: BaseRequest = BMSLogger.buildLogSendRequest(completionHandler: analyticsSendCallback) {
-                    request.send(requestBody: logPayloadData, completionHandler: analyticsSendCallback)
-                }
+
             }
             catch let error as NSError {
                 analyticsSendCallback(nil, error)
@@ -454,7 +456,7 @@ public class BMSLogger: LoggerDelegate {
     // MARK: - Sending logs
     
     // Build the Request object that will be used to send the logs to the server
-    internal static func buildLogSendRequest(completionHandler callback: BMSCompletionHandler) -> BaseRequest? {
+    internal static func buildLogSendRequest(completionHandler callback: BMSCompletionHandler) throws -> BaseRequest? {
         
         let bmsClient = BMSClient.sharedInstance
         var headers: [String: String] = ["Content-Type": "text/plain"]
@@ -484,7 +486,7 @@ public class BMSLogger: LoggerDelegate {
         else {
             BMSLogger.internalLogger.error(message: "Failed to send logs because the client was not yet initialized. Make sure that the BMSClient class has been initialized.")
             
-            return nil
+            throw BMSAnalyticsError.analyticsNotInitialized
         }
     }
     
@@ -687,17 +689,18 @@ public extension Logger {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { () -> Void in
             do {
                 // Gather the logs and put them in a JSON object
-                let logsToSend: String? = try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs)
-                
-                var logPayloadData = ("{}" as NSString).dataUsingEncoding(NSUTF8StringEncoding)! // If no logs exist
-                if let logPayload = logsToSend {
-                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
-                    logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
+                if let logsToSend: String = try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs) {
+                    
+                    let logPayloadJson = [Constants.outboundLogPayload: logsToSend]
+                    let logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
+                    
+                    if let request: BaseRequest = try BMSLogger.buildLogSendRequest(completionHandler: logSendCallback) {
+                        request.send(requestBody: logPayloadData, completionHandler: logSendCallback)
+                    }
                 }
-                
-                // Send the request, even if there are no logs to send (to keep track of device info)
-                if let request: BaseRequest = BMSLogger.buildLogSendRequest(completionHandler: logSendCallback) {
-                    request.send(requestBody: logPayloadData, completionHandler: logSendCallback)
+                else {
+                    let error = NSError(domain: BMSAnalyticsError.domain, code: BMSAnalyticsError.noLogsToSend.rawValue, userInfo: [NSLocalizedDescriptionKey: "There are no recorded logs to send to Bluemix."])
+                    logSendCallback(nil, error)
                 }
             }
             catch let error as NSError {
@@ -756,17 +759,18 @@ public extension Logger {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) { () -> Void in
             do {
                 // Gather the logs and put them in a JSON object
-                let logsToSend: String? = try BMSLogger.getLogs(fromFile: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs)
-    
-                var logPayloadData = ("{}" as NSString).dataUsingEncoding(NSUTF8StringEncoding)! // If no logs exist
-                if let logPayload = logsToSend {
-                    let logPayloadJson = [Constants.outboundLogPayload: logPayload]
-                    logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
+                if let logsToSend: String = try BMSLogger.getLogs(fromFile: Constants.File.Analytics.logs, overflowFileName: Constants.File.Analytics.overflowLogs, bufferFileName: Constants.File.Analytics.outboundLogs) {
+                    
+                    let logPayloadJson = [Constants.outboundLogPayload: logsToSend]
+                    let logPayloadData = try NSJSONSerialization.dataWithJSONObject(logPayloadJson, options: [])
+                    
+                    if let request: BaseRequest = try BMSLogger.buildLogSendRequest(completionHandler: analyticsSendCallback) {
+                        request.send(requestBody: logPayloadData, completionHandler: analyticsSendCallback)
+                    }
                 }
-                
-                // Send the request, even if there are no logs to send (to keep track of device info)
-                if let request: BaseRequest = BMSLogger.buildLogSendRequest(completionHandler: analyticsSendCallback) {
-                    request.send(requestBody: logPayloadData, completionHandler: analyticsSendCallback)
+                else {
+                    let error = NSError(domain: BMSAnalyticsError.domain, code: BMSAnalyticsError.noLogsToSend.rawValue, userInfo: [NSLocalizedDescriptionKey: "There are no recorded data to send to Bluemix."])
+                    analyticsSendCallback(nil, error)
                 }
             }
             catch let error as NSError {
@@ -1053,7 +1057,7 @@ public class BMSLogger: LoggerDelegate {
     // MARK: - Sending logs
     
     // Build the Request object that will be used to send the logs to the server
-    internal static func buildLogSendRequest(completionHandler callback: BMSCompletionHandler) -> BaseRequest? {
+    internal static func buildLogSendRequest(completionHandler callback: BMSCompletionHandler) throws -> BaseRequest? {
         
         let bmsClient = BMSClient.sharedInstance
         var headers: [String: String] = ["Content-Type": "text/plain"]
@@ -1081,9 +1085,10 @@ public class BMSLogger: LoggerDelegate {
             return Request(url: logUploadUrl, method: HttpMethod.POST, headers: headers)
         }
         else {
-            BMSLogger.internalLogger.error(message: "Failed to send logs because the client was not yet initialized. Make sure that the BMSClient class has been initialized.")
+            let errorMessage = "Failed to send logs because the client was not yet initialized. Make sure that the BMSClient class has been initialized."
+            BMSLogger.internalLogger.error(message: errorMessage)
             
-            return nil
+            throw NSError(domain: BMSAnalyticsError.domain, code: BMSAnalyticsError.analyticsNotInitialized.rawValue, userInfo: [NSLocalizedDescriptionKey: errorMessage])
         }
     }
     

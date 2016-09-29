@@ -491,7 +491,7 @@ public class BMSAnalytics: AnalyticsDelegate {
             if userIdentity == BMSAnalytics.uniqueDeviceId {
                 BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
             }
-                // userIdentity is being set by the developer
+            // userIdentity is being set by the developer
             else {
                 guard !Analytics.automaticallyRecordUsers else {
                     
