@@ -27,25 +27,27 @@ target 'MyApp' do
 end
 ```
 
-Then run the `pod install` command.
+Then run the `pod install` command. To update to a newer release of BMSAnalytics, use `pod update BMSAnalytics`.
 
 #### Xcode 8
 
-Before running the `pod install` command, make sure to use the latest Cocoapods [pre-release version](https://github.com/CocoaPods/CocoaPods/releases).
+Before running the `pod install` command, install Cocoapods [1.1.0.rc.2](https://github.com/CocoaPods/CocoaPods/releases) (or later), using the command `sudo gem install cocoapods --pre`.
 
 If you receive a prompt saying "Convert to Current Swift Syntax?" when opening your project in Xcode 8 (following the installation of BMSAnalytics), **do not** convert BMSAnalytics, BMSCore, or BMSAnalyticsAPI.
 
 
 ### Carthage
-To install BMSAnalytics using Carthage, add it to your Cartfile: 
+
+To install BMSAnalytics with Carthage, follow the instructions [here](https://github.com/Carthage/Carthage#getting-started).
+
+Add this line to your Cartfile: 
 
 ```ogdl
 github "ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics"
 ```
 
-Then run the `carthage update` command. Once the build is finished, drag `BMSAnalytics.framework`, `BMSCore.framework` and `BMSAnalyticsAPI.framework` into your Xcode project. 
+Then run the `carthage update` command. Once the build is finished, add `BMSAnalytics.framework`, `BMSCore.framework` and `BMSAnalyticsAPI.framework` to your project. 
 
-To complete the integration, follow the instructions [here](https://github.com/Carthage/Carthage#getting-started).
 
 #### Xcode 8
 
