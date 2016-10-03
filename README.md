@@ -53,6 +53,77 @@ Then run the `carthage update` command. Once the build is finished, add `BMSAnal
 For apps built with Swift 2.3, use the command `carthage update --toolchain com.apple.dt.toolchain.Swift_2_3`. Otherwise, use `carthage update`.
 
 
+
+## Usage Examples
+
+```Swift
+// Initialize BMSClient
+
+let appRoute = "https://myapp.mybluemix.net"
+let appGuid = "2fe35477-5410-4c87-1234-aca59511433b"
+let bluemixRegion = BMSClient.Region.usSouth
+
+BMSClient.sharedInstance.initialize(bluemixAppRoute: appRoute,
+	                                bluemixAppGUID: appGuid,
+	                                bluemixRegion: bluemixRegion)
+               
+               
+// Initialize Analytics
+
+Analytics.initialize(appName: "My App Name", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle)
+
+
+// Configure Logger and Analytics
+
+let logger = Logger.logger(name: "My Logger")
+
+Analytics.isEnabled = true
+Logger.isLogStorageEnabled = true
+Logger.isInternalDebugLoggingEnabled = true
+Logger.logLevelFilter = LogLevel.debug
+
+
+// Set the user identity (e.g. login username)
+
+Analytics.userIdentity = "Username 1"
+
+
+// Log messages anywhere in your application, using an appropriate severity level
+
+logger.debug(message: "Fine level information, typically for debugging purposes.")
+logger.info(message: "Some useful information regarding the application's state.")
+logger.warn(message: "Something may have gone wrong.")
+logger.error(message: "Something has definitely gone wrong!")
+logger.fatal(message: "The application crashed!!")
+
+
+// Send logs and analytics data to the Mobile Analytics Service, and parse the response
+
+Logger.send(completionHandler: { (response: Response?, error: Error?) in
+    if let response = response {
+        print("Status code: \(response.statusCode)")
+        print("Response: \(response.responseText)")
+    }
+    if let error = error {
+        logger.error(message: "Failed to send logs. Error: \(error)")
+    }
+})
+
+Analytics.send(completionHandler: { (response: Response?, error: Error?) in
+    if let response = response {
+        print("Status code: \(response.statusCode)")
+        print("Response: \(response.responseText)")
+    }
+    if let error = error {
+        logger.error(message: "Failed to send analytics. Error: \(error)")
+    }
+})
+
+
+```
+
+
+
 =======================
 Copyright 2015 IBM Corp.
 
