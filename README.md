@@ -58,47 +58,31 @@ For apps built with Swift 2.3, use the command `carthage update --toolchain com.
 
 ```Swift
 // Initialize BMSClient
-
-let appRoute = "https://myapp.mybluemix.net"
-let appGuid = "2fe35477-5410-4c87-1234-aca59511433b"
-let bluemixRegion = BMSClient.Region.usSouth
-
-BMSClient.sharedInstance.initialize(bluemixAppRoute: appRoute,
-	                                bluemixAppGUID: appGuid,
-	                                bluemixRegion: bluemixRegion)
-               
+BMSClient.sharedInstance.initialize(bluemixRegion: BMSClient.Region.usSouth) 
                
 // Initialize Analytics
-
 Analytics.initialize(appName: "My App Name", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle)
 
-
 // Configure Logger and Analytics
-
-let logger = Logger.logger(name: "My Logger")
-
 Analytics.isEnabled = true
 Logger.isLogStorageEnabled = true
 Logger.isInternalDebugLoggingEnabled = true
 Logger.logLevelFilter = LogLevel.debug
-
+let logger = Logger.logger(name: "My Logger")
 
 // Set the user identity (e.g. login username)
-
 Analytics.userIdentity = "Username 1"
 
-
 // Log messages anywhere in your application, using an appropriate severity level
-
 logger.debug(message: "Fine level information, typically for debugging purposes.")
 logger.info(message: "Some useful information regarding the application's state.")
 logger.warn(message: "Something may have gone wrong.")
 logger.error(message: "Something has definitely gone wrong!")
 logger.fatal(message: "The application crashed!!")
 
+Analytics.log(metadata: ["event": "something significant occurred"])
 
 // Send logs and analytics data to the Mobile Analytics Service, and parse the response
-
 Logger.send(completionHandler: { (response: Response?, error: Error?) in
     if let response = response {
         print("Status code: \(response.statusCode)")
