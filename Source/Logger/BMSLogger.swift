@@ -260,13 +260,20 @@ public class BMSLogger: LoggerDelegate {
     
     internal static func log(exception uncaughtException: NSException) {
         
-        let logger = Logger.logger(name: Constants.Package.logger)
-        var exceptionString = "Uncaught Exception: \(uncaughtException.name). "
+        var metadata: [String: Any] = [:]
+        var exceptionString = uncaughtException.name.rawValue // Placeholder in case there is no uncaughtException.reason
+        
+        metadata[Constants.Metadata.Analytics.stacktrace] = uncaughtException.callStackSymbols
+        metadata[Constants.Metadata.Analytics.exceptionClass] = uncaughtException.name.rawValue
         if let reason = uncaughtException.reason {
-            exceptionString += "Reason: \(reason)."
+            metadata[Constants.Metadata.Analytics.exceptionMessage] = reason
+            exceptionString = reason
+        }
+        else {
+            metadata[Constants.Metadata.Analytics.exceptionMessage] = ""
         }
         
-        logger.fatal(message: exceptionString)
+        Logger.delegate?.logToFile(message: exceptionString, level: LogLevel.fatal, loggerName: Constants.Package.logger, calledFile: #file, calledFunction: #function, calledLineNumber: #line, additionalMetadata: metadata)
     }
     
     
@@ -860,14 +867,21 @@ public class BMSLogger: LoggerDelegate {
     
     
     internal static func log(exception uncaughtException: NSException) {
+
+        var metadata: [String: AnyObject] = [:]
+        var exceptionString = uncaughtException.name // Placeholder in case there is no uncaughtException.reason
         
-        let logger = Logger.logger(name: Constants.Package.logger)
-        var exceptionString = "Uncaught Exception: \(uncaughtException.name). "
+        metadata[Constants.Metadata.Analytics.stacktrace] = uncaughtException.callStackSymbols
+        metadata[Constants.Metadata.Analytics.exceptionClass] = uncaughtException.name
         if let reason = uncaughtException.reason {
-            exceptionString += "Reason: \(reason)."
+            metadata[Constants.Metadata.Analytics.exceptionMessage] = reason
+            exceptionString = reason
+        }
+        else {
+            metadata[Constants.Metadata.Analytics.exceptionMessage] = ""
         }
         
-        logger.fatal(message: exceptionString)
+        Logger.delegate?.logToFile(message: exceptionString, level: LogLevel.fatal, loggerName: Constants.Package.logger, calledFile: #file, calledFunction: #function, calledLineNumber: #line, additionalMetadata: metadata)
     }
     
     

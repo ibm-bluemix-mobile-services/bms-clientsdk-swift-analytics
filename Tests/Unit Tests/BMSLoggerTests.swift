@@ -286,8 +286,7 @@ class BMSLoggerTests: XCTestCase {
             return
         }
         let fileContents = "[\(formattedContents)]"
-        let reason = e.reason!
-        let errorMessage = "Uncaught Exception: \(e.name)." + " Reason: \(reason)."
+        let errorMessage = e.reason
         let logDict = fileContents.data(using: .utf8)!
         guard let jsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
             XCTFail()
@@ -1281,8 +1280,7 @@ class BMSLoggerTests: XCTestCase {
             return
         }
         let fileContents = "[\(formattedContents)]"
-        let reason = e.reason!
-        let errorMessage = "Uncaught Exception: \(e.name)." + " Reason: \(reason)."
+        let errorMessage = e.reason!
         let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
         guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
             XCTFail()

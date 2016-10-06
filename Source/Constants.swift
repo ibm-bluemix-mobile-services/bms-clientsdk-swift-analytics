@@ -82,6 +82,9 @@ internal struct Constants {
             static let userId = "$userID"
             static let initialContext = "initialCtx"
             static let timestamp = "$timestamp"
+            static let stacktrace = "$stacktrace"
+            static let exceptionMessage = "$exceptionMessage"
+            static let exceptionClass = "$exceptionClass"
         }
     }
     
