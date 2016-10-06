@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
-        BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1-dev.ng.bluemix.net")
+        BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1.ng.bluemix.net")
         
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
         Analytics.initialize(appName: "TestAppiOS", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle)
@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1-dev.ng.bluemix.net")
+        BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1.ng.bluemix.net")
         
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
         Analytics.initialize(appName: "TestAppiOS", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle)

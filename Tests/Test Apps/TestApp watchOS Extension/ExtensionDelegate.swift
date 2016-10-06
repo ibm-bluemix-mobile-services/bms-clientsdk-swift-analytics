@@ -21,7 +21,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
         
-        BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1-dev.ng.bluemix.net")
+        BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1.ng.bluemix.net")
 
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
         Analytics.initialize(appName: "TestAppWatchOS", apiKey: "1234", hasUserContext: true)
