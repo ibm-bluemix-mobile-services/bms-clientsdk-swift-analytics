@@ -12,6 +12,7 @@
 */
 
 
+import BMSAnalyticsAPI
 
 // MARK: - Swift 3
 
@@ -35,6 +36,11 @@ public typealias BMSDataTaskCompletionHandler = (Data?, URLResponse?, Error?) ->
 */
 public struct BMSURLSession {
 
+    
+    // Determines whether metadata gets recorded for all BMSURLSession network requests
+    // Can only be set to true by passing DeviceEvent.network in the Analytics.initialize() method in the BMSAnalytics framework.
+    
+    public static var shouldRecordNetworkMetadata: Bool = false
     
     private let configuration: URLSessionConfiguration
     
@@ -68,10 +74,12 @@ public struct BMSURLSession {
     
     /**
         Creates a task that retrieves the contents of the specified URL.
-
-        To start the task, you must call its `resume` method.
+     
+        To start the task, you must call its `resume()` method.
 
         - parameter url:  The URL to retrieve data from.
+     
+        - returns: A data task.
     */
     public func dataTask(with url: URL) -> URLSessionDataTask {
         
@@ -82,13 +90,15 @@ public struct BMSURLSession {
     /**
         Creates a task that retrieves the contents of the specified URL, and passes the response to the completion handler.
 
-        To start the task, you must call its `resume` method.
+        To start the task, you must call its `resume()` method.
 
         - note: It is not recommended to use this method if the session was created with a delegate.
                 The completion handler will override all delegate methods except those for handling authentication challenges.
 
         - parameter url:                The URL to retrieve data from.
         - parameter completionHandler:  The completion handler to call when the request is complete.
+     
+        - returns: A data task.
     */
     public func dataTask(with url: URL, completionHandler: @escaping BMSDataTaskCompletionHandler) -> URLSessionDataTask {
         
@@ -99,10 +109,12 @@ public struct BMSURLSession {
     /**
         Creates a task that retrieves the contents of a URL based on the specified request object.
 
-        To start the task, you must call its `resume` method.
+        To start the task, you must call its `resume()` method.
 
         - parameter request:  An object that provides request-specific information
                               such as the URL, cache policy, request type, and body data.
+     
+        - returns: A data task.
     */
     public func dataTask(with request: URLRequest) -> URLSessionDataTask {
         
@@ -113,7 +125,6 @@ public struct BMSURLSession {
         let urlSession = URLSession(configuration: configuration, delegate: parentDelegate, delegateQueue: delegateQueue)
         
         let dataTask = urlSession.dataTask(with: bmsRequest)
-        
         return dataTask
     }
     
@@ -122,7 +133,7 @@ public struct BMSURLSession {
         Creates a task that retrieves the contents of a URL based on the specified request object,
         and passes the response to the completion handler.
 
-        To start the task, you must call its `resume` method.
+        To start the task, you must call its `resume()` method.
 
         - note: It is not recommended to use this method if the session was created with a delegate.
                 The completion handler will override all delegate methods except those for handling authentication challenges.
@@ -130,6 +141,8 @@ public struct BMSURLSession {
         - parameter request:            An object that provides request-specific information
                                         such as the URL, cache policy, request type, and body data.
         - parameter completionHandler:  The completion handler to call when the request is complete.
+     
+        - returns: A data task.
     */
     public func dataTask(with request: URLRequest, completionHandler: @escaping BMSDataTaskCompletionHandler) -> URLSessionDataTask {
         
@@ -137,10 +150,9 @@ public struct BMSURLSession {
         
         let urlSession = URLSession(configuration: configuration, delegate: delegate, delegateQueue: delegateQueue)
         let originalTask = BMSURLSessionTaskType.dataTaskWithCompletionHandler(completionHandler)
-        let bmsCompletionHandler = BMSURLSession.generateBmsCompletionHandler(from: completionHandler, urlSession: urlSession, request: request, originalTask: originalTask)
+        let bmsCompletionHandler = BMSURLSession.generateBmsCompletionHandler(from: completionHandler, urlSession: urlSession, request: bmsRequest, originalTask: originalTask, requestBody: nil)
         
         let dataTask = urlSession.dataTask(with: bmsRequest, completionHandler: bmsCompletionHandler)
-        
         return dataTask
     }
     
@@ -151,11 +163,13 @@ public struct BMSURLSession {
     /**
         Creates a task that uploads data to the URL specified in the request object.
 
-        To start the task, you must call its `resume` method.
+        To start the task, you must call its `resume()` method.
 
         - parameter request:   An object that provides request-specific information
                                such as the URL and cache policy. The request body is ignored.
         - parameter bodyData:  The body data for the request.
+     
+        - returns: An upload task.
     */
     public func uploadTask(with request: URLRequest, from bodyData: Data) -> URLSessionUploadTask {
         
@@ -166,7 +180,6 @@ public struct BMSURLSession {
         let urlSession = URLSession(configuration: configuration, delegate: parentDelegate, delegateQueue: delegateQueue)
         
         let uploadTask = urlSession.uploadTask(with: bmsRequest, from: bodyData)
-        
         return uploadTask
     }
     
@@ -174,7 +187,7 @@ public struct BMSURLSession {
     /**
         Creates a task that uploads data to the URL specified in the request object.
 
-        To start the task, you must call its `resume` method.
+        To start the task, you must call its `resume()` method.
 
         - note: It is not recommended to use this method if the session was created with a delegate.
                 The completion handler will override all delegate methods except those for handling authentication challenges.
@@ -183,6 +196,8 @@ public struct BMSURLSession {
                                         such as the URL and cache policy. The request body is ignored.
         - parameter bodyData:           The body data for the request.
         - parameter completionHandler:  The completion handler to call when the request is complete.
+     
+        - returns: An upload task.
     */
     public func uploadTask(with request: URLRequest, from bodyData: Data?, completionHandler: @escaping BMSDataTaskCompletionHandler) -> URLSessionUploadTask {
         
@@ -190,10 +205,9 @@ public struct BMSURLSession {
         
         let urlSession = URLSession(configuration: configuration, delegate: delegate, delegateQueue: delegateQueue)
         let originalTask = BMSURLSessionTaskType.uploadTaskWithDataAndCompletionHandler(bodyData, completionHandler)
-        let bmsCompletionHandler = BMSURLSession.generateBmsCompletionHandler(from: completionHandler, urlSession: urlSession, request: request, originalTask: originalTask)
+        let bmsCompletionHandler = BMSURLSession.generateBmsCompletionHandler(from: completionHandler, urlSession: urlSession, request: bmsRequest, originalTask: originalTask, requestBody: bodyData)
         
         let uploadTask = urlSession.uploadTask(with: bmsRequest, from: bodyData, completionHandler: bmsCompletionHandler)
-        
         return uploadTask
     }
     
@@ -201,11 +215,13 @@ public struct BMSURLSession {
     /**
         Creates a task that uploads a file to the URL specified in the request object.
 
-        To start the task, you must call its `resume` method.
+        To start the task, you must call its `resume()` method.
 
         - parameter request:  An object that provides request-specific information
                               such as the URL and cache policy. The request body is ignored.
         - parameter fileURL:  The location of the file to upload.
+     
+        - returns: An upload task.
     */
     public func uploadTask(with request: URLRequest, fromFile fileURL: URL) -> URLSessionUploadTask {
         
@@ -216,7 +232,6 @@ public struct BMSURLSession {
         let urlSession = URLSession(configuration: configuration, delegate: parentDelegate, delegateQueue: delegateQueue)
         
         let uploadTask = urlSession.uploadTask(with: bmsRequest, fromFile: fileURL)
-        
         return uploadTask
     }
     
@@ -224,7 +239,7 @@ public struct BMSURLSession {
     /**
         Creates a task that uploads a file to the URL specified in the request object.
 
-        To start the task, you must call its `resume` method.
+        To start the task, you must call its `resume()` method.
 
         - note: It is not recommended to use this method if the session was created with a delegate.
                 The completion handler will override all delegate methods except those for handling authentication challenges.
@@ -233,17 +248,26 @@ public struct BMSURLSession {
                                         such as the URL and cache policy. The request body is ignored.
         - parameter fileURL:            The location of the file to upload.
         - parameter completionHandler:  The completion handler to call when the request is complete.
+     
+        - returns: An upload task.
     */
     public func uploadTask(with request: URLRequest, fromFile fileURL: URL, completionHandler: @escaping BMSDataTaskCompletionHandler) -> URLSessionUploadTask {
+        
+        var fileContents: Data? = nil
+        do {
+            fileContents = try Data(contentsOf: fileURL)
+        }
+        catch(let error) {
+            BMSURLSession.logger.warn(message: "Cannot retrieve the contents of the file \(fileURL.absoluteString). Error: \(error)")
+        }
         
         let bmsRequest = BMSURLSession.addBMSHeaders(to: request)
         
         let urlSession = URLSession(configuration: configuration, delegate: delegate, delegateQueue: delegateQueue)
         let originalTask = BMSURLSessionTaskType.uploadTaskWithFileAndCompletionHandler(fileURL, completionHandler)
-        let bmsCompletionHandler = BMSURLSession.generateBmsCompletionHandler(from: completionHandler, urlSession: urlSession, request: request, originalTask: originalTask)
+        let bmsCompletionHandler = BMSURLSession.generateBmsCompletionHandler(from: completionHandler, urlSession: urlSession, request: bmsRequest, originalTask: originalTask, requestBody: fileContents)
         
         let uploadTask = urlSession.uploadTask(with: bmsRequest, fromFile: fileURL, completionHandler: bmsCompletionHandler)
-        
         return uploadTask
     }
     
@@ -283,6 +307,52 @@ public struct BMSURLSession {
             return true
         }
         return false
+    }
+    
+    
+    // Required to hook in challenge handling via AuthorizationManager
+    internal static func generateBmsCompletionHandler(from completionHandler: @escaping BMSDataTaskCompletionHandler, urlSession: URLSession, request: URLRequest, originalTask: BMSURLSessionTaskType, requestBody: Data?) -> BMSDataTaskCompletionHandler {
+        
+        // Allows Analytics to track each network request and its associated metadata.
+        let trackingId = UUID().uuidString
+        
+        // The time at which the request is considered to have started.
+        // We start the request timer here so that it doesn't need to get passed around via method parameters.
+        // The request is considered to have begun when the URLSessionTask is created.
+        let startTime = Int64(Date.timeIntervalSinceReferenceDate * 1000) // milliseconds
+        
+        return { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            
+            if BMSURLSession.isAuthorizationManagerRequired(for: response) {
+                
+                // Resend the original request with the "Authorization" header added
+                BMSURLSession.handleAuthorizationChallenge(session: urlSession, request: request, originalTask: originalTask, handleTask: { (urlSessionTask) in
+                    
+                    if let taskWithAuthorization = urlSessionTask {
+                        taskWithAuthorization.resume()
+                    }
+                    else {
+                        completionHandler(data, response, error)
+                    }
+                })
+            }
+            else {
+                
+                if shouldRecordNetworkMetadata {
+                    
+                    let bytesReceived: Int64 = Int64(data?.count ?? 0)
+                    var bytesSent: Int64 = 0
+                    if requestBody != nil {
+                        bytesSent = Int64(requestBody!.count)
+                    }
+                    
+                    let requestMetadata = getRequestMetadata(response: response, bytesSent: bytesSent, bytesReceived: bytesReceived, trackingId: trackingId, startTime: startTime, url: request.url)
+                    Analytics.log(metadata: requestMetadata)
+                }
+                
+                completionHandler(data, response, error)
+            }
+        }
     }
     
     
@@ -336,29 +406,34 @@ public struct BMSURLSession {
     }
     
     
-    // Required to hook in challenge handling via AuthorizationManager
-    internal static func generateBmsCompletionHandler(from completionHandler: @escaping BMSDataTaskCompletionHandler, urlSession: URLSession, request: URLRequest, originalTask: BMSURLSessionTaskType) -> BMSDataTaskCompletionHandler {
+    // Gather response data as JSON to be recorded in an Analytics log
+    internal static func getRequestMetadata(response: URLResponse?, bytesSent: Int64, bytesReceived: Int64, trackingId: String, startTime: Int64, url: URL?) -> [String: Any] {
         
-        return { (data: Data?, response: URLResponse?, error: Error?) -> Void in
-            
-            if BMSURLSession.isAuthorizationManagerRequired(for: response) {
-                
-                // Resend the original request with the "Authorization" header added
-                BMSURLSession.handleAuthorizationChallenge(session: urlSession, request: request, originalTask: originalTask, handleTask: { (urlSessionTask) in
-                    
-                    if let taskWithAuthorization = urlSessionTask {
-                        taskWithAuthorization.resume()
-                    }
-                    else {
-                        completionHandler(data, response, error)
-                    }
-                })
-            }
-            else {
-                completionHandler(data, response, error)
-            }
+        let endTime = Int64(Date.timeIntervalSinceReferenceDate * 1000) // milliseconds
+        let roundTripTime = endTime - startTime
+        
+        // Data for analytics logging
+        var responseMetadata: [String: Any] = [:]
+        
+        responseMetadata["$category"] = "network"
+        responseMetadata["$trackingId"] = trackingId
+        responseMetadata["$outboundTimestamp"] = startTime
+        responseMetadata["$inboundTimestamp"] = endTime
+        responseMetadata["$roundTripTime"] = roundTripTime
+        responseMetadata["$bytesSent"] = bytesSent
+        responseMetadata["$bytesReceived"] = bytesReceived
+
+        if let urlString = url?.absoluteString {
+            responseMetadata["$path"] = urlString
         }
+        
+        if let httpResponse = response as? HTTPURLResponse {
+            responseMetadata["$responseCode"] = httpResponse.statusCode
+        }
+        
+        return responseMetadata
     }
+    
 }
     
     
@@ -399,11 +474,11 @@ public typealias BMSDataTaskCompletionHandler = (NSData?, NSURLResponse?, NSErro
 
 
 /**
-    A wrapper around Swift's `URLSession` API that incorporates
+    A wrapper around Swift's `NSURLSession` API that incorporates
     Bluemix Mobile Services. Use this API to gather analytics data on your network requests
     and/or to access backends that are protected by Mobile Client Access.
 
-    Currently, `BMSURLSession` only supports `URLSessionDataTask` and `URLSessionUploadTask`.
+    Currently, `BMSURLSession` only supports `NSURLSessionDataTask` and `NSURLSessionUploadTask`.
 
     For more information, refer to the documentation for `NSURLSession` in the Swift `Foundation` framework.
 */
