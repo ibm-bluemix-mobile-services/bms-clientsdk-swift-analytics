@@ -65,6 +65,8 @@ public extension Analytics {
                 #else
                     Analytics.logger.warn(message: "The Analytics class cannot automatically record lifecycle events for non-iOS apps.")
                 #endif
+            case .network:
+                BMSURLSession.shouldRecordNetworkMetadata = true
             }
         }
         
