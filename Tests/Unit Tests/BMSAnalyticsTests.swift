@@ -213,57 +213,6 @@ class BMSAnalyticsTests: XCTestCase {
         XCTAssert(requestMetadata!.contains("\"mfpAppName\":\"Test app\""))
     }
 
-    
-    func testGenerateInboundResponseMetadata() {
-        
-        class MockRequest: Request {
-            
-            override var startTime: TimeInterval {
-                get {
-                    return 0
-                }
-                set { }
-            }
-            
-            override var trackingId: String {
-                get {
-                    return ""
-                }
-                set { }
-            }
-            
-            init() {
-                super.init(url: "", headers: nil, queryParameters: nil)
-            }
-        }
-        
-        let requestUrl = "http://example.com"
-        let request = MockRequest()
-        request.send(completionHandler: nil)
-        
-        let responseInfo = "{\"key1\": \"value1\", \"key2\": \"value2\"}".data(using: .utf8)
-        let urlResponse = HTTPURLResponse(url: URL(string: "http://example.com")!, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: ["key": "value"])
-        let response = Response(responseData: responseInfo, httpResponse: urlResponse, isRedirect: false)
-        
-        let responseMetadata = BMSAnalytics.generateInboundResponseMetadata(request: request, response: response, url: requestUrl)
-        
-        let outboundTimestamp = responseMetadata["$outboundTimestamp"] as? TimeInterval
-        let inboundTimestamp = responseMetadata["$inboundTimestamp"] as? TimeInterval
-        let roundTripTime = responseMetadata["$roundTripTime"] as? TimeInterval
-        
-        guard let outboundTime = outboundTimestamp, let inboundTime = inboundTimestamp, let roundTrip = roundTripTime else {
-            XCTFail("The inbound, outbound, and roundtrip times for the request should all have values")
-            return
-        }
-        
-        XCTAssert(inboundTime > outboundTime)
-        XCTAssert(roundTrip > 0)
-        
-        let responseBytes = responseMetadata["$bytesReceived"] as? Int
-        XCTAssertNotNil(responseBytes)
-        XCTAssert(responseBytes == 36)
-    }
-
 
     func testUniqueDeviceId() {
         
@@ -622,56 +571,6 @@ class BMSAnalyticsTests: XCTestCase {
         // Since BMSAnalytics has not been initialized, there will be no app name.
         // In a real app, this should default to the bundle ID. Unit tests have no bundle ID.
         XCTAssert(requestMetadata!.containsString("\"mfpAppName\":\"Test app\""))
-    }
-    
-    
-    func testGenerateInboundResponseMetadata() {
-        
-        class MockRequest: Request {
-            
-            override var startTime: NSTimeInterval {
-                get {
-                    return 0
-                }
-                set { }
-            }
-            
-            override var trackingId: String {
-                get {
-                    return ""
-                }
-                set { }
-            }
-            
-            init() {
-                super.init(url: "", headers: nil, queryParameters: nil)
-            }
-        }
-        
-        let requestUrl = "http://example.com"
-        let request = MockRequest()
-        request.send(completionHandler: nil)
-        
-        let responseInfo = "{\"key1\": \"value1\", \"key2\": \"value2\"}".dataUsingEncoding(NSUTF8StringEncoding)
-        let urlResponse = NSHTTPURLResponse(URL: NSURL(string: "http://example.com")!, statusCode: 200, HTTPVersion: "HTTP/1.1", headerFields: ["key": "value"])
-        let response = Response(responseData: responseInfo, httpResponse: urlResponse, isRedirect: false)
-        
-        let responseMetadata = BMSAnalytics.generateInboundResponseMetadata(request, response: response, url: requestUrl)
-        
-        let outboundTime = responseMetadata["$outboundTimestamp"] as? NSTimeInterval
-        let inboundTime = responseMetadata["$inboundTimestamp"] as? NSTimeInterval
-        let roundTripTime = responseMetadata["$roundTripTime"] as? NSTimeInterval
-        
-        XCTAssertNotNil(outboundTime)
-        XCTAssertNotNil(inboundTime)
-        XCTAssertNotNil(roundTripTime)
-        
-        XCTAssert(inboundTime > outboundTime)
-        XCTAssert(roundTripTime > 0)
-        
-        let responseBytes = responseMetadata["$bytesReceived"] as? Int
-        XCTAssertNotNil(responseBytes)
-        XCTAssert(responseBytes == 36)
     }
     
     

@@ -284,37 +284,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     }
     
     
-    // Gather response data as JSON to be recorded in an analytics log
-    internal static func generateInboundResponseMetadata(request: Request, response: Response, url: String) -> [String: Any] {
-        
-        Analytics.logger.debug(message: "Network response inbound")
-        
-        let endTime = NSDate.timeIntervalSinceReferenceDate
-        let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
-        
-        let bytesSent = request.requestBody?.count ?? 0
-        
-        // Data for analytics logging
-        var responseMetadata: [String: Any] = [:]
-        
-        responseMetadata["$category"] = "network" as AnyObject
-        responseMetadata["$path"] = url
-        responseMetadata["$trackingId"] = request.trackingId
-        responseMetadata["$outboundTimestamp"] = request.startTime
-        responseMetadata["$inboundTimestamp"] = endTime
-        responseMetadata["$roundTripTime"] = roundTripTime
-        responseMetadata["$responseCode"] = response.statusCode
-        responseMetadata["$bytesSent"] = bytesSent
-        
-        if (response.responseText != nil && !response.responseText!.isEmpty) {
-            responseMetadata["$bytesReceived"] = response.responseText?.lengthOfBytes(using: .utf8)
-        }
-        
-        return responseMetadata
-    }
-    
-    
-    
+
     // MARK: - Helpers
     
     internal static func logInternal(event category: String) {
@@ -644,37 +614,6 @@ public class BMSAnalytics: AnalyticsDelegate {
         return requestMetadataString
     }
     
-    
-    // Gather response data as JSON to be recorded in an analytics log
-    internal static func generateInboundResponseMetadata(request: Request, response: Response, url: String) -> [String: AnyObject] {
-    
-        Analytics.logger.debug(message: "Network response inbound")
-        
-        let endTime = NSDate.timeIntervalSinceReferenceDate()
-        let roundTripTime = (endTime - request.startTime) * 1000 // Converting to milliseconds
-        
-        let bytesSent = request.requestBody?.length ?? 0
-        
-        
-        // Data for analytics logging
-        var responseMetadata: [String: AnyObject] = [:]
-        
-        responseMetadata["$category"] = "network" as AnyObject
-        responseMetadata["$path"] = url
-        responseMetadata["$trackingId"] = request.trackingId
-        responseMetadata["$outboundTimestamp"] = request.startTime
-        responseMetadata["$inboundTimestamp"] = endTime
-        responseMetadata["$roundTripTime"] = roundTripTime
-        responseMetadata["$responseCode"] = response.statusCode
-        responseMetadata["$bytesSent"] = bytesSent
-        
-        if (response.responseText != nil && !response.responseText!.isEmpty) {
-            responseMetadata["$bytesReceived"] = response.responseText?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
-        }
-        
-        return responseMetadata
-    }
-        
     
     
     // MARK: - Helpers
