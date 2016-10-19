@@ -16,7 +16,7 @@ This is the analytics and logger component of the Swift SDK for [IBM Bluemix Mob
 The Bluemix Mobile Services Swift SDKs are available via [Cocoapods](http://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage).
 
 ### Cocoapods
-To install BMSAnalytics using Cocoapods, add it to your Podfile:
+To install BMSAnalytics using Cocoapods, add it to your Podfile. If your project does not have a Podfile yet, use the `pod init` command.
 
 ```ruby
 use_frameworks!
