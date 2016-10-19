@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1.ng.bluemix.net")
         
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-        Analytics.initialize(appName: "TestAppiOS", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle)
+        Analytics.initialize(appName: "TestAppiOS", apiKey: "1234", hasUserContext: true, deviceEvents: DeviceEvent.lifecycle, DeviceEvent.network)
         
         Analytics.isEnabled = true
         Logger.isLogStorageEnabled = true
