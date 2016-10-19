@@ -20,7 +20,7 @@ CHECKOUT OPTIONS:
     :commit: 79952cd738ceeff94f3172c8fa4af37bb1150681
     :git: https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics-api.git
   BMSCore:
-    :commit: 7da53829d6b5e7dfe7443a6a6d7bf5f2a6fab1d6
+    :commit: a5f25534bf2a0d7f98a74945f6c6f0c3b6ae7978
     :git: https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-core.git
 
 SPEC CHECKSUMS:

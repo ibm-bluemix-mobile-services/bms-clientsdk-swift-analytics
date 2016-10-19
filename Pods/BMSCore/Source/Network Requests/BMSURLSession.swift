@@ -413,15 +413,15 @@ public struct BMSURLSession {
         let roundTripTime = endTime - startTime
         
         // Data for analytics logging
+        // NSNumber is used because, for some reason, JSONSerialization fails to convert Int64 to JSON
         var responseMetadata: [String: Any] = [:]
-        
         responseMetadata["$category"] = "network"
-        responseMetadata["$trackingId"] = trackingId
-        responseMetadata["$outboundTimestamp"] = startTime
-        responseMetadata["$inboundTimestamp"] = endTime
-        responseMetadata["$roundTripTime"] = roundTripTime
-        responseMetadata["$bytesSent"] = bytesSent
-        responseMetadata["$bytesReceived"] = bytesReceived
+        responseMetadata["$trackingid"] = trackingId
+        responseMetadata["$outboundTimestamp"] = NSNumber(value: startTime)
+        responseMetadata["$inboundTimestamp"] = NSNumber(value: endTime)
+        responseMetadata["$roundTripTime"] = NSNumber(value: roundTripTime)
+        responseMetadata["$bytesSent"] = NSNumber(value: bytesSent)
+        responseMetadata["$bytesReceived"] = NSNumber(value: bytesReceived)
 
         if let urlString = url?.absoluteString {
             responseMetadata["$path"] = urlString
