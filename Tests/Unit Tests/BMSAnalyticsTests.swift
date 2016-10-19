@@ -36,7 +36,7 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
 
-    func testinitialize() {
+    func testInitialize() {
      
         XCTAssertNil(BMSAnalytics.apiKey)
         XCTAssertNil(BMSAnalytics.appName)
@@ -47,7 +47,7 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
     
-    func testinitializeWithBmsClientInitialized() {
+    func testInitializeWithBmsClientInitialized() {
         
         XCTAssertNil(BMSAnalytics.apiKey)
         XCTAssertNil(BMSAnalytics.appName)
@@ -62,21 +62,22 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
     
-    func testinitializeRegistersUncaughtExceptionHandler() {
+    func testInitializeRegistersUncaughtExceptionHandler() {
         
         Analytics.initialize(appName: "Unit Test App", apiKey: "1234")
         XCTAssertNotNil(NSGetUncaughtExceptionHandler())
     }
     
     
-    func testinitializeAndDeviceEvents() {
+    func testInitializeWithDeviceEvents() {
         
         let referenceTime = Int64(NSDate.timeIntervalSinceReferenceDate * 1000)
         
-        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.lifecycle)
+        Analytics.initialize(appName: "Unit Test App", apiKey: "1234", deviceEvents: DeviceEvent.lifecycle, DeviceEvent.network)
         
         // When registering LIFECYCLE events, the BMSAnalytics.logSessionStart() method should get called immediately, assigning a new value to BMSAnalytics.startTime and BMSAnalytics.lifecycleEvents
         XCTAssertTrue(BMSAnalytics.startTime >= referenceTime)
+        XCTAssertTrue(BMSURLSession.shouldRecordNetworkMetadata)
     }
     
 
@@ -150,7 +151,7 @@ class BMSAnalyticsTests: XCTestCase {
         1) Call logSessionEnd(). This should have no effect since logSessionStart() was never called.
         2) Call logSessionStart().
      */
-    func testlogSessionEndBeforeLogSessionStart() {
+    func testLogSessionEndBeforeLogSessionStart() {
         
         XCTAssertTrue(BMSAnalytics.lifecycleEvents.isEmpty)
         XCTAssertEqual(BMSAnalytics.startTime, 0)
