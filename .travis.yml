@@ -6,6 +6,8 @@ matrix:
 install:
   - gem install cocoapods --pre
 before_script:
+  - mkdir -p /Users/travis/Library/Developer/CoreSimulator/Devices/5752202B-E7A2-4B6C-9D7B-B211C2F54654/data/Documents
+  - chmod -R 777 /Users/travis/Library/Developer/CoreSimulator
   - rm -rf ~/Library/Developer/Xcode/DerivedData
   - pod setup
 script:
