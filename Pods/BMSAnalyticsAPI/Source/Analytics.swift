@@ -33,7 +33,8 @@ public enum DeviceEvent {
     /// - Note: Only available for iOS apps. For watchOS apps, call the `recordApplicationDidBecomeActive()` and `recordApplicationWillResignActive()` methods in the appropriate `ExtensionDelegate` methods.
     case lifecycle
     
-    /// Records metadata for network requests created with the `BMSURLSession` API in the `BMSCore` framework.
+    /// Records metadata for network requests sent by the Bluemix Mobile Services SDKs (BMSCore, BMSAnalytics, BMSPush, BMSSecurity, etc.).
+    /// To have metadata recorded for your own custom network requests and sent to the Mobile Analytics Service, create your requests with `BMSURLSession`.
     case network
 }
 
@@ -52,7 +53,7 @@ public protocol AnalyticsDelegate {
 // MARK: - Analytics
 
 /**
-    Records analytics data and sends it to the Analytics server.
+    Records analytics data and sends it to the Mobile Analytics Service.
 */
 public class Analytics {
     
@@ -89,7 +90,7 @@ public class Analytics {
 
         Analytics logs are added to the log file until the file size is greater than the `maxLogStoreSize` property. At this point, the first half of the stored logs will be deleted to make room for new log data.
 
-        When ready, use the `send()` method to send the recorded data to the Analytics server.
+        When ready, use the `send()` method to send the recorded data to the Mobile Analytics Service.
 
         - parameter metadata:  The analytics data
     */
@@ -130,7 +131,8 @@ public enum DeviceEvent {
     /// - Note: Only available for iOS apps. For watchOS apps, call the `recordApplicationDidBecomeActive()` and `recordApplicationWillResignActive()` methods in the appropriate `ExtensionDelegate` methods.
     case lifecycle
     
-    /// Records metadata for network requests created with the `BMSURLSession` API in the `BMSCore` framework.
+    /// Records metadata for network requests sent by the Bluemix Mobile Services SDKs (BMSCore, BMSAnalytics, BMSPush, BMSSecurity, etc.).
+    /// To have metadata recorded for your own custom network requests and sent to the Mobile Analytics Service, create your requests with `BMSURLSession`.
     case network
 }
 
@@ -149,7 +151,7 @@ public protocol AnalyticsDelegate {
 // MARK: - Analytics
 
 /**
-    Records analytics data and sends it to the Analytics server.
+    Records analytics data and sends it to the Mobile Analytics Service.
 */
 public class Analytics {
     
@@ -186,7 +188,7 @@ public class Analytics {
 
         Analytics logs are added to the log file until the file size is greater than the `maxLogStoreSize` property. At this point, the first half of the stored logs will be deleted to make room for new log data.
 
-        When ready, use the `send()` method to send the recorded data to the Analytics server.
+        When ready, use the `send()` method to send the recorded data to the Mobile Analytics Service.
 
         - parameter metadata:  The analytics data
     */

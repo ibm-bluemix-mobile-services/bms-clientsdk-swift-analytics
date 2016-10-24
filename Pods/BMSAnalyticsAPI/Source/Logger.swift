@@ -61,7 +61,7 @@ public enum LogLevel: Int {
 
 // MARK: - LoggerDelegate
 
-// Contains functionality to store logs locally on the device and send them to an analytics server.
+// Contains functionality to store logs locally on the device and send them to the Mobile Analytics Service.
 // This protocol is implemented in the BMSAnalytics framework.
 public protocol LoggerDelegate {
     
@@ -75,7 +75,7 @@ public protocol LoggerDelegate {
 // MARK: - Logger
 
 /**
-    A logging framework that can print messages to the console, store them locally on the device, and send them to a remote Analytics server. With each log message, additional information is gathered such as the file, function, and line where the log was called, as well as the severity of the message.
+    A logging framework that can print messages to the console, store them locally on the device, and send them to a remote Mobile Analytics Service. With each log message, additional information is gathered such as the file, function, and line where the log was called, as well as the severity of the message.
 
     Multiple `Logger` instances can be created with different names using the `logger(name:)` method.
 
@@ -83,11 +83,11 @@ public protocol LoggerDelegate {
 
     To enable logs to be stored locally on the device, set the `logStoreEnabled` property to `true`. Logs are added to the log file until the file size is greater than the `maxLogStoreSize` property. At this point, the first half of the stored logs will be deleted to make room for new log data.
 
-    To send logs to the Analytics server, call the `send()` method. When the log data is successfully uploaded, the logs will be deleted from local storage.
+    To send logs to the Mobile Analytics Service, call the `send()` method. When the log data is successfully uploaded, the logs will be deleted from local storage.
 
     - Note: The `Logger` class sets an uncaught exception handler to log application crashes. If you wish to set your own exception handler, do so **before** calling `Logger.logger(name:)`, or the `Logger` exception handler will be overwritten.
 
-    - Important: The `BMSAnalytics` framework is required for log messages to be stored and sent to an Analytics server. If this framework is not available, the `Logger` class can only print messages to the console.
+    - Important: The `BMSAnalytics` framework is required for log messages to be stored and sent to a Mobile Analytics Service. If this framework is not available, the `Logger` class can only print messages to the console.
 */
 public class Logger {
     
@@ -108,7 +108,7 @@ public class Logger {
     public static var isInternalDebugLoggingEnabled: Bool = false
     
     /// Determines whether logs get stored locally on the device.
-    /// Must be set to `true` to be able to send logs to the Analytics server.
+    /// Must be set to `true` to be able to send logs to the Mobile Analytics Service.
     public static var isLogStorageEnabled: Bool = false
     
     /// The maximum file size (in bytes) for log storage.
@@ -130,7 +130,7 @@ public class Logger {
     
     // MARK: Properties (internal)
     
-    // Used to persist all logs to the device's file system and send logs to the analytics server.
+    // Used to persist all logs to the device's file system and send logs to the Mobile Analytics Service.
     // Public access required by BMSAnalytics framework, which is required to initialize this property.
     public static var delegate: LoggerDelegate?
     
@@ -335,7 +335,7 @@ public enum LogLevel: Int {
 
 // MARK: - LoggerDelegate
 
-// Contains functionality to store logs locally on the device and send them to an analytics server.
+// Contains functionality to store logs locally on the device and send them to a Mobile Analytics Service.
 // This protocol is implemented in the BMSAnalytics framework.
 public protocol LoggerDelegate {
     
@@ -349,7 +349,7 @@ public protocol LoggerDelegate {
 // MARK: - Logger
 
 /**
-    A logging framework that can print messages to the console, store them locally on the device, and send them to a remote Analytics server. With each log message, additional information is gathered such as the file, function, and line where the log was called, as well as the severity of the message.
+    A logging framework that can print messages to the console, store them locally on the device, and send them to a remote Mobile Analytics Service. With each log message, additional information is gathered such as the file, function, and line where the log was called, as well as the severity of the message.
 
     Multiple `Logger` instances can be created with different names using the `logger(name:)` method.
 
@@ -357,11 +357,11 @@ public protocol LoggerDelegate {
 
     To enable logs to be stored locally on the device, set the `logStoreEnabled` property to `true`. Logs are added to the log file until the file size is greater than the `maxLogStoreSize` property. At this point, the first half of the stored logs will be deleted to make room for new log data.
 
-    To send logs to the Analytics server, call the `send()` method. When the log data is successfully uploaded, the logs will be deleted from local storage.
+    To send logs to the Mobile Analytics Service, call the `send()` method. When the log data is successfully uploaded, the logs will be deleted from local storage.
 
     - Note: The `Logger` class sets an uncaught exception handler to log application crashes. If you wish to set your own exception handler, do so **before** calling `Logger.logger(name:)`, or the `Logger` exception handler will be overwritten.
 
-    - Important: The `BMSAnalytics` framework is required for log messages to be stored and sent to an Analytics server. If this framework is not available, the `Logger` class can only print messages to the console.
+    - Important: The `BMSAnalytics` framework is required for log messages to be stored and sent to a Mobile Analytics Service. If this framework is not available, the `Logger` class can only print messages to the console.
 */
 public class Logger {
     
@@ -382,7 +382,7 @@ public class Logger {
     public static var isInternalDebugLoggingEnabled: Bool = false
     
     /// Determines whether logs get stored locally on the device.
-    /// Must be set to `true` to be able to send logs to the Analytics server.
+    /// Must be set to `true` to be able to send logs to the Mobile Analytics Service.
     public static var isLogStorageEnabled: Bool = false
     
     /// The maximum file size (in bytes) for log storage.
@@ -404,7 +404,7 @@ public class Logger {
     
     // MARK: Properties (internal)
     
-    // Used to persist all logs to the device's file system and send logs to the analytics server.
+    // Used to persist all logs to the device's file system and send logs to the Mobile Analytics Service.
     // Public access required by BMSAnalytics framework, which is required to initialize this property.
     public static var delegate: LoggerDelegate?
     
