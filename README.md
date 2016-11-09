@@ -1,12 +1,12 @@
 BMSAnalytics
 ===================================================
 
+[![Build Status](https://travis-ci.org/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics.svg?branch=master)](https://travis-ci.org/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics)
 [![Platform](https://img.shields.io/cocoapods/p/BMSAnalytics.svg?style=flat)](http://cocoadocs.org/docsets/BMSAnalytics)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/BMSAnalytics.svg)](https://img.shields.io/cocoapods/v/BMSAnalytics.svg)
-[![Build Status](https://travis-ci.org/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics.svg?branch=master)](https://travis-ci.org/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics)
 [![](https://img.shields.io/badge/bluemix-powered-blue.svg)](https://bluemix.net)
 
-BMSAnalytics is the analytics and logger component of the Swift SDKs for [IBM Bluemix Mobile Services](https://console.ng.bluemix.net/docs/mobile/index.html).
+BMSAnalytics is the analytics and logger component of the Swift SDKs for [IBM Bluemix Mobile Services](https://console.ng.bluemix.net/docs/mobile/services.html).
 
 
 
@@ -42,7 +42,7 @@ Read the [official documentation](https://console.ng.bluemix.net/docs/services/m
 
 ## Installation
 
-The Bluemix Mobile Services Swift SDKs are available via [Cocoapods](http://cocoapods.org/) and [Carthage](https://github.com/Carthage/Carthage).
+The Bluemix Mobile Services Swift SDKs can be installed with either [Cocoapods](http://cocoapods.org/) or [Carthage](https://github.com/Carthage/Carthage).
 
 
 ### Cocoapods
