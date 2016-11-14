@@ -3,8 +3,11 @@ matrix:
   include:
     - osx_image: xcode7.3
     - osx_image: xcode8
+before_install:
+  - echo "2" | gem uninstall json
 install:
   - gem install cocoapods -v 1.1.1
+  - gem install jazzy
 before_script:
   # This seems to reduce random build failures
   - mkdir -p /Users/travis/Library/Developer/CoreSimulator/Devices/5752202B-E7A2-4B6C-9D7B-B211C2F54654/data/Documents
@@ -22,4 +25,5 @@ script:
   # When merging or pushing to the master branch, release a new version
   - if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [[ "${TRAVIS_JOB_NUMBER}" = *".2"* ]]; then
       bash scripts/release.sh;
+      bash publish-docs.sh;
     fi
