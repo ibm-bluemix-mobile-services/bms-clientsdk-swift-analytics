@@ -6,14 +6,15 @@ matrix:
 install:
   - gem install cocoapods -v 1.1.1
 before_script:
+  # This seems to reduce random build failures
   - mkdir -p /Users/travis/Library/Developer/CoreSimulator/Devices/5752202B-E7A2-4B6C-9D7B-B211C2F54654/data/Documents
   - chmod -R 777 /Users/travis/Library/Developer/CoreSimulator
   - rm -rf ~/Library/Developer/Xcode/DerivedData
-  - pod setup
 script:
-  - pod install
-  - pod lib lint
+  # Test that the framework can be installed and built, and passes all unit tests
+  - pod update
   - carthage update
+  - pod lib lint
   - xcodebuild -scheme 'BMSAnalytics iOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
   - xcodebuild -scheme 'BMSAnalytics watchOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
   - travis_retry xcodebuild test -scheme 'BMSAnalytics Tests' -destination 'platform=iOS Simulator,name=iPhone 6s'
