@@ -13,6 +13,7 @@
 
 
 import BMSCore
+import BMSAnalyticsAPI
 
 
 
@@ -22,7 +23,9 @@ import BMSCore
     
 
 
-// Initializer and send methods
+/**
+    Adds the `initialize` and `send` methods.
+*/
 public extension Analytics {
     
     
@@ -107,7 +110,7 @@ public extension Analytics {
 
 // MARK: -
 
-/**
+/*
     Provides the internal implementation of the `Logger` class in the BMSAnalyticsAPI framework.
 */
 public class BMSAnalytics: AnalyticsDelegate {
@@ -115,14 +118,14 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     // MARK: Properties (API)
     
-    /// The name of the iOS/WatchOS app.
+    // The name of the iOS/WatchOS app.
     public fileprivate(set) static var appName: String?
     
-    /// The unique ID used to send logs to the Mobile Analytics Service.
+    // The unique ID used to send logs to the Mobile Analytics Service.
     public fileprivate(set) static var apiKey: String?
     
-    /// Identifies the current application user.
-    /// To reset the userId, set the value to nil.
+    // Identifies the current application user.
+    // To reset the userId, set the value to nil.
     public var userIdentity: String? {
         
         // Note: The developer sets this value via Analytics.userIdentity
@@ -356,7 +359,9 @@ internal extension BMSAnalytics {
 
 
 
-// Initializer and send methods
+/**
+    Adds the `initialize` and `send` methods.
+*/
 public extension Analytics {
     
     
@@ -441,7 +446,7 @@ public extension Analytics {
 
 // MARK: -
 
-/**
+/*
     Provides the internal implementation of the `Analytics` class in the BMSAnalyticsAPI framework.
 */
 public class BMSAnalytics: AnalyticsDelegate {
@@ -449,14 +454,14 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     // MARK: Properties (API)
     
-    /// The name of the iOS/WatchOS app.
+    // The name of the iOS/WatchOS app.
     public private(set) static var appName: String?
     
-    /// The unique ID used to send logs to the Mobile Analytics Service.
+    // The unique ID used to send logs to the Mobile Analytics Service.
     public private(set) static var apiKey: String?
     
-    /// Identifies the current application user.
-    /// To reset the userId, set the value to nil.
+    // Identifies the current application user.
+    // To reset the userId, set the value to nil.
     public var userIdentity: String? {
         
         // Note: The developer sets this value via Analytics.userIdentity
