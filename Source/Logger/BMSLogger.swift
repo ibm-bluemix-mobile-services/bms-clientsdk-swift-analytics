@@ -34,9 +34,9 @@ public extension Logger {
     
     
     /**
-        Send the accumulated logs to the Bluemix server.
+        Send the accumulated logs to the Mobile Analytics service.
 
-        Logger logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)`.
+        Logger logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)` from the `BMSCore` framework.
 
         - parameter completionHandler:  Optional callback containing the results of the send request.
     */

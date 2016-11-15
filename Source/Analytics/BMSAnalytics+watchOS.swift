@@ -28,7 +28,7 @@ public extension Analytics {
     
     /**
         Starts a timer to record the length of time the watchOS app is being used before becoming inactive.
-        This event will be recorded and sent to the Mobile Analytics Service, provided that the `Analytics.enabled` property is set to `true`.
+        This event will be recorded and sent to the Mobile Analytics service, provided that the `Analytics.enabled` property is set to `true`.
 
         This should be called in the `ExtensionDelegate` `applicationDidBecomeActive()` method.
     */
@@ -40,7 +40,7 @@ public extension Analytics {
     
     /**
         Ends the timer started by the `Analytics startRecordingApplicationLifecycleEvents` method.
-        This event will be recorded and sent to the Mobile Analytics Service, provided that the `Analytics.enabled` property is set to `true`.
+        This event will be recorded and sent to the Mobile Analytics service, provided that the `Analytics.enabled` property is set to `true`.
 
         This should be called in the `ExtensionDelegate` `applicationWillResignActive()` method.
     */
@@ -115,7 +115,7 @@ public extension Analytics {
     
     /**
         Starts a timer to record the length of time the watchOS app is being used before becoming inactive.
-        This event will be recorded and sent to the Mobile Analytics Service, provided that the `Analytics.enabled` property is set to `true`.
+        This event will be recorded and sent to the Mobile Analytics service, provided that the `Analytics.enabled` property is set to `true`.
 
         This should be called in the `ExtensionDelegate` `applicationDidBecomeActive()` method.
     */
@@ -127,7 +127,7 @@ public extension Analytics {
     
     /**
         Ends the timer started by the `Analytics startRecordingApplicationLifecycleEvents` method.
-        This event will be recorded and sent to the Mobile Analytics Service, provided that the `Analytics.enabled` property is set to `true`.
+        This event will be recorded and sent to the Mobile Analytics service, provided that the `Analytics.enabled` property is set to `true`.
 
         This should be called in the `ExtensionDelegate` `applicationWillResignActive()` method.
     */

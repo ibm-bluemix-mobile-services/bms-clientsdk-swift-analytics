@@ -34,12 +34,12 @@ public extension Analytics {
     
     
     /**
-        The required initializer for the `Analytics` class when communicating with a Mobile Analytics Service.
+        The required initializer for the `Analytics` class when communicating with a Mobile Analytics service.
 
-        This method must be called after the `BMSClient.sharedInstance.initialize(bluemixRegion:)` method and before calling `Analytics.send()` or `Logger.send()`.
+        - Note: This method must be called after initializing `BMSClient` with `BMSClient.sharedInstance.initialize(bluemixRegion:)` from the `BMSCore` framework, and before calling `send(completionHandler:)` or `Logger.send(completionHandler:)`.
 
         - parameter appName:         The application name.  Should be consistent across platforms (e.g. Android and iOS).
-        - parameter apiKey:          A unique ID used to authenticate with the Mobile Analytics Service.
+        - parameter apiKey:          A unique ID used to authenticate with the Mobile Analytics service.
         - parameter hasUserContext:  If `false`, user identities will be automatically recorded using
                                         the device on which the app is installed.
                                         If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
@@ -93,9 +93,9 @@ public extension Analytics {
     
     
     /**
-        Send the accumulated analytics logs to the Mobile Analytics Service.
+        Send the accumulated analytics logs to the Mobile Analytics service.
 
-        Analytics logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)`.
+        Analytics logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)` from the `BMSCore` framework.
 
         - parameter completionHandler:  Optional callback containing the results of the send request.
     */
@@ -121,7 +121,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     // The name of the iOS/WatchOS app.
     public fileprivate(set) static var appName: String?
     
-    // The unique ID used to send logs to the Mobile Analytics Service.
+    // The unique ID used to send logs to the Mobile Analytics service.
     public fileprivate(set) static var apiKey: String?
     
     // Identifies the current application user.
@@ -370,12 +370,12 @@ public extension Analytics {
     
     
     /**
-        The required initializer for the `Analytics` class when communicating with a Mobile Analytics Service.
+        The required initializer for the `Analytics` class when communicating with a Mobile Analytics service.
 
         This method must be called after the `BMSClient.sharedInstance.initialize(bluemixRegion:)` method and before calling `Analytics.send()` or `Logger.send()`.
 
         - parameter appName:         The application name.  Should be consistent across platforms (e.g. Android and iOS).
-        - parameter apiKey:          A unique ID used to authenticate with the Mobile Analytics Service.
+        - parameter apiKey:          A unique ID used to authenticate with the Mobile Analytics service.
         - parameter hasUserContext:  If `false`, user identities will be automatically recorded using
                                         the device on which the app is installed.
                                         If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
@@ -429,7 +429,7 @@ public extension Analytics {
     
     
     /**
-         Send the accumulated analytics logs to the Mobile Analytics Service.
+         Send the accumulated analytics logs to the Mobile Analytics service.
      
          Analytics logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)`.
 
@@ -457,7 +457,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     // The name of the iOS/WatchOS app.
     public private(set) static var appName: String?
     
-    // The unique ID used to send logs to the Mobile Analytics Service.
+    // The unique ID used to send logs to the Mobile Analytics service.
     public private(set) static var apiKey: String?
     
     // Identifies the current application user.
