@@ -22,7 +22,7 @@ script:
   - xcodebuild -scheme 'BMSAnalytics watchOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
   - travis_retry xcodebuild test -scheme 'BMSAnalytics Tests' -destination 'platform=iOS Simulator,name=iPhone 6s'
 
-  # When merging or pushing to the master branch, release a new version
+  # When merging or pushing to the master branch, release a new version and publish the API documentation
   - if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [[ "${TRAVIS_JOB_NUMBER}" = *".2"* ]]; then
       bash scripts/release.sh;
       bash publish-docs.sh;

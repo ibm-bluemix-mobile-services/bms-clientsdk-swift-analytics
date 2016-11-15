@@ -21,8 +21,7 @@ docs_directory='./ibm-bluemix-mobile-services.github.io/API docs/Client SDK/BMSA
 bmsanalytics=$(sourcekitten doc)
 bmsanalyticsapi=$(sourcekitten doc --module-name BMSAnalyticsAPI -- -project Pods/Pods.xcodeproj)
 echo ${bmsanalyticsapi%?}', '${bmsanalytics:1} > kitty.json
-jazzy --sourcekitten-sourcefile kitty.json --output "${docs_directory}" --skip-undocumented --clean
-rm kitty.json
+jazzy --sourcekitten-sourcefile kitty.json --output "${docs_directory}"
 
 # Publish docs
 cd ibm-bluemix-mobile-services.github.io
