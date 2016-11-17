@@ -13,7 +13,7 @@ before_script:
 script:
   # Test that the framework can be installed and built, and passes all unit tests
   - set -e
-  - pod update
+  - travis_wait pod update
   - carthage update
   - pod lib lint --allow-warnings
   - xcodebuild -scheme 'BMSAnalytics iOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
