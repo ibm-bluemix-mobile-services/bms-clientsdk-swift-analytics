@@ -17,7 +17,7 @@ cd ..
 
 # Generate new docs using Jazzy and Sourcekitten
 version=$(grep -o 'version.*=.*[0-9]' BMSAnalytics.podspec | cut -f 2 -d "'")
-docs_directory='./ibm-bluemix-mobile-services.github.io/API docs/Client SDK/BMSAnalytics/Swift'
+docs_directory='./ibm-bluemix-mobile-services.github.io/API-docs/client-SDK/BMSAnalytics/Swift'
 bmsanalytics=$(sourcekitten doc)
 bmsanalyticsapi=$(sourcekitten doc --module-name BMSAnalyticsAPI -- -project Pods/Pods.xcodeproj)
 echo ${bmsanalyticsapi%?}', '${bmsanalytics:1} > kitty.json
@@ -29,3 +29,17 @@ git add .
 git commit -m "Published docs for BMSAnalytics Swift SDK version ${version}"
 git rebase master
 git push --set-upstream origin master
+
+
+
+
+
+
+
+
+rm kitty.json
+bmsanalytics=$(sourcekitten doc)
+bmsanalyticsapi=$(sourcekitten doc --module-name BMSAnalyticsAPI -- -project Pods/Pods.xcodeproj)
+echo ${bmsanalyticsapi%?}', '${bmsanalytics:1} > kitty.json
+jazzy --sourcekitten-sourcefile kitty.json
+open docs/index.html
