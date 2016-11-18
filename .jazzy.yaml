@@ -1,0 +1,21 @@
+module: BMSAnalytics
+author: IBM
+github_url: https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics
+
+skip_undocumented: true
+clean: true
+
+custom_categories:
+  - name: Logger
+    children:
+    - Logger
+    - LogLevel
+
+  - name: Analytics
+    children:
+    - Analytics
+    - DeviceEvent
+
+  - name: Error
+    children:
+    - BMSAnalyticsError

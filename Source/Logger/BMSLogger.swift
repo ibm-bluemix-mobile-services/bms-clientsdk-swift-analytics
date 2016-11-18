@@ -13,6 +13,7 @@
 
 
 import BMSCore
+import BMSAnalyticsAPI
 
 
 
@@ -22,7 +23,9 @@ import BMSCore
 
 
     
-// Send methods
+/**
+    Adds the `send` method.
+*/
 public extension Logger {
     
     
@@ -31,9 +34,9 @@ public extension Logger {
     
     
     /**
-        Send the accumulated logs to the Bluemix server.
+        Send the accumulated logs to the Mobile Analytics service.
 
-        Logger logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)`.
+        Logger logs can only be sent if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)` from the `BMSCore` framework.
 
         - parameter completionHandler:  Optional callback containing the results of the send request.
     */
@@ -185,7 +188,7 @@ public extension Logger {
 
 // MARK: -
 
-/**
+/*
     Provides the internal implementation of the `Logger` class in the BMSAnalyticsAPI framework.
 */
 public class BMSLogger: LoggerDelegate {
@@ -223,8 +226,8 @@ public class BMSLogger: LoggerDelegate {
     
     // MARK: - Uncaught exceptions
     
-    /// True if the app crashed recently due to an uncaught exception.
-    /// This property will be set back to `false` if the logs are sent to the server.
+    // True if the app crashed recently due to an uncaught exception.
+    // This property will be set back to `false` if the logs are sent to the server.
     public var isUncaughtExceptionDetected: Bool {
         
         get {
@@ -631,7 +634,9 @@ internal func dispatch_sync_throwable(_ queue: DispatchQueue, block: () throws -
     
     
 
-// Send methods
+/**
+    Adds the `send` method.
+*/
 public extension Logger {
     
     
@@ -793,7 +798,7 @@ public extension Logger {
 
 // MARK: -
 
-/**
+/*
     Provides the internal implementation of the `Logger` class in the BMSAnalyticsAPI framework.
 */
 public class BMSLogger: LoggerDelegate {
@@ -831,8 +836,8 @@ public class BMSLogger: LoggerDelegate {
     
     // MARK: - Uncaught exceptions
     
-    /// True if the app crashed recently due to an uncaught exception.
-    /// This property will be set back to `false` if the logs are sent to the server.
+    // True if the app crashed recently due to an uncaught exception.
+    // This property will be set back to `false` if the logs are sent to the server.
     public var isUncaughtExceptionDetected: Bool {
         
         get {

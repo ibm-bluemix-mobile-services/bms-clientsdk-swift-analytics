@@ -24,10 +24,10 @@
 */
 public enum BMSAnalyticsError: Error {
     
-    /// Analytics must be initialized with the `Analytics.initialize(appName:apiKey:hasUserContext:deviceEvents:)` method before calling `Analytics.send()` or `Logger.send()`.
+    /// Analytics must be initialized with `Analytics.initialize(appName:apiKey:hasUserContext:deviceEvents:)` before calling `Analytics.send(completionHandler:)` or `Logger.send(completionHandler:)`.
     case analyticsNotInitialized
     
-    /// If there are no logs or analytics data recorded, there is nothing to send to the Mobile Analytics Service.
+    /// If there are no logs or analytics data recorded, there is nothing to send to the Mobile Analytics service.
     case noLogsToSend
     
     static let domain = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics"
@@ -58,7 +58,7 @@ public enum BMSAnalyticsError: Int, ErrorType {
     /// Analytics must be initialized with the `Analytics.initialize(appName:apiKey:hasUserContext:deviceEvents:)` method before calling `Analytics.send()` or `Logger.send()`.
     case analyticsNotInitialized = 100
     
-    /// If there are no logs or analytics data recorded, there is nothing to send to the Mobile Analytics Service.
+    /// If there are no logs or analytics data recorded, there is nothing to send to the Mobile Analytics service.
     case noLogsToSend = 101
     
     static let domain = "com.ibm.mobilefirstplatform.clientsdk.swift.BMSAnalytics"

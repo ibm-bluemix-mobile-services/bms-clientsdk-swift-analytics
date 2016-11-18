@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# This script is used by Travis-CI to automatically rebuild and deploy API documentation.
+
+# If any part of this script fails, the Travis build will also be marked as failed
+set -ev
+ 
+brew install sourcekitten
+
+# Clone the repository where the docs will be hosted
+# GITHUB_TOKEN required for Travis to have permissions to push to the BMSAnalytics repository
+git clone https://ibm-bluemix-mobile-services:${GITHUB_TOKEN}@github.com/ibm-bluemix-mobile-services/ibm-bluemix-mobile-services.github.io.git
+cd ibm-bluemix-mobile-services.github.io
+git remote rm origin
+git remote add origin https://ibm-bluemix-mobile-services:${GITHUB_TOKEN}@github.com/ibm-bluemix-mobile-services/ibm-bluemix-mobile-services.github.io.git
+cd ..
+
+# Generate new docs using Jazzy and Sourcekitten
+version=$(grep -o 'version.*=.*[0-9]' BMSAnalytics.podspec | cut -f 2 -d "'")
+docs_directory='./ibm-bluemix-mobile-services.github.io/API-docs/client-SDK/BMSAnalytics/Swift'
+bmsanalytics=$(sourcekitten doc)
+bmsanalyticsapi=$(sourcekitten doc --module-name BMSAnalyticsAPI -- -project Pods/Pods.xcodeproj)
+echo ${bmsanalyticsapi%?}', '${bmsanalytics:1} > kitty.json
+jazzy --sourcekitten-sourcefile kitty.json --output "${docs_directory}"
+
+# Publish docs
+cd ibm-bluemix-mobile-services.github.io
+git add .
+git commit -m "Published docs for BMSAnalytics Swift SDK version ${version}"
+git rebase master
+git push --set-upstream origin master
+
+
+
+
+
+
+
+
+rm kitty.json
+bmsanalytics=$(sourcekitten doc)
+bmsanalyticsapi=$(sourcekitten doc --module-name BMSAnalyticsAPI -- -project Pods/Pods.xcodeproj)
+echo ${bmsanalyticsapi%?}', '${bmsanalytics:1} > kitty.json
+jazzy --sourcekitten-sourcefile kitty.json
+open docs/index.html
