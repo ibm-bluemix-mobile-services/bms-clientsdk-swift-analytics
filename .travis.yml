@@ -22,5 +22,5 @@ script:
   # When merging or pushing to the master branch, release a new version and publish the API documentation
   - if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [[ "${TRAVIS_JOB_NUMBER}" = *".2"* ]]; then
       bash scripts/release.sh;
-      bash publish-docs.sh;
+      bash scripts/publish-docs.sh;
     fi
