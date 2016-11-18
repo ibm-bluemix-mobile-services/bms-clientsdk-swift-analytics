@@ -29,17 +29,3 @@ git add .
 git commit -m "Published docs for BMSAnalytics Swift SDK version ${version}"
 git rebase master
 git push --set-upstream origin master
-
-
-
-
-
-
-
-
-rm kitty.json
-bmsanalytics=$(sourcekitten doc)
-bmsanalyticsapi=$(sourcekitten doc --module-name BMSAnalyticsAPI -- -project Pods/Pods.xcodeproj)
-echo ${bmsanalyticsapi%?}', '${bmsanalytics:1} > kitty.json
-jazzy --sourcekitten-sourcefile kitty.json
-open docs/index.html

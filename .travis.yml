@@ -14,7 +14,7 @@ script:
   # Test that the framework can be installed and built, and passes all unit tests
   - travis_wait pod update
   - carthage update
-  - pod lib lint --allow-warnings
+  - pod lib lint
   - xcodebuild -scheme 'BMSAnalytics iOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
   - xcodebuild -scheme 'BMSAnalytics watchOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
   - travis_retry xcodebuild test -scheme 'BMSAnalytics Tests' -destination 'platform=iOS Simulator,name=iPhone 6s' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
@@ -22,5 +22,5 @@ script:
   # When merging or pushing to the master branch, release a new version and publish the API documentation
   - if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ] && [[ "${TRAVIS_JOB_NUMBER}" = *".2"* ]]; then
       bash scripts/release.sh;
-      bash publish-docs.sh;
+      bash scripts/publish-docs.sh;
     fi
