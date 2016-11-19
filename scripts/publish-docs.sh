@@ -18,8 +18,8 @@ cd ..
 # Generate new docs using Jazzy and Sourcekitten
 version=$(grep -o 'version.*=.*[0-9]' BMSAnalytics.podspec | cut -f 2 -d "'")
 docs_directory='./ibm-bluemix-mobile-services.github.io/API-docs/client-SDK/BMSAnalytics/Swift'
-bmsanalytics=$(sourcekitten doc)
 bmsanalyticsapi=$(sourcekitten doc --module-name BMSAnalyticsAPI -- -project Pods/Pods.xcodeproj)
+bmsanalytics=$(sourcekitten doc)
 echo ${bmsanalyticsapi%?}', '${bmsanalytics:1} > kitty.json
 jazzy --sourcekitten-sourcefile kitty.json --output "${docs_directory}"
 
