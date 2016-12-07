@@ -37,7 +37,7 @@ public extension BMSAnalytics {
         
         NotificationCenter.default.addObserver(self, selector: #selector(logSessionStart), name: .UIApplicationWillEnterForeground, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(logSessionEnd), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logSessionEnd), name: .UIApplicationDidEnterBackground, object: nil)
     }
     
     
