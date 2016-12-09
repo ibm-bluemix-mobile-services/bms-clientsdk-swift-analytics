@@ -14,22 +14,69 @@
 
 import Foundation
 import CoreLocation
+import BMSAnalyticsAPI
 
 
 
-class LocationManager: NSObject, CLLocationManagerDelegate {
+// Adds the current location to analytics metadata before logging the event.
+// Note: We do not use location updates as separate events; the information only tags along with other events (like switching users or ending an app session).
+internal class LocationDelegate: NSObject, CLLocationManagerDelegate {
     
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    // The metadata that will be logged along with the user's current location
+    internal var analyticsMetadata: [String: Any]? = nil
+    
+    // Contains the session ID of the last recorded event, so that we do not record any event more than once.
+    private var previousSessionID: String = ""
+    
+    
+    internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let newLocation: CLLocationCoordinate2D = (manager.location?.coordinate)!
-        print("\nNew location: \(newLocation.latitude), \(newLocation.longitude)")
+        guard var metadata = self.analyticsMetadata else {
+            // No metadata to record, so there is no point in retrieving the location
+            return
+        }
+        
+        guard let currentLocation: CLLocationCoordinate2D = manager.location?.coordinate else {
+            Analytics.logger.warn(message: "Could not determine the user's current location.")
+            recordMetadata(metadata: metadata, locationManager: manager)
+            
+            return
+        }
+        
+        metadata[Constants.Metadata.Analytics.latitude] = currentLocation.latitude
+        metadata[Constants.Metadata.Analytics.longitude] = currentLocation.longitude
+        recordMetadata(metadata: metadata, locationManager: manager)
     }
     
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
-        print("\nFailed with error: \(error)")
+        Analytics.logger.error(message: "Failed to retrieve the user's current location. Error: \(error)")
+        
+        if let metadata = self.analyticsMetadata {
+            recordMetadata(metadata: metadata, locationManager: manager)
+        }
+    }
+    
+    
+    // Log the metadata and stop location services (if using iOS 8)
+    private func recordMetadata(metadata: [String: Any], locationManager: CLLocationManager) {
+        
+        // Sometimes, CLLocationManager requestLocation() will call this delegate more than once (I wish I knew why). In these circumstances, we do not want to log because the same metadata has already been logged before.
+        // To prevent this, we check if the session ID is the same as the last time this method was called.
+        if let currentSessionId = metadata[Constants.Metadata.Analytics.sessionId] as? String,
+            currentSessionId != previousSessionID {
+            
+            Analytics.log(metadata: metadata)
+            previousSessionID = currentSessionId
+        }
+        
+        // If the device iOS version is less than 9.0, then we had to use startUpdatingLocation() in BMSAnalytics, meaning that we now need to stopUpdatingLocation() since we only want a one-time event
+        if #available(iOS 9.0, *) {}
+        else {
+            locationManager.stopUpdatingLocation()
+        }
     }
     
 }

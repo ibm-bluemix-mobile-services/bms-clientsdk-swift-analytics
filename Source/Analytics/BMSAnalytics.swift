@@ -14,6 +14,7 @@
 
 import BMSCore
 import BMSAnalyticsAPI
+import CoreLocation
 
 
 
@@ -116,7 +117,7 @@ public extension Analytics {
 public class BMSAnalytics: AnalyticsDelegate {
     
     
-    // MARK: Properties (API)
+    // MARK: Properties (public)
     
     // The name of the iOS/WatchOS app.
     public fileprivate(set) static var appName: String?
@@ -175,6 +176,10 @@ public class BMSAnalytics: AnalyticsDelegate {
         }
         return ""
     }
+    
+    // The manager and delegate that get the user's current location to log as metadata
+    private static var locationManager = CLLocationManager()
+    private static var locationDelegate = LocationDelegate()
     
     
     
@@ -292,6 +297,7 @@ public class BMSAnalytics: AnalyticsDelegate {
 
     // MARK: - Helpers
     
+    // Used to log certain events like initial context (when the app enters foreground) and switching users
     internal static func logInternal(event category: String) {
         
         let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
@@ -302,8 +308,32 @@ public class BMSAnalytics: AnalyticsDelegate {
         metadata[Constants.Metadata.Analytics.sessionId] = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId]
         metadata[Constants.Metadata.Analytics.timestamp] = NSNumber(value: currentTime)
         
-        Analytics.log(metadata: metadata)
+        // Get current location, add it to the metadata, and log
+        if Analytics.locationEnabled {
+            if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways {
+                
+                self.locationDelegate.analyticsMetadata = metadata
+                locationManager.delegate = self.locationDelegate
+                locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+                
+                
+                if #available(iOS 9.0, watchOS 2.0, *) {
+                    locationManager.requestLocation()
+                } else {
+                    locationManager.startUpdatingLocation()
+                }
+            }
+            else {
+                Analytics.logger.warn(message: "The CLLocationManager authorization status must be authorizedAlways before location data can be gathered.")
+            }
+        }
+        else {
+            Analytics.log(metadata: metadata)
+        }
     }
+    
+    
+    
 
     
     // Retrieve the unique device ID, or return "unknown" if it is unattainable.
