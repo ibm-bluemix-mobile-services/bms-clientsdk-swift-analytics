@@ -15,6 +15,7 @@
 import WatchKit
 import BMSCore
 import BMSAnalytics
+import CoreLocation
 
 
 
@@ -24,6 +25,15 @@ import BMSAnalytics
 
 class InterfaceController: WKInterfaceController {
 
+    
+    let locationManager = CLLocationManager()
+    
+    
+    @IBAction func logLocationButtonPressed() {
+    
+        Analytics.logLocation()
+    }
+    
     
     @IBAction func sendAnalyticsButtonPressed() {
         
@@ -68,6 +78,17 @@ class InterfaceController: WKInterfaceController {
         
         Logger.send(completionHandler: completionHandler(sentUsing: "Logs"))
         Analytics.send(completionHandler: completionHandler(sentUsing: "Analytics"))
+    }
+    
+    
+    override func didAppear() {
+        
+        super.didAppear()
+        
+        // Get permission for location services
+        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
     }
 }
     

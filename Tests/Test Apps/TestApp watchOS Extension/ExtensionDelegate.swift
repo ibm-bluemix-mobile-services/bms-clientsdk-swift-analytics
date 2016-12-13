@@ -24,7 +24,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         BMSClient.sharedInstance.initialize(bluemixRegion: ".stage1.ng.bluemix.net")
 
         // IMPORTANT: Replace the apiKey parameter with a key from a real Analytics service instance
-        Analytics.initialize(appName: "TestAppWatchOS", apiKey: "1234", hasUserContext: true)
+        Analytics.initialize(appName: "TestAppWatchOS", apiKey: "1234", hasUserContext: true, collectLocation: true, deviceEvents: DeviceEvent.network)
         
         Analytics.isEnabled = true
         Logger.isLogStorageEnabled = true

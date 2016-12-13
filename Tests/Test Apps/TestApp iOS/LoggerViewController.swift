@@ -15,6 +15,7 @@
 import UIKit
 import BMSCore
 import BMSAnalytics
+import CoreLocation
 
 
 
@@ -27,6 +28,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     var currentLogLevel = "Debug"
     var currentLogLevelFilter = "Debug"
+    
+    let locationManager = CLLocationManager()
     
     
     
@@ -47,6 +50,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // MARK: Button presses
     
     // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
+    // This logs the message written in the `logMessageField` and separately logs the user's current location.
     @IBAction func recordLog(_ sender: UIButton) {
         
         Analytics.log(metadata: ["buttonPressed": "recordLog"])
@@ -97,8 +101,15 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         default:
             break
         }
+        
+        Analytics.logLocation()
     }
     
+    
+    @IBAction func recordLocation(_ sender: UIButton) {
+        
+        Analytics.logLocation()
+    }
     
     // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
     @IBAction func sendLogs(_ sender: UIButton) {
@@ -139,6 +150,10 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
+    @IBAction func changeUserId(_ sender: UIButton) {
+        
+        Analytics.userIdentity = String(Date().timeIntervalSince1970)
+    }
     
     // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
     @IBAction func triggerUncaughtException(_ sender: UIButton) {
@@ -201,6 +216,11 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         // Should print true if the "Trigger Uncaught Exception" button was pressed in the last app session
         print("Uncaught Exception Detected: \(Logger.isUncaughtExceptionDetected)")
+        
+        // Get user permission to use location services
+        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
     }
 }
     
