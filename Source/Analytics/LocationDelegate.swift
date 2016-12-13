@@ -26,8 +26,8 @@ internal class LocationDelegate: NSObject, CLLocationManagerDelegate {
     // The metadata that will be logged along with the user's current location
     internal var analyticsMetadata: [String: Any]? = nil
     
-    // Contains the session ID of the last recorded event, so that we do not record any event more than once.
-    private var previousSessionID: String = ""
+    // Contains the timestamp of the last recorded event, so that we do not record any event more than once.
+    private var previousTimestamp: Int64 = 0
     
     
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -63,13 +63,12 @@ internal class LocationDelegate: NSObject, CLLocationManagerDelegate {
     // Log the metadata and stop location services (if using iOS 8)
     private func recordMetadata(metadata: [String: Any], locationManager: CLLocationManager) {
         
-        // Sometimes, CLLocationManager requestLocation() will call this delegate more than once (I wish I knew why). In these circumstances, we do not want to log because the same metadata has already been logged before.
-        // To prevent this, we check if the session ID is the same as the last time this method was called.
-        if let currentSessionId = metadata[Constants.Metadata.Analytics.sessionId] as? String,
-            currentSessionId != previousSessionID {
+        // For some reason, CLLocationManager requestLocation() will sometimes call this delegate more than once. In these circumstances, we do not want to log because the same metadata has already been logged before.
+        if let currentTimestamp = metadata[Constants.Metadata.Analytics.timestamp] as? Int64,
+            currentTimestamp != previousTimestamp {
             
             Analytics.log(metadata: metadata)
-            previousSessionID = currentSessionId
+            previousTimestamp = currentTimestamp
         }
         
         // If the device iOS version is less than 9.0, then we had to use startUpdatingLocation() in BMSAnalytics, meaning that we now need to stopUpdatingLocation() since we only want a one-time event

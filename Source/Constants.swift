@@ -82,6 +82,7 @@ internal struct Constants {
             static let userId = "$userID"
             static let initialContext = "initialCtx"
             static let timestamp = "$timestamp"
+            static let location = "logLocation"
             static let latitude = "$latitude"
             static let longitude = "$longitude"
             static let stacktrace = "$stacktrace"

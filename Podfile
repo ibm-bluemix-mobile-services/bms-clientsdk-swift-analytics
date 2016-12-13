@@ -2,8 +2,7 @@ use_frameworks!
 
 
 def shared_pod
-	pod 'BMSCore', '~> 2.1'
-    pod 'BMSAnalyticsAPI', :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics-api.git', :branch => 'development'
+	pod 'BMSCore', '~> 2.2'
 end
 
 
