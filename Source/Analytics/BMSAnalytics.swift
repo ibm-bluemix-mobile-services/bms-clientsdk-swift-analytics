@@ -106,7 +106,7 @@ public extension Analytics {
     */
     public static func logLocation() {
         
-        BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.location)
+        BMSAnalytics.logEvent(Constants.Metadata.Analytics.location)
     }
     
     
@@ -151,7 +151,7 @@ public class BMSAnalytics: AnalyticsDelegate {
             
             // userIdentity is being set by the SDK
             if userIdentity == BMSAnalytics.uniqueDeviceId {
-                BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
+                BMSAnalytics.logEvent(Constants.Metadata.Analytics.user)
             }
             // userIdentity is being set by the developer
             else {
@@ -165,7 +165,7 @@ public class BMSAnalytics: AnalyticsDelegate {
                 
                 if BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] != nil {
                     
-                    BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
+                    BMSAnalytics.logEvent(Constants.Metadata.Analytics.user)
                 }
                 else {
                     Analytics.logger.error(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
@@ -224,7 +224,7 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         Analytics.log(metadata: lifecycleEvents)
         
-        BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.initialContext)
+        BMSAnalytics.logEvent(Constants.Metadata.Analytics.initialContext)
     }
     
     
@@ -317,7 +317,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     // MARK: - Helpers
     
     // Used to log certain events like initial context (when the app enters foreground) and switching users
-    internal static func logInternal(event category: String) {
+    internal static func logEvent(_ category: String) {
         
         let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
         
@@ -517,7 +517,7 @@ public class BMSAnalytics: AnalyticsDelegate {
             
             // userIdentity is being set by the SDK
             if userIdentity == BMSAnalytics.uniqueDeviceId {
-                BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
+                BMSAnalytics.logEvent(Constants.Metadata.Analytics.user)
             }
             // userIdentity is being set by the developer
             else {
@@ -531,7 +531,7 @@ public class BMSAnalytics: AnalyticsDelegate {
                 
                 if BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] != nil {
                     
-                    BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.user)
+                    BMSAnalytics.logEvent(Constants.Metadata.Analytics.user)
                 }
                 else {
                     Analytics.logger.error(message: "To see active users in the analytics console, you must either opt in for DeviceEvents.LIFECYCLE in the Analytics initializer (for iOS apps) or first call Analytics.recordApplicationDidBecomeActive() before setting Analytics.userIdentity (for watchOS apps).")
@@ -583,7 +583,7 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         Analytics.log(metadata: lifecycleEvents)
         
-        BMSAnalytics.logInternal(event: Constants.Metadata.Analytics.initialContext)
+        BMSAnalytics.logEvent(Constants.Metadata.Analytics.initialContext)
     }
     
     
@@ -675,7 +675,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     // MARK: - Helpers
     
-    internal static func logInternal(event category: String) {
+    internal static func logEvent(category: String) {
         
         let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
         
