@@ -481,8 +481,8 @@
 				924E0AD31CB5AC0F00C2FEE2 /* AppDelegate.swift */,
 				924E0AD41CB5AC0F00C2FEE2 /* LaunchScreen.storyboard */,
 				924E0AD61CB5AC0F00C2FEE2 /* Main.storyboard */,
-				924E0AD81CB5AC0F00C2FEE2 /* LogDisplayViewController.swift */,
 				924E0AD91CB5AC0F00C2FEE2 /* LoggerViewController.swift */,
+				924E0AD81CB5AC0F00C2FEE2 /* LogDisplayViewController.swift */,
 				924E0ADA1CB5AC0F00C2FEE2 /* Resources */,
 			);
 			path = "TestApp iOS";

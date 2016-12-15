@@ -37,18 +37,16 @@ public extension Analytics {
     /**
         The required initializer for the `Analytics` class when communicating with a Mobile Analytics service.
      
-        Here you can choose what data you want to have monitored by `Analytics`, including user identities, current location, app lifecycle events, and network requests.
+        Here you can choose what data you want to have monitored by `Analytics`, including user identities, user location, app lifecycle events, and network requests.
 
         - Note: This method must be called after initializing `BMSClient` with `BMSClient.sharedInstance.initialize(bluemixRegion:)` from the `BMSCore` framework, and before calling `send(completionHandler:)` or `Logger.send(completionHandler:)`.
 
         - parameter appName:            The application name.  Should be consistent across platforms (i.e. Android and iOS).
         - parameter apiKey:             A unique ID used to authenticate with the Mobile Analytics service.
         - parameter hasUserContext:     If `false`, user identities will be automatically recorded using
-                                            the device on which the app is installed.
-                                            If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
+                                            the device on which the app is installed. If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
         - parameter collectLocation:    Determines whether Analytics should automatically monitor the user's
-                                            current location. 
-                                            Before location can be retrieved, you must first request permission from the user with `CLLocationManager` `requestWhenInUseAuthorization()`.
+                                            current location. Before location can be retrieved, you must first request permission from the user with `CLLocationManager` `requestWhenInUseAuthorization()`.
         - parameter deviceEvents:       Device events that will be recorded automatically by the `Analytics` class.
     */
     public static func initialize(appName: String?, apiKey: String?, hasUserContext: Bool = false, collectLocation: Bool = false, deviceEvents: DeviceEvent...) {
@@ -59,7 +57,7 @@ public extension Analytics {
             BMSAnalytics.apiKey = apiKey
         }
         
-        // Link all of the BMSAnalytics implementation to the BMSAnalyticsSpec APIs
+        // Link the BMSAnalytics implementation to the APIs in BMSAnalyticsAPI
         Logger.delegate = BMSLogger()
         Analytics.delegate = BMSAnalytics()
         
@@ -194,6 +192,7 @@ public class BMSAnalytics: AnalyticsDelegate {
         return ""
     }
     
+    // Allows the developer to choose whether we should record location information for their users
     internal static var locationEnabled = false
     
     // The manager and delegate that get the user's current location to log as metadata
@@ -316,10 +315,10 @@ public class BMSAnalytics: AnalyticsDelegate {
 
     // MARK: - Helpers
     
-    // Used to log certain events like initial context (when the app enters foreground) and switching users
+    // Used to log certain events like initial context (when the app enters foreground), switching users, and getting user location
     internal static func logEvent(_ category: String) {
         
-        let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
+        let currentTime = Int64(Date().timeIntervalSince1970 * 1000.0)
         
         var metadata: [String: Any] = [:]
         metadata[Constants.Metadata.Analytics.category] = category
@@ -338,9 +337,10 @@ public class BMSAnalytics: AnalyticsDelegate {
                 locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
                 
                 
-                if #available(iOS 9.0, watchOS 2.0, *) {
+                if #available(iOS 9.0, *) {
                     locationManager.requestLocation()
-                } else {
+                }
+                else {
                     locationManager.startUpdatingLocation()
                 }
             }
@@ -419,17 +419,20 @@ public extension Analytics {
     
     /**
         The required initializer for the `Analytics` class when communicating with a Mobile Analytics service.
+     
+         Here you can choose what data you want to have monitored by `Analytics`, including user identities, user location, app lifecycle events, and network requests.
 
-        This method must be called after the `BMSClient.sharedInstance.initialize(bluemixRegion:)` method and before calling `Analytics.send()` or `Logger.send()`.
+        - Note: This method must be called after the `BMSClient.sharedInstance.initialize(bluemixRegion:)` method and before calling `Analytics.send()` or `Logger.send()`.
 
-        - parameter appName:         The application name.  Should be consistent across platforms (e.g. Android and iOS).
-        - parameter apiKey:          A unique ID used to authenticate with the Mobile Analytics service.
-        - parameter hasUserContext:  If `false`, user identities will be automatically recorded using
-                                        the device on which the app is installed.
-                                        If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
-        - parameter deviceEvents:    Device events that will be recorded automatically by the `Analytics` class.
+        - parameter appName:            The application name.  Should be consistent across platforms (i.e. Android and iOS).
+        - parameter apiKey:             A unique ID used to authenticate with the Mobile Analytics service.
+        - parameter hasUserContext:     If `false`, user identities will be automatically recorded using
+                                            the device on which the app is installed. If you want to define user identities yourself using `Analytics.userIdentity`, set this parameter to `true`.
+        - parameter collectLocation:    Determines whether Analytics should automatically monitor the user's
+                                             current location. Before location can be retrieved, you must first request permission from the user with `CLLocationManager` `requestWhenInUseAuthorization()`.
+        - parameter deviceEvents:       Device events that will be recorded automatically by the `Analytics` class.
     */
-    public static func initialize(appName appName: String?, apiKey: String?, hasUserContext: Bool = false, deviceEvents: DeviceEvent...) {
+    public static func initialize(appName appName: String?, apiKey: String?, hasUserContext: Bool = false, collectLocation: Bool = false, deviceEvents: DeviceEvent...) {
         
         BMSAnalytics.appName = appName
         
@@ -437,11 +440,18 @@ public extension Analytics {
             BMSAnalytics.apiKey = apiKey
         }
         
-        // Link all of the BMSAnalytics implementation to the BMSAnalyticsSpec APIs
+        // Link the BMSAnalytics implementation to the APIs in BMSAnalyticsAPI
         Logger.delegate = BMSLogger()
         Analytics.delegate = BMSAnalytics()
         
-        BMSLogger.startCapturingUncaughtExceptions()
+        Analytics.automaticallyRecordUsers = !hasUserContext
+        // If the developer does not want to specify the user identities themselves, we do it for them.
+        if automaticallyRecordUsers {
+            // We associate each unique device with one unique user. As such, all users will be anonymous.
+            Analytics.userIdentity = BMSAnalytics.uniqueDeviceId
+        }
+        
+        BMSAnalytics.locationEnabled = collectLocation
         
         // Registering device events
         for event in deviceEvents {
@@ -457,13 +467,7 @@ public extension Analytics {
             }
         }
         
-        Analytics.automaticallyRecordUsers = !hasUserContext
-        
-        // If the developer does not want to specify the user identities themselves, we do it for them.
-        if automaticallyRecordUsers {
-            // We associate each unique device with one unique user. As such, all users will be anonymous.
-            Analytics.userIdentity = BMSAnalytics.uniqueDeviceId
-        }
+        BMSLogger.startCapturingUncaughtExceptions()
         
         // Package analytics metadata in a header for each request
         // Outbound request metadata is identical for all requests made on the same device from the same app
@@ -473,6 +477,17 @@ public extension Analytics {
         else {
             Analytics.logger.warn(message: "Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
         }
+    }
+    
+    
+    /**
+        Log the user's current location once.
+     
+        - important: Before calling this method, make sure that you have requested permission to use location services from the user (using `CLLocationManager` `requestWhenInUseAuthorization()`), and set the `collectLocation` parameter to `true` in the `Analytics.initialize(appName:apiKey:hasUserContext:collectLocation:deviceEvents:)` method.
+     */
+    public static func logLocation() {
+        
+        BMSAnalytics.logEvent(Constants.Metadata.Analytics.location)
     }
     
     
@@ -500,7 +515,7 @@ public extension Analytics {
 public class BMSAnalytics: AnalyticsDelegate {
     
     
-    // MARK: Properties (API)
+    // MARK: Properties (public)
     
     // The name of the iOS/WatchOS app.
     public private(set) static var appName: String?
@@ -559,6 +574,13 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         return ""
     }
+    
+    // Allows the developer to choose whether we should record location information for their users
+    internal static var locationEnabled = false
+    
+    // The manager and delegate that get the user's current location to log as metadata
+    internal static var locationManager = CLLocationManager()
+    internal static var locationDelegate = LocationDelegate()
     
     
     
@@ -675,6 +697,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     
     // MARK: - Helpers
     
+    // Used to log certain events like initial context (when the app enters foreground), switching users, and getting user location
     internal static func logEvent(category: String) {
         
         let currentTime = Int64(NSDate().timeIntervalSince1970 * 1000.0)
@@ -685,7 +708,34 @@ public class BMSAnalytics: AnalyticsDelegate {
         metadata[Constants.Metadata.Analytics.sessionId] = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId]
         metadata[Constants.Metadata.Analytics.timestamp] = NSNumber(longLong: currentTime)
         
-        Analytics.log(metadata: metadata)
+        // Get current location, add it to the metadata, and log
+        if BMSAnalytics.locationEnabled {
+            if CLLocationManager.locationServicesEnabled() &&
+                (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse ||
+                    CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedAlways) {
+                
+                locationDelegate.analyticsMetadata = metadata
+                locationManager.delegate = locationDelegate
+                locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+                
+                
+                if #available(iOS 9.0, *) {
+                    locationManager.requestLocation()
+                }
+                else {
+                    // startUpdatingLocation() does not exist until watchOS 3.0, so it will not compile in Xcode 7, which only has the watchOS 2 SDK.
+                    #if os(iOS)
+                        locationManager.startUpdatingLocation()
+                    #endif
+                }
+            }
+            else {
+                Analytics.logger.warn(message: "The CLLocationManager authorization status must be authorizedWhenInUse before location data can be gathered.")
+            }
+        }
+        else {
+            Analytics.log(metadata: metadata)
+        }
     }
 
     

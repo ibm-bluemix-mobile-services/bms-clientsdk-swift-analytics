@@ -454,6 +454,18 @@ class BMSAnalyticsTests: XCTestCase {
     }
     
     
+    func testInitializeWithLocation() {
+        
+        Analytics.initialize(appName: nil, apiKey: nil, collectLocation: true)
+        
+        XCTAssertTrue(BMSAnalytics.locationEnabled)
+        
+        Analytics.initialize(appName: nil, apiKey: nil, collectLocation: false)
+        
+        XCTAssertFalse(BMSAnalytics.locationEnabled)
+    }
+    
+    
     func testLogSessionStartTwiceDoesNothing() {
         
         XCTAssertTrue(BMSAnalytics.lifecycleEvents.isEmpty)

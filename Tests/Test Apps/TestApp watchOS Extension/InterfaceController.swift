@@ -45,35 +45,17 @@ class InterfaceController: WKInterfaceController {
         
         func completionHandler(sentUsing sendType: String) -> BMSCompletionHandler {
             
-            #if swift(>=3.0)
-                
-                return {
-                    (response: Response?, error: Error?) -> Void in
-                    if let response = response {
-                        print("\(sendType) sent successfully: " + String(response.isSuccessful))
-                        print("Status code: " + String(describing: response.statusCode))
-                        if let responseText = response.responseText {
-                            print("Response text: " + responseText)
-                        }
-                        print("\n")
+            return {
+                (response: Response?, error: Error?) -> Void in
+                if let response = response {
+                    print("\(sendType) sent successfully: " + String(response.isSuccessful))
+                    print("Status code: " + String(describing: response.statusCode))
+                    if let responseText = response.responseText {
+                        print("Response text: " + responseText)
                     }
+                    print("\n")
                 }
-                
-            #else
-                
-                return {
-                    (response: Response?, error: NSError?) -> Void in
-                        if let response = response {
-                            print("\(sendType) sent successfully: " + String(response.isSuccessful))
-                            print("Status code: " + String(response.statusCode))
-                            if let responseText = response.responseText {
-                                print("Response text: " + responseText)
-                            }
-                            print("\n")
-                        }
-                }
-                
-            #endif
+            }
         }
         
         Logger.send(completionHandler: completionHandler(sentUsing: "Logs"))
@@ -112,6 +94,16 @@ class InterfaceController: WKInterfaceController {
 class InterfaceController: WKInterfaceController {
     
     
+    
+    let locationManager = CLLocationManager()
+    
+    
+    @IBAction func logLocationButtonPressed() {
+        
+        Analytics.logLocation()
+    }
+    
+    
     @IBAction func sendAnalyticsButtonPressed() {
         
         Logger.logLevelFilter = LogLevel.debug
@@ -137,6 +129,17 @@ class InterfaceController: WKInterfaceController {
         
         Logger.send(completionHandler: completionHandler(sentUsing: "Logs"))
         Analytics.send(completionHandler: completionHandler(sentUsing: "Analytics"))
+    }
+    
+    
+    override func didAppear() {
+        
+        super.didAppear()
+        
+        // Get permission for location services
+        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
     }
 }
 
