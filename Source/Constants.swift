@@ -21,7 +21,6 @@ internal struct Constants {
     static let uncaughtException = "loggerUncaughtExceptionDetected"
     static let outboundLogPayload = "__logdata"
     static let analyticsApiKey = "x-mfp-analytics-api-key"
-    static let analyticsP30ApiKey = "x-analytics-p30-appid"
     static let userDefaultsSuiteName = "com.ibm.mobilefirstplatform.clientsdk.swift.Analytics"
 
     
