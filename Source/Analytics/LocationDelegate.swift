@@ -27,7 +27,7 @@ internal class LocationDelegate: NSObject, CLLocationManagerDelegate {
     internal var analyticsMetadata: [String: Any]? = nil
     
     // Contains the timestamp of the last recorded event, so that we do not record any event more than once.
-    private var previousTimestamp: Int64 = 0
+    internal var previousTimestamp: Int64 = 0
     
     
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -61,7 +61,7 @@ internal class LocationDelegate: NSObject, CLLocationManagerDelegate {
     
     
     // Log the metadata and stop location services (if using iOS 8)
-    private func recordMetadata(metadata: [String: Any], locationManager: CLLocationManager) {
+    internal func recordMetadata(metadata: [String: Any], locationManager: CLLocationManager) {
         
         // For some reason, CLLocationManager requestLocation() will sometimes call this delegate more than once. In these circumstances, we do not want to log because the same metadata has already been logged before.
         if let currentTimestamp = metadata[Constants.Metadata.Analytics.timestamp] as? Int64,

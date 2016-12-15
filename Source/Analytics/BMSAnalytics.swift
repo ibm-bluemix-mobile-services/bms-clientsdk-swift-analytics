@@ -197,8 +197,8 @@ public class BMSAnalytics: AnalyticsDelegate {
     internal static var locationEnabled = false
     
     // The manager and delegate that get the user's current location to log as metadata
-    private static var locationManager = CLLocationManager()
-    private static var locationDelegate = LocationDelegate()
+    internal static var locationManager = CLLocationManager()
+    internal static var locationDelegate = LocationDelegate()
     
     
     
@@ -329,10 +329,12 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         // Get current location, add it to the metadata, and log
         if BMSAnalytics.locationEnabled {
-            if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
+            if CLLocationManager.locationServicesEnabled() &&
+                (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse ||
+                    CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways) {
                 
-                self.locationDelegate.analyticsMetadata = metadata
-                locationManager.delegate = self.locationDelegate
+                locationDelegate.analyticsMetadata = metadata
+                locationManager.delegate = locationDelegate
                 locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
                 
                 
