@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E51EB2A49B04EED47271F4FFA66ED377D3D9E3A6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C085D2EEE16CABB71CC24352CB49D623764E3985" : 9223372036854775807,
+    "E51EB2A49B04EED47271F4FFA66ED377D3D9E3A6" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F4C0DF3D-0375-4FF9-B50A-2CA88F719C37",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C085D2EEE16CABB71CC24352CB49D623764E3985" : "BMSAnalyticsAPI\/",
+    "E51EB2A49B04EED47271F4FFA66ED377D3D9E3A6" : "BMSAnalytics\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BMSAnalytics",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BMSAnalytics.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ibm-bluemix-mobile-services\/bms-clientsdk-swift-analytics-api.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C085D2EEE16CABB71CC24352CB49D623764E3985"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ibm-bluemix-mobile-services\/bms-clientsdk-swift-analytics.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E51EB2A49B04EED47271F4FFA66ED377D3D9E3A6"
+    }
+  ]
+}

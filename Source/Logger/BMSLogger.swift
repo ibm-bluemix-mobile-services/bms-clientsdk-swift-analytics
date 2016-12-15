@@ -476,14 +476,12 @@ public class BMSLogger: LoggerDelegate {
         // Check that the BMSClient class has been initialized before building the upload URL
         // Only the region is needed to communicate with the Analytics service. App route and GUID are not required.
         if bmsClient.bluemixRegion != nil && bmsClient.bluemixRegion != "" {
+    
             guard BMSAnalytics.apiKey != nil && BMSAnalytics.apiKey != "" else {
                 returnInitializationError(className: "Analytics", missingValue: "apiKey", callback: callback)
                 return nil
             }
             headers[Constants.analyticsApiKey] = BMSAnalytics.apiKey!
-            if let appGuid = BMSClient.sharedInstance.bluemixAppGUID {
-                headers[Constants.analyticsP30ApiKey] = appGuid
-            }
             
             logUploadUrl = "https://" + Constants.AnalyticsServer.hostName + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadPath
             
@@ -1086,14 +1084,12 @@ public class BMSLogger: LoggerDelegate {
         // Check that the BMSClient class has been initialized before building the upload URL
         // Only the region is needed to communicate with the Analytics service. App route and GUID are not required.
         if bmsClient.bluemixRegion != nil && bmsClient.bluemixRegion != "" {
+            
             guard BMSAnalytics.apiKey != nil && BMSAnalytics.apiKey != "" else {
                 returnInitializationError(className: "Analytics", missingValue: "apiKey", callback: callback)
                 return nil
             }
             headers[Constants.analyticsApiKey] = BMSAnalytics.apiKey!
-            if let appGuid = BMSClient.sharedInstance.bluemixAppGUID {
-                headers[Constants.analyticsP30ApiKey] = appGuid
-            }
             
             logUploadUrl = "https://" + Constants.AnalyticsServer.hostName + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadPath
             

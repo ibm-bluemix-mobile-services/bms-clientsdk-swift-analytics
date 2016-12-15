@@ -80,6 +80,18 @@ class BMSAnalyticsTests: XCTestCase {
         XCTAssertTrue(BMSURLSession.shouldRecordNetworkMetadata)
     }
     
+    
+    func testInitializeWithLocation() {
+        
+        Analytics.initialize(appName: nil, apiKey: nil, collectLocation: true)
+        
+        XCTAssertTrue(BMSAnalytics.locationEnabled)
+        
+        Analytics.initialize(appName: nil, apiKey: nil, collectLocation: false)
+        
+        XCTAssertFalse(BMSAnalytics.locationEnabled)
+    }
+    
 
     func testLogSessionStartTwiceDoesNothing() {
         
@@ -439,6 +451,18 @@ class BMSAnalyticsTests: XCTestCase {
         // When registering LIFECYCLE events, the BMSAnalytics.logSessionStart() method should get called immediately, assigning a new value to BMSAnalytics.startTime and BMSAnalytics.lifecycleEvents
         XCTAssertTrue(BMSAnalytics.startTime >= referenceTime)
         XCTAssertTrue(BMSURLSession.shouldRecordNetworkMetadata)
+    }
+    
+    
+    func testInitializeWithLocation() {
+        
+        Analytics.initialize(appName: nil, apiKey: nil, collectLocation: true)
+        
+        XCTAssertTrue(BMSAnalytics.locationEnabled)
+        
+        Analytics.initialize(appName: nil, apiKey: nil, collectLocation: false)
+        
+        XCTAssertFalse(BMSAnalytics.locationEnabled)
     }
     
     

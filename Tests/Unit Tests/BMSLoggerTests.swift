@@ -667,7 +667,7 @@ class BMSLoggerTests: XCTestCase {
         Analytics.initialize(appName: "testAppName", apiKey: "1234")
         let url = "https://" + Constants.AnalyticsServer.hostName + BMSClient.Region.usSouth + Constants.AnalyticsServer.uploadPath
         
-        let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: "1234", Constants.analyticsP30ApiKey: "appID1"]
+        let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: "1234"]
         
         do {
             try FileManager().removeItem(atPath: pathToFile)
@@ -1649,7 +1649,7 @@ class BMSLoggerTests: XCTestCase {
         Analytics.initialize(appName: "testAppName", apiKey: "1234")
         let url = "https://" + Constants.AnalyticsServer.hostName + BMSClient.Region.usSouth + Constants.AnalyticsServer.uploadPath
         
-        let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: "1234", Constants.analyticsP30ApiKey: "appID1"]
+        let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: "1234"]
         
         do {
             try NSFileManager().removeItemAtPath(pathToFile)

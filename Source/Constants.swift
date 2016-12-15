@@ -21,7 +21,6 @@ internal struct Constants {
     static let uncaughtException = "loggerUncaughtExceptionDetected"
     static let outboundLogPayload = "__logdata"
     static let analyticsApiKey = "x-mfp-analytics-api-key"
-    static let analyticsP30ApiKey = "x-analytics-p30-appid"
     static let userDefaultsSuiteName = "com.ibm.mobilefirstplatform.clientsdk.swift.Analytics"
 
     
@@ -82,6 +81,9 @@ internal struct Constants {
             static let userId = "$userID"
             static let initialContext = "initialCtx"
             static let timestamp = "$timestamp"
+            static let location = "logLocation"
+            static let latitude = "$latitude"
+            static let longitude = "$longitude"
             static let stacktrace = "$stacktrace"
             static let exceptionMessage = "$exceptionMessage"
             static let exceptionClass = "$exceptionClass"

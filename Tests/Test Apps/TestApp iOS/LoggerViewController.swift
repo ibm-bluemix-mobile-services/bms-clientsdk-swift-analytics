@@ -15,6 +15,7 @@
 import UIKit
 import BMSCore
 import BMSAnalytics
+import CoreLocation
 
 
 
@@ -27,6 +28,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     var currentLogLevel = "Debug"
     var currentLogLevelFilter = "Debug"
+    
+    let locationManager = CLLocationManager()
     
     
     
@@ -47,6 +50,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // MARK: Button presses
     
     // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
+    // This logs the message written in the `logMessageField` and separately logs the user's current location.
     @IBAction func recordLog(_ sender: UIButton) {
         
         Analytics.log(metadata: ["buttonPressed": "recordLog"])
@@ -97,6 +101,14 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         default:
             break
         }
+        
+        Analytics.logLocation()
+    }
+    
+    
+    @IBAction func recordLocation(_ sender: UIButton) {
+        
+        Analytics.logLocation()
     }
     
     
@@ -137,6 +149,12 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         catch {
             print("Failed to delete logs!")
         }
+    }
+    
+    
+    @IBAction func changeUserId(_ sender: UIButton) {
+        
+        Analytics.userIdentity = String(Date().timeIntervalSince1970)
     }
     
     
@@ -201,6 +219,11 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         // Should print true if the "Trigger Uncaught Exception" button was pressed in the last app session
         print("Uncaught Exception Detected: \(Logger.isUncaughtExceptionDetected)")
+        
+        // Get user permission to use location services
+        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
     }
 }
     
@@ -226,6 +249,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var currentLogLevel = "Debug"
     var currentLogLevelFilter = "Debug"
     
+    let locationManager = CLLocationManager()
+    
     
     
     // MARK: Outlets
@@ -244,6 +269,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // MARK: Button presses
     
+    // This logs the message written in the `logMessageField` and separately logs the user's current location.
     @IBAction func recordLog(sender: UIButton) {
         
         Analytics.log(metadata: ["buttonPressed": "recordLog"])
@@ -294,6 +320,14 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         default:
             break
         }
+        
+        Analytics.logLocation()
+    }
+    
+    
+    @IBAction func recordLocation(sender: UIButton) {
+        
+        Analytics.logLocation()
     }
     
     
@@ -332,6 +366,12 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         } catch {
             print("Failed to delete logs!")
         }
+    }
+    
+    
+    @IBAction func changeUserId(sender: UIButton) {
+        
+        Analytics.userIdentity = String(NSDate().timeIntervalSince1970)
     }
     
     
@@ -395,6 +435,11 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         // Should print true if the "Trigger Uncaught Exception" button was pressed in the last app session
         print("Uncaught Exception Detected: \(Logger.isUncaughtExceptionDetected)")
+        
+        // Get user permission to use location services
+        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
     }
 }
 
