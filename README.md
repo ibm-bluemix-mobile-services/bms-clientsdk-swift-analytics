@@ -92,7 +92,8 @@ For apps built with Swift 2.3, use the command `carthage update --toolchain com.
 * [Initialize](#initialize)
 * [Configure Logger and Analytics](#configure-logger-and-analytics)
 * [Set the app user's identity](#set-the-app-users-identity)
-* [Log some information](#log-some-information)
+* [Log the user's current location](#log-the-users-current-location)
+* [Log some other information](#log-some-other-information)
 * [Send the data to the server](#send-the-data-to-the-server)
 * [Disable logging output](#disable-logging-output-for-production-applications)
 
@@ -111,12 +112,12 @@ import BMSAnalytics
 
 ### Initialize
 
-Initialize `BMSClient` and `Analytics`. This is typically done at the beginning of the app's lifecycle, such as the `application(_:didFinishLaunchingWithOptions:)` method in the `AppDelegate.swift`.
+Initialize `BMSClient` and `Analytics`. This is typically done at the beginning of the app's lifecycle, such as the `application(_:didFinishLaunchingWithOptions:)` method in the `AppDelegate.swift`. 
 
 ```Swift
 BMSClient.sharedInstance.initialize(bluemixRegion: BMSClient.Region.usSouth)
 
-Analytics.initialize(appName: "My App", apiKey: "1234", hasUserContext: true, deviceEvents: .lifecycle, .network)
+Analytics.initialize(appName: "My App", apiKey: "1234", hasUserContext: true, collectLocation: true, deviceEvents: .lifecycle, .network)
 ```
 
 --
@@ -136,7 +137,7 @@ Logger.logLevelFilter = LogLevel.debug
 
 ### Set the app user's identity
 
-If your app's users log in with a username, you can track each user with `Analytics.userIdentity`. To use this feature, you must have set the `hasUserContext` parameter to `true` in the `Analytics.initialize()` method first. If you set `hasUserContext` to `false`, BMSAnalytics will automatically record user identities, treating each device as one unique user.
+If your app's users log in with a username, you can track each user with `Analytics.userIdentity`. To use this feature, you must have set the `hasUserContext` parameter to `true` in the `Analytics.initialize()` method first, as shown in the [Initialize](#initialize) section.. If you set `hasUserContext` to `false`, BMSAnalytics will automatically record user identities anonymously by treating each device as one unique user.
 
 ```Swift
 Analytics.userIdentity = "John Doe"
@@ -144,7 +145,15 @@ Analytics.userIdentity = "John Doe"
 
 --
 
-### Log some information
+### Log the user's current location
+
+Before using this feature, you first need to `import CoreLocation` and get permission from the user to monitor their location using the [requestWhenInUseAuthorization()](https://developer.apple.com/reference/corelocation/cllocationmanager/1620562-requestwheninuseauthorization) method from [CLLocationManager](https://developer.apple.com/reference/corelocation/cllocationmanager).
+
+To have `BMSAnalytics` automatically record the user's location, set the `collectLocation` parameter to `true` in the `Analytics.initialize()` method, as shown in the [Initialize](#initialize) section. Once this parameter is set, you can log the user's current location yourself at any time while the app is in an active state by calling `Analytics.logLocation()`. 
+
+--
+
+### Log some other information
 
 Create a Logger instance and log messages anywhere in your application, using an appropriate severity level.
 
@@ -197,7 +206,7 @@ Analytics.send(completionHandler: { (response: Response?, error: Error?) in
 
 By default, the Logger class will print its logs to Xcode console. If is advised to disable Logger output for applications built in release mode. In order to do so add a debug flag named `RELEASE_BUILD` to your release build configuration. One way of doing so is adding `-D RELEASE_BUILD` to the `Other Swift Flags` section of the project build configuration.
 
-
+--------
 
 ## License
 
