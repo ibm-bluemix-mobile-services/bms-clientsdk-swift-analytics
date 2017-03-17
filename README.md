@@ -3,6 +3,7 @@ BMSAnalytics
 
 [![Build Status](https://travis-ci.org/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics.svg?branch=master)](https://travis-ci.org/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5845c74509484096bc16afd8b43686bf)](https://www.codacy.com/app/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics&amp;utm_campaign=Badge_Grade)
+[![Coverage Status](https://coveralls.io/repos/github/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics/badge.svg?branch=development)](https://coveralls.io/github/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics?branch=development)
 [![Platform](https://img.shields.io/cocoapods/p/BMSAnalytics.svg?style=flat)](http://cocoadocs.org/docsets/BMSAnalytics)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/BMSAnalytics.svg)](https://img.shields.io/cocoapods/v/BMSAnalytics.svg)
 [![](https://img.shields.io/badge/bluemix-powered-blue.svg)](https://bluemix.net)
