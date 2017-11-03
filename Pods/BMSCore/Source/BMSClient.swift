@@ -25,7 +25,7 @@
 public class BMSClient {
     
     
-    // MARK: Constants
+    // MARK: - Constants
     
     /**
         The region where your Bluemix service is hosted.
@@ -53,11 +53,19 @@ public class BMSClient {
             - note: Use this in the `BMSClient.initialize(bluemixAppRoute:bluemixAppGUID:bluemixRegion:)` method.
          */
         public static let sydney = ".au-syd.bluemix.net"
+	
+	/**
+	    The Germany Bluemix region.
+         
+            - note: Use this in the `BMSClient.initialize(bluemixAppRoute:bluemixAppGUID:bluemixRegion:)` method.
+         */
+	public static let germany = ".eu-de.bluemix.net"
+        
     }
     
     
 
-    // MARK: Properties (API)
+    // MARK: - Properties
     
     /// The singleton that is used for all `BMSClient` activity.
     public static let sharedInstance = BMSClient()
@@ -65,21 +73,25 @@ public class BMSClient {
     /// Specifies the base Bluemix application backend URL.
     public private(set) var bluemixAppRoute: String?
     
-    // Specifies the region where the Bluemix service is hosted.
+    /// Specifies the region where the Bluemix service is hosted.
     public private(set) var bluemixRegion: String?
     
     /// Specifies the Bluemix application backend identifier.
     public private(set) var bluemixAppGUID: String?
-        
+    
     /// Specifies the allowed timeout (in seconds) for all `Request` network requests.
     public var requestTimeout: Double = 20.0
+    
+    
+    
+    // MARK: - Properties (internal)
     
     // Handles the authentication process for network requests.
 	public var authorizationManager: AuthorizationManager
 	
     
     
-    // MARK: Initializers
+    // MARK: - Initializer
     
     /**
         The required intializer for the `BMSClient` class.
@@ -129,7 +141,7 @@ public class BMSClient {
 public class BMSClient {
     
     
-    // MARK: Constants
+    // MARK: - Constants
     
     /**
         The region where your Bluemix service is hosted.
@@ -161,7 +173,7 @@ public class BMSClient {
     
     
     
-    // MARK: Properties (API)
+    // MARK: - Properties
     
     /// The singleton that is used for all `BMSClient` activity.
     public static let sharedInstance = BMSClient()
@@ -169,7 +181,7 @@ public class BMSClient {
     /// Specifies the base Bluemix application backend URL.
     public private(set) var bluemixAppRoute: String?
     
-    // Specifies the region where the Bluemix service is hosted.
+    /// Specifies the region where the Bluemix service is hosted.
     public private(set) var bluemixRegion: String?
     
     /// Specifies the Bluemix application backend identifier.
@@ -178,12 +190,16 @@ public class BMSClient {
     /// Specifies the allowed timeout (in seconds) for all `Request` network requests.
     public var requestTimeout: Double = 20.0
     
+    
+    
+    // MARK: - Properties (internal)
+    
     // Handles the authentication process for network requests.
     public var authorizationManager: AuthorizationManager
     
     
     
-    // MARK: Initializers
+    // MARK: - Initializer
     
     /**
         The required intializer for the `BMSClient` class.
