@@ -259,52 +259,52 @@ public class BMSLogger: LoggerDelegate {
             }
         }
 
-        if(!BMSLogger.isNSException){
+        if (!BMSLogger.isNSException) {
             BMSLogger.checkSignal()
         }
     }
     
-    internal static func checkSignal(){
+    internal static func checkSignal() {
         NSSetUncaughtExceptionHandler { (exception) in
              let signalValue = exception.reason
              let signalReason = exception.name.rawValue
-             BMSLogger.logOtherThanNSException(trace: exception.callStackSymbols, signalValue:signalValue!, signalReason:signalReason );
+             BMSLogger.logOtherThanNSException(trace: exception.callStackSymbols, signalValue:signalValue!, signalReason:signalReason )
          }
 
         signal(SIGSEGV) { signal in
             let signalReason = String(cString:strsignal(signal))
             let signalValue = "SIGSEGV"
-            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason );
+            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason )
         }
 
         signal(SIGABRT) { signal in
             let signalReason = String(cString:strsignal(signal))
             let signalValue = "SIGABRT"
-            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason );
+            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason )
         }
 
         signal(SIGILL) { signal in
             let signalReason = String(cString:strsignal(signal))
             let signalValue = "SIGILL"
-            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason );
+            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason )
         }
 
         signal(SIGFPE) { signal in
             let signalReason = String(cString:strsignal(signal))
             let signalValue = "SIGFPE"
-            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason );
+            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason )
         }
 
         signal(SIGBUS) { signal in
             let signalReason = String(cString:strsignal(signal))
             let signalValue = "SIGBUS"
-            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason );
+            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason )
         }
 
         signal(SIGPIPE) { signal in
             let signalReason = String(cString:strsignal(signal))
             let signalValue = "SIGPIPE"
-            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason );
+            BMSLogger.logOtherThanNSException(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason )
         }
     }
 
@@ -939,53 +939,53 @@ public class BMSLogger: LoggerDelegate {
                 BMSLogger.existingUncaughtExceptionHandler?(uncaughtException)
             }
         }
-        if(!BMSLogger.isNSException){
+        if (!BMSLogger.isNSException) {
             BMSLogger.checkSignal()
         }
     }
     
     
-    internal static func checkSignal(){
+    internal static func checkSignal() {
          NSSetUncaughtExceptionHandler { (exception) in
             let signalValue = exception.name
             let signalReason = exception.reason
-            BMSLogger.logOtherThanNSException(trace: exception.callStackSymbols, signalValue:signalValue, signalReason:signalReason! );
+            BMSLogger.logOtherThanNSException(trace: exception.callStackSymbols, signalValue:signalValue, signalReason:signalReason! )
          }
 
         signal(SIGSEGV) { signal in
             let signalReason = String.fromCString(strsignal(signal))
             let signalValue = "SIGSEGV"
-            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!);
+            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!)
         }
 
         signal(SIGABRT) { signal in
             let signalReason = String.fromCString(strsignal(signal))
             let signalValue = "SIGABRT"
-            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!);
+            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!)
         }
 
         signal(SIGILL) { signal in
             let signalReason = String.fromCString(strsignal(signal))
             let signalValue = "SIGILL"
-            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!);
+            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!)
         }
 
         signal(SIGFPE) { signal in
             let signalReason = String.fromCString(strsignal(signal))
             let signalValue = "SIGFPE"
-            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!);
+            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!)
         }
 
         signal(SIGBUS) { signal in
             let signalReason = String.fromCString(strsignal(signal))
             let signalValue = "SIGBUS"
-            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!);
+            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!)
         }
 
         signal(SIGPIPE) { signal in
             let signalReason = String.fromCString(strsignal(signal))
             let signalValue = "SIGPIPE"
-            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!);
+            BMSLogger.logOtherThanNSException(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason!)
         }
     }
 
