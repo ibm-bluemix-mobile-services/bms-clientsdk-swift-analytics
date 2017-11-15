@@ -309,29 +309,25 @@ public class BMSLogger: LoggerDelegate {
     }
 
     internal static func logOtherThanNSException(trace crashTrace: [String], signalValue:String, signalReason:String) {
+        BMSLogger.log(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason )
+        BMSAnalytics.logSessionEnd()
+        abort()
+    }
 
-        if (!BMSLogger.exceptionHasBeenCalled) {
+    internal static func log(trace crashTrace: [String], signalValue:String, signalReason:String) {
 
-            let message = "App Crash: Crashed with signal \(signalValue) (\(signalReason))"
+        let message = "App Crash: Crashed with signal \(signalValue) (\(signalReason))"
 
-            // Persist a flag so that when the app starts back up, we can see if an exception occurred in the last session
-            BMSLogger.exceptionHasBeenCalled = true
+        let exceptionString = message
+        let stacktrace = crashTrace
 
-            let exceptionString = message
-            let stacktrace = crashTrace
+        var metadata: [String: Any] = [:]
 
-            var metadata: [String: Any] = [:]
+        metadata[Constants.Metadata.Analytics.stacktrace] = stacktrace
+        metadata[Constants.Metadata.Analytics.exceptionClass] = ""
+        metadata[Constants.Metadata.Analytics.exceptionMessage] = message
 
-            metadata[Constants.Metadata.Analytics.stacktrace] = stacktrace
-            metadata[Constants.Metadata.Analytics.exceptionClass] = ""
-            metadata[Constants.Metadata.Analytics.exceptionMessage] = message
-
-            Logger.delegate?.logToFile(message: exceptionString, level: LogLevel.fatal, loggerName: Constants.Package.logger, calledFile: #file, calledFunction: #function, calledLineNumber: #line, additionalMetadata: metadata)
-
-            BMSAnalytics.logSessionEnd()
-
-            abort()
-        }
+        Logger.delegate?.logToFile(message: exceptionString, level: LogLevel.fatal, loggerName: Constants.Package.logger, calledFile: #file, calledFunction: #function, calledLineNumber: #line, additionalMetadata: metadata)
     }
 
     internal static func log(exception uncaughtException: NSException) {
@@ -991,28 +987,26 @@ public class BMSLogger: LoggerDelegate {
 
     internal static func logOtherThanNSException(trace crashTrace: [String], signalValue:String, signalReason:String) {
 
-        if (!BMSLogger.exceptionHasBeenCalled) {
+        BMSLogger.log(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason)
+        BMSAnalytics.logSessionEnd()
+        abort()
+    }
 
-            let message = "App Crash: Crashed with signal \(signalValue) (\(signalReason))"
+    internal static func log(trace crashTrace: [String], signalValue:String, signalReason:String) {
 
-            // Persist a flag so that when the app starts back up, we can see if an exception occurred in the last session
-            BMSLogger.exceptionHasBeenCalled = true
+        let message = "App Crash: Crashed with signal \(signalValue) (\(signalReason))"
 
-            let exceptionString = message
-            let stacktrace = crashTrace
+        let exceptionString = message
+        let stacktrace = crashTrace
 
-            var metadata: [String: AnyObject] = [:]
+        var metadata: [String: AnyObject] = [:]
 
-            metadata[Constants.Metadata.Analytics.stacktrace] = stacktrace
-            metadata[Constants.Metadata.Analytics.exceptionClass] = ""
-            metadata[Constants.Metadata.Analytics.exceptionMessage] = message
+        metadata[Constants.Metadata.Analytics.stacktrace] = stacktrace
+        metadata[Constants.Metadata.Analytics.exceptionClass] = ""
+        metadata[Constants.Metadata.Analytics.exceptionMessage] = message
 
-            Logger.delegate?.logToFile(message: exceptionString, level: LogLevel.fatal, loggerName: Constants.Package.logger, calledFile: #file, calledFunction: #function, calledLineNumber: #line, additionalMetadata: metadata)
+        Logger.delegate?.logToFile(message: exceptionString, level: LogLevel.fatal, loggerName: Constants.Package.logger, calledFile: #file, calledFunction: #function, calledLineNumber: #line, additionalMetadata: metadata)
 
-            BMSAnalytics.logSessionEnd()
-            
-            abort()
-        }
     }
 
     internal static func log(exception uncaughtException: NSException) {
