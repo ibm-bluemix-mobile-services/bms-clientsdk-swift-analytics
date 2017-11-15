@@ -313,6 +313,12 @@ class BMSLoggerTests: XCTestCase {
         }
 
         let trace = Thread.callStackSymbols;
+
+        //1. Just make sure the method logOtherThanNSException called.
+        BMSLogger.signalHasBeenRaised = true
+        BMSLogger.logOtherThanNSException(signalValue:"SIGILL", signalReason:"Illegal instruction")
+
+        //2. Actual Test
         BMSLogger.log(trace: trace, signalValue:"SIGILL", signalReason:"Illegal instruction")
 
         guard let formattedContents = BMSLoggerTests.getContents(ofFile: pathToFile) else {
@@ -1339,6 +1345,11 @@ class BMSLoggerTests: XCTestCase {
 
         }
 
+        //1. Just make sure the method logOtherThanNSException called.
+        BMSLogger.signalHasBeenRaised = true
+        BMSLogger.logOtherThanNSException(signalValue:"SIGILL", signalReason:"Illegal instruction")
+
+        //2. Actual Test
         BMSLogger.log(trace: NSThread.callStackSymbols(), signalValue:"SIGILL", signalReason:"Illegal instruction")
 
         guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
