@@ -299,6 +299,41 @@ class BMSLoggerTests: XCTestCase {
         XCTAssertNotNil(exception[Constants.Metadata.Logger.timestamp])
         XCTAssertEqual(exception[Constants.Metadata.Logger.level] as? String, "FATAL")
     }
+
+    func testLogExceptionNullReason() {
+
+        Logger.isLogStorageEnabled = true
+
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+        } catch {
+
+        }
+
+        let e = NSException(name: NSExceptionName("crashApp"), reason: nil, userInfo: ["user":"nana"])
+
+        BMSLogger.log(exception: e)
+
+        guard let formattedContents = BMSLoggerTests.getContents(ofFile: pathToFile) else {
+            XCTFail()
+            return
+        }
+        let fileContents = "[\(formattedContents)]"
+        let errorMessage = "crashApp"
+        let logDict = fileContents.data(using: .utf8)!
+        guard let jsonDict = BMSLoggerTests.convertToJson(logs: logDict) else {
+            XCTFail()
+            return
+        }
+
+        let exception = jsonDict[0]
+        XCTAssertEqual(exception[Constants.Metadata.Logger.message] as? String, errorMessage)
+        XCTAssertEqual(exception[Constants.Metadata.Logger.package] as? String, Constants.Package.logger)
+        XCTAssertNotNil(exception[Constants.Metadata.Logger.timestamp])
+        XCTAssertEqual(exception[Constants.Metadata.Logger.level] as? String, "FATAL")
+    }
     
     func testCrashLog() {
 
@@ -871,7 +906,25 @@ class BMSLoggerTests: XCTestCase {
         }
     }
     
-    
+    func testSimultaneousSend(){
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
+        Analytics.initialize(appName: "testAppName", apiKey: "1234")
+
+        XCTAssertFalse(Logger.currentlySendingLoggerLogs)
+        XCTAssertFalse(Logger.currentlySendingAnalyticsLogs)
+
+        Logger.currentlySendingLoggerLogs=true
+        Logger.currentlySendingAnalyticsLogs=true
+
+        Logger.send { (_, _) in
+            XCTAssertTrue(Logger.currentlySendingLoggerLogs)
+        }
+        Analytics.send { (_, _) in
+            XCTAssertTrue(Logger.currentlySendingAnalyticsLogs)
+        }
+    }
+
     func testReturnInitializationError() {
         
         // BMSClient initialization
@@ -1326,6 +1379,42 @@ class BMSLoggerTests: XCTestCase {
             return
         }
         
+        let exception = jsonDict[0]
+        XCTAssertTrue(exception[Constants.Metadata.Logger.message] == errorMessage)
+        XCTAssertTrue(exception[Constants.Metadata.Logger.package] == Constants.Package.logger)
+        XCTAssertNotNil(exception[Constants.Metadata.Logger.timestamp])
+        XCTAssertTrue(exception[Constants.Metadata.Logger.level] == "FATAL")
+    }
+
+    func testLogExceptionNullReason() {
+
+        Logger.isLogStorageEnabled = true
+
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+
+        do {
+            try NSFileManager().removeItemAtPath(pathToFile)
+        } catch {
+
+        }
+
+	let nullVariable: String? = nil
+        let e = NSException(name:"crashApp", reason:String(nullVariable), userInfo:["user":"nana"])
+
+        BMSLogger.log(exception: e)
+
+        guard let formattedContents = BMSLoggerTests.getFileContents(pathToFile) else {
+            XCTFail()
+            return
+        }
+        let fileContents = "[\(formattedContents)]"
+        let errorMessage = e.reason!
+        let logDict : NSData = fileContents.dataUsingEncoding(NSUTF8StringEncoding)!
+        guard let jsonDict = BMSLoggerTests.convertLogsToJson(logDict) else {
+            XCTFail()
+            return
+        }
+
         let exception = jsonDict[0]
         XCTAssertTrue(exception[Constants.Metadata.Logger.message] == errorMessage)
         XCTAssertTrue(exception[Constants.Metadata.Logger.package] == Constants.Package.logger)
@@ -1889,6 +1978,24 @@ class BMSLoggerTests: XCTestCase {
         }
     }
     
+    func testSimultaneousSend(){
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
+        Analytics.initialize(appName: "testAppName", apiKey: "1234")
+
+        XCTAssertFalse(Logger.currentlySendingLoggerLogs)
+        XCTAssertFalse(Logger.currentlySendingAnalyticsLogs)
+
+        Logger.currentlySendingLoggerLogs=true
+        Logger.currentlySendingAnalyticsLogs=true
+
+        Logger.send { (_, _) in
+           XCTAssertTrue(Logger.currentlySendingLoggerLogs)
+        }
+        Analytics.send { (_, _) in
+           XCTAssertTrue(Logger.currentlySendingAnalyticsLogs)
+        }
+    }
     
     func testReturnInitializationError(){
         // BMSClient initialization
