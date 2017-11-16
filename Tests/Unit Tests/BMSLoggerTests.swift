@@ -923,6 +923,33 @@ class BMSLoggerTests: XCTestCase {
         Analytics.send { (_, _) in
             XCTAssertTrue(Logger.currentlySendingAnalyticsLogs)
         }
+
+        do {
+	   try BMSLogger.readLogs(fromFile: "")
+	} catch { XCTAssertTrue(true) }
+
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
+
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+
+        } catch {
+
+        }
+
+        do {
+            try FileManager().removeItem(atPath: pathToBuffer)
+
+        } catch {
+
+        }
+
+        do {
+           if let logsToSend: String = try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs){
+                XCTAssertNil(logsToSend)
+           }
+	} catch {}
     }
 
     func testReturnInitializationError() {
@@ -1995,6 +2022,33 @@ class BMSLoggerTests: XCTestCase {
         Analytics.send { (_, _) in
            XCTAssertTrue(Logger.currentlySendingAnalyticsLogs)
         }
+
+        do {
+           try BMSLogger.readLogs(fromFile: "")
+        } catch { }
+
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
+
+        do {
+            try NSFileManager().removeItemAtPath(pathToFile)
+
+        } catch {
+
+        }
+
+        do {
+            try NSFileManager().removeItemAtPath(pathToBuffer)
+
+        } catch {
+
+        }
+
+        do {
+           if let logsToSend: String = try BMSLogger.getLogs(fromFile: Constants.File.Logger.logs, overflowFileName: Constants.File.Logger.overflowLogs, bufferFileName: Constants.File.Logger.outboundLogs){
+		XCTAssertNil(logsToSend)
+           }
+        } catch {}
     }
     
     func testReturnInitializationError(){
