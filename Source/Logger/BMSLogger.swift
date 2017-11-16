@@ -243,11 +243,10 @@ public class BMSLogger: LoggerDelegate {
     
     // This flag prevents infinite loops of uncaught exceptions
     internal static var exceptionHasBeenCalled = false
-    
+    internal static var signalHasBeenRaised = false
     internal static func startCapturingUncaughtExceptions() {
         
         NSSetUncaughtExceptionHandler { (uncaughtException: NSException) -> Void in
-            
             if (!BMSLogger.exceptionHasBeenCalled) {
                 // Persist a flag so that when the app starts back up, we can see if an exception occurred in the last session
                 BMSLogger.exceptionHasBeenCalled = true
@@ -258,9 +257,63 @@ public class BMSLogger: LoggerDelegate {
                 BMSLogger.existingUncaughtExceptionHandler?(uncaughtException)
             }
         }
+
+        BMSLogger.checkSignal()
     }
     
-    
+    internal static func checkSignal() {
+
+        signal(SIGSEGV) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGSEGV", signalReason:String(cString:strsignal(signal)) )
+        }
+
+        signal(SIGABRT) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGABRT", signalReason:String(cString:strsignal(signal)) )
+        }
+
+        signal(SIGILL) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGILL", signalReason:String(cString:strsignal(signal)) )
+        }
+
+        signal(SIGFPE) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGFPE", signalReason:String(cString:strsignal(signal)) )
+        }
+
+        signal(SIGBUS) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGBUS", signalReason:String(cString:strsignal(signal)) )
+        }
+
+        signal(SIGPIPE) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGPIPE", signalReason:String(cString:strsignal(signal)) )
+        }
+    }
+
+    internal static func logOtherThanNSException(signalValue:String, signalReason:String) {
+        if !BMSLogger.signalHasBeenRaised {
+            BMSLogger.signalHasBeenRaised = true
+            BMSLogger.exceptionHasBeenCalled = true
+            BMSLogger.log(trace: Thread.callStackSymbols, signalValue:signalValue, signalReason:signalReason )
+            BMSAnalytics.logSessionEnd()
+            abort()
+        }
+    }
+
+    internal static func log(trace crashTrace: [String], signalValue:String, signalReason:String) {
+
+        let message = "App Crash: Crashed with signal \(signalValue) (\(signalReason))"
+
+        let exceptionString = message
+        let stacktrace = crashTrace
+
+        var metadata: [String: Any] = [:]
+
+        metadata[Constants.Metadata.Analytics.stacktrace] = stacktrace
+        metadata[Constants.Metadata.Analytics.exceptionClass] = ""
+        metadata[Constants.Metadata.Analytics.exceptionMessage] = message
+
+        Logger.delegate?.logToFile(message: exceptionString, level: LogLevel.fatal, loggerName: Constants.Package.logger, calledFile: #file, calledFunction: #function, calledLineNumber: #line, additionalMetadata: metadata)
+    }
+
     internal static func log(exception uncaughtException: NSException) {
         
         var metadata: [String: Any] = [:]
@@ -851,11 +904,10 @@ public class BMSLogger: LoggerDelegate {
     
     // This flag prevents infinite loops of uncaught exceptions
     internal static var exceptionHasBeenCalled = false
-    
+    internal static var signalHasBeenRaised = false
     internal static func startCapturingUncaughtExceptions() {
         
         NSSetUncaughtExceptionHandler { (uncaughtException: NSException) -> Void in
-            
             if (!BMSLogger.exceptionHasBeenCalled) {
                 // Persist a flag so that when the app starts back up, we can see if an exception occurred in the last session
                 BMSLogger.exceptionHasBeenCalled = true
@@ -866,9 +918,65 @@ public class BMSLogger: LoggerDelegate {
                 BMSLogger.existingUncaughtExceptionHandler?(uncaughtException)
             }
         }
+
+        BMSLogger.checkSignal()
     }
     
     
+    internal static func checkSignal() {
+
+        signal(SIGSEGV) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGSEGV", signalReason:String(String.fromCString(strsignal(signal))) )
+        }
+
+        signal(SIGABRT) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGABRT", signalReason:String(String.fromCString(strsignal(signal))) )
+        }
+
+        signal(SIGILL) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGILL", signalReason:String(String.fromCString(strsignal(signal))) )
+        }
+
+        signal(SIGFPE) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGFPE", signalReason:String(String.fromCString(strsignal(signal))) )
+        }
+
+        signal(SIGBUS) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGBUS", signalReason:String(String.fromCString(strsignal(signal))) )
+        }
+
+        signal(SIGPIPE) { signal in
+            BMSLogger.logOtherThanNSException(signalValue:"SIGPIPE", signalReason:String(String.fromCString(strsignal(signal))) )
+        }
+    }
+
+    internal static func logOtherThanNSException(signalValue signalValue:String, signalReason:String) {
+        if !BMSLogger.signalHasBeenRaised {
+            BMSLogger.signalHasBeenRaised = true
+            BMSLogger.exceptionHasBeenCalled = true
+            BMSLogger.log(trace: NSThread.callStackSymbols(), signalValue:signalValue, signalReason:signalReason)
+            BMSAnalytics.logSessionEnd()
+            abort()
+        }
+    }
+
+    internal static func log(trace crashTrace: [String], signalValue:String, signalReason:String) {
+
+        let message = "App Crash: Crashed with signal \(signalValue) (\(signalReason))"
+
+        let exceptionString = message
+        let stacktrace = crashTrace
+
+        var metadata: [String: AnyObject] = [:]
+
+        metadata[Constants.Metadata.Analytics.stacktrace] = stacktrace
+        metadata[Constants.Metadata.Analytics.exceptionClass] = ""
+        metadata[Constants.Metadata.Analytics.exceptionMessage] = message
+
+        Logger.delegate?.logToFile(message: exceptionString, level: LogLevel.fatal, loggerName: Constants.Package.logger, calledFile: #file, calledFunction: #function, calledLineNumber: #line, additionalMetadata: metadata)
+
+    }
+
     internal static func log(exception uncaughtException: NSException) {
 
         var metadata: [String: AnyObject] = [:]
