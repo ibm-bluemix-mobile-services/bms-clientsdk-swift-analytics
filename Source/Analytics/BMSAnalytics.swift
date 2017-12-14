@@ -216,6 +216,10 @@ public class BMSAnalytics: AnalyticsDelegate {
             return
         }
         
+        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+      
         BMSAnalytics.startTime = Int64(Date.timeIntervalSinceReferenceDate * 1000) // milliseconds
         
         lifecycleEvents[Constants.Metadata.Analytics.sessionId] = UUID().uuidString
