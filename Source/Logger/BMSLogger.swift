@@ -80,7 +80,11 @@ public extension Logger {
                     debugMessage += " Error: \(error)."
                 }
                 
-                BMSLogger.internalLogger.error(message: "Request to send client logs has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send the logs with a completion handler to retrieve the response and error.")
+                if error.debugDescription == "Optional(BMSAnalytics.BMSAnalyticsError.noLogsToSend)" {
+                    BMSLogger.internalLogger.error(message: "There are no recorded logs to send to Bluemix.");
+                } else {                
+                    BMSLogger.internalLogger.error(message: "Request to send client logs has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send the logs with a completion handler to retrieve the response and error.")
+                }
                 BMSLogger.internalLogger.debug(message: debugMessage)
             }
             
