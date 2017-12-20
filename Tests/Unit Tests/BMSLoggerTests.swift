@@ -757,12 +757,10 @@ class BMSLoggerTests: XCTestCase {
             
         }
 
-        try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in }!
-
         let loggerInstance = Logger.logger(name: fakePKG)
         Logger.isLogStorageEnabled = true
         Logger.logLevelFilter = LogLevel.debug
-        
+
         loggerInstance.debug(message: "Hello world")
         loggerInstance.info(message: "1242342342343243242342")
         loggerInstance.warn(message: "Str: heyoooooo")
@@ -779,6 +777,49 @@ class BMSLoggerTests: XCTestCase {
     }
     
     
+    func testLogSendRequestwithNoLog(){
+        let fakePKG = "MYPKG"
+        let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
+        let pathToBuffer = BMSLogger.logsDocumentPath + Constants.File.Logger.outboundLogs
+        let bmsClient = BMSClient.sharedInstance
+        bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
+        Analytics.initialize(appName: "testAppName", apiKey: "1234")
+        let url = "https://" + Constants.AnalyticsServer.hostName + BMSClient.Region.usSouth + Constants.AnalyticsServer.uploadPath
+
+        let headers = ["Content-Type": "text/plain", Constants.analyticsApiKey: "1234"]
+
+        do {
+            try FileManager().removeItem(atPath: pathToFile)
+
+        } catch {
+
+        }
+
+        do {
+            try FileManager().removeItem(atPath: pathToBuffer)
+
+        } catch {
+
+        }
+
+        let loggerInstance = Logger.logger(name: fakePKG)
+        Logger.isLogStorageEnabled = true
+        Logger.logLevelFilter = LogLevel.debug
+
+        let loggerSendFinished = expectation(description: "Logger send complete")
+        Logger.send { (_, _) in
+            XCTAssertFalse(Logger.currentlySendingLoggerLogs)
+            loggerSendFinished.fulfill()
+        }
+        XCTAssertTrue(Logger.currentlySendingLoggerLogs)
+
+        waitForExpectations(timeout: 10.0) { (error1: Error?) -> Void in
+            if error1 != nil {
+                XCTFail("Expectation failed with error: \(error1)")
+            }
+        }
+    }
+
     func testLogSendFailWithEmptyAPIKey(){
         let fakePKG = Constants.Package.logger
         let pathToFile = BMSLogger.logsDocumentPath + Constants.File.Logger.logs
