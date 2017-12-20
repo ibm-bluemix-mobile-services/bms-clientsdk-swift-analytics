@@ -756,7 +756,9 @@ class BMSLoggerTests: XCTestCase {
         } catch {
             
         }
-        
+
+        try! BMSLogger.buildLogSendRequest() { (response, error) -> Void in }!
+
         let loggerInstance = Logger.logger(name: fakePKG)
         Logger.isLogStorageEnabled = true
         Logger.logLevelFilter = LogLevel.debug
