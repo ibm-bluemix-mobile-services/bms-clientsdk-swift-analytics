@@ -83,7 +83,7 @@ public extension Logger {
                 if error.debugDescription == "Optional(BMSAnalytics.BMSAnalyticsError.noLogsToSend)" {
                     BMSLogger.internalLogger.error(message: "There are no recorded logs to send to Bluemix.")
                 } else {
-                    BMSLogger.internalLogger.error(message: "Request to send client logs has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send the logs with a completion handler to retrieve the response and error.")
+                    BMSLogger.internalLogger.error(message: "Request to send client logs has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send the logs with a completion handler to retrieve the response and error. Reason: \(debugMessage)")
                 }
                 BMSLogger.internalLogger.debug(message: debugMessage)
             }
@@ -153,7 +153,7 @@ public extension Logger {
                     debugMessage += " Error: \(error)."
                 }
                 
-                BMSLogger.internalLogger.error(message: "Request to send analytics data has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send analytics with a completion handler to retrieve the response and error.")
+                BMSLogger.internalLogger.error(message: "Request to send analytics data has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send analytics with a completion handler to retrieve the response and error. Reason: \(debugMessage)")
                 BMSLogger.internalLogger.debug(message: debugMessage)
             }
             
@@ -746,7 +746,7 @@ public extension Logger {
                     debugMessage += " Error: \(error.debugDescription)."
                 }
                 
-                BMSLogger.internalLogger.error(message: "Request to send client logs has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send the logs with a completion handler to retrieve the response and error.")
+                BMSLogger.internalLogger.error(message: "Request to send client logs has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send the logs with a completion handler to retrieve the response and error. Reason: \(debugMessage)")
                 BMSLogger.internalLogger.debug(message: debugMessage)
             }
             
@@ -816,7 +816,7 @@ public extension Logger {
                     debugMessage += " Error: \(error.debugDescription)."
                 }
                 
-                BMSLogger.internalLogger.error(message: "Request to send analytics data has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send analytics with a completion handler to retrieve the response and error.")
+                BMSLogger.internalLogger.error(message: "Request to send analytics data has failed. To see more details, set Logger.sdkDebugLoggingEnabled to true, or send analytics with a completion handler to retrieve the response and error. Reason: \(debugMessage)")
                 BMSLogger.internalLogger.debug(message: debugMessage)
             }
             
