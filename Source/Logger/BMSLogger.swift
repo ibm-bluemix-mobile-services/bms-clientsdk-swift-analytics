@@ -513,7 +513,7 @@ public class BMSLogger: LoggerDelegate {
         
         var logFileName = Constants.File.unknown
         let fileUrl = URL(string: filePath)
-        if let lastPathComponent = fileUrl?.lastPathComponent, lastPathComponent.characters.count > 0 {
+        if let lastPathComponent = fileUrl?.lastPathComponent, !lastPathComponent.isEmpty {
             logFileName = lastPathComponent
         }
         return logFileName

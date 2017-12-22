@@ -207,7 +207,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     // This method should be called when the app starts up.
     //      In iOS, this occurs when the app is about to enter the foreground.
     //      In watchOS, the user decides when this method is executed, but we recommend calling it when the app becomes active.
-    dynamic static internal func logSessionStart() {
+    @objc dynamic static internal func logSessionStart() {
         
         // If this method is called before logSessionEnd() gets called, exit early so that the original startTime and metadata from the previous session start do not get discarded.
             
@@ -235,7 +235,7 @@ public class BMSAnalytics: AnalyticsDelegate {
     // This method should be called when the app closes.
     //      In iOS, this occurs when the app enters the background.
     //      In watchOS, the user decides when this method is executed, but we recommend calling it when the app becomes active.
-    dynamic static internal func logSessionEnd() {
+    @objc dynamic static internal func logSessionEnd() {
         
         // If logSessionStart() has not been called yet, the app session is ending before it starts.
         //      This may occur if the app crashes while launching. In this case, set the session duration to 0.
