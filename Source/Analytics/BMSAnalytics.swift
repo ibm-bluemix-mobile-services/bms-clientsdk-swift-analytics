@@ -326,11 +326,10 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         var metadata: [String: Any] = [:]
         metadata[Constants.Metadata.Analytics.category] = category
-        if category == Constants.Metadata.Analytics.user
-        {
+        if category == Constants.Metadata.Analytics.user {
             metadata[Constants.Metadata.Analytics.userId] = Analytics.userIdentity
         }
-        else{
+        else {
             metadata[Constants.Metadata.Analytics.userId]=BMSAnalytics.uniqueDeviceId
         }
         
