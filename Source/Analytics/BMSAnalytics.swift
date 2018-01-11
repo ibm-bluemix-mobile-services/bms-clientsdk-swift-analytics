@@ -326,7 +326,14 @@ public class BMSAnalytics: AnalyticsDelegate {
         
         var metadata: [String: Any] = [:]
         metadata[Constants.Metadata.Analytics.category] = category
-        metadata[Constants.Metadata.Analytics.userId] = Analytics.userIdentity
+        if category == Constants.Metadata.Analytics.user
+        {
+            metadata[Constants.Metadata.Analytics.userId] = Analytics.userIdentity
+        }
+        else{
+            metadata[Constants.Metadata.Analytics.userId]=BMSAnalytics.uniqueDeviceId
+        }
+        
         metadata[Constants.Metadata.Analytics.sessionId] = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId]
         metadata[Constants.Metadata.Analytics.timestamp] = NSNumber(value: currentTime)
         
