@@ -41,7 +41,7 @@
 		92B9DF6C1DF9FCC800BD3605 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9DF6A1DF9FCC800BD3605 /* LocationDelegate.swift */; };
 		92B9DFB81E00632A00BD3605 /* LocationDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9DFB71E00632A00BD3605 /* LocationDelegateTests.swift */; };
 		963EC4D9C05D038450DD3BEA /* Pods_TestApp_watchOS_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D47A33A1F7D17C3BC0BA13C1 /* Pods_TestApp_watchOS_Extension.framework */; };
-		D0574D722076249000578D06 /* FeedbackTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0574D712076249000578D06 /* FeedbackTest.swift */; };
+		D0574D7C2076386600578D06 /* FeedbackTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0574D712076249000578D06 /* FeedbackTest.swift */; };
 		D066DE8020629A3F00F1EFEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D066DE7F20629A3F00F1EFEC /* Assets.xcassets */; };
 		D066DE8B20629B1200F1EFEC /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = D066DE8A20629B1200F1EFEC /* Feedback.swift */; };
 		D0898F0320628B42007DEC72 /* Feedback.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0898F0220628B42007DEC72 /* Feedback.storyboard */; };
@@ -1341,7 +1341,6 @@
 			files = (
 				9221C0DC1C4EE159007FA9D0 /* Error.swift in Sources */,
 				D0FA9F21206E4CDF00B89BDD /* ioapi.c in Sources */,
-				D0574D722076249000578D06 /* FeedbackTest.swift in Sources */,
 				D0FA9F1F206E4CDF00B89BDD /* unzip.c in Sources */,
 				9221C0481C4ED9AF007FA9D0 /* BMSAnalytics+iOS.swift in Sources */,
 				D0FA9F1E206E4CDF00B89BDD /* ZipUtilities.swift in Sources */,
@@ -1362,6 +1361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0574D7C2076386600578D06 /* FeedbackTest.swift in Sources */,
 				9221C0521C4EDA9C007FA9D0 /* BMSAnalyticsTests.swift in Sources */,
 				92B9DFB81E00632A00BD3605 /* LocationDelegateTests.swift in Sources */,
 				9221C0501C4ED9CF007FA9D0 /* BMSLoggerTests.swift in Sources */,
