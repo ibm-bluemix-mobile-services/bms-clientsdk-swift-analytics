@@ -21,8 +21,6 @@ import BMSAnalyticsAPI
 
 #if swift(>=3.0)
 
-
-    
 /**
     Adds the `send` method.
 */
@@ -31,6 +29,7 @@ public extension Logger {
     
     internal static var currentlySendingLoggerLogs = false
     internal static var currentlySendingAnalyticsLogs = false
+    internal static var currentlySendingFeedbackdata = false
     
     
     /**
@@ -100,7 +99,7 @@ public extension Logger {
                     let logPayloadJson = [Constants.outboundLogPayload: logsToSend]
                     let logPayloadData = try JSONSerialization.data(withJSONObject: logPayloadJson, options: [])
                     
-                    if let request: BaseRequest = try BMSLogger.buildLogSendRequest(completionHandler: logSendCallback) {
+                    if let request: Request = try BMSLogger.buildLogSendRequest(completionHandler: logSendCallback) {
                         request.send(requestBody: logPayloadData, completionHandler: logSendCallback)
                     }
                 }
@@ -170,7 +169,7 @@ public extension Logger {
                     let logPayloadJson = [Constants.outboundLogPayload: logsToSend]
                     let logPayloadData = try JSONSerialization.data(withJSONObject: logPayloadJson, options: [])
                     
-                    if let request: BaseRequest = try BMSLogger.buildLogSendRequest(completionHandler: analyticsSendCallback) {
+                    if let request: Request = try BMSLogger.buildLogSendRequest(completionHandler: analyticsSendCallback) {
                         request.send(requestBody: logPayloadData, completionHandler: analyticsSendCallback)
                     }
                 }
@@ -185,7 +184,6 @@ public extension Logger {
             }
         })
     }
-    
 }
 
 
@@ -224,6 +222,8 @@ public class BMSLogger: LoggerDelegate {
     // Path to the log files on the client device
     internal static let logsDocumentPath: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/"
     
+    internal static let feedbackDocumentPath: String = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] + "/feedback/"
+
     internal static let fileManager = FileManager.default
 
     
@@ -524,7 +524,7 @@ public class BMSLogger: LoggerDelegate {
     // MARK: - Sending logs
     
     // Build the Request object that will be used to send the logs to the server
-    internal static func buildLogSendRequest(completionHandler callback: BMSCompletionHandler) throws -> BaseRequest? {
+    internal static func buildLogSendRequest(completionHandler callback: BMSCompletionHandler) throws -> Request? {
         
         let bmsClient = BMSClient.sharedInstance
         var headers: [String: String] = ["Content-Type": "text/plain"]
@@ -545,7 +545,7 @@ public class BMSLogger: LoggerDelegate {
             if (bmsClient.bluemixRegion!.contains("localhost")) {
                 logUploadUrl = "http://" + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadPath
             }
-            
+
             // Request class is specific to Bluemix (since it uses Bluemix authorization managers)
             return Request(url: logUploadUrl, method: HttpMethod.POST, headers: headers)
         }
@@ -556,6 +556,38 @@ public class BMSLogger: LoggerDelegate {
         }
     }
     
+    // Build the Request object that will be used to send the logs to the server
+    internal static func buildLogSendRequestForFeedback(completionHandler callback: BMSCompletionHandler) throws -> Request? {
+
+        var logUploadUrl = ""
+        let bmsClient = BMSClient.sharedInstance
+        var headers: [String: String] = ["Content-Type": "multipart/form-data"]
+
+        // Check that the BMSClient class has been initialized before building the upload URL
+        // Only the region is needed to communicate with the Analytics service. App route and GUID are not required.
+        if bmsClient.bluemixRegion != nil && bmsClient.bluemixRegion != "" {
+
+            guard BMSAnalytics.apiKey != nil && BMSAnalytics.apiKey != "" else {
+                returnInitializationError(className: "Analytics", missingValue: "apiKey", callback: callback)
+                return nil
+            }
+            headers[Constants.analyticsApiKey] = BMSAnalytics.apiKey!
+
+            logUploadUrl = "https://" + Constants.AnalyticsServer.hostName + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadFeedbackPath
+
+            if (bmsClient.bluemixRegion!.contains("localhost")) {
+                logUploadUrl = "http://" + bmsClient.bluemixRegion! + Constants.AnalyticsServer.uploadFeedbackPath
+            }
+
+            // Request class is specific to Bluemix (since it uses Bluemix authorization managers)
+            return Request(url: logUploadUrl, method: HttpMethod.POST, headers: headers)
+        }
+        else {
+            BMSLogger.internalLogger.error(message: "Failed to send feedback data because the client was not yet initialized. Make sure that the BMSClient class has been initialized.")
+
+            throw BMSAnalyticsError.analyticsNotInitialized
+        }
+    }
     
     // If this is reached, the user most likely failed to initialize BMSClient or Analytics
     internal static func returnInitializationError(className uninitializedClass: String, missingValue: String, callback: BMSCompletionHandler) {

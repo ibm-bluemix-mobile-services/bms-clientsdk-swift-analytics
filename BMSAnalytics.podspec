@@ -9,9 +9,9 @@ Pod::Spec.new do |s|
   s.authors           = { 'IBM Bluemix Services Mobile SDK' => 'mobilsdk@us.ibm.com' }
 
   s.source       = { :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics.git', :tag => s.version }
-  s.source_files = 'Source/**/*.swift'
+  s.source_files = 'Source/**/*.swift','Source/Zip/*.{swift,h}','Source/Zip/minizip/*.{c,h}'
   s.ios.exclude_files = 'Source/**/*watchOS*.swift'
-  s.watchos.exclude_files = 'Source/**/*iOS*.swift'
+  s.watchos.exclude_files = 'Source/**/*iOS*.swift','Source/Feedback','Source/Zip/*.{swift,h}', 'Source/Zip/minizip/*.{c,h}', 'Source/Zip/minizip/aes/*.{c,h}'
 
   s.dependency 'BMSCore', '~> 2.1'
 
