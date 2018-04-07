@@ -22,14 +22,31 @@ import UIKit
 class ComposeEditorViewController: UIViewController {
 
     var messages:[String] = [String]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //  messageBox.delegate = self as! UITextViewDelegate
-        
+
         // Do any additional setup after loading the view.
         messageBox.placeholder = "Please enter your comments here"
         messageBox.textColor = UIColor.lightGray
+
+        self.messageBox.textContainer.maximumNumberOfLines = 5
+        self.messageBox.textContainer.lineBreakMode = .byTruncatingTail
+
+        messageBox.inputView = UIView()
+
+        messageBox.translatesAutoresizingMaskIntoConstraints = false
+        messageBox.isScrollEnabled = false
+
+        func textViewDidChange(_ textView: UITextView) {
+            let fixedWidth = messageBox.frame.size.width
+            messageBox.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+            let newSize = messageBox.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+            var newFrame = messageBox.frame
+            newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+            messageBox.frame = newFrame
+        }
     }
     
     @IBOutlet weak var messageBox: UITextView!

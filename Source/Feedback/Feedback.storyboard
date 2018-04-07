@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="documents saved in the Xcode 7 format" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--feedbackImageView-->
@@ -19,32 +19,35 @@
                         <viewControllerLayoutGuide type="bottom" id="21v-CE-8Xs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="43p-uA-DNv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="FeedBackimageView" translatesAutoresizingMaskIntoConstraints="NO" id="BUs-St-dML" userLabel="FeedBackimageView">
-                                <rect key="frame" x="20" y="20" width="369" height="652"/>
+                                <rect key="frame" x="21" y="20" width="278" height="396"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="133-nQ-CD8" appends="YES" id="L51-mW-pDD"/>
                                 </connections>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQS-dM-loo">
-                                <rect key="frame" x="3" y="691" width="404" height="44"/>
+                                <rect key="frame" x="0.0" y="435" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="nOy-z8-iP0"/>
+                                </constraints>
                                 <items>
-                                    <barButtonItem image="edit copy-1" id="3iP-4s-bVh">
+                                    <barButtonItem image="ic_action_draw_01" id="3iP-4s-bVh">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="editButtonTapped:" destination="Sl1-kx-SF6" id="w9b-2n-xvC"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Erase" image="eraser" id="C2F-ed-qba" userLabel="Marker">
+                                    <barButtonItem title="Erase" image="ic_action_erase" id="C2F-ed-qba" userLabel="Marker">
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <action selector="markerButtonTapped:" destination="Sl1-kx-SF6" id="0xe-8X-CCB"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem systemItem="compose" id="lcW-vF-YHy">
+                                    <barButtonItem title="Item" image="ic_action_comment" id="lcW-vF-YHy">
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <action selector="composeFeedButton:" destination="Sl1-kx-SF6" id="cOj-bt-8wS"/>
@@ -72,7 +75,7 @@
                                 </userDefinedRuntimeAttributes>
                             </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVS-Ae-PRH">
-                                <rect key="frame" x="339" y="37" width="45" height="41"/>
+                                <rect key="frame" x="249" y="37" width="45" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="AYu-DS-i7G"/>
                                 </constraints>
@@ -84,14 +87,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="GQS-dM-loo" firstAttribute="top" secondItem="BUs-St-dML" secondAttribute="bottom" constant="19" id="KZy-nr-kSi"/>
+                            <constraint firstItem="21v-CE-8Xs" firstAttribute="top" secondItem="GQS-dM-loo" secondAttribute="bottom" constant="1" id="21Z-Lf-dOG"/>
+                            <constraint firstItem="GQS-dM-loo" firstAttribute="centerX" secondItem="BUs-St-dML" secondAttribute="centerX" id="9Yk-KW-1t1"/>
+                            <constraint firstItem="GQS-dM-loo" firstAttribute="leading" secondItem="43p-uA-DNv" secondAttribute="leading" id="AuZ-eE-zAN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BUs-St-dML" secondAttribute="trailing" constant="5" id="L8k-ch-AWE"/>
+                            <constraint firstAttribute="trailing" secondItem="GQS-dM-loo" secondAttribute="trailing" id="MaC-R0-Pvp"/>
                             <constraint firstItem="BUs-St-dML" firstAttribute="top" secondItem="jG3-iX-5f2" secondAttribute="bottom" id="TpI-cm-Rd7"/>
-                            <constraint firstItem="21v-CE-8Xs" firstAttribute="top" secondItem="GQS-dM-loo" secondAttribute="bottom" constant="1" id="Ue2-ac-kev"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JVS-Ae-PRH" secondAttribute="trailing" constant="10" id="bZO-sq-eTx"/>
-                            <constraint firstItem="BUs-St-dML" firstAttribute="centerX" secondItem="GQS-dM-loo" secondAttribute="centerX" id="h1Q-2I-L7E"/>
-                            <constraint firstItem="BUs-St-dML" firstAttribute="leading" secondItem="43p-uA-DNv" secondAttribute="leadingMargin" id="qBQ-s3-aOJ"/>
-                            <constraint firstItem="GQS-dM-loo" firstAttribute="leading" secondItem="43p-uA-DNv" secondAttribute="leadingMargin" constant="-17" id="v8G-DZ-edf"/>
+                            <constraint firstItem="GQS-dM-loo" firstAttribute="top" secondItem="BUs-St-dML" secondAttribute="bottom" constant="19" id="nVe-XW-WTl"/>
                             <constraint firstItem="JVS-Ae-PRH" firstAttribute="top" secondItem="jG3-iX-5f2" secondAttribute="bottom" constant="17" id="yyc-YI-37R"/>
                         </constraints>
                     </view>
@@ -111,7 +114,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1485.5999999999999" y="-249.62518740629687"/>
+            <point key="canvasLocation" x="1485.5072463768117" y="-250.27173913043481"/>
         </scene>
         <!--composePopup-->
         <scene sceneID="Ccj-Sm-B5v">
@@ -122,18 +125,18 @@
                         <viewControllerLayoutGuide type="bottom" id="3Hp-VE-aa7"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" id="Qh5-lP-Koa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFm-o3-FFF">
-                                <rect key="frame" x="0.0" y="117" width="414" height="502"/>
+                                <rect key="frame" x="-1" y="234" width="322" height="197"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8d-b2-h1U">
-                                <rect key="frame" x="171.66666666666666" y="551" width="71" height="30"/>
+                                <rect key="frame" x="124.5" y="388" width="71" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="71" id="4VD-bk-hh0"/>
@@ -149,11 +152,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="i8d-b2-h1U" firstAttribute="centerX" secondItem="Qh5-lP-Koa" secondAttribute="centerX" id="3PW-QG-Th2"/>
-                            <constraint firstItem="IFm-o3-FFF" firstAttribute="centerY" secondItem="Qh5-lP-Koa" secondAttribute="centerY" id="EVK-uq-4gl"/>
                             <constraint firstItem="i8d-b2-h1U" firstAttribute="centerX" secondItem="IFm-o3-FFF" secondAttribute="centerX" id="I8D-6i-4iV"/>
-                            <constraint firstItem="3Hp-VE-aa7" firstAttribute="top" secondItem="i8d-b2-h1U" secondAttribute="bottom" constant="155" id="cXT-9m-wpm"/>
-                            <constraint firstItem="IFm-o3-FFF" firstAttribute="leading" secondItem="Qh5-lP-Koa" secondAttribute="leading" id="ugV-wy-Exi"/>
-                            <constraint firstItem="3Hp-VE-aa7" firstAttribute="top" secondItem="IFm-o3-FFF" secondAttribute="bottom" constant="117" id="ziQ-Kq-R0J"/>
+                            <constraint firstItem="IFm-o3-FFF" firstAttribute="top" secondItem="i8d-b2-h1U" secondAttribute="bottom" constant="-184" id="PDy-At-hNs"/>
+                            <constraint firstItem="3Hp-VE-aa7" firstAttribute="top" secondItem="i8d-b2-h1U" secondAttribute="bottom" constant="62" id="cXT-9m-wpm"/>
+                            <constraint firstItem="IFm-o3-FFF" firstAttribute="leading" secondItem="Qh5-lP-Koa" secondAttribute="leading" constant="-1" id="ugV-wy-Exi"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="IFm-o3-FFF" secondAttribute="bottom" constant="49" id="yAa-sz-igr"/>
                         </constraints>
                     </view>
                     <connections>
@@ -162,13 +165,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCg-gg-GHs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2508.6956521739135" y="-99.456521739130437"/>
+            <point key="canvasLocation" x="2506.875" y="-101.25"/>
         </scene>
     </scenes>
     <resources>
         <image name="close-circled" width="45" height="45"/>
-        <image name="edit copy-1" width="18" height="18"/>
-        <image name="eraser" width="18" height="18"/>
+        <image name="ic_action_comment" width="24" height="24"/>
+        <image name="ic_action_draw_01" width="24" height="24"/>
+        <image name="ic_action_erase" width="24" height="24"/>
     </resources>
     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
