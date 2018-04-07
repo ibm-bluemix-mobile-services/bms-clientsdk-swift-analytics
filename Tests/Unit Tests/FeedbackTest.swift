@@ -239,7 +239,7 @@ class FeedbackTest: XCTestCase {
         let summaryStr = summary4.jsonRepresentation()
         let expected1 = "{\"saved\":[], \"send\":{\""+timeSent+"\":[\"TestInstance1\"],\""+timeSent1+"\":[\"TestInstance2\"]}}"
         let expected2 = "{\"saved\":[], \"send\":{\""+timeSent1+"\":[\"TestInstance2\"],\""+timeSent+"\":[\"TestInstance1\"]}}"
-        XCTAssertTrue(expected1.elementsEqual(summaryStr) || expected2.elementsEqual(summaryStr))
+        XCTAssertTrue((expected1 == summaryStr) || (expected2 == summaryStr))
 
         do{
             try BMSLogger.fileManager.removeItem(atPath:  BMSLogger.feedbackDocumentPath+"AppFeedBackSummary.json")
