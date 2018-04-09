@@ -35,19 +35,19 @@
                                     <constraint firstAttribute="height" constant="44" id="nOy-z8-iP0"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem image="ic_action_draw_01" id="3iP-4s-bVh">
+                                    <barButtonItem image="edit" id="3iP-4s-bVh">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="editButtonTapped:" destination="Sl1-kx-SF6" id="w9b-2n-xvC"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Erase" image="ic_action_erase" id="C2F-ed-qba" userLabel="Marker">
+                                    <barButtonItem title="Erase" image="eraser-1" id="C2F-ed-qba" userLabel="Marker">
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <action selector="markerButtonTapped:" destination="Sl1-kx-SF6" id="0xe-8X-CCB"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Item" image="ic_action_comment" id="lcW-vF-YHy">
+                                    <barButtonItem title="Item" image="comment" id="lcW-vF-YHy">
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <action selector="composeFeedButton:" destination="Sl1-kx-SF6" id="cOj-bt-8wS"/>
@@ -170,9 +170,9 @@
     </scenes>
     <resources>
         <image name="close-circled" width="45" height="45"/>
-        <image name="ic_action_comment" width="24" height="24"/>
-        <image name="ic_action_draw_01" width="24" height="24"/>
-        <image name="ic_action_erase" width="24" height="24"/>
+        <image name="comment" width="20" height="20"/>
+        <image name="edit" width="20" height="20"/>
+        <image name="eraser-1" width="20" height="20"/>
     </resources>
     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
