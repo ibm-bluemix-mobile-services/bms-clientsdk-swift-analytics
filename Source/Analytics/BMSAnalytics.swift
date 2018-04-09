@@ -95,7 +95,7 @@ public extension Analytics {
             Analytics.logger.warn(message: "Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
         }
 
-        //Send Feedback data
+        // Send Feedback data
         #if os(iOS)
             Feedback.send(fromSentButton: false)
         #endif

@@ -88,7 +88,7 @@ class FeedbackTest: XCTestCase {
 
     func testWrite(){
         do {
-            let fileWithPath = BMSLogger.feedbackDocumentPath+"/testfeedback.json";
+            let fileWithPath = BMSLogger.feedbackDocumentPath+"/testfeedback.json"
             createDirectory(atPath: BMSLogger.feedbackDocumentPath)
             let jsonString = String("{\"key\":\"value\"}")!
             Feedback.write(toFile: fileWithPath, feedbackdata: jsonString, append: false )
@@ -153,17 +153,19 @@ class FeedbackTest: XCTestCase {
             try BMSLogger.fileManager.removeItem(atPath: directory+"/feedback.json")
             try BMSLogger.fileManager.removeItem(atPath: expectedZipPath)
             try BMSLogger.fileManager.removeItem(atPath: BMSLogger.feedbackDocumentPath+instanceName)
-        }catch{XCTFail()}
+        } catch {
+            XCTFail()
+        }
     }
 
-    func testGetInstanceName(){
+    func testGetInstanceName() {
         let creation = String(Int((Date().timeIntervalSince1970 * 1000.0).rounded()))
         Feedback.instanceName = "TestInstance"
         Feedback.creationDate = creation
         XCTAssertEqual("TestInstance_"+creation,Feedback.getInstanceName())
     }
 
-    func testAddAndReturnTimeSent(){
+    func testAddAndReturnTimeSent() {
         let instanceName = "TestInstance"
         let directory = BMSLogger.feedbackDocumentPath+instanceName
         createDirectory(atPath: directory)
@@ -192,10 +194,12 @@ class FeedbackTest: XCTestCase {
         do{
             try BMSLogger.fileManager.removeItem(atPath: directory+"/feedback.json")
             try BMSLogger.fileManager.removeItem(atPath: BMSLogger.feedbackDocumentPath+instanceName)
-        }catch{XCTFail()}
+        } catch {
+            XCTFail()
+        }
     }
 
-    func testUpdateSummaryJsonFile(){
+    func testUpdateSummaryJsonFile() {
         let directory = BMSLogger.feedbackDocumentPath
         createDirectory(atPath: directory)
 
@@ -244,7 +248,9 @@ class FeedbackTest: XCTestCase {
         do{
             try BMSLogger.fileManager.removeItem(atPath:  BMSLogger.feedbackDocumentPath+"AppFeedBackSummary.json")
             try BMSLogger.fileManager.removeItem(atPath: BMSLogger.feedbackDocumentPath)
-        }catch{XCTFail()}
+        } catch {
+            XCTFail()
+        }
     }
 
     func testBuildLogSendRequestForFeedbackForBluemix() {
@@ -279,7 +285,7 @@ class FeedbackTest: XCTestCase {
         XCTAssertEqual(bmsRequest!.resourceUrl, bmsFeedbackUploadUrl)
     }
 
-    func testFeedbackSendRequest(){
+    func testFeedbackSendRequest() {
         let pathToFile = BMSLogger.feedbackDocumentPath
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
@@ -300,7 +306,7 @@ class FeedbackTest: XCTestCase {
         XCTAssertTrue(request.httpMethod == HttpMethod.POST)
     }
 
-    func testFeedbackSend(){
+    func testFeedbackSend() {
         let pathToFile = BMSLogger.feedbackDocumentPath
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
@@ -348,7 +354,7 @@ class FeedbackTest: XCTestCase {
         }
     }
 
-    func testFeedbackSendWithNoLog(){
+    func testFeedbackSendWithNoLog() {
         let pathToFile = BMSLogger.feedbackDocumentPath
         let bmsClient = BMSClient.sharedInstance
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
@@ -356,7 +362,7 @@ class FeedbackTest: XCTestCase {
 
         do {
             try FileManager().removeItem(atPath: pathToFile)
-        } catch {}
+        } catch { }
 
         let instanceName="TestInstance"
         let directory = BMSLogger.feedbackDocumentPath+instanceName
@@ -386,7 +392,7 @@ class FeedbackTest: XCTestCase {
         }
     }
 
-    func getSummary() -> Feedback.AppFeedBackSummary{
+    func getSummary() -> Feedback.AppFeedBackSummary {
         do {
             let afbsFile = BMSLogger.feedbackDocumentPath+"AppFeedBackSummary.json"
             let afbs = Feedback.convertFileToData(filepath: afbsFile)
@@ -401,7 +407,7 @@ class FeedbackTest: XCTestCase {
         let isExist = FileManager.default.fileExists(atPath:atPath, isDirectory: &objcBool)
 
         // If the folder with the given path doesn't exist already, create it
-        if isExist == false{
+        if isExist == false {
             do{
                 try FileManager.default.createDirectory(atPath: atPath, withIntermediateDirectories: true, attributes: nil)
             }catch{
@@ -409,6 +415,7 @@ class FeedbackTest: XCTestCase {
             }
         }
     }
+
 }
 
 #endif

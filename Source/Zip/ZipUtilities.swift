@@ -12,7 +12,7 @@
 import Foundation
 
 internal class ZipUtilities {
-    
+
     // File manager
     let fileManager = FileManager.default
 
@@ -26,9 +26,10 @@ internal class ZipUtilities {
         func filePath() -> String {
             return filePathURL.path
         }
+
     }
     
-    //MARK: Path processing
+    // MARK: Path processing
     
     /**
     Process zip paths
@@ -37,7 +38,7 @@ internal class ZipUtilities {
     
     - returns: Array of ProcessedFilePath structs.
     */
-    internal func processZipPaths(_ paths: [URL]) -> [ProcessedFilePath]{
+    internal func processZipPaths(_ paths: [URL]) -> [ProcessedFilePath] {
         var processedFilePaths = [ProcessedFilePath]()
         for path in paths {
             let filePath = path.path
