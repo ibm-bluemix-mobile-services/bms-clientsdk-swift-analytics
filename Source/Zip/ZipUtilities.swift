@@ -22,20 +22,20 @@ internal class ZipUtilities {
     internal struct ProcessedFilePath {
         let filePathURL: URL
         let fileName: String?
-        
+
         func filePath() -> String {
             return filePathURL.path
         }
 
     }
-    
+
     // MARK: Path processing
-    
+
     /**
     Process zip paths
-    
+
     - parameter paths: Paths as NSURL.
-    
+
     - returns: Array of ProcessedFilePath structs.
     */
     internal func processZipPaths(_ paths: [URL]) -> [ProcessedFilePath] {
@@ -55,13 +55,12 @@ internal class ZipUtilities {
         }
         return processedFilePaths
     }
-    
-    
+
     /**
      Recursive function to expand directory contents and parse them into ProcessedFilePath structs.
-     
+
      - parameter directory: Path of folder as NSURL.
-     
+
      - returns: Array of ProcessedFilePath structs.
      */
     internal func expandDirectoryFilePath(_ directory: URL) -> [ProcessedFilePath] {

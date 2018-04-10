@@ -72,7 +72,7 @@ class FeedbackTest: XCTestCase {
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
         Analytics.initialize(appName: "testAppName", apiKey: "1234")
 
-        let newFeedbackExpectation = expectation(description:"")
+        let newFeedbackExpectation = expectation(description: "")
         let timeDelay = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: timeDelay) {
             newFeedbackExpectation.fulfill()
@@ -86,20 +86,20 @@ class FeedbackTest: XCTestCase {
         }
     }
 
-    func testWrite(){
+    func testWrite() {
         do {
             let fileWithPath = BMSLogger.feedbackDocumentPath+"/testfeedback.json"
             createDirectory(atPath: BMSLogger.feedbackDocumentPath)
             let jsonString = String("{\"key\":\"value\"}")!
-            Feedback.write(toFile: fileWithPath, feedbackdata: jsonString, append: false )
+            Feedback.write(toFile: fileWithPath, feedbackdata: jsonString, append: false)
             let fileContent = Feedback.convertFileToString(filepath: fileWithPath)
             print(fileContent)
             XCTAssertTrue(BMSLogger.fileManager.fileExists(atPath: fileWithPath))
             XCTAssertEqual(jsonString, fileContent)
 
-            //Test with allow append
+            // Test with allow append
             let jsonString1 = String("{\"key1\":\"value1\"}")!
-            Feedback.write(toFile: fileWithPath, feedbackdata: jsonString1, append: true )
+            Feedback.write(toFile: fileWithPath, feedbackdata: jsonString1, append: true)
             let fileContent1 = Feedback.convertFileToString(filepath: fileWithPath)
             print(fileContent1)
             XCTAssertTrue(BMSLogger.fileManager.fileExists(atPath: fileWithPath))
@@ -117,7 +117,7 @@ class FeedbackTest: XCTestCase {
         }
     }
 
-    func testConvertToJSON(){
+    func testConvertToJSON() {
         let jsonObject: [String: Any] = [
             "id": "id",
             "comments": ["Comment1", "Comment2"],
@@ -134,16 +134,16 @@ class FeedbackTest: XCTestCase {
         XCTAssertEqual(expectedString, feedbackJsonString)
     }
 
-    func testCreateZip(){
+    func testCreateZip() {
         let instanceName="TestInstance"
         let directory = BMSLogger.feedbackDocumentPath+instanceName
         createDirectory(atPath: directory)
         let expectedZipPath = BMSLogger.feedbackDocumentPath + "/../"+instanceName + ".zip"
 
-        let jsonString1 = String("Some image data")!  //dummy data
-        Feedback.write(toFile: directory+"/image.png", feedbackdata: jsonString1, append: false )
+        let jsonString1 = String("Some image data")!  // dummy data
+        Feedback.write(toFile: directory+"/image.png", feedbackdata: jsonString1, append: false)
         XCTAssertTrue(BMSLogger.fileManager.fileExists(atPath: directory+"/image.png"))
-        Feedback.write(toFile: directory+"/feedback.json", feedbackdata: jsonString1, append: false )
+        Feedback.write(toFile: directory+"/feedback.json", feedbackdata: jsonString1, append: false)
         XCTAssertTrue(BMSLogger.fileManager.fileExists(atPath: directory+"/feedback.json"))
         Feedback.createZip(instanceName: instanceName)
         XCTAssertTrue(BMSLogger.fileManager.fileExists(atPath: expectedZipPath))
@@ -162,7 +162,7 @@ class FeedbackTest: XCTestCase {
         let creation = String(Int((Date().timeIntervalSince1970 * 1000.0).rounded()))
         Feedback.instanceName = "TestInstance"
         Feedback.creationDate = creation
-        XCTAssertEqual("TestInstance_"+creation,Feedback.getInstanceName())
+        XCTAssertEqual("TestInstance_"+creation, Feedback.getInstanceName())
     }
 
     func testAddAndReturnTimeSent() {
@@ -180,7 +180,7 @@ class FeedbackTest: XCTestCase {
             "username": "Jammy"
         ]
         let feedbackJsonString = Feedback.convertToJSON(sampleFeedbackJsonObject)
-        Feedback.write(toFile: directory+"/feedback.json", feedbackdata: feedbackJsonString!, append: false )
+        Feedback.write(toFile: directory+"/feedback.json", feedbackdata: feedbackJsonString!, append: false)
         XCTAssertTrue(BMSLogger.fileManager.fileExists(atPath: directory+"/feedback.json"))
 
         let timeSent1 = String(Int((Date().timeIntervalSince1970 * 1000.0).rounded()))
@@ -246,7 +246,7 @@ class FeedbackTest: XCTestCase {
         XCTAssertTrue((expected1 == summaryStr) || (expected2 == summaryStr))
 
         do{
-            try BMSLogger.fileManager.removeItem(atPath:  BMSLogger.feedbackDocumentPath+"AppFeedBackSummary.json")
+            try BMSLogger.fileManager.removeItem(atPath: BMSLogger.feedbackDocumentPath+"AppFeedBackSummary.json")
             try BMSLogger.fileManager.removeItem(atPath: BMSLogger.feedbackDocumentPath)
         } catch {
             XCTFail()
@@ -259,8 +259,7 @@ class FeedbackTest: XCTestCase {
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: BMSClient.Region.usSouth)
         Analytics.initialize(appName: "testAppName", apiKey: "1234")
 
-        let bmsRequest = try! BMSLogger.buildLogSendRequestForFeedback() { (response, error) -> Void in
-        }
+        let bmsRequest = try! BMSLogger.buildLogSendRequestForFeedback() { (response, error) -> Void in }
 
         XCTAssertNotNil(bmsRequest)
         XCTAssertTrue(bmsRequest is Request)
@@ -275,8 +274,7 @@ class FeedbackTest: XCTestCase {
         bmsClient.initialize(bluemixAppRoute: "bluemix", bluemixAppGUID: "appID1", bluemixRegion: "localhost:8000")
         Analytics.initialize(appName: "testAppName", apiKey: "1234")
 
-        let bmsRequest = try! BMSLogger.buildLogSendRequestForFeedback() { (response, error) -> Void in
-        }
+        let bmsRequest = try! BMSLogger.buildLogSendRequestForFeedback() { (response, error) -> Void in }
 
         XCTAssertNotNil(bmsRequest)
         XCTAssertTrue(bmsRequest is Request)
@@ -298,8 +296,7 @@ class FeedbackTest: XCTestCase {
             try FileManager().removeItem(atPath: pathToFile)
         } catch {}
 
-        let request = try! BMSLogger.buildLogSendRequestForFeedback() { (response, error) -> Void in
-            }!
+        let request = try! BMSLogger.buildLogSendRequestForFeedback() { (response, error) -> Void in }!
 
         XCTAssertTrue(request.resourceUrl == url)
         XCTAssertTrue(request.headers == headers)
@@ -333,10 +330,10 @@ class FeedbackTest: XCTestCase {
             }
         }
 
-        let jsonString1 = String("Some image data")!  //dummy data
-        Feedback.write(toFile: directory+"/image.png", feedbackdata: jsonString1, append: false )
+        let jsonString1 = String("Some image data")!  // dummy data
+        Feedback.write(toFile: directory+"/image.png", feedbackdata: jsonString1, append: false)
         XCTAssertTrue(BMSLogger.fileManager.fileExists(atPath: directory+"/image.png"))
-        Feedback.write(toFile: directory+"/feedback.json", feedbackdata: jsonString1, append: false )
+        Feedback.write(toFile: directory+"/feedback.json", feedbackdata: jsonString1, append: false)
         XCTAssertTrue(BMSLogger.fileManager.fileExists(atPath: directory+"/feedback.json"))
         Feedback.createZip(instanceName: instanceName)
         XCTAssertTrue(BMSLogger.fileManager.fileExists(atPath: expectedZipPath))
@@ -397,14 +394,14 @@ class FeedbackTest: XCTestCase {
             let afbsFile = BMSLogger.feedbackDocumentPath+"AppFeedBackSummary.json"
             let afbs = Feedback.convertFileToData(filepath: afbsFile)
             let json = try JSONSerialization.jsonObject(with: afbs!, options: JSONSerialization.ReadingOptions.mutableContainers)
-            return Feedback.AppFeedBackSummary(json: json as! [String : Any])
+            return Feedback.AppFeedBackSummary(json: json as! [String: Any])
         }catch{}
-        return Feedback.AppFeedBackSummary(json:[:])
+        return Feedback.AppFeedBackSummary(json: [:])
     }
 
     func createDirectory(atPath: String) {
-        var objcBool:ObjCBool = true
-        let isExist = FileManager.default.fileExists(atPath:atPath, isDirectory: &objcBool)
+        var objcBool: ObjCBool = true
+        let isExist = FileManager.default.fileExists(atPath: atPath, isDirectory: &objcBool)
 
         // If the folder with the given path doesn't exist already, create it
         if isExist == false {

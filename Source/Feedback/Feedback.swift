@@ -23,16 +23,16 @@ import BMSCore
 public class Feedback {
 
     struct FeedbackJson {
-        let id:String
-        let comments:[String]
-        let screenName:String
-        let screenWidth:Int
-        let screenHeight:Int
-        let sessionID:String
-        let username:String
-        var timeSent:String
+        let id: String
+        let comments: [String]
+        let screenName: String
+        let screenWidth: Int
+        let screenHeight: Int
+        let sessionID: String
+        let username: String
+        var timeSent: String
 
-        init(json:[String:Any]) {
+        init(json: [String: Any]) {
             id = json["id"] as? String ?? ""
             comments = json["comments"] as? [String] ?? []
             screenName = json["screenName"] as? String ?? ""
@@ -45,22 +45,22 @@ public class Feedback {
 
         var dictionaryRepresentation: [String: Any] {
             return [
-                "id" : id,
-                "comments" : comments,
-                "screenName" : screenName,
-                "screenWidth" : screenWidth,
-                "screenHeight" : screenHeight,
-                "sessionID" : sessionID,
-                "username" : username,
-                "timeSent" : timeSent
+                "id": id,
+                "comments": comments,
+                "screenName": screenName,
+                "screenWidth": screenWidth,
+                "screenHeight": screenHeight,
+                "sessionID": sessionID,
+                "username": username,
+                "timeSent": timeSent
             ]
         }
     }
 
-    struct sendEntry {
+    struct SendEntry {
         var timeSent: String
         var sendArray: [String]
-        init(timeSent:String, sendArray:[String]) {
+        init(timeSent: String, sendArray: [String]) {
             self.timeSent = timeSent
             self.sendArray = sendArray
         }
@@ -68,19 +68,19 @@ public class Feedback {
 
     struct AppFeedBackSummary {
         var saved: [String]
-        var send: [sendEntry]
+        var send: [SendEntry]
 
         init(json: [String: Any]) {
             self.saved = json["saved"] as? [String] ?? []
             self.send = []
-            let sendArray:[String: [String]] = (json["send"] as? [String : [String]]) ?? [:]
+            let sendArray: [String: [String]] = (json["send"] as? [String: [String]]) ?? [:]
             for key in sendArray.keys {
-                send.append(sendEntry(timeSent: key, sendArray: sendArray[key]!))
+                send.append(SendEntry(timeSent: key, sendArray: sendArray[key]!))
             }
         }
 
         func jsonRepresentation() -> String {
-            var savedString:String = "["
+            var savedString: String = "["
             for i in 0..<self.saved.count {
                 savedString = savedString + "\""+self.saved[i]+"\""
                 if i != self.saved.count-1 {
@@ -89,10 +89,10 @@ public class Feedback {
             }
             savedString = savedString + "]"
 
-            var sendArray:String = "{"
+            var sendArray: String = "{"
             for i in 0..<self.send.count {
-                let ts:String = "\""+self.send[i].timeSent+"\""+":"
-                var sa:String = "["
+                let ts: String = "\""+self.send[i].timeSent+"\""+":"
+                var sa: String = "["
                 for j in 0..<self.send[i].sendArray.count {
                     sa = sa + "\"" + self.send[i].sendArray[j] + "\""
                     if j != self.send[i].sendArray.count-1 {
@@ -107,24 +107,24 @@ public class Feedback {
             }
             sendArray = sendArray + "}"
 
-            let returnStr:String = "{\"saved\":"+savedString+", \"send\":"+sendArray+"}"
+            let returnStr: String = "{\"saved\":"+savedString+", \"send\":"+sendArray+"}"
             return returnStr
         }
 
         var dictionaryRepresentation: [String: Any] {
             return [
-                "saved" : self.saved,
-                "send" : self.send
+                "saved": self.saved,
+                "send": self.send
             ]
         }
     }
 
     internal static var currentlySendingFeedbackdata = false
-    static var screenshot:UIImage?
-    static var messages:[String] = [String]()
-    static var instanceName:String?
-    static var creationDate:String?
-    static var timeSent:String?
+    static var screenshot: UIImage?
+    static var messages: [String] = [String]()
+    static var instanceName: String?
+    static var creationDate: String?
+    static var timeSent: String?
 
     public static func invokeFeedback() -> Void {
         let bmsClient = BMSClient.sharedInstance
@@ -136,7 +136,7 @@ public class Feedback {
             screenshot=nil
 
             let uiViewController = topController(nil)
-            let instance:String = NSStringFromClass(uiViewController.classForCoder)
+            let instance: String = NSStringFromClass(uiViewController.classForCoder)
             Feedback.instanceName = instance.replacingOccurrences(of: "_", with: "")
             Feedback.creationDate = String(Int((Date().timeIntervalSince1970 * 1000.0).rounded()))
             Feedback.screenshot = takeScreenshot(uiViewController.view)
@@ -144,12 +144,12 @@ public class Feedback {
             let feedbackBundle = Bundle(for: UIImageControllerViewController.self)
             let feedbackStoryboard: UIStoryboard!
             feedbackStoryboard = UIStoryboard(name: "Feedback", bundle: feedbackBundle)
-            let feedbackViewController : UIViewController = feedbackStoryboard.instantiateViewController(withIdentifier: "feedbackImageView")
+            let feedbackViewController: UIViewController = feedbackStoryboard.instantiateViewController(withIdentifier: "feedbackImageView")
             uiViewController.present(feedbackViewController, animated: true, completion: nil)
         }
     }
 
-    public static func send(fromSentButton:Bool) -> Void {
+    public static func send(fromSentButton: Bool) -> Void {
         /* Sudo code:
          If called from send action
          - Save Image
@@ -169,7 +169,7 @@ public class Feedback {
             createFeedbackJsonFile()
             updateSummaryJsonFile(getInstanceName(), timesent: "", remove: false)
         }
-        let filesToSend:[String] = getListOfFeedbackFilesToSend()
+        let filesToSend: [String] = getListOfFeedbackFilesToSend()
         if filesToSend.count != 0 {
             BMSLogger.internalLogger.info(message: "filesToSend count = " + String(filesToSend.count))
             for i in 0..<filesToSend.count {
@@ -194,7 +194,7 @@ public class Feedback {
         return image!
     }
 
-    internal static func topController(_ parent:UIViewController? = nil) -> UIViewController {
+    internal static func topController(_ parent: UIViewController? = nil) -> UIViewController {
         if let vc = parent {
             if let tab = vc as? UITabBarController, let selected = tab.selectedViewController {
                 return topController(selected)
@@ -211,8 +211,8 @@ public class Feedback {
     }
 
     internal static func sendFeedback(instanceName: String) {
-        let zipFile:String = BMSLogger.feedbackDocumentPath + "/../"+instanceName + ".zip"
-        let instanceDocPath:String = BMSLogger.feedbackDocumentPath + instanceName
+        let zipFile: String = BMSLogger.feedbackDocumentPath + "/../"+instanceName + ".zip"
+        let instanceDocPath: String = BMSLogger.feedbackDocumentPath + instanceName
 
         func completionHandler() -> BMSCompletionHandler {
             return {
@@ -222,7 +222,7 @@ public class Feedback {
                 if error == nil && response?.statusCode == 201 {
                     BMSLogger.internalLogger.info(message: "Feedback data successfully sent to the server."+String(describing: response?.isSuccessful) + " \nStatus code: " + String(describing: response?.statusCode))
                     if let responseText = response?.responseText {
-                        BMSLogger.internalLogger.info(message:"Response text: " + responseText)
+                        BMSLogger.internalLogger.info(message: "Response text: " + responseText)
                     }
 
                     do {
@@ -242,7 +242,7 @@ public class Feedback {
     }
 
     // Same as the other send() method but for analytics
-    internal static func sendFeedbackFile(uploadFileName:String, completionHandler userCallback: BMSCompletionHandler? = nil) {
+    internal static func sendFeedbackFile(uploadFileName: String, completionHandler userCallback: BMSCompletionHandler? = nil) {
 
         // Wait for sending next file
         while currentlySendingFeedbackdata {
@@ -302,7 +302,7 @@ public class Feedback {
                     let body = NSMutableData()
                     body.append(fileData)
 
-                    if let request: Request = try BMSLogger.buildLogSendRequestForFeedback(completionHandler:feedbackSendCallback) {
+                    if let request: Request = try BMSLogger.buildLogSendRequestForFeedback(completionHandler: feedbackSendCallback) {
                         request.send(requestBody: body as Data, completionHandler: feedbackSendCallback)
                     }
                 }
@@ -318,7 +318,7 @@ public class Feedback {
 
     internal static func saveImage(_ image: UIImage) -> Void {
         if let data = UIImagePNGRepresentation(image) {
-            var objcBool:ObjCBool = true
+            var objcBool: ObjCBool = true
             let isExist = FileManager.default.fileExists(atPath: BMSLogger.feedbackDocumentPath+getInstanceName()+"/", isDirectory: &objcBool)
 
             // If the folder with the given path doesn't exist already, create it
@@ -344,13 +344,13 @@ public class Feedback {
     }
 
     // Function adds timeSent to feedback.json if its not exists otherwise returns the timestamp
-    internal static func addAndReturnTimeSent(instanceName : String, timeSent: String) -> String {
-        let instanceJsonFile:String = BMSLogger.feedbackDocumentPath+instanceName+"/feedback.json"
+    internal static func addAndReturnTimeSent(instanceName: String, timeSent: String) -> String {
+        let instanceJsonFile: String = BMSLogger.feedbackDocumentPath+instanceName+"/feedback.json"
         if BMSLogger.fileManager.fileExists(atPath: instanceJsonFile) {
             let feedbackData = convertFileToData(filepath: instanceJsonFile)
             do {
                 let json = try JSONSerialization.jsonObject(with: feedbackData!, options: JSONSerialization.ReadingOptions.mutableContainers)
-                var feedback = FeedbackJson(json: json as! [String : Any])
+                var feedback = FeedbackJson(json: json as! [String: Any])
                 if feedback.timeSent.isEmpty {
                     feedback.timeSent=timeSent
                     write(toFile: instanceJsonFile, feedbackdata: convertToJSON(feedback.dictionaryRepresentation)!, append: false)
@@ -371,7 +371,7 @@ public class Feedback {
         if afbs != nil {
             do {
                 let json = try JSONSerialization.jsonObject(with: afbs!, options: JSONSerialization.ReadingOptions.mutableContainers)
-                let summary = AppFeedBackSummary(json: json as! [String : Any])
+                let summary = AppFeedBackSummary(json: json as! [String: Any])
                 return summary.saved
             } catch let jsonErr {
                 BMSLogger.internalLogger.error(message: "getListOfFeedbackFilesToSend: Error : " + jsonErr.localizedDescription)
@@ -380,16 +380,16 @@ public class Feedback {
         return []
     }
 
-    internal static func updateSummaryJsonFile(_ entry: String, timesent:String, remove:Bool) -> Void {
+    internal static func updateSummaryJsonFile(_ entry: String, timesent: String, remove: Bool) -> Void {
         let afbsFile = BMSLogger.feedbackDocumentPath+"AppFeedBackSummary.json"
         let afbs = convertFileToData(filepath: afbsFile)
-        var summary:AppFeedBackSummary
+        var summary: AppFeedBackSummary
         do {
             if afbs == nil {
-                summary = AppFeedBackSummary(json:[:])
+                summary = AppFeedBackSummary(json: [:])
             } else {
                 let json = try JSONSerialization.jsonObject(with: afbs!, options: JSONSerialization.ReadingOptions.mutableContainers)
-                summary = AppFeedBackSummary(json: json as! [String : Any])
+                summary = AppFeedBackSummary(json: json as! [String: Any])
             }
 
             if remove == false {
@@ -404,7 +404,7 @@ public class Feedback {
                         }
                     }
 
-                    var updated:Bool = false
+                    var updated: Bool = false
                     // Add to send
                     for i in 0..<summary.send.count {
                         if summary.send[i].timeSent == timesent {
@@ -415,7 +415,7 @@ public class Feedback {
                     }
 
                     if updated == false {
-                        summary.send.append(sendEntry(timeSent:timesent, sendArray:[entry]))
+                        summary.send.append(SendEntry(timeSent: timesent, sendArray: [entry]))
                         updated = true
                     }
                 } else {
@@ -430,12 +430,12 @@ public class Feedback {
         }
     }
 
-    internal static func createZip(instanceName:String) -> Void {
+    internal static func createZip(instanceName: String) -> Void {
         let imageFile = BMSLogger.feedbackDocumentPath+instanceName+"/image.png"
         let jsonFile = BMSLogger.feedbackDocumentPath+instanceName+"/feedback.json"
 
         do {
-            let zipFilePath = try Zip.quickZipFiles([URL(string: imageFile)!,URL(string: jsonFile)!], fileName: instanceName )
+            let zipFilePath = try Zip.quickZipFiles([URL(string: imageFile)!, URL(string: jsonFile)!], fileName: instanceName)
             BMSLogger.internalLogger.info(message: "zipFilePath: " + zipFilePath.absoluteString)
         }
         catch {
@@ -443,9 +443,9 @@ public class Feedback {
         }
     }
 
-    internal static func convertFileToString(filepath : String) -> String? {
+    internal static func convertFileToString(filepath: String) -> String? {
         let fileURL = URL(fileURLWithPath: filepath)
-        var fileContent:String? = ""
+        var fileContent: String? = ""
         do {
             fileContent = try String(contentsOf: fileURL, encoding: .utf8)
         } catch let error {
@@ -454,8 +454,8 @@ public class Feedback {
         return fileContent
     }
 
-    internal static func convertFileToData(filepath : String) -> Data? {
-        var fileContent:Data? = nil
+    internal static func convertFileToData(filepath: String) -> Data? {
+        var fileContent: Data? = nil
         do {
             fileContent = try Data(contentsOf: URL(fileURLWithPath: filepath), options: .mappedIfSafe)
         } catch let error {
@@ -471,12 +471,12 @@ public class Feedback {
         let id = deviceID! + "_" + screenName
 
         let screenSize = UIScreen.main.bounds
-        let screenWidth:Int = Int(screenSize.width)
-        let screenHeight:Int = Int(screenSize.height)
-        let sessionId:String = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
-        let userID:String
+        let screenWidth: Int = Int(screenSize.width)
+        let screenHeight: Int = Int(screenSize.height)
+        let sessionId: String = BMSAnalytics.lifecycleEvents[Constants.Metadata.Analytics.sessionId] as! String
+        let userID: String
 
-        if( Analytics.userIdentity == nil ) {
+        if Analytics.userIdentity == nil {
             userID = "UNKNOWN"
         } else {
             userID = (Analytics.userIdentity)!
@@ -515,7 +515,7 @@ public class Feedback {
     }
 
     // Append log message to the end of the log file
-    internal static func write(toFile file: String, feedbackdata : String, append:Bool) {
+    internal static func write(toFile file: String, feedbackdata: String, append: Bool) {
 
         do {
             // Remove the file if its already exists
@@ -551,6 +551,3 @@ public class Feedback {
 #else
 
 #endif
-
-
-

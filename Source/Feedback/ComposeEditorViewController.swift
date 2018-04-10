@@ -21,7 +21,7 @@ import UIKit
 
 class ComposeEditorViewController: UIViewController {
 
-    var messages:[String] = [String]()
+    var messages: [String] = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class ComposeEditorViewController: UIViewController {
     @IBOutlet weak var messageBox: UITextView!
 
     @IBAction func messagePopupOK(_ sender: Any) {
-        
+
         Feedback.messages.append(messageBox.text)
 
         dismiss(animated: false, completion: nil)
@@ -65,7 +65,7 @@ class ComposeEditorViewController: UIViewController {
 
 }
 
-extension UITextView :UITextViewDelegate {
+extension UITextView: UITextViewDelegate {
 
     /// Resize the placeholder when the UITextView bounds change
     override open var bounds: CGRect {
@@ -78,7 +78,7 @@ extension UITextView :UITextViewDelegate {
     public var placeholder: String? {
         get {
             var placeholderText: String?
-            
+
             if let placeholderLabel = self.viewWithTag(100) as? UILabel {
                 placeholderText = placeholderLabel.text
             }
@@ -111,7 +111,7 @@ extension UITextView :UITextViewDelegate {
             let labelY = self.textContainerInset.top - 2
             let labelWidth = self.frame.width - (labelX * 2)
             let labelHeight = placeholderLabel.frame.height
-            
+
             placeholderLabel.frame = CGRect(x: labelX, y: labelY, width: labelWidth, height: labelHeight)
         }
     }
@@ -133,6 +133,7 @@ extension UITextView :UITextViewDelegate {
         self.resizePlaceholder()
         self.delegate = self
     }
+
 }
 
 #endif

@@ -24,12 +24,12 @@ class UIImageControllerViewController: UIViewController {
     var path = UIBezierPath()
     var startpoint = CGPoint()
     var touchpoint = CGPoint()
-    static var touchEnabled:Bool = false
-    static var isMarkerBtnPressed:Bool = false
-    static var isComposeBtnPressed:Bool = false
-    static var ext:UIImage?
-    static var counter:Int = 0
-    static var isImageEdited:Bool = false
+    static var touchEnabled: Bool = false
+    static var isMarkerBtnPressed: Bool = false
+    static var isComposeBtnPressed: Bool = false
+    static var ext: UIImage?
+    static var counter: Int = 0
+    static var isImageEdited: Bool = false
 
     @IBOutlet weak var composeBtn: UIBarButtonItem!
     @IBOutlet weak var editBtn: UIBarButtonItem!
@@ -42,11 +42,11 @@ class UIImageControllerViewController: UIViewController {
     @IBOutlet var imageViewGesture: UITapGestureRecognizer!
 
     @IBAction func editButtonTapped(_ sender: Any) {
-        if( UIImageControllerViewController.isMarkerBtnPressed == true) {
+        if UIImageControllerViewController.isMarkerBtnPressed == true {
             UIImageControllerViewController.isMarkerBtnPressed = false
             markerBtn.tintColor = UIColor.black
         }
-        if( UIImageControllerViewController.isComposeBtnPressed == true) {
+        if UIImageControllerViewController.isComposeBtnPressed == true {
             UIImageControllerViewController.isComposeBtnPressed = false
             compBtn.tintColor = UIColor.black
         }
@@ -61,11 +61,11 @@ class UIImageControllerViewController: UIViewController {
     }
 
     @IBAction func markerButtonTapped(_ sender: UIBarButtonItem) {
-        if( UIImageControllerViewController.touchEnabled == true) {
+        if UIImageControllerViewController.touchEnabled == true {
             UIImageControllerViewController.touchEnabled = false
             editBtn.tintColor = UIColor.black
         }
-        if( UIImageControllerViewController.isComposeBtnPressed == true) {
+        if UIImageControllerViewController.isComposeBtnPressed == true {
             UIImageControllerViewController.isComposeBtnPressed = false
             compBtn.tintColor = UIColor.black
         }
@@ -103,7 +103,7 @@ class UIImageControllerViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.isMultipleTouchEnabled = false
         markerBtn.tintColor = UIColor.black
-        
+
         // Tap Gesture Function
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(normalTap(_:)))
         tapGesture.numberOfTapsRequired = 1
@@ -135,15 +135,15 @@ class UIImageControllerViewController: UIViewController {
             startpoint = point
         }
 
-        if (!UIImageControllerViewController.touchEnabled && UIImageControllerViewController.isComposeBtnPressed) {
+        if !UIImageControllerViewController.touchEnabled && UIImageControllerViewController.isComposeBtnPressed {
             addComment(touches)
         }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (UIImageControllerViewController.touchEnabled) {
+        if UIImageControllerViewController.touchEnabled {
             let touch = touches.first
-            if let point = touch?.location(in: imageView){
+            if let point = touch?.location(in: imageView) {
                 touchpoint = point
             }
             path.move(to: startpoint)
@@ -155,7 +155,7 @@ class UIImageControllerViewController: UIViewController {
         }
     }
 
-    func addComment(_ touches:Set<UITouch>) {
+    func addComment(_ touches: Set<UITouch>) {
         UIImageControllerViewController.isImageEdited = true
 
         let touch = touches.first
@@ -166,15 +166,15 @@ class UIImageControllerViewController: UIViewController {
         path.move(to: startpoint)
         startpoint = touchpoint
 
-        if (imageView.point(inside: startpoint, with: nil)) {
+        if imageView.point(inside: startpoint, with: nil) {
             // Draw Circle
-            path =  UIBezierPath(arcCenter: CGPoint(x: touchpoint.x,y: touchpoint.y), radius: CGFloat(20), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            path =  UIBezierPath(arcCenter: CGPoint(x: touchpoint.x, y: touchpoint.y), radius: CGFloat(20), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
             let strokeLayer = CAShapeLayer()
             strokeLayer.fillColor = UIColor.orange.cgColor
             strokeLayer.strokeColor = UIColor.orange.cgColor
 
             let textLayer = CATextLayer()
-            textLayer.frame = CGRect(x: touchpoint.x-5,y: touchpoint.y-10, width: 20, height: 20)
+            textLayer.frame = CGRect(x: touchpoint.x-5, y: touchpoint.y-10, width: 20, height: 20)
             textLayer.font = UIFont(name: "Helvetica-Bold", size: 18)
             textLayer.fontSize = 18
             textLayer.foregroundColor = UIColor.black.cgColor
@@ -210,15 +210,15 @@ class UIImageControllerViewController: UIViewController {
     }
 
     @IBAction func composeFeedButton(_ sender: Any) {
-        if (UIImageControllerViewController.touchEnabled == true) {
+        if UIImageControllerViewController.touchEnabled == true {
             UIImageControllerViewController.touchEnabled = false
             editBtn.tintColor = UIColor.black
         }
-        if (UIImageControllerViewController.isMarkerBtnPressed == true) {
+        if UIImageControllerViewController.isMarkerBtnPressed == true {
             UIImageControllerViewController.isMarkerBtnPressed = false
             markerBtn.tintColor = UIColor.black
         }
-        if (UIImageControllerViewController.isComposeBtnPressed ) {
+        if UIImageControllerViewController.isComposeBtnPressed {
             UIImageControllerViewController.isComposeBtnPressed = false
             compBtn.tintColor = UIColor.black
         } else {
@@ -237,8 +237,8 @@ class UIImageControllerViewController: UIViewController {
     @IBAction func closeButton(_ sender: Any) {
         if UIImageControllerViewController.isImageEdited {
             let alert = UIAlertController(title: "Close Feedback", message: "Do you want to Send or Discard the Feedback before exit?", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Send", style: UIAlertActionStyle.default, handler: {action in self.sendFeedback()}))
-            alert.addAction(UIAlertAction(title: "Discard", style: UIAlertActionStyle.cancel, handler: {action in self.dismiss(animated: false, completion: nil)}))
+            alert.addAction(UIAlertAction(title: "Send", style: UIAlertActionStyle.default, handler: { action in self.sendFeedback() }))
+            alert.addAction(UIAlertAction(title: "Discard", style: UIAlertActionStyle.cancel, handler: { action in self.dismiss(animated: false, completion: nil) }))
             self.present(alert, animated: true, completion: nil)
         } else {
             self.dismiss(animated: false, completion: nil)
@@ -264,7 +264,7 @@ class UIImageControllerViewController: UIViewController {
         self.view.addSubview(toastLabel)
         UIView.animate(withDuration: 1.0, delay: 0.1, options: .curveEaseOut, animations: {
             toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
+        }, completion: { (isCompleted) in
             toastLabel.removeFromSuperview()
             self.dismiss(animated: false, completion: nil)
         })
@@ -275,7 +275,7 @@ class UIImageControllerViewController: UIViewController {
             self.sendFeedback()
         } else {
             let alert = UIAlertController(title: "Send Feedback", message: "Nothing to send, since no comments added. Do you want to exit?", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Yes, Exit", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: false, completion: nil)}))
+            alert.addAction(UIAlertAction(title: "Yes, Exit", style: UIAlertActionStyle.default, handler: { action in self.dismiss(animated: false, completion: nil) }))
             alert.addAction(UIAlertAction(title: "No, Cancel", style: UIAlertActionStyle.cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
