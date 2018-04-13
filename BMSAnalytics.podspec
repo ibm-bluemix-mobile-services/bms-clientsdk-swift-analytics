@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.dependency 'BMSCore', '~> 2.1'
 
   s.requires_arc = true
-
+  s.ios.resources = ['Source/Resources/*.{storyboard,xcassets,json,imageset,png}']
   s.ios.deployment_target = '8.0'
   s.watchos.deployment_target = '2.0'
 

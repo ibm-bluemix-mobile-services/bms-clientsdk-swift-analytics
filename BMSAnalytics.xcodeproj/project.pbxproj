@@ -320,7 +320,6 @@
 		D066DE7F20629A3F00F1EFEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D066DE8A20629B1200F1EFEC /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		D077EAF52072504500AACF2F /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		D077EB0020725CCA00AACF2F /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		D0898F0220628B42007DEC72 /* Feedback.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feedback.storyboard; sourceTree = "<group>"; };
 		D0C50EE42062C55E00C2175D /* UIImageControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageControllerViewController.swift; sourceTree = "<group>"; };
 		D0C50EEF2062C5A000C2175D /* ComposeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeEditorViewController.swift; sourceTree = "<group>"; };
@@ -443,10 +442,11 @@
 		9221C0081C4ED26F007FA9D0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D0898F0220628B42007DEC72 /* Feedback.storyboard */,
+				D066DE7F20629A3F00F1EFEC /* Assets.xcassets */,
 				9221C0091C4ED26F007FA9D0 /* BMSAnalytics.h */,
 				9221C00B1C4ED26F007FA9D0 /* Info_iOS.plist */,
 				9221C00C1C4ED26F007FA9D0 /* Info_watchOS.plist */,
-				D077EB0020725CCA00AACF2F /* module.modulemap */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -822,8 +822,6 @@
 				D066DE8A20629B1200F1EFEC /* Feedback.swift */,
 				D0C50EE42062C55E00C2175D /* UIImageControllerViewController.swift */,
 				D0C50EEF2062C5A000C2175D /* ComposeEditorViewController.swift */,
-				D0898F0220628B42007DEC72 /* Feedback.storyboard */,
-				D066DE7F20629A3F00F1EFEC /* Assets.xcassets */,
 			);
 			path = Feedback;
 			sourceTree = "<group>";
