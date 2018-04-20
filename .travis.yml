@@ -20,7 +20,7 @@ script:
   # Test that the framework can be installed and built, and passes all unit tests
   - travis_wait pod update
   - carthage update
-  - pod lib lint --allow-warnings
+  - pod spec lint --allow-warnings
   - xcodebuild -scheme 'BMSAnalytics iOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
   - xcodebuild -scheme 'BMSAnalytics watchOS' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
   # For Xcode 7, test with iOS 8.1

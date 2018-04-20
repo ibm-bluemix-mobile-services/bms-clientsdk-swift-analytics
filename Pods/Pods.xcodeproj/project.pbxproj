@@ -7,76 +7,76 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		084226776CD1152076C689FDBBC481E8 /* BMSURLSessionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55ED37BCED8D52DDC1E61DD1F14F4AF /* BMSURLSessionUtility.swift */; };
-		0C0C890585011225E9E7CDD49323882A /* BMSCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 30D322591BD72223F0E969A845577B06 /* BMSCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		06CDDCC0DBB4BE4ED1922AB81494395D /* AppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001D4B9A71106E36A4921E3E87FDFF /* AppIdentity.swift */; };
+		06E928146DBA6E793F300FBB5CB3E8CB /* BaseAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB983E66535F8CB3AC6BA4C62B9D493 /* BaseAuthorizationManager.swift */; };
+		0C0C890585011225E9E7CDD49323882A /* BMSCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F016A2F5DDD6318ADC3EE60B862DF5E /* BMSCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DFF9A15B281D6C5FD2714877F280104 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE31A7DDF1DBD842801300089EE9E3BC /* Foundation.framework */; };
-		1376EBB4B5F8F61E15FE9A62A0633F6A /* BMSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D77AECC2EE12068A5816DC273464B /* BMSClient.swift */; };
-		1823D1D9A4A945442874FD48CC9EC190 /* BMSURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEC236801EF82904F52A4BA979BA5C3 /* BMSURLSession.swift */; };
+		1270BCE93255F91CA2B7E1C02AC3948E /* BMSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFFA4FDE2CBAC59D1C9E479D4D56757 /* BMSClient.swift */; };
+		16F9A3E28EFA5F4FFB1F01CC197F32D2 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81B0009AA0B96378CA63511718DDAE /* Response.swift */; };
 		198DE2A3347E4496F90E77DDD54527E6 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D792F50A20D1AF55EE65D74F26F7E3C /* Analytics.swift */; };
-		19EEBFA5DCB20A7EBDD00438C3137D00 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312587D1948DAA68728864F73BC2F9D6 /* NetworkMonitor.swift */; };
-		1ADDB7D1D2ABE6674C6542547E582E66 /* BaseDeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BCC840BA940BA1D14DB7048337BD53 /* BaseDeviceIdentity.swift */; };
 		1AFC3C139041DAC0164692788CE1301E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE31A7DDF1DBD842801300089EE9E3BC /* Foundation.framework */; };
-		1BDB03F83C6CF1104E56D631452EBCBD /* BMSURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29691800936AA91B463859B94088457 /* BMSURLSessionDelegate.swift */; };
-		1C540ADA148674224F36A3BD33546B37 /* Pods-BMSAnalytics Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 84080D4C751C928E6F870BD2A255C53A /* Pods-BMSAnalytics Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C20A5DED3046D55856F5AFB394E2D1F /* AppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB001D4B9A71106E36A4921E3E87FDFF /* AppIdentity.swift */; };
+		1C540ADA148674224F36A3BD33546B37 /* Pods-BMSAnalytics Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 229BD500A6994F83CB4D0A50A2E6512F /* Pods-BMSAnalytics Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CDCEFBAF3A8EB74BEFFA3C712FB1943 /* DeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A417A1C1EAA6CD77E24B622068F58402 /* DeviceIdentity.swift */; };
+		1D44FFEAD5295FEFBE88A3440012FA18 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B03BB98D80A337D11AD5BC065BB4D47 /* NetworkMonitor.swift */; };
+		21CB0FB2BC8C3BEE6BD4D3BF43B56302 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF561B6466E1D878A9FBFE3C7521B7 /* Request.swift */; };
+		24A581C783A9848DB6CF9C6D2128F169 /* BaseDeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222FD59D652CABCD36E0CA884C9BC0DE /* BaseDeviceIdentity.swift */; };
+		292C8B2A3B05B913AD0969215523B518 /* BMSCore-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6ECC6E02B195F6166A804E6D3C2AE /* BMSCore-iOS-dummy.m */; };
 		2A0391A30491C18A015E73BF62FFDE40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE31A7DDF1DBD842801300089EE9E3BC /* Foundation.framework */; };
-		30C1F1197E43123811C3E182298D8AB2 /* BaseUserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC866C4208DDDD9459713435C952526C /* BaseUserIdentity.swift */; };
+		32AE558300AE436654472A0360CBB7F0 /* BMSURLSessionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA425FC9A3AE723D250DD351759860A /* BMSURLSessionUtility.swift */; };
 		33A1B3AA5EA114A56CB2D6A439C6B58C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2BBF786FE79E7E77FAE549722657D1 /* Logger.swift */; };
-		346966C283CDA9CA0738E56DC7A8213F /* DeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A2C627EF25FB52C9DB5085F3CB4957 /* DeviceIdentity.swift */; };
-		3D6D5BC4F2E7A9A1C31E81306C2D9E60 /* Pods-BMSAnalytics Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 156CEEE38E55D270C81389F336A8326F /* Pods-BMSAnalytics Tests-dummy.m */; };
-		3D94261CCEB1705089EA423F7D09D9DE /* module.modulemap in Sources */ = {isa = PBXBuildFile; fileRef = 69CDB814C3D7A7E6A97A74F9A452A0F5 /* module.modulemap */; };
+		36363CBCEE4AC5EFB6B586C063F797D6 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AD5002CCD687849F22FFED9C56323C /* BaseRequest.swift */; };
+		3D6D5BC4F2E7A9A1C31E81306C2D9E60 /* Pods-BMSAnalytics Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 392C58BB1613949B075C58EA727B6C22 /* Pods-BMSAnalytics Tests-dummy.m */; };
+		436CB227EB189FF981049D59D26F09D5 /* BMSURLSessionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA425FC9A3AE723D250DD351759860A /* BMSURLSessionUtility.swift */; };
 		43AF81046B622192D3D79308F135381D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 329B2BB6FD59C58C39BB1636E677A420 /* Foundation.framework */; };
+		45C12D950A11A27F56F14BE5448D3210 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACAEBE6C4DA3A103AA3357CDD4A986 /* Error.swift */; };
 		45F641A61C1489B2B71C25BA16D2B5E4 /* BMSAnalyticsAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8071DFE2EA64CAB06512FF8A6A7806 /* BMSAnalyticsAPI.framework */; };
-		489C0EFAA32D4D8554644F6B07FD9120 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9CF4908CAC2FA6F6CED2B9E9EA3D79 /* AuthorizationManager.swift */; };
+		47D89BBFCE6640E9AD769985B0AE3FA7 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF561B6466E1D878A9FBFE3C7521B7 /* Request.swift */; };
 		49059D03C3B5974DDC961583A115792D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE31A7DDF1DBD842801300089EE9E3BC /* Foundation.framework */; };
-		4BDD848290B71C3D38DFD91F44C945AC /* BaseAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D9A7D2B3307C8415D07A2AC7C30C3 /* BaseAuthorizationManager.swift */; };
+		4982393660FED7282E5CA6A644B1A46A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B81B0009AA0B96378CA63511718DDAE /* Response.swift */; };
 		4D2D4A340AD5F8519CE9A7AE642EFD5D /* RequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DCAEDA0BF49809A599A87500B8C63 /* RequestMetadata.swift */; };
 		4E9127A52A5DB7398CDFD8746A96EA72 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 329B2BB6FD59C58C39BB1636E677A420 /* Foundation.framework */; };
-		4FB3BD442084F2959709037584D722ED /* BMSCore-watchOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6292C87972F1AE2D11E7010D3AEF7BD5 /* BMSCore-watchOS-dummy.m */; };
-		53946D0AED8A25DAC37BD1F1A3119263 /* BMSAnalyticsAPI-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FB01DF830AE0C08E29079CB27B43603C /* BMSAnalyticsAPI-iOS-dummy.m */; };
-		5663BDB73E198314B1E73D87493F8339 /* BaseUserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC866C4208DDDD9459713435C952526C /* BaseUserIdentity.swift */; };
-		5683EC19E7979B3E6DDD4996BCB53BF9 /* Pods-TestApp iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FC5CAB09EC357C903F3ADA4452E8F75 /* Pods-TestApp iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		51519FC0845693F79098DF846FA5892B /* BaseAppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12DB6ABCC71E1E2B40BC0333B7DEE3 /* BaseAppIdentity.swift */; };
+		518D7A507EBB72327A8E501B657C4663 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341FB624DED0C372E1F852A6077893E3 /* AuthorizationManager.swift */; };
+		53946D0AED8A25DAC37BD1F1A3119263 /* BMSAnalyticsAPI-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E2CB94DF850669D21CE73FF2F0F5C8AA /* BMSAnalyticsAPI-iOS-dummy.m */; };
+		5683EC19E7979B3E6DDD4996BCB53BF9 /* Pods-TestApp iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A0A97DBA6C688EE98FDA8DAD4790865 /* Pods-TestApp iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5DE5CB16090CF32C77CBE178C54533CE /* BaseAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB983E66535F8CB3AC6BA4C62B9D493 /* BaseAuthorizationManager.swift */; };
 		5E1FFABDDF67E8A28A2F046BCA41AE85 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 329B2BB6FD59C58C39BB1636E677A420 /* Foundation.framework */; };
-		62704F048A75120A667CBBCE21D802D1 /* UserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9DC1F94CF538FEA6D7814292390672 /* UserIdentity.swift */; };
-		6364AD05B13190074BB3CF8FBB786A4B /* AppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F4BA2729BD3C5AE53E5811F04FDE0 /* AppIdentity.swift */; };
-		68DB4EE7943EBF39664FC2D46AD58A1A /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165A2B7B1534FAA01D663870D0C87AAC /* Request.swift */; };
-		694C8E6BEA8DA01A20C5685C02A00F25 /* BMSAnalyticsAPI-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B0E4B577C47C443105F46DFF961C80A /* BMSAnalyticsAPI-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		699BC98985F486E2BF1BA351D6E6A3C5 /* BMSCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 30D322591BD72223F0E969A845577B06 /* BMSCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6CC0D65180796D6923F174F656EF2EBE /* Pods-BMSAnalytics iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2F83BEE2F047BF0D06FFDDBB4B42C7 /* Pods-BMSAnalytics iOS-dummy.m */; };
-		6D917D2087E3A155C319C2132247E140 /* BMSURLSessionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55ED37BCED8D52DDC1E61DD1F14F4AF /* BMSURLSessionUtility.swift */; };
-		711BC00B679E2FD77EF80CF4CB2294BA /* Pods-BMSAnalytics watchOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E4866C1AE53F66631A5B052714DE10AD /* Pods-BMSAnalytics watchOS-dummy.m */; };
-		73E5D7DB2937ADC0DFCFA665F4C55E5B /* BMSURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEC236801EF82904F52A4BA979BA5C3 /* BMSURLSession.swift */; };
-		7A4848DB61920E429DBA36D0E26519D0 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F8BB8E4A1B879CFF7B59DF8AC29C83 /* Response.swift */; };
+		694C8E6BEA8DA01A20C5685C02A00F25 /* BMSAnalyticsAPI-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D60F865C2637BD808D428347D4C4626 /* BMSAnalyticsAPI-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		699BC98985F486E2BF1BA351D6E6A3C5 /* BMSCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F016A2F5DDD6318ADC3EE60B862DF5E /* BMSCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C11E340D28AA68FA56ADEAAFC78DD54 /* module.modulemap in Sources */ = {isa = PBXBuildFile; fileRef = 22AC2982A0F51A32AE180A2E37507894 /* module.modulemap */; };
+		6CC0D65180796D6923F174F656EF2EBE /* Pods-BMSAnalytics iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8C2400EE745D5C9BFE4728364042D9 /* Pods-BMSAnalytics iOS-dummy.m */; };
+		70A52AC14A86A572AA622337D9C3DC30 /* BMSURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE65F067E229CB43D10042A478EB0B /* BMSURLSessionDelegate.swift */; };
+		711BC00B679E2FD77EF80CF4CB2294BA /* Pods-BMSAnalytics watchOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D334227E795AD444D067FE9CE46C1940 /* Pods-BMSAnalytics watchOS-dummy.m */; };
+		763C7FF4F419D31742561130D354254A /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341FB624DED0C372E1F852A6077893E3 /* AuthorizationManager.swift */; };
 		7BFDFA9F9583C5A8D1EAAEC38265E401 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 329B2BB6FD59C58C39BB1636E677A420 /* Foundation.framework */; };
-		7DD75ABF8841AA050907C7B9B6EFC192 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165A2B7B1534FAA01D663870D0C87AAC /* Request.swift */; };
 		81AC665151DEB17F51FD69F65FE4F54D /* RequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96DCAEDA0BF49809A599A87500B8C63 /* RequestMetadata.swift */; };
-		862EEF9730F59BB1A19466B14F445E51 /* Pods-TestApp iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B45DD5C6B1F9CCD35E9F7163BBCF4CA1 /* Pods-TestApp iOS-dummy.m */; };
-		8C5A5CFC8C5532FE4445DB8932185C6A /* BMSURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29691800936AA91B463859B94088457 /* BMSURLSessionDelegate.swift */; };
-		8F4A94E76C97BAD715D3897D81EF9E88 /* Pods-TestApp watchOS Extension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F7125DF4D1B5B478C485CD8FE7A31327 /* Pods-TestApp watchOS Extension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		919FDCCF918A8A01348325EAD352AFBB /* BMSAnalyticsAPI-watchOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D696B97614E0846EFD3E9CB72C31E158 /* BMSAnalyticsAPI-watchOS-dummy.m */; };
+		84D88E6E32DDABF0B945BF5D34582A15 /* UserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D954B2D0C418B35BC40B163816C597F9 /* UserIdentity.swift */; };
+		85A1C1DA9A33BD152CA7A30CF987F163 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46AD5002CCD687849F22FFED9C56323C /* BaseRequest.swift */; };
+		862EEF9730F59BB1A19466B14F445E51 /* Pods-TestApp iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E6DF4AE46F91FA456BB4972934AC0 /* Pods-TestApp iOS-dummy.m */; };
+		8A13BABB99EA6E9F4903E52819561D8E /* BaseDeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222FD59D652CABCD36E0CA884C9BC0DE /* BaseDeviceIdentity.swift */; };
+		8E0FE755D72D67D23C0694F55476473B /* BaseAppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12DB6ABCC71E1E2B40BC0333B7DEE3 /* BaseAppIdentity.swift */; };
+		8E73ED75FBD74E5506E1DE6325BFAE07 /* BMSURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE65F067E229CB43D10042A478EB0B /* BMSURLSessionDelegate.swift */; };
+		8F4A94E76C97BAD715D3897D81EF9E88 /* Pods-TestApp watchOS Extension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D9D0DB6E6175593206E490FE6EC1BB2E /* Pods-TestApp watchOS Extension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		919FDCCF918A8A01348325EAD352AFBB /* BMSAnalyticsAPI-watchOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9008907A476C00F3536343E3CF0F2449 /* BMSAnalyticsAPI-watchOS-dummy.m */; };
 		927DA7082C3A8F387E7B9B5D871EDBB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE31A7DDF1DBD842801300089EE9E3BC /* Foundation.framework */; };
-		A0BA89C14056C17C117FEEE04B6329EC /* Pods-BMSAnalytics watchOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 637C07FC496F48C1592F44FF4F4E6071 /* Pods-BMSAnalytics watchOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A546B64464D1F8BC2C7737975F23E7C0 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4898ABE5E8C4D67878627DBE260B66 /* BaseRequest.swift */; };
-		A6EE35F1E363F7C903E145C0C8652D25 /* DeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A2C627EF25FB52C9DB5085F3CB4957 /* DeviceIdentity.swift */; };
-		B1EBC84D0E50AF3B843992E9491B1682 /* AppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6F4BA2729BD3C5AE53E5811F04FDE0 /* AppIdentity.swift */; };
-		B2A98FF8AB5E16693653DF9DC1F3DF9F /* BaseDeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BCC840BA940BA1D14DB7048337BD53 /* BaseDeviceIdentity.swift */; };
+		A0BA89C14056C17C117FEEE04B6329EC /* Pods-BMSAnalytics watchOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 82B8610966B8E58AD8C001A9DB32E469 /* Pods-BMSAnalytics watchOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC3C86A8900282C5563876B3A02671AF /* BMSCore-watchOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D15940E58A3C6D035AFF29DF754AD0 /* BMSCore-watchOS-dummy.m */; };
+		ADB62FB10D4700D04473F27385D5C96D /* BaseUserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F66F5AE44E55025C48C5CBD9955D0E /* BaseUserIdentity.swift */; };
+		B0A2686A81E771F98B51C872E7045311 /* BMSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFFA4FDE2CBAC59D1C9E479D4D56757 /* BMSClient.swift */; };
 		B4342EE1DAE59A869D56A8FC99DF6457 /* BMSAnalyticsAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8071DFE2EA64CAB06512FF8A6A7806 /* BMSAnalyticsAPI.framework */; };
-		BE94045C73A192EA9F5F0948A9B034B2 /* BaseAppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6314D204E8723574245E0ED856CB0ABF /* BaseAppIdentity.swift */; };
-		C60D48248AA19BC2F0D95CF765AAF10C /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9512B9EC5CB5524C1E462E0ED295B72D /* Error.swift */; };
-		C9831C7DED720E9459A14145E41295D4 /* BMSCore-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 323DCEFE1D1BE5A3EF9FCE7E7741F387 /* BMSCore-iOS-dummy.m */; };
-		CDDB9D3A7612ABEE25A87E01FA6590B2 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9CF4908CAC2FA6F6CED2B9E9EA3D79 /* AuthorizationManager.swift */; };
-		CEFEA7540997080D12B4E6F47B9F0491 /* BMSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D77AECC2EE12068A5816DC273464B /* BMSClient.swift */; };
-		DCDC694C02CCF6C3F4E6E14A8FEBF383 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4898ABE5E8C4D67878627DBE260B66 /* BaseRequest.swift */; };
+		C4F795F0658F38D25F70F63BB647FCBB /* DeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A417A1C1EAA6CD77E24B622068F58402 /* DeviceIdentity.swift */; };
+		CA836C2082AA7EC22A5FA7C1B004E05F /* BMSURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F89439ACADFE0F4F36DE1594F81471C /* BMSURLSession.swift */; };
+		CF3331F55AB2AE611BC3116BAA7849D4 /* BaseUserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F66F5AE44E55025C48C5CBD9955D0E /* BaseUserIdentity.swift */; };
+		E0CF708B685FB23BC8995DCC1EE3F8E3 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ACAEBE6C4DA3A103AA3357CDD4A986 /* Error.swift */; };
+		E0F2BADFDD39B29797C83208B8E64028 /* module.modulemap in Sources */ = {isa = PBXBuildFile; fileRef = 22AC2982A0F51A32AE180A2E37507894 /* module.modulemap */; };
 		E10C2CADCF572BE1070CD0F22FE051F7 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D792F50A20D1AF55EE65D74F26F7E3C /* Analytics.swift */; };
-		E2EE50C1266B522ADFFCA321C082A136 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F8BB8E4A1B879CFF7B59DF8AC29C83 /* Response.swift */; };
-		E702B4C03B490AEA5D3ED0DE70F15B3B /* UserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9DC1F94CF538FEA6D7814292390672 /* UserIdentity.swift */; };
-		E70FBBB350CDE495578AAFD9402D886B /* BMSAnalyticsAPI-watchOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C339E1C0883A7A1ED8B8BF07905840 /* BMSAnalyticsAPI-watchOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EA2ED98A44FF20964D2C3134EE8F7917 /* Pods-BMSAnalytics iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A8A2364B6D9C7A20C0CFC6F5D71E4DCF /* Pods-BMSAnalytics iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E70FBBB350CDE495578AAFD9402D886B /* BMSAnalyticsAPI-watchOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B3B873CE7F0D74B10285AC8EDCC42A0A /* BMSAnalyticsAPI-watchOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA2ED98A44FF20964D2C3134EE8F7917 /* Pods-BMSAnalytics iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 54F2316EAD7EA70CB70359D6A70ED54A /* Pods-BMSAnalytics iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC2B2480B281021C82283E87466E3B30 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2BBF786FE79E7E77FAE549722657D1 /* Logger.swift */; };
-		EDC23B071E433A946D3039E0DB9201A0 /* module.modulemap in Sources */ = {isa = PBXBuildFile; fileRef = 69CDB814C3D7A7E6A97A74F9A452A0F5 /* module.modulemap */; };
-		EFB391DC383FA856D460A84BEAB2D037 /* Pods-TestApp watchOS Extension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E48387BE831DD10DBAECAEFB03F83C /* Pods-TestApp watchOS Extension-dummy.m */; };
-		F09F16F81A6F82B6B659169E6CD7678A /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9512B9EC5CB5524C1E462E0ED295B72D /* Error.swift */; };
-		F6F4859C0D0C26E1493EFF88AEEE82BA /* BaseAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289D9A7D2B3307C8415D07A2AC7C30C3 /* BaseAuthorizationManager.swift */; };
-		FDCFC533BA494D400C15587D7B43455C /* BaseAppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6314D204E8723574245E0ED856CB0ABF /* BaseAppIdentity.swift */; };
+		EFB391DC383FA856D460A84BEAB2D037 /* Pods-TestApp watchOS Extension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F8AA15369F360AE2B71E0B24D6218E6 /* Pods-TestApp watchOS Extension-dummy.m */; };
+		FCA1EDFDA35B4BF5CF63763F5F12FC93 /* UserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D954B2D0C418B35BC40B163816C597F9 /* UserIdentity.swift */; };
+		FF914DDE9743AB8595D4FF3A82B388A8 /* BMSURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F89439ACADFE0F4F36DE1594F81471C /* BMSURLSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,110 +167,110 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		095137F04763CE79E66ED13D1F8B7EAB /* BMSCore-watchOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; name = "BMSCore-watchOS.modulemap"; path = "../BMSCore-watchOS/BMSCore-watchOS.modulemap"; sourceTree = "<group>"; };
-		0CD6F499B7C715CCC5DA12CF40C7B77B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		005914999E0FA668A776519D026995E7 /* Pods-TestApp watchOS Extension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TestApp watchOS Extension.modulemap"; sourceTree = "<group>"; };
+		03ACAEBE6C4DA3A103AA3357CDD4A986 /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Source/Error.swift; sourceTree = "<group>"; };
+		076E205E79B0268CC9C18F1CCAE5DB03 /* Pods-TestApp iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TestApp iOS.release.xcconfig"; sourceTree = "<group>"; };
+		0C8C2400EE745D5C9BFE4728364042D9 /* Pods-BMSAnalytics iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BMSAnalytics iOS-dummy.m"; sourceTree = "<group>"; };
 		0DB3883D3F55907835994C819966F321 /* Pods_BMSAnalytics_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BMSAnalytics_Tests.framework; path = "Pods-BMSAnalytics Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10D398DF3249C2D336F50AD8012E519F /* BMSAnalyticsAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BMSAnalyticsAPI.framework; path = "BMSAnalyticsAPI-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		12BD555CCDF5B3A0CDF7B2F30CBE7032 /* Pods-BMSAnalytics Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BMSAnalytics Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		156CEEE38E55D270C81389F336A8326F /* Pods-BMSAnalytics Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BMSAnalytics Tests-dummy.m"; sourceTree = "<group>"; };
-		165A2B7B1534FAA01D663870D0C87AAC /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = "Source/Network Requests/Request.swift"; sourceTree = "<group>"; };
-		18898D5455A4EF4FE24E4CE7FF40F213 /* BMSAnalyticsAPI-watchOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; name = "BMSAnalyticsAPI-watchOS.modulemap"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.modulemap"; sourceTree = "<group>"; };
-		1920E35F8DB3094E691059F6DE42C855 /* Pods-TestApp iOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TestApp iOS-resources.sh"; sourceTree = "<group>"; };
-		1B111E3020F066C455E4204E91F4029E /* Pods-BMSAnalytics watchOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-BMSAnalytics watchOS.modulemap"; sourceTree = "<group>"; };
-		1E1C55C996949FC1BAB0C2561FFC68F4 /* Pods-TestApp iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TestApp iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		2018722353207C180D0C5C667F0753CE /* Pods-TestApp watchOS Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TestApp watchOS Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		22E83FB1D6D85B782DF0D7EBA44F17D1 /* Pods-BMSAnalytics iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-BMSAnalytics iOS.modulemap"; sourceTree = "<group>"; };
-		287903D34C65314B73159A917C865B94 /* BMSCore-watchOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BMSCore-watchOS.xcconfig"; path = "../BMSCore-watchOS/BMSCore-watchOS.xcconfig"; sourceTree = "<group>"; };
-		289D9A7D2B3307C8415D07A2AC7C30C3 /* BaseAuthorizationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseAuthorizationManager.swift; path = Source/Security/BaseAuthorizationManager.swift; sourceTree = "<group>"; };
-		2FC5CAB09EC357C903F3ADA4452E8F75 /* Pods-TestApp iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TestApp iOS-umbrella.h"; sourceTree = "<group>"; };
+		13B5DD40D7BBD5F56B08B850C43F5E4D /* Pods-BMSAnalytics watchOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BMSAnalytics watchOS-resources.sh"; sourceTree = "<group>"; };
+		184CAE5BF21118E3E35ED3496F6AB269 /* BMSAnalyticsAPI-watchOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BMSAnalyticsAPI-watchOS.xcconfig"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.xcconfig"; sourceTree = "<group>"; };
+		188DFC0D4FBFDA0ACC1622794E78887D /* BMSCore-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "BMSCore-iOS.modulemap"; sourceTree = "<group>"; };
+		1927A4EFCBE7D28A61EDE680380AF91F /* BMSAnalyticsAPI-watchOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BMSAnalyticsAPI-watchOS-prefix.pch"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-prefix.pch"; sourceTree = "<group>"; };
+		1D55A59B82A5BD2C8C5D5A0E0D15A219 /* Pods-BMSAnalytics iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics iOS.release.xcconfig"; sourceTree = "<group>"; };
+		222FD59D652CABCD36E0CA884C9BC0DE /* BaseDeviceIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseDeviceIdentity.swift; path = Source/Security/Identity/BaseDeviceIdentity.swift; sourceTree = "<group>"; };
+		229BD500A6994F83CB4D0A50A2E6512F /* Pods-BMSAnalytics Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BMSAnalytics Tests-umbrella.h"; sourceTree = "<group>"; };
+		22AC2982A0F51A32AE180A2E37507894 /* module.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = module.modulemap; path = Source/Resources/module.modulemap; sourceTree = "<group>"; };
+		256536F9AD52E16C192EC5EDD5C5D954 /* Pods-BMSAnalytics watchOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BMSAnalytics watchOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		274D63F3C0E99F8D05089AD9282284FA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../BMSAnalyticsAPI-watchOS/Info.plist"; sourceTree = "<group>"; };
+		299A8FD5B4160ADA696D3BBB4B98C870 /* Pods-BMSAnalytics Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BMSAnalytics Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		29DC7169273B343CDF8E81B85D2E89D1 /* Pods-TestApp iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TestApp iOS.modulemap"; sourceTree = "<group>"; };
+		2E6E71EF3D585661810A7AA4ECE4A041 /* BMSCore-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "BMSCore-iOS.xcconfig"; sourceTree = "<group>"; };
+		2EAE65F067E229CB43D10042A478EB0B /* BMSURLSessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSURLSessionDelegate.swift; path = "Source/Network Requests/BMSURLSessionDelegate.swift"; sourceTree = "<group>"; };
 		30802EA3DBED8A2E35B3185770D89A5C /* BMSAnalyticsAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BMSAnalyticsAPI.framework; path = "BMSAnalyticsAPI-watchOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		30D322591BD72223F0E969A845577B06 /* BMSCore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BMSCore.h; path = Source/Resources/BMSCore.h; sourceTree = "<group>"; };
-		312587D1948DAA68728864F73BC2F9D6 /* NetworkMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkMonitor.swift; path = "Source/Network Requests/NetworkMonitor.swift"; sourceTree = "<group>"; };
-		323DCEFE1D1BE5A3EF9FCE7E7741F387 /* BMSCore-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BMSCore-iOS-dummy.m"; sourceTree = "<group>"; };
+		32020471FC869E0A56D6CB8599A32395 /* BMSCore-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSCore-iOS-prefix.pch"; sourceTree = "<group>"; };
+		328C40F8DEA692A9CC9B84421B99087E /* BMSAnalyticsAPI-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSAnalyticsAPI-iOS-prefix.pch"; sourceTree = "<group>"; };
 		329B2BB6FD59C58C39BB1636E677A420 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3938E6A323EC1A297B1689D6B1B3C042 /* Pods-BMSAnalytics Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics Tests.release.xcconfig"; sourceTree = "<group>"; };
+		3393C900D66BA2B2D6CE78484F86EC58 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		341FB624DED0C372E1F852A6077893E3 /* AuthorizationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthorizationManager.swift; path = Source/Security/AuthorizationManager.swift; sourceTree = "<group>"; };
+		34A39F2A2F0C7B6333B60FFB4E4AAC18 /* Pods-BMSAnalytics iOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BMSAnalytics iOS-resources.sh"; sourceTree = "<group>"; };
+		392C58BB1613949B075C58EA727B6C22 /* Pods-BMSAnalytics Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BMSAnalytics Tests-dummy.m"; sourceTree = "<group>"; };
+		399CF8CCC06D11C60D4CA315BB142784 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CEAFA00DACE6C382FE5D7B4F5153074 /* BMSAnalyticsAPI-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "BMSAnalyticsAPI-iOS.modulemap"; sourceTree = "<group>"; };
 		3D792F50A20D1AF55EE65D74F26F7E3C /* Analytics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Analytics.swift; path = Source/Analytics.swift; sourceTree = "<group>"; };
 		3E2BBF786FE79E7E77FAE549722657D1 /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Source/Logger.swift; sourceTree = "<group>"; };
-		44C6FA20354AF1183E9D466E4A0CAB8C /* Pods-TestApp iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-TestApp iOS.modulemap"; sourceTree = "<group>"; };
-		47434B5ACB352A3BC0286F124A8BC5C0 /* BMSAnalyticsAPI-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "BMSAnalyticsAPI-iOS.modulemap"; sourceTree = "<group>"; };
-		48A2C627EF25FB52C9DB5085F3CB4957 /* DeviceIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceIdentity.swift; path = Source/Security/Identity/DeviceIdentity.swift; sourceTree = "<group>"; };
-		53C339E1C0883A7A1ED8B8BF07905840 /* BMSAnalyticsAPI-watchOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BMSAnalyticsAPI-watchOS-umbrella.h"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-umbrella.h"; sourceTree = "<group>"; };
-		55850BD4D3F674C671CD69E69FCF9D00 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		57FE811FB1C774BCE30B0A4EA501324D /* Pods-BMSAnalytics watchOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BMSAnalytics watchOS-resources.sh"; sourceTree = "<group>"; };
-		5F6D8A7CA6E26C073ACC93BB270AAF57 /* Pods-BMSAnalytics Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BMSAnalytics Tests-frameworks.sh"; sourceTree = "<group>"; };
-		61515B9FE98F54B0B261EAD5AB942C84 /* BMSAnalyticsAPI-watchOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BMSAnalyticsAPI-watchOS-prefix.pch"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-prefix.pch"; sourceTree = "<group>"; };
-		6292C87972F1AE2D11E7010D3AEF7BD5 /* BMSCore-watchOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "BMSCore-watchOS-dummy.m"; path = "../BMSCore-watchOS/BMSCore-watchOS-dummy.m"; sourceTree = "<group>"; };
-		6314D204E8723574245E0ED856CB0ABF /* BaseAppIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseAppIdentity.swift; path = Source/Security/Identity/BaseAppIdentity.swift; sourceTree = "<group>"; };
-		637C07FC496F48C1592F44FF4F4E6071 /* Pods-BMSAnalytics watchOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BMSAnalytics watchOS-umbrella.h"; sourceTree = "<group>"; };
-		64DD662704105DCA89F37EFC5D9190C8 /* BMSAnalyticsAPI-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "BMSAnalyticsAPI-iOS.xcconfig"; sourceTree = "<group>"; };
-		65642C513184781EE77DBAFF169657DF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		66E48387BE831DD10DBAECAEFB03F83C /* Pods-TestApp watchOS Extension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TestApp watchOS Extension-dummy.m"; sourceTree = "<group>"; };
-		69CDB814C3D7A7E6A97A74F9A452A0F5 /* module.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; name = module.modulemap; path = Source/Resources/module.modulemap; sourceTree = "<group>"; };
+		4020D07772940E902C0FE9C86D6DBE06 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../BMSCore-watchOS/Info.plist"; sourceTree = "<group>"; };
+		4140F4E8C7CB0ECF759F8746E6520897 /* Pods-BMSAnalytics watchOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics watchOS.debug.xcconfig"; sourceTree = "<group>"; };
+		46AD5002CCD687849F22FFED9C56323C /* BaseRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseRequest.swift; path = "Source/Network Requests/BaseRequest.swift"; sourceTree = "<group>"; };
+		54F2316EAD7EA70CB70359D6A70ED54A /* Pods-BMSAnalytics iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BMSAnalytics iOS-umbrella.h"; sourceTree = "<group>"; };
+		56EFC040659478A0A2B7C09094304B12 /* Pods-BMSAnalytics Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BMSAnalytics Tests-resources.sh"; sourceTree = "<group>"; };
+		599B763A4C009D7BC1813DF6924916AB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A0A97DBA6C688EE98FDA8DAD4790865 /* Pods-TestApp iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TestApp iOS-umbrella.h"; sourceTree = "<group>"; };
+		5B81B0009AA0B96378CA63511718DDAE /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = "Source/Network Requests/Response.swift"; sourceTree = "<group>"; };
+		5F016A2F5DDD6318ADC3EE60B862DF5E /* BMSCore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BMSCore.h; path = Source/Resources/BMSCore.h; sourceTree = "<group>"; };
+		5F89439ACADFE0F4F36DE1594F81471C /* BMSURLSession.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSURLSession.swift; path = "Source/Network Requests/BMSURLSession.swift"; sourceTree = "<group>"; };
+		6144508C9A41C9BE16A78FE9E465B3B7 /* Pods-BMSAnalytics Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BMSAnalytics Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		69D469C5D9303F74C7C52060E6B78E22 /* BMSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BMSCore.framework; path = "BMSCore-watchOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B0E4B577C47C443105F46DFF961C80A /* BMSAnalyticsAPI-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSAnalyticsAPI-iOS-umbrella.h"; sourceTree = "<group>"; };
-		6C0839D323E5D1909E955A17B78E9636 /* Pods-TestApp iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TestApp iOS.release.xcconfig"; sourceTree = "<group>"; };
+		6AB55C6A1B7B36E3D9A737EF5CA75BA0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D60F865C2637BD808D428347D4C4626 /* BMSAnalyticsAPI-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSAnalyticsAPI-iOS-umbrella.h"; sourceTree = "<group>"; };
+		6DB983E66535F8CB3AC6BA4C62B9D493 /* BaseAuthorizationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseAuthorizationManager.swift; path = Source/Security/BaseAuthorizationManager.swift; sourceTree = "<group>"; };
 		6E8071DFE2EA64CAB06512FF8A6A7806 /* BMSAnalyticsAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BMSAnalyticsAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F2D77AECC2EE12068A5816DC273464B /* BMSClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSClient.swift; path = Source/BMSClient.swift; sourceTree = "<group>"; };
 		6FDB21A6A5AA9FCDC75E2A2BC2A20861 /* Pods_TestApp_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TestApp_iOS.framework; path = "Pods-TestApp iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		70CB9282F4FFCE06E4FE12641DB0F4B7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../BMSAnalyticsAPI-watchOS/Info.plist"; sourceTree = "<group>"; };
-		7B6F4BA2729BD3C5AE53E5811F04FDE0 /* AppIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppIdentity.swift; path = Source/Security/Identity/AppIdentity.swift; sourceTree = "<group>"; };
-		7D5A906B6BDAFC2563CE9E981077824B /* Pods-BMSAnalytics iOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BMSAnalytics iOS-resources.sh"; sourceTree = "<group>"; };
-		7DBEC7B527EF45D72E2CC369B2FC1C3F /* Pods-TestApp iOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TestApp iOS-frameworks.sh"; sourceTree = "<group>"; };
-		7FEC236801EF82904F52A4BA979BA5C3 /* BMSURLSession.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSURLSession.swift; path = "Source/Network Requests/BMSURLSession.swift"; sourceTree = "<group>"; };
-		82F9E14760E34A3934027E1C64598E67 /* BMSCore-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSCore-iOS-prefix.pch"; sourceTree = "<group>"; };
-		82FF7EE9ADA353727AEDE997DFC1F8EF /* Pods-TestApp watchOS Extension-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TestApp watchOS Extension-acknowledgements.plist"; sourceTree = "<group>"; };
-		8330385D0ABF346FAAE5BE5BE32611AB /* Pods-BMSAnalytics iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics iOS.release.xcconfig"; sourceTree = "<group>"; };
-		83D4B5F8FCB76DBB2BDD62152275B69D /* Pods-TestApp watchOS Extension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-TestApp watchOS Extension.modulemap"; sourceTree = "<group>"; };
-		84080D4C751C928E6F870BD2A255C53A /* Pods-BMSAnalytics Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BMSAnalytics Tests-umbrella.h"; sourceTree = "<group>"; };
-		8F8AB2511FD51661831940795BA05006 /* Pods-BMSAnalytics watchOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BMSAnalytics watchOS-acknowledgements.markdown"; sourceTree = "<group>"; };
-		900F147790A7DC386E9844A3CD17E32E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		921E1A9DB0904C3CC5B541713CC54763 /* Pods-TestApp iOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TestApp iOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		71FFF3191BA5FAD422392A6791D82A2A /* Pods-BMSAnalytics Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BMSAnalytics Tests.modulemap"; sourceTree = "<group>"; };
+		7427300C1A878F823998EBA11C882086 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C19146FD6B4CAC69D8E6FD83041CE80 /* Pods-TestApp iOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TestApp iOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		7F8AA15369F360AE2B71E0B24D6218E6 /* Pods-TestApp watchOS Extension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TestApp watchOS Extension-dummy.m"; sourceTree = "<group>"; };
+		7FFFA4FDE2CBAC59D1C9E479D4D56757 /* BMSClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSClient.swift; path = Source/BMSClient.swift; sourceTree = "<group>"; };
+		82B8610966B8E58AD8C001A9DB32E469 /* Pods-BMSAnalytics watchOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BMSAnalytics watchOS-umbrella.h"; sourceTree = "<group>"; };
+		8B02CF195EFA3A920A1FCB7749ABE548 /* Pods-BMSAnalytics iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		8B03BB98D80A337D11AD5BC065BB4D47 /* NetworkMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkMonitor.swift; path = "Source/Network Requests/NetworkMonitor.swift"; sourceTree = "<group>"; };
+		8B234B91275F8EE14EBAB06C966769A6 /* Pods-TestApp watchOS Extension-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TestApp watchOS Extension-resources.sh"; sourceTree = "<group>"; };
+		8C0BD3822AD50B579ADF322EDE89FCD9 /* Pods-TestApp watchOS Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TestApp watchOS Extension.debug.xcconfig"; sourceTree = "<group>"; };
+		8C897A3E27C1E8C17B8D9A316E777D10 /* Pods-BMSAnalytics iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BMSAnalytics iOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		8FB6ECC6E02B195F6166A804E6D3C2AE /* BMSCore-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BMSCore-iOS-dummy.m"; sourceTree = "<group>"; };
+		9008907A476C00F3536343E3CF0F2449 /* BMSAnalyticsAPI-watchOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "BMSAnalyticsAPI-watchOS-dummy.m"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9512B9EC5CB5524C1E462E0ED295B72D /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Source/Error.swift; sourceTree = "<group>"; };
 		96879AF39321AD00435CF106D80D384A /* Pods_BMSAnalytics_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BMSAnalytics_iOS.framework; path = "Pods-BMSAnalytics iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		974D66D2F951060179D5FE635435ADDE /* Pods-BMSAnalytics watchOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics watchOS.release.xcconfig"; sourceTree = "<group>"; };
 		97F1C1D9009C4EF3D12B0E1D7EEA4E50 /* BMSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BMSCore.framework; path = "BMSCore-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D67ECDABD926B5DE863CA5E9DC9C93C /* Pods-BMSAnalytics Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BMSAnalytics Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		A0459491D01678C28010D17DBBB7B5F7 /* Pods-TestApp watchOS Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TestApp watchOS Extension.release.xcconfig"; sourceTree = "<group>"; };
-		A22FF2EAD224DA3E6CF08BF413C650FB /* Pods-BMSAnalytics watchOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics watchOS.debug.xcconfig"; sourceTree = "<group>"; };
-		A8A2364B6D9C7A20C0CFC6F5D71E4DCF /* Pods-BMSAnalytics iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BMSAnalytics iOS-umbrella.h"; sourceTree = "<group>"; };
-		B095E6A34D86138DE294CC2204667875 /* BMSCore-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "BMSCore-iOS.xcconfig"; sourceTree = "<group>"; };
-		B0D051DA9B8B33851DD6ED5FF3737617 /* Pods-TestApp watchOS Extension-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TestApp watchOS Extension-resources.sh"; sourceTree = "<group>"; };
-		B1FB4726F9F2FE49A8F703A51D4BC4F2 /* Pods-BMSAnalytics Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BMSAnalytics Tests-resources.sh"; sourceTree = "<group>"; };
-		B22599529408B714A150E4508992B79E /* Pods-TestApp iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TestApp iOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		B29691800936AA91B463859B94088457 /* BMSURLSessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSURLSessionDelegate.swift; path = "Source/Network Requests/BMSURLSessionDelegate.swift"; sourceTree = "<group>"; };
-		B45DD5C6B1F9CCD35E9F7163BBCF4CA1 /* Pods-TestApp iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TestApp iOS-dummy.m"; sourceTree = "<group>"; };
-		B7E73DD5B31C27F6FD72EFB72A41A28C /* Pods-BMSAnalytics iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BMSAnalytics iOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		BE023861AEB29494DF874967A2F2978A /* BMSAnalyticsAPI-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSAnalyticsAPI-iOS-prefix.pch"; sourceTree = "<group>"; };
-		C6B3048E6FD20C1F5507F41AF0DB74EB /* BMSCore-watchOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BMSCore-watchOS-prefix.pch"; path = "../BMSCore-watchOS/BMSCore-watchOS-prefix.pch"; sourceTree = "<group>"; };
-		C6FD0B86F1FD9B28A3E509E428E58BE6 /* Pods-BMSAnalytics Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		CB8D34D0BCA61C19811CBD0976CFAA21 /* Pods-TestApp watchOS Extension-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TestApp watchOS Extension-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CB9DC1F94CF538FEA6D7814292390672 /* UserIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UserIdentity.swift; path = Source/Security/Identity/UserIdentity.swift; sourceTree = "<group>"; };
-		CC1A130F044AF0880AA1DFBA95DF8636 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B18F730E5C11D6CACE240667B01380A /* Pods-BMSAnalytics watchOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics watchOS.release.xcconfig"; sourceTree = "<group>"; };
+		9B2E6DF4AE46F91FA456BB4972934AC0 /* Pods-TestApp iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TestApp iOS-dummy.m"; sourceTree = "<group>"; };
+		A11C4FD33F3C161CAF01EBB33CC246A1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A32EB3F5F5E976074857C7734F5E6E27 /* Pods-TestApp iOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TestApp iOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		A3CD4724B192876E2E9BB7CD1ACADFC9 /* Pods-TestApp watchOS Extension-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TestApp watchOS Extension-acknowledgements.plist"; sourceTree = "<group>"; };
+		A417A1C1EAA6CD77E24B622068F58402 /* DeviceIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceIdentity.swift; path = Source/Security/Identity/DeviceIdentity.swift; sourceTree = "<group>"; };
+		A9F1F01DDAE4900FBA3EACF0A1C9E630 /* BMSAnalyticsAPI-watchOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "BMSAnalyticsAPI-watchOS.modulemap"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.modulemap"; sourceTree = "<group>"; };
+		AA0A75DEC416C33EF983B2AF585C9A3C /* Pods-BMSAnalytics iOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BMSAnalytics iOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		AA8AE916B89B2AB8372C920D813DF9BB /* Pods-BMSAnalytics Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		AAEC7BB5AE846BEC0A82DD377F3E6BBA /* BMSCore-watchOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BMSCore-watchOS.xcconfig"; path = "../BMSCore-watchOS/BMSCore-watchOS.xcconfig"; sourceTree = "<group>"; };
+		B3B873CE7F0D74B10285AC8EDCC42A0A /* BMSAnalyticsAPI-watchOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BMSAnalyticsAPI-watchOS-umbrella.h"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-umbrella.h"; sourceTree = "<group>"; };
+		B45CC148C059AC73D6E7E7939D6BE132 /* Pods-TestApp iOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TestApp iOS-resources.sh"; sourceTree = "<group>"; };
+		B81F9F060E389CB29D7129FE408B791D /* Pods-BMSAnalytics Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics Tests.release.xcconfig"; sourceTree = "<group>"; };
+		BA12DB6ABCC71E1E2B40BC0333B7DEE3 /* BaseAppIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseAppIdentity.swift; path = Source/Security/Identity/BaseAppIdentity.swift; sourceTree = "<group>"; };
+		BB001D4B9A71106E36A4921E3E87FDFF /* AppIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppIdentity.swift; path = Source/Security/Identity/AppIdentity.swift; sourceTree = "<group>"; };
+		BE2ED0C3C999F9BBA0A420CA5008517F /* Pods-BMSAnalytics iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BMSAnalytics iOS.modulemap"; sourceTree = "<group>"; };
+		C0AF561B6466E1D878A9FBFE3C7521B7 /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = "Source/Network Requests/Request.swift"; sourceTree = "<group>"; };
+		C0D15940E58A3C6D035AFF29DF754AD0 /* BMSCore-watchOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "BMSCore-watchOS-dummy.m"; path = "../BMSCore-watchOS/BMSCore-watchOS-dummy.m"; sourceTree = "<group>"; };
+		C53258F8CEC0D55C8B69B7D579A6C5BA /* Pods-TestApp iOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TestApp iOS-frameworks.sh"; sourceTree = "<group>"; };
 		CD20B571016160D964BDB7F205D5D7ED /* Pods_BMSAnalytics_watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BMSAnalytics_watchOS.framework; path = "Pods-BMSAnalytics watchOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE4898ABE5E8C4D67878627DBE260B66 /* BaseRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseRequest.swift; path = "Source/Network Requests/BaseRequest.swift"; sourceTree = "<group>"; };
-		CF2F83BEE2F047BF0D06FFDDBB4B42C7 /* Pods-BMSAnalytics iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BMSAnalytics iOS-dummy.m"; sourceTree = "<group>"; };
-		D02891629070490F0DBECDD5EC1BD6AE /* BMSCore-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "BMSCore-iOS.modulemap"; sourceTree = "<group>"; };
-		D30084BAF4DD30FC56658E1441FADDA8 /* Pods-BMSAnalytics Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-BMSAnalytics Tests.modulemap"; sourceTree = "<group>"; };
-		D696B97614E0846EFD3E9CB72C31E158 /* BMSAnalyticsAPI-watchOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "BMSAnalyticsAPI-watchOS-dummy.m"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-dummy.m"; sourceTree = "<group>"; };
-		D739F53433AEB73F662691142EC38A9C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../BMSCore-watchOS/Info.plist"; sourceTree = "<group>"; };
+		CD98DE8AE7C4985ED52A230CF8A5972E /* Pods-TestApp watchOS Extension-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TestApp watchOS Extension-frameworks.sh"; sourceTree = "<group>"; };
+		D15BC58365CE20C9A0560164B90D1742 /* Pods-TestApp iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TestApp iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D334227E795AD444D067FE9CE46C1940 /* Pods-BMSAnalytics watchOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BMSAnalytics watchOS-dummy.m"; sourceTree = "<group>"; };
+		D34B831408D24B11CE1E6CEA8E4E8D7F /* Pods-BMSAnalytics watchOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BMSAnalytics watchOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		D954B2D0C418B35BC40B163816C597F9 /* UserIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UserIdentity.swift; path = Source/Security/Identity/UserIdentity.swift; sourceTree = "<group>"; };
 		D96DCAEDA0BF49809A599A87500B8C63 /* RequestMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestMetadata.swift; path = Source/RequestMetadata.swift; sourceTree = "<group>"; };
-		DA9CF4908CAC2FA6F6CED2B9E9EA3D79 /* AuthorizationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthorizationManager.swift; path = Source/Security/AuthorizationManager.swift; sourceTree = "<group>"; };
-		DBC187FFE474323DBB9DD18238079465 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9D0DB6E6175593206E490FE6EC1BB2E /* Pods-TestApp watchOS Extension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TestApp watchOS Extension-umbrella.h"; sourceTree = "<group>"; };
 		DE31A7DDF1DBD842801300089EE9E3BC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		E1274A0F87659CF2FC158958BC8BA5DB /* Pods-BMSAnalytics iOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BMSAnalytics iOS-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E1BCC840BA940BA1D14DB7048337BD53 /* BaseDeviceIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseDeviceIdentity.swift; path = Source/Security/Identity/BaseDeviceIdentity.swift; sourceTree = "<group>"; };
-		E3CB9114D1901144F63C6ABE99681753 /* Pods-TestApp watchOS Extension-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TestApp watchOS Extension-frameworks.sh"; sourceTree = "<group>"; };
-		E4866C1AE53F66631A5B052714DE10AD /* Pods-BMSAnalytics watchOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BMSAnalytics watchOS-dummy.m"; sourceTree = "<group>"; };
-		E665B8D0B93C070FC0A37BD2EDC64BB4 /* BMSAnalyticsAPI-watchOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BMSAnalyticsAPI-watchOS.xcconfig"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.xcconfig"; sourceTree = "<group>"; };
-		E7F8BB8E4A1B879CFF7B59DF8AC29C83 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = "Source/Network Requests/Response.swift"; sourceTree = "<group>"; };
-		EF6877B5AFF73219E1655A0BA061EADE /* Pods-BMSAnalytics iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BMSAnalytics iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		F55ED37BCED8D52DDC1E61DD1F14F4AF /* BMSURLSessionUtility.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSURLSessionUtility.swift; path = "Source/Network Requests/BMSURLSessionUtility.swift"; sourceTree = "<group>"; };
-		F7125DF4D1B5B478C485CD8FE7A31327 /* Pods-TestApp watchOS Extension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TestApp watchOS Extension-umbrella.h"; sourceTree = "<group>"; };
-		F7FC4BFB003EB05A29E7B50F50D642C6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA1A8BB6A6CF0C0F05646FFCA78BFF8C /* Pods-BMSAnalytics watchOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BMSAnalytics watchOS-acknowledgements.plist"; sourceTree = "<group>"; };
-		FB01DF830AE0C08E29079CB27B43603C /* BMSAnalyticsAPI-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BMSAnalyticsAPI-iOS-dummy.m"; sourceTree = "<group>"; };
-		FC866C4208DDDD9459713435C952526C /* BaseUserIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseUserIdentity.swift; path = Source/Security/Identity/BaseUserIdentity.swift; sourceTree = "<group>"; };
+		E1A77C378124EB16070606BF7BE18751 /* Pods-TestApp watchOS Extension-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TestApp watchOS Extension-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E2BACAAC8DC8503B3BB4A66B9986B7E2 /* BMSCore-watchOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BMSCore-watchOS-prefix.pch"; path = "../BMSCore-watchOS/BMSCore-watchOS-prefix.pch"; sourceTree = "<group>"; };
+		E2CB94DF850669D21CE73FF2F0F5C8AA /* BMSAnalyticsAPI-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BMSAnalyticsAPI-iOS-dummy.m"; sourceTree = "<group>"; };
+		E638AB75DBDE005C646FC55237E7B0B9 /* BMSAnalyticsAPI-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "BMSAnalyticsAPI-iOS.xcconfig"; sourceTree = "<group>"; };
+		E6AD1EB25DC32130E6C7F12AE04B68A3 /* Pods-BMSAnalytics Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BMSAnalytics Tests-frameworks.sh"; sourceTree = "<group>"; };
+		EEA425FC9A3AE723D250DD351759860A /* BMSURLSessionUtility.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSURLSessionUtility.swift; path = "Source/Network Requests/BMSURLSessionUtility.swift"; sourceTree = "<group>"; };
+		F289627EC7ECF661ECA387D798EC2C9A /* BMSCore-watchOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "BMSCore-watchOS.modulemap"; path = "../BMSCore-watchOS/BMSCore-watchOS.modulemap"; sourceTree = "<group>"; };
+		F30A189E5685F8DB8678DA9E578E4F94 /* Pods-TestApp watchOS Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TestApp watchOS Extension.release.xcconfig"; sourceTree = "<group>"; };
+		F5437E20F6D43694E9F02A6BCC89FD4C /* Pods-BMSAnalytics watchOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BMSAnalytics watchOS.modulemap"; sourceTree = "<group>"; };
+		F7F66F5AE44E55025C48C5CBD9955D0E /* BaseUserIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseUserIdentity.swift; path = Source/Security/Identity/BaseUserIdentity.swift; sourceTree = "<group>"; };
+		FE4D3F6665F5207AD203CBA0ED99431E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFB891636CCC981C4B79A2F2F6057536 /* Pods_TestApp_watchOS_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TestApp_watchOS_Extension.framework; path = "Pods-TestApp watchOS Extension.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -352,39 +352,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07BE0340305811B58776C1A39154B33B /* Support Files */ = {
+		00C99979376CFE9A2D87B95B1E06561A /* Pods-TestApp watchOS Extension */ = {
 			isa = PBXGroup;
 			children = (
-				47434B5ACB352A3BC0286F124A8BC5C0 /* BMSAnalyticsAPI-iOS.modulemap */,
-				64DD662704105DCA89F37EFC5D9190C8 /* BMSAnalyticsAPI-iOS.xcconfig */,
-				FB01DF830AE0C08E29079CB27B43603C /* BMSAnalyticsAPI-iOS-dummy.m */,
-				BE023861AEB29494DF874967A2F2978A /* BMSAnalyticsAPI-iOS-prefix.pch */,
-				6B0E4B577C47C443105F46DFF961C80A /* BMSAnalyticsAPI-iOS-umbrella.h */,
-				18898D5455A4EF4FE24E4CE7FF40F213 /* BMSAnalyticsAPI-watchOS.modulemap */,
-				E665B8D0B93C070FC0A37BD2EDC64BB4 /* BMSAnalyticsAPI-watchOS.xcconfig */,
-				D696B97614E0846EFD3E9CB72C31E158 /* BMSAnalyticsAPI-watchOS-dummy.m */,
-				61515B9FE98F54B0B261EAD5AB942C84 /* BMSAnalyticsAPI-watchOS-prefix.pch */,
-				53C339E1C0883A7A1ED8B8BF07905840 /* BMSAnalyticsAPI-watchOS-umbrella.h */,
-				70CB9282F4FFCE06E4FE12641DB0F4B7 /* Info.plist */,
-				55850BD4D3F674C671CD69E69FCF9D00 /* Info.plist */,
+				6AB55C6A1B7B36E3D9A737EF5CA75BA0 /* Info.plist */,
+				005914999E0FA668A776519D026995E7 /* Pods-TestApp watchOS Extension.modulemap */,
+				E1A77C378124EB16070606BF7BE18751 /* Pods-TestApp watchOS Extension-acknowledgements.markdown */,
+				A3CD4724B192876E2E9BB7CD1ACADFC9 /* Pods-TestApp watchOS Extension-acknowledgements.plist */,
+				7F8AA15369F360AE2B71E0B24D6218E6 /* Pods-TestApp watchOS Extension-dummy.m */,
+				CD98DE8AE7C4985ED52A230CF8A5972E /* Pods-TestApp watchOS Extension-frameworks.sh */,
+				8B234B91275F8EE14EBAB06C966769A6 /* Pods-TestApp watchOS Extension-resources.sh */,
+				D9D0DB6E6175593206E490FE6EC1BB2E /* Pods-TestApp watchOS Extension-umbrella.h */,
+				8C0BD3822AD50B579ADF322EDE89FCD9 /* Pods-TestApp watchOS Extension.debug.xcconfig */,
+				F30A189E5685F8DB8678DA9E578E4F94 /* Pods-TestApp watchOS Extension.release.xcconfig */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/BMSAnalyticsAPI-iOS";
+			name = "Pods-TestApp watchOS Extension";
+			path = "Target Support Files/Pods-TestApp watchOS Extension";
 			sourceTree = "<group>";
 		};
-		106E48F8ACA5681ABBB6F25D366A376B /* Pods-TestApp iOS */ = {
+		037E0DFAAFCA4BC6236337F7FF806CC7 /* Pods-BMSAnalytics iOS */ = {
 			isa = PBXGroup;
 			children = (
-				CC1A130F044AF0880AA1DFBA95DF8636 /* Info.plist */,
-				44C6FA20354AF1183E9D466E4A0CAB8C /* Pods-TestApp iOS.modulemap */,
-				921E1A9DB0904C3CC5B541713CC54763 /* Pods-TestApp iOS-acknowledgements.markdown */,
-				B22599529408B714A150E4508992B79E /* Pods-TestApp iOS-acknowledgements.plist */,
-				B45DD5C6B1F9CCD35E9F7163BBCF4CA1 /* Pods-TestApp iOS-dummy.m */,
-				7DBEC7B527EF45D72E2CC369B2FC1C3F /* Pods-TestApp iOS-frameworks.sh */,
-				1920E35F8DB3094E691059F6DE42C855 /* Pods-TestApp iOS-resources.sh */,
-				2FC5CAB09EC357C903F3ADA4452E8F75 /* Pods-TestApp iOS-umbrella.h */,
-				1E1C55C996949FC1BAB0C2561FFC68F4 /* Pods-TestApp iOS.debug.xcconfig */,
-				6C0839D323E5D1909E955A17B78E9636 /* Pods-TestApp iOS.release.xcconfig */,
+				599B763A4C009D7BC1813DF6924916AB /* Info.plist */,
+				BE2ED0C3C999F9BBA0A420CA5008517F /* Pods-BMSAnalytics iOS.modulemap */,
+				AA0A75DEC416C33EF983B2AF585C9A3C /* Pods-BMSAnalytics iOS-acknowledgements.markdown */,
+				8C897A3E27C1E8C17B8D9A316E777D10 /* Pods-BMSAnalytics iOS-acknowledgements.plist */,
+				0C8C2400EE745D5C9BFE4728364042D9 /* Pods-BMSAnalytics iOS-dummy.m */,
+				34A39F2A2F0C7B6333B60FFB4E4AAC18 /* Pods-BMSAnalytics iOS-resources.sh */,
+				54F2316EAD7EA70CB70359D6A70ED54A /* Pods-BMSAnalytics iOS-umbrella.h */,
+				8B02CF195EFA3A920A1FCB7749ABE548 /* Pods-BMSAnalytics iOS.debug.xcconfig */,
+				1D55A59B82A5BD2C8C5D5A0E0D15A219 /* Pods-BMSAnalytics iOS.release.xcconfig */,
+			);
+			name = "Pods-BMSAnalytics iOS";
+			path = "Target Support Files/Pods-BMSAnalytics iOS";
+			sourceTree = "<group>";
+		};
+		085F1767E11FB7F9A610FE59D72BCC17 /* Pods-TestApp iOS */ = {
+			isa = PBXGroup;
+			children = (
+				399CF8CCC06D11C60D4CA315BB142784 /* Info.plist */,
+				29DC7169273B343CDF8E81B85D2E89D1 /* Pods-TestApp iOS.modulemap */,
+				7C19146FD6B4CAC69D8E6FD83041CE80 /* Pods-TestApp iOS-acknowledgements.markdown */,
+				A32EB3F5F5E976074857C7734F5E6E27 /* Pods-TestApp iOS-acknowledgements.plist */,
+				9B2E6DF4AE46F91FA456BB4972934AC0 /* Pods-TestApp iOS-dummy.m */,
+				C53258F8CEC0D55C8B69B7D579A6C5BA /* Pods-TestApp iOS-frameworks.sh */,
+				B45CC148C059AC73D6E7E7939D6BE132 /* Pods-TestApp iOS-resources.sh */,
+				5A0A97DBA6C688EE98FDA8DAD4790865 /* Pods-TestApp iOS-umbrella.h */,
+				D15BC58365CE20C9A0560164B90D1742 /* Pods-TestApp iOS.debug.xcconfig */,
+				076E205E79B0268CC9C18F1CCAE5DB03 /* Pods-TestApp iOS.release.xcconfig */,
 			);
 			name = "Pods-TestApp iOS";
 			path = "Target Support Files/Pods-TestApp iOS";
@@ -394,39 +409,49 @@
 			isa = PBXGroup;
 			children = (
 				68F60859A2ECFEEE4868BE84706F4261 /* BMSAnalyticsAPI */,
-				6420FCF2E53D2A6DA40668EBC90E1601 /* BMSCore */,
+				1586C92A81B88065882E17E5F0499DEB /* BMSCore */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		1586C92A81B88065882E17E5F0499DEB /* BMSCore */ = {
+			isa = PBXGroup;
+			children = (
+				BB001D4B9A71106E36A4921E3E87FDFF /* AppIdentity.swift */,
+				341FB624DED0C372E1F852A6077893E3 /* AuthorizationManager.swift */,
+				BA12DB6ABCC71E1E2B40BC0333B7DEE3 /* BaseAppIdentity.swift */,
+				6DB983E66535F8CB3AC6BA4C62B9D493 /* BaseAuthorizationManager.swift */,
+				222FD59D652CABCD36E0CA884C9BC0DE /* BaseDeviceIdentity.swift */,
+				46AD5002CCD687849F22FFED9C56323C /* BaseRequest.swift */,
+				F7F66F5AE44E55025C48C5CBD9955D0E /* BaseUserIdentity.swift */,
+				7FFFA4FDE2CBAC59D1C9E479D4D56757 /* BMSClient.swift */,
+				5F016A2F5DDD6318ADC3EE60B862DF5E /* BMSCore.h */,
+				5F89439ACADFE0F4F36DE1594F81471C /* BMSURLSession.swift */,
+				2EAE65F067E229CB43D10042A478EB0B /* BMSURLSessionDelegate.swift */,
+				EEA425FC9A3AE723D250DD351759860A /* BMSURLSessionUtility.swift */,
+				A417A1C1EAA6CD77E24B622068F58402 /* DeviceIdentity.swift */,
+				03ACAEBE6C4DA3A103AA3357CDD4A986 /* Error.swift */,
+				22AC2982A0F51A32AE180A2E37507894 /* module.modulemap */,
+				8B03BB98D80A337D11AD5BC065BB4D47 /* NetworkMonitor.swift */,
+				C0AF561B6466E1D878A9FBFE3C7521B7 /* Request.swift */,
+				5B81B0009AA0B96378CA63511718DDAE /* Response.swift */,
+				D954B2D0C418B35BC40B163816C597F9 /* UserIdentity.swift */,
+				A8726E487B50D5AA46ADA5D9D059A30D /* Support Files */,
+			);
+			name = BMSCore;
+			path = BMSCore;
 			sourceTree = "<group>";
 		};
 		1B9136DA8068BF16F70D303B6B1C307E /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				4AF139F167E809BF56B764C6DE4BE5F0 /* Pods-BMSAnalytics iOS */,
-				5D17A167DBDF225F05CEC618B677980F /* Pods-BMSAnalytics Tests */,
-				F61F2DE4B76973954F93A9E0D1DA7CF8 /* Pods-BMSAnalytics watchOS */,
-				106E48F8ACA5681ABBB6F25D366A376B /* Pods-TestApp iOS */,
-				2B5C5F711D18CD46300A1CB7338E280D /* Pods-TestApp watchOS Extension */,
+				037E0DFAAFCA4BC6236337F7FF806CC7 /* Pods-BMSAnalytics iOS */,
+				A8D811CDCAD9D3DB3CF99A447CE9C064 /* Pods-BMSAnalytics Tests */,
+				6B4EC6CD44FC04759C411867CB7406AB /* Pods-BMSAnalytics watchOS */,
+				085F1767E11FB7F9A610FE59D72BCC17 /* Pods-TestApp iOS */,
+				00C99979376CFE9A2D87B95B1E06561A /* Pods-TestApp watchOS Extension */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		2B5C5F711D18CD46300A1CB7338E280D /* Pods-TestApp watchOS Extension */ = {
-			isa = PBXGroup;
-			children = (
-				F7FC4BFB003EB05A29E7B50F50D642C6 /* Info.plist */,
-				83D4B5F8FCB76DBB2BDD62152275B69D /* Pods-TestApp watchOS Extension.modulemap */,
-				CB8D34D0BCA61C19811CBD0976CFAA21 /* Pods-TestApp watchOS Extension-acknowledgements.markdown */,
-				82FF7EE9ADA353727AEDE997DFC1F8EF /* Pods-TestApp watchOS Extension-acknowledgements.plist */,
-				66E48387BE831DD10DBAECAEFB03F83C /* Pods-TestApp watchOS Extension-dummy.m */,
-				E3CB9114D1901144F63C6ABE99681753 /* Pods-TestApp watchOS Extension-frameworks.sh */,
-				B0D051DA9B8B33851DD6ED5FF3737617 /* Pods-TestApp watchOS Extension-resources.sh */,
-				F7125DF4D1B5B478C485CD8FE7A31327 /* Pods-TestApp watchOS Extension-umbrella.h */,
-				2018722353207C180D0C5C667F0753CE /* Pods-TestApp watchOS Extension.debug.xcconfig */,
-				A0459491D01678C28010D17DBBB7B5F7 /* Pods-TestApp watchOS Extension.release.xcconfig */,
-			);
-			name = "Pods-TestApp watchOS Extension";
-			path = "Target Support Files/Pods-TestApp watchOS Extension";
 			sourceTree = "<group>";
 		};
 		344510043C2A4931B5FB9E24429D131A /* iOS */ = {
@@ -437,79 +462,33 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		4AF139F167E809BF56B764C6DE4BE5F0 /* Pods-BMSAnalytics iOS */ = {
-			isa = PBXGroup;
-			children = (
-				DBC187FFE474323DBB9DD18238079465 /* Info.plist */,
-				22E83FB1D6D85B782DF0D7EBA44F17D1 /* Pods-BMSAnalytics iOS.modulemap */,
-				E1274A0F87659CF2FC158958BC8BA5DB /* Pods-BMSAnalytics iOS-acknowledgements.markdown */,
-				B7E73DD5B31C27F6FD72EFB72A41A28C /* Pods-BMSAnalytics iOS-acknowledgements.plist */,
-				CF2F83BEE2F047BF0D06FFDDBB4B42C7 /* Pods-BMSAnalytics iOS-dummy.m */,
-				7D5A906B6BDAFC2563CE9E981077824B /* Pods-BMSAnalytics iOS-resources.sh */,
-				A8A2364B6D9C7A20C0CFC6F5D71E4DCF /* Pods-BMSAnalytics iOS-umbrella.h */,
-				EF6877B5AFF73219E1655A0BA061EADE /* Pods-BMSAnalytics iOS.debug.xcconfig */,
-				8330385D0ABF346FAAE5BE5BE32611AB /* Pods-BMSAnalytics iOS.release.xcconfig */,
-			);
-			name = "Pods-BMSAnalytics iOS";
-			path = "Target Support Files/Pods-BMSAnalytics iOS";
-			sourceTree = "<group>";
-		};
-		5D17A167DBDF225F05CEC618B677980F /* Pods-BMSAnalytics Tests */ = {
-			isa = PBXGroup;
-			children = (
-				0CD6F499B7C715CCC5DA12CF40C7B77B /* Info.plist */,
-				D30084BAF4DD30FC56658E1441FADDA8 /* Pods-BMSAnalytics Tests.modulemap */,
-				12BD555CCDF5B3A0CDF7B2F30CBE7032 /* Pods-BMSAnalytics Tests-acknowledgements.markdown */,
-				9D67ECDABD926B5DE863CA5E9DC9C93C /* Pods-BMSAnalytics Tests-acknowledgements.plist */,
-				156CEEE38E55D270C81389F336A8326F /* Pods-BMSAnalytics Tests-dummy.m */,
-				5F6D8A7CA6E26C073ACC93BB270AAF57 /* Pods-BMSAnalytics Tests-frameworks.sh */,
-				B1FB4726F9F2FE49A8F703A51D4BC4F2 /* Pods-BMSAnalytics Tests-resources.sh */,
-				84080D4C751C928E6F870BD2A255C53A /* Pods-BMSAnalytics Tests-umbrella.h */,
-				C6FD0B86F1FD9B28A3E509E428E58BE6 /* Pods-BMSAnalytics Tests.debug.xcconfig */,
-				3938E6A323EC1A297B1689D6B1B3C042 /* Pods-BMSAnalytics Tests.release.xcconfig */,
-			);
-			name = "Pods-BMSAnalytics Tests";
-			path = "Target Support Files/Pods-BMSAnalytics Tests";
-			sourceTree = "<group>";
-		};
-		6420FCF2E53D2A6DA40668EBC90E1601 /* BMSCore */ = {
-			isa = PBXGroup;
-			children = (
-				7B6F4BA2729BD3C5AE53E5811F04FDE0 /* AppIdentity.swift */,
-				DA9CF4908CAC2FA6F6CED2B9E9EA3D79 /* AuthorizationManager.swift */,
-				6314D204E8723574245E0ED856CB0ABF /* BaseAppIdentity.swift */,
-				289D9A7D2B3307C8415D07A2AC7C30C3 /* BaseAuthorizationManager.swift */,
-				E1BCC840BA940BA1D14DB7048337BD53 /* BaseDeviceIdentity.swift */,
-				CE4898ABE5E8C4D67878627DBE260B66 /* BaseRequest.swift */,
-				FC866C4208DDDD9459713435C952526C /* BaseUserIdentity.swift */,
-				6F2D77AECC2EE12068A5816DC273464B /* BMSClient.swift */,
-				30D322591BD72223F0E969A845577B06 /* BMSCore.h */,
-				7FEC236801EF82904F52A4BA979BA5C3 /* BMSURLSession.swift */,
-				B29691800936AA91B463859B94088457 /* BMSURLSessionDelegate.swift */,
-				F55ED37BCED8D52DDC1E61DD1F14F4AF /* BMSURLSessionUtility.swift */,
-				48A2C627EF25FB52C9DB5085F3CB4957 /* DeviceIdentity.swift */,
-				9512B9EC5CB5524C1E462E0ED295B72D /* Error.swift */,
-				69CDB814C3D7A7E6A97A74F9A452A0F5 /* module.modulemap */,
-				312587D1948DAA68728864F73BC2F9D6 /* NetworkMonitor.swift */,
-				165A2B7B1534FAA01D663870D0C87AAC /* Request.swift */,
-				E7F8BB8E4A1B879CFF7B59DF8AC29C83 /* Response.swift */,
-				CB9DC1F94CF538FEA6D7814292390672 /* UserIdentity.swift */,
-				E1AA0181A8941AEECCF5FFFDAD3216EC /* Support Files */,
-			);
-			name = BMSCore;
-			path = BMSCore;
-			sourceTree = "<group>";
-		};
 		68F60859A2ECFEEE4868BE84706F4261 /* BMSAnalyticsAPI */ = {
 			isa = PBXGroup;
 			children = (
 				3D792F50A20D1AF55EE65D74F26F7E3C /* Analytics.swift */,
 				3E2BBF786FE79E7E77FAE549722657D1 /* Logger.swift */,
 				D96DCAEDA0BF49809A599A87500B8C63 /* RequestMetadata.swift */,
-				07BE0340305811B58776C1A39154B33B /* Support Files */,
+				85D4924EE4355343B5B15ADA00703D70 /* Support Files */,
 			);
 			name = BMSAnalyticsAPI;
 			path = BMSAnalyticsAPI;
+			sourceTree = "<group>";
+		};
+		6B4EC6CD44FC04759C411867CB7406AB /* Pods-BMSAnalytics watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				7427300C1A878F823998EBA11C882086 /* Info.plist */,
+				F5437E20F6D43694E9F02A6BCC89FD4C /* Pods-BMSAnalytics watchOS.modulemap */,
+				256536F9AD52E16C192EC5EDD5C5D954 /* Pods-BMSAnalytics watchOS-acknowledgements.markdown */,
+				D34B831408D24B11CE1E6CEA8E4E8D7F /* Pods-BMSAnalytics watchOS-acknowledgements.plist */,
+				D334227E795AD444D067FE9CE46C1940 /* Pods-BMSAnalytics watchOS-dummy.m */,
+				13B5DD40D7BBD5F56B08B850C43F5E4D /* Pods-BMSAnalytics watchOS-resources.sh */,
+				82B8610966B8E58AD8C001A9DB32E469 /* Pods-BMSAnalytics watchOS-umbrella.h */,
+				4140F4E8C7CB0ECF759F8746E6520897 /* Pods-BMSAnalytics watchOS.debug.xcconfig */,
+				9B18F730E5C11D6CACE240667B01380A /* Pods-BMSAnalytics watchOS.release.xcconfig */,
+			);
+			name = "Pods-BMSAnalytics watchOS";
+			path = "Target Support Files/Pods-BMSAnalytics watchOS";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -521,6 +500,26 @@
 				886B2795C46A46FAAF53316B8B6DECA9 /* Products */,
 				1B9136DA8068BF16F70D303B6B1C307E /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		85D4924EE4355343B5B15ADA00703D70 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3CEAFA00DACE6C382FE5D7B4F5153074 /* BMSAnalyticsAPI-iOS.modulemap */,
+				E638AB75DBDE005C646FC55237E7B0B9 /* BMSAnalyticsAPI-iOS.xcconfig */,
+				E2CB94DF850669D21CE73FF2F0F5C8AA /* BMSAnalyticsAPI-iOS-dummy.m */,
+				328C40F8DEA692A9CC9B84421B99087E /* BMSAnalyticsAPI-iOS-prefix.pch */,
+				6D60F865C2637BD808D428347D4C4626 /* BMSAnalyticsAPI-iOS-umbrella.h */,
+				A9F1F01DDAE4900FBA3EACF0A1C9E630 /* BMSAnalyticsAPI-watchOS.modulemap */,
+				184CAE5BF21118E3E35ED3496F6AB269 /* BMSAnalyticsAPI-watchOS.xcconfig */,
+				9008907A476C00F3536343E3CF0F2449 /* BMSAnalyticsAPI-watchOS-dummy.m */,
+				1927A4EFCBE7D28A61EDE680380AF91F /* BMSAnalyticsAPI-watchOS-prefix.pch */,
+				B3B873CE7F0D74B10285AC8EDCC42A0A /* BMSAnalyticsAPI-watchOS-umbrella.h */,
+				A11C4FD33F3C161CAF01EBB33CC246A1 /* Info.plist */,
+				274D63F3C0E99F8D05089AD9282284FA /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/BMSAnalyticsAPI-iOS";
 			sourceTree = "<group>";
 		};
 		886B2795C46A46FAAF53316B8B6DECA9 /* Products */ = {
@@ -549,22 +548,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E1AA0181A8941AEECCF5FFFDAD3216EC /* Support Files */ = {
+		A8726E487B50D5AA46ADA5D9D059A30D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				D02891629070490F0DBECDD5EC1BD6AE /* BMSCore-iOS.modulemap */,
-				B095E6A34D86138DE294CC2204667875 /* BMSCore-iOS.xcconfig */,
-				323DCEFE1D1BE5A3EF9FCE7E7741F387 /* BMSCore-iOS-dummy.m */,
-				82F9E14760E34A3934027E1C64598E67 /* BMSCore-iOS-prefix.pch */,
-				095137F04763CE79E66ED13D1F8B7EAB /* BMSCore-watchOS.modulemap */,
-				287903D34C65314B73159A917C865B94 /* BMSCore-watchOS.xcconfig */,
-				6292C87972F1AE2D11E7010D3AEF7BD5 /* BMSCore-watchOS-dummy.m */,
-				C6B3048E6FD20C1F5507F41AF0DB74EB /* BMSCore-watchOS-prefix.pch */,
-				D739F53433AEB73F662691142EC38A9C /* Info.plist */,
-				65642C513184781EE77DBAFF169657DF /* Info.plist */,
+				188DFC0D4FBFDA0ACC1622794E78887D /* BMSCore-iOS.modulemap */,
+				2E6E71EF3D585661810A7AA4ECE4A041 /* BMSCore-iOS.xcconfig */,
+				8FB6ECC6E02B195F6166A804E6D3C2AE /* BMSCore-iOS-dummy.m */,
+				32020471FC869E0A56D6CB8599A32395 /* BMSCore-iOS-prefix.pch */,
+				F289627EC7ECF661ECA387D798EC2C9A /* BMSCore-watchOS.modulemap */,
+				AAEC7BB5AE846BEC0A82DD377F3E6BBA /* BMSCore-watchOS.xcconfig */,
+				C0D15940E58A3C6D035AFF29DF754AD0 /* BMSCore-watchOS-dummy.m */,
+				E2BACAAC8DC8503B3BB4A66B9986B7E2 /* BMSCore-watchOS-prefix.pch */,
+				3393C900D66BA2B2D6CE78484F86EC58 /* Info.plist */,
+				4020D07772940E902C0FE9C86D6DBE06 /* Info.plist */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/BMSCore-iOS";
+			sourceTree = "<group>";
+		};
+		A8D811CDCAD9D3DB3CF99A447CE9C064 /* Pods-BMSAnalytics Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FE4D3F6665F5207AD203CBA0ED99431E /* Info.plist */,
+				71FFF3191BA5FAD422392A6791D82A2A /* Pods-BMSAnalytics Tests.modulemap */,
+				6144508C9A41C9BE16A78FE9E465B3B7 /* Pods-BMSAnalytics Tests-acknowledgements.markdown */,
+				299A8FD5B4160ADA696D3BBB4B98C870 /* Pods-BMSAnalytics Tests-acknowledgements.plist */,
+				392C58BB1613949B075C58EA727B6C22 /* Pods-BMSAnalytics Tests-dummy.m */,
+				E6AD1EB25DC32130E6C7F12AE04B68A3 /* Pods-BMSAnalytics Tests-frameworks.sh */,
+				56EFC040659478A0A2B7C09094304B12 /* Pods-BMSAnalytics Tests-resources.sh */,
+				229BD500A6994F83CB4D0A50A2E6512F /* Pods-BMSAnalytics Tests-umbrella.h */,
+				AA8AE916B89B2AB8372C920D813DF9BB /* Pods-BMSAnalytics Tests.debug.xcconfig */,
+				B81F9F060E389CB29D7129FE408B791D /* Pods-BMSAnalytics Tests.release.xcconfig */,
+			);
+			name = "Pods-BMSAnalytics Tests";
+			path = "Target Support Files/Pods-BMSAnalytics Tests";
 			sourceTree = "<group>";
 		};
 		E71D4F1B209E31EAE76C08BC82AE4929 /* watchOS */ = {
@@ -573,23 +590,6 @@
 				329B2BB6FD59C58C39BB1636E677A420 /* Foundation.framework */,
 			);
 			name = watchOS;
-			sourceTree = "<group>";
-		};
-		F61F2DE4B76973954F93A9E0D1DA7CF8 /* Pods-BMSAnalytics watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				900F147790A7DC386E9844A3CD17E32E /* Info.plist */,
-				1B111E3020F066C455E4204E91F4029E /* Pods-BMSAnalytics watchOS.modulemap */,
-				8F8AB2511FD51661831940795BA05006 /* Pods-BMSAnalytics watchOS-acknowledgements.markdown */,
-				FA1A8BB6A6CF0C0F05646FFCA78BFF8C /* Pods-BMSAnalytics watchOS-acknowledgements.plist */,
-				E4866C1AE53F66631A5B052714DE10AD /* Pods-BMSAnalytics watchOS-dummy.m */,
-				57FE811FB1C774BCE30B0A4EA501324D /* Pods-BMSAnalytics watchOS-resources.sh */,
-				637C07FC496F48C1592F44FF4F4E6071 /* Pods-BMSAnalytics watchOS-umbrella.h */,
-				A22FF2EAD224DA3E6CF08BF413C650FB /* Pods-BMSAnalytics watchOS.debug.xcconfig */,
-				974D66D2F951060179D5FE635435ADDE /* Pods-BMSAnalytics watchOS.release.xcconfig */,
-			);
-			name = "Pods-BMSAnalytics watchOS";
-			path = "Target Support Files/Pods-BMSAnalytics watchOS";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -674,7 +674,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 923A396EB53416814DBAD96C9EF81121 /* Build configuration list for PBXNativeTarget "BMSCore-iOS" */;
 			buildPhases = (
-				0F020EC5DE2C3079D574AB2C7A984EDA /* Sources */,
+				F5DD8B3FF458BBF51001684B0A9D91E1 /* Sources */,
 				9FB4931BF5BB9ECA311CB5C51BF0087D /* Frameworks */,
 				3CAE8A6D6A595967BCED250B862BC824 /* Headers */,
 			);
@@ -711,7 +711,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CABEEBF22578374251827FAE14D77DAC /* Build configuration list for PBXNativeTarget "BMSCore-watchOS" */;
 			buildPhases = (
-				5B0EE552D613573DE57ACEC8A60B2BDA /* Sources */,
+				0B5F50723A220ACB1A9DA58B60914ED9 /* Sources */,
 				DD87B242CBAF113D46F1BF1713BB3456 /* Frameworks */,
 				9C8C8638B7CBF1FF4612CC7580450340 /* Headers */,
 			);
@@ -841,8 +841,8 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -878,37 +878,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0B5F50723A220ACB1A9DA58B60914ED9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06CDDCC0DBB4BE4ED1922AB81494395D /* AppIdentity.swift in Sources */,
+				518D7A507EBB72327A8E501B657C4663 /* AuthorizationManager.swift in Sources */,
+				51519FC0845693F79098DF846FA5892B /* BaseAppIdentity.swift in Sources */,
+				5DE5CB16090CF32C77CBE178C54533CE /* BaseAuthorizationManager.swift in Sources */,
+				8A13BABB99EA6E9F4903E52819561D8E /* BaseDeviceIdentity.swift in Sources */,
+				36363CBCEE4AC5EFB6B586C063F797D6 /* BaseRequest.swift in Sources */,
+				CF3331F55AB2AE611BC3116BAA7849D4 /* BaseUserIdentity.swift in Sources */,
+				1270BCE93255F91CA2B7E1C02AC3948E /* BMSClient.swift in Sources */,
+				AC3C86A8900282C5563876B3A02671AF /* BMSCore-watchOS-dummy.m in Sources */,
+				CA836C2082AA7EC22A5FA7C1B004E05F /* BMSURLSession.swift in Sources */,
+				8E73ED75FBD74E5506E1DE6325BFAE07 /* BMSURLSessionDelegate.swift in Sources */,
+				436CB227EB189FF981049D59D26F09D5 /* BMSURLSessionUtility.swift in Sources */,
+				C4F795F0658F38D25F70F63BB647FCBB /* DeviceIdentity.swift in Sources */,
+				E0CF708B685FB23BC8995DCC1EE3F8E3 /* Error.swift in Sources */,
+				E0F2BADFDD39B29797C83208B8E64028 /* module.modulemap in Sources */,
+				47D89BBFCE6640E9AD769985B0AE3FA7 /* Request.swift in Sources */,
+				16F9A3E28EFA5F4FFB1F01CC197F32D2 /* Response.swift in Sources */,
+				FCA1EDFDA35B4BF5CF63763F5F12FC93 /* UserIdentity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0C130DC662ECEA7E99982FC9F6C249C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				EFB391DC383FA856D460A84BEAB2D037 /* Pods-TestApp watchOS Extension-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0F020EC5DE2C3079D574AB2C7A984EDA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6364AD05B13190074BB3CF8FBB786A4B /* AppIdentity.swift in Sources */,
-				CDDB9D3A7612ABEE25A87E01FA6590B2 /* AuthorizationManager.swift in Sources */,
-				BE94045C73A192EA9F5F0948A9B034B2 /* BaseAppIdentity.swift in Sources */,
-				F6F4859C0D0C26E1493EFF88AEEE82BA /* BaseAuthorizationManager.swift in Sources */,
-				B2A98FF8AB5E16693653DF9DC1F3DF9F /* BaseDeviceIdentity.swift in Sources */,
-				A546B64464D1F8BC2C7737975F23E7C0 /* BaseRequest.swift in Sources */,
-				30C1F1197E43123811C3E182298D8AB2 /* BaseUserIdentity.swift in Sources */,
-				1376EBB4B5F8F61E15FE9A62A0633F6A /* BMSClient.swift in Sources */,
-				C9831C7DED720E9459A14145E41295D4 /* BMSCore-iOS-dummy.m in Sources */,
-				1823D1D9A4A945442874FD48CC9EC190 /* BMSURLSession.swift in Sources */,
-				8C5A5CFC8C5532FE4445DB8932185C6A /* BMSURLSessionDelegate.swift in Sources */,
-				084226776CD1152076C689FDBBC481E8 /* BMSURLSessionUtility.swift in Sources */,
-				346966C283CDA9CA0738E56DC7A8213F /* DeviceIdentity.swift in Sources */,
-				C60D48248AA19BC2F0D95CF765AAF10C /* Error.swift in Sources */,
-				3D94261CCEB1705089EA423F7D09D9DE /* module.modulemap in Sources */,
-				19EEBFA5DCB20A7EBDD00438C3137D00 /* NetworkMonitor.swift in Sources */,
-				68DB4EE7943EBF39664FC2D46AD58A1A /* Request.swift in Sources */,
-				7A4848DB61920E429DBA36D0E26519D0 /* Response.swift in Sources */,
-				E702B4C03B490AEA5D3ED0DE70F15B3B /* UserIdentity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -920,31 +919,6 @@
 				919FDCCF918A8A01348325EAD352AFBB /* BMSAnalyticsAPI-watchOS-dummy.m in Sources */,
 				33A1B3AA5EA114A56CB2D6A439C6B58C /* Logger.swift in Sources */,
 				4D2D4A340AD5F8519CE9A7AE642EFD5D /* RequestMetadata.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B0EE552D613573DE57ACEC8A60B2BDA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B1EBC84D0E50AF3B843992E9491B1682 /* AppIdentity.swift in Sources */,
-				489C0EFAA32D4D8554644F6B07FD9120 /* AuthorizationManager.swift in Sources */,
-				FDCFC533BA494D400C15587D7B43455C /* BaseAppIdentity.swift in Sources */,
-				4BDD848290B71C3D38DFD91F44C945AC /* BaseAuthorizationManager.swift in Sources */,
-				1ADDB7D1D2ABE6674C6542547E582E66 /* BaseDeviceIdentity.swift in Sources */,
-				DCDC694C02CCF6C3F4E6E14A8FEBF383 /* BaseRequest.swift in Sources */,
-				5663BDB73E198314B1E73D87493F8339 /* BaseUserIdentity.swift in Sources */,
-				CEFEA7540997080D12B4E6F47B9F0491 /* BMSClient.swift in Sources */,
-				4FB3BD442084F2959709037584D722ED /* BMSCore-watchOS-dummy.m in Sources */,
-				73E5D7DB2937ADC0DFCFA665F4C55E5B /* BMSURLSession.swift in Sources */,
-				1BDB03F83C6CF1104E56D631452EBCBD /* BMSURLSessionDelegate.swift in Sources */,
-				6D917D2087E3A155C319C2132247E140 /* BMSURLSessionUtility.swift in Sources */,
-				A6EE35F1E363F7C903E145C0C8652D25 /* DeviceIdentity.swift in Sources */,
-				F09F16F81A6F82B6B659169E6CD7678A /* Error.swift in Sources */,
-				EDC23B071E433A946D3039E0DB9201A0 /* module.modulemap in Sources */,
-				7DD75ABF8841AA050907C7B9B6EFC192 /* Request.swift in Sources */,
-				E2EE50C1266B522ADFFCA321C082A136 /* Response.swift in Sources */,
-				62704F048A75120A667CBBCE21D802D1 /* UserIdentity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,6 +954,32 @@
 				53946D0AED8A25DAC37BD1F1A3119263 /* BMSAnalyticsAPI-iOS-dummy.m in Sources */,
 				EC2B2480B281021C82283E87466E3B30 /* Logger.swift in Sources */,
 				81AC665151DEB17F51FD69F65FE4F54D /* RequestMetadata.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5DD8B3FF458BBF51001684B0A9D91E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C20A5DED3046D55856F5AFB394E2D1F /* AppIdentity.swift in Sources */,
+				763C7FF4F419D31742561130D354254A /* AuthorizationManager.swift in Sources */,
+				8E0FE755D72D67D23C0694F55476473B /* BaseAppIdentity.swift in Sources */,
+				06E928146DBA6E793F300FBB5CB3E8CB /* BaseAuthorizationManager.swift in Sources */,
+				24A581C783A9848DB6CF9C6D2128F169 /* BaseDeviceIdentity.swift in Sources */,
+				85A1C1DA9A33BD152CA7A30CF987F163 /* BaseRequest.swift in Sources */,
+				ADB62FB10D4700D04473F27385D5C96D /* BaseUserIdentity.swift in Sources */,
+				B0A2686A81E771F98B51C872E7045311 /* BMSClient.swift in Sources */,
+				292C8B2A3B05B913AD0969215523B518 /* BMSCore-iOS-dummy.m in Sources */,
+				FF914DDE9743AB8595D4FF3A82B388A8 /* BMSURLSession.swift in Sources */,
+				70A52AC14A86A572AA622337D9C3DC30 /* BMSURLSessionDelegate.swift in Sources */,
+				32AE558300AE436654472A0360CBB7F0 /* BMSURLSessionUtility.swift in Sources */,
+				1CDCEFBAF3A8EB74BEFFA3C712FB1943 /* DeviceIdentity.swift in Sources */,
+				45C12D950A11A27F56F14BE5448D3210 /* Error.swift in Sources */,
+				6C11E340D28AA68FA56ADEAAFC78DD54 /* module.modulemap in Sources */,
+				1D44FFEAD5295FEFBE88A3440012FA18 /* NetworkMonitor.swift in Sources */,
+				21CB0FB2BC8C3BEE6BD4D3BF43B56302 /* Request.swift in Sources */,
+				4982393660FED7282E5CA6A644B1A46A /* Response.swift in Sources */,
+				84D88E6E32DDABF0B945BF5D34582A15 /* UserIdentity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,49 +1061,266 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0545070E25BC8BE9C11EE513D1EEE059 /* Debug */ = {
+		08C95E24905D14C1EB9C219C6AB319F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E638AB75DBDE005C646FC55237E7B0B9 /* BMSAnalyticsAPI-iOS.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS.modulemap";
+				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
+				PRODUCT_NAME = BMSAnalyticsAPI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		20441BCB2F4937F68C51FD0BDA5C2408 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 076E205E79B0268CC9C18F1CCAE5DB03 /* Pods-TestApp iOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-TestApp iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TestApp iOS/Pods-TestApp iOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		320E9FF3075C73A9DFD595D5B7F5F789 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E638AB75DBDE005C646FC55237E7B0B9 /* BMSAnalyticsAPI-iOS.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS.modulemap";
+				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
+				PRODUCT_NAME = BMSAnalyticsAPI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3CC38C4BD4E21EEC340F944C52E51E87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 184CAE5BF21118E3E35ED3496F6AB269 /* BMSAnalyticsAPI-watchOS.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.modulemap";
+				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
+				PRODUCT_NAME = BMSAnalyticsAPI;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		3DD4A85329B58A2D1686FEDD5A368B4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B02CF195EFA3A920A1FCB7749ABE548 /* Pods-BMSAnalytics iOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics iOS/Pods-BMSAnalytics iOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		41DEA84C5F3A6AD15FDC838E429D9EDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D55A59B82A5BD2C8C5D5A0E0D15A219 /* Pods-BMSAnalytics iOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics iOS/Pods-BMSAnalytics iOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4FD56F984BF344AC37C62CE8A5F6363C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SYMROOT = "${SRCROOT}/../build";
@@ -1111,9 +1328,9 @@
 			};
 			name = Debug;
 		};
-		11EE21931DE5C7117B2B667ED157A4AC /* Release */ = {
+		5B36D919404376E345B2F6CF5DE7352B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 974D66D2F951060179D5FE635435ADDE /* Pods-BMSAnalytics watchOS.release.xcconfig */;
+			baseConfigurationReference = AAEC7BB5AE846BEC0A82DD377F3E6BBA /* BMSCore-watchOS.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1121,58 +1338,120 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics watchOS/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSCore-watchOS/BMSCore-watchOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSCore-watchOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics watchOS/Pods-BMSAnalytics watchOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_BMSAnalytics_watchOS;
+				MODULEMAP_FILE = "Target Support Files/BMSCore-watchOS/BMSCore-watchOS.modulemap";
+				PRODUCT_MODULE_NAME = BMSCore;
+				PRODUCT_NAME = BMSCore;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		1AA8C451A5BE9F26A6826DBB9F5547F1 /* Release */ = {
+		5F7C14778B452E6AA48E1673A22D8305 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B095E6A34D86138DE294CC2204667875 /* BMSCore-iOS.xcconfig */;
+			baseConfigurationReference = 8C0BD3822AD50B579ADF322EDE89FCD9 /* Pods-TestApp watchOS Extension.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-TestApp watchOS Extension/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TestApp watchOS Extension/Pods-TestApp watchOS Extension.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		792A87A1E9B4AE18B8B11B4E950110F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 184CAE5BF21118E3E35ED3496F6AB269 /* BMSAnalyticsAPI-watchOS.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.modulemap";
+				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
+				PRODUCT_NAME = BMSAnalyticsAPI;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		81B249F94857615798B88BB035C9E94E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E6E71EF3D585661810A7AA4ECE4A041 /* BMSCore-iOS.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/BMSCore-iOS/BMSCore-iOS-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/BMSCore-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/BMSCore-iOS/BMSCore-iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = BMSCore;
 				PRODUCT_NAME = BMSCore;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1180,164 +1459,121 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		36B4870EB7777B3B11E6FACC8D8A3293 /* Release */ = {
+		8FFC3AE34A5FF88630D1CCE1C992D8CC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 287903D34C65314B73159A917C865B94 /* BMSCore-watchOS.xcconfig */;
+			baseConfigurationReference = F30A189E5685F8DB8678DA9E578E4F94 /* Pods-TestApp watchOS Extension.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BMSCore-watchOS/BMSCore-watchOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSCore-watchOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSCore-watchOS/BMSCore-watchOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = BMSCore;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		377E4D8C5D9C82D07C53B21BDC525414 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A22FF2EAD224DA3E6CF08BF413C650FB /* Pods-BMSAnalytics watchOS.debug.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics watchOS/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-TestApp watchOS Extension/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics watchOS/Pods-BMSAnalytics watchOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MODULEMAP_FILE = "Target Support Files/Pods-TestApp watchOS Extension/Pods-TestApp watchOS Extension.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_BMSAnalytics_watchOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
-			name = Debug;
+			name = Release;
 		};
-		3C2556AA954F163C7E771687A5E62A1A /* Debug */ = {
+		A55C5707951AF743FEBE1CF5574F6CB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E1C55C996949FC1BAB0C2561FFC68F4 /* Pods-TestApp iOS.debug.xcconfig */;
+			baseConfigurationReference = AA8AE916B89B2AB8372C920D813DF9BB /* Pods-BMSAnalytics Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics Tests/Pods-BMSAnalytics Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C0E4E36B9607369085721646B2874420 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D15BC58365CE20C9A0560164B90D1742 /* Pods-TestApp iOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-TestApp iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-TestApp iOS/Pods-TestApp iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_TestApp_iOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		46426CC311B0CB535AF33C927E4D28B3 /* Debug */ = {
+		C8D44E9E651C56E8F9EDAF7F088C93DC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64DD662704105DCA89F37EFC5D9190C8 /* BMSAnalyticsAPI-iOS.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = BMSAnalyticsAPI;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		47EE4FED41AD9ECB1C0EFC90EC3CD95B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E665B8D0B93C070FC0A37BD2EDC64BB4 /* BMSAnalyticsAPI-watchOS.xcconfig */;
+			baseConfigurationReference = AAEC7BB5AE846BEC0A82DD377F3E6BBA /* BMSCore-watchOS.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1345,110 +1581,117 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSCore-watchOS/BMSCore-watchOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSCore-watchOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = BMSAnalyticsAPI;
+				MODULEMAP_FILE = "Target Support Files/BMSCore-watchOS/BMSCore-watchOS.modulemap";
+				PRODUCT_MODULE_NAME = BMSCore;
+				PRODUCT_NAME = BMSCore;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
-			name = Release;
+			name = Debug;
 		};
-		4AAF81AB8ED95694719FC4C17DEE2F3F /* Release */ = {
+		D57DFF61A6BDE219FBD4E621C62FBE54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
 				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
-		62FC1586DE074D104547DFDFE42810B5 /* Debug */ = {
+		DE6513BD3B2B9475D650D1E9D38AA8D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2018722353207C180D0C5C667F0753CE /* Pods-TestApp watchOS Extension.debug.xcconfig */;
+			baseConfigurationReference = 4140F4E8C7CB0ECF759F8746E6520897 /* Pods-BMSAnalytics watchOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-TestApp watchOS Extension/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics watchOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TestApp watchOS Extension/Pods-TestApp watchOS Extension.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics watchOS/Pods-BMSAnalytics watchOS.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_TestApp_watchOS_Extension;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1456,371 +1699,101 @@
 			};
 			name = Debug;
 		};
-		81AF903A1456CEB72437254C09400369 /* Release */ = {
+		E17103D570F9F42908D332783760D822 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64DD662704105DCA89F37EFC5D9190C8 /* BMSAnalyticsAPI-iOS.xcconfig */;
+			baseConfigurationReference = B81F9F060E389CB29D7129FE408B791D /* Pods-BMSAnalytics Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = BMSAnalyticsAPI;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8487EFA67849FA39DC416ADD54CA7B8A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6FD0B86F1FD9B28A3E509E428E58BE6 /* Pods-BMSAnalytics Tests.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics Tests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics Tests/Pods-BMSAnalytics Tests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_BMSAnalytics_Tests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8C67C877730CCF546E2C68F78E68A8E7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8330385D0ABF346FAAE5BE5BE32611AB /* Pods-BMSAnalytics iOS.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics iOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics iOS/Pods-BMSAnalytics iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_BMSAnalytics_iOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		8D58F5C04787CB665940FD67092FBF86 /* Debug */ = {
+		F8A8B62F6F05A107DC0C98AF249CD564 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B095E6A34D86138DE294CC2204667875 /* BMSCore-iOS.xcconfig */;
+			baseConfigurationReference = 9B18F730E5C11D6CACE240667B01380A /* Pods-BMSAnalytics watchOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics watchOS/Pods-BMSAnalytics watchOS.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		FFED0CDA42F607401FB95F40C47A77D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E6E71EF3D585661810A7AA4ECE4A041 /* BMSCore-iOS.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/BMSCore-iOS/BMSCore-iOS-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/BMSCore-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/BMSCore-iOS/BMSCore-iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_MODULE_NAME = BMSCore;
 				PRODUCT_NAME = BMSCore;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		9F149648B427229F2D46196FC43D5E27 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 287903D34C65314B73159A917C865B94 /* BMSCore-watchOS.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BMSCore-watchOS/BMSCore-watchOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSCore-watchOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSCore-watchOS/BMSCore-watchOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = BMSCore;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		A78B940A6FE135740C9EC6C5BF39031F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0459491D01678C28010D17DBBB7B5F7 /* Pods-TestApp watchOS Extension.release.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-TestApp watchOS Extension/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TestApp watchOS Extension/Pods-TestApp watchOS Extension.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_TestApp_watchOS_Extension;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		AFDDC9D985663AB3D28B3D2CFCF93508 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E665B8D0B93C070FC0A37BD2EDC64BB4 /* BMSAnalyticsAPI-watchOS.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = BMSAnalyticsAPI;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		B863B489747B672BF8C0691522E77250 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C0839D323E5D1909E955A17B78E9636 /* Pods-TestApp iOS.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-TestApp iOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TestApp iOS/Pods-TestApp iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_TestApp_iOS;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		C7EA74A30C96FC19EAA6618C76BA5B5A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3938E6A323EC1A297B1689D6B1B3C042 /* Pods-BMSAnalytics Tests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics Tests/Pods-BMSAnalytics Tests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_BMSAnalytics_Tests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F68391BC06FBEC5700D11AFA2BC0A187 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF6877B5AFF73219E1655A0BA061EADE /* Pods-BMSAnalytics iOS.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-BMSAnalytics iOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BMSAnalytics iOS/Pods-BMSAnalytics iOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_BMSAnalytics_iOS;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1835,8 +1808,8 @@
 		1189ABE9896A3A89A3CE4F23052F17E0 /* Build configuration list for PBXNativeTarget "Pods-BMSAnalytics iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F68391BC06FBEC5700D11AFA2BC0A187 /* Debug */,
-				8C67C877730CCF546E2C68F78E68A8E7 /* Release */,
+				3DD4A85329B58A2D1686FEDD5A368B4B /* Debug */,
+				41DEA84C5F3A6AD15FDC838E429D9EDA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1844,8 +1817,8 @@
 		2D4B0B5492E39A16C1769D124500DF23 /* Build configuration list for PBXNativeTarget "BMSAnalyticsAPI-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				46426CC311B0CB535AF33C927E4D28B3 /* Debug */,
-				81AF903A1456CEB72437254C09400369 /* Release */,
+				08C95E24905D14C1EB9C219C6AB319F6 /* Debug */,
+				320E9FF3075C73A9DFD595D5B7F5F789 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1853,8 +1826,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0545070E25BC8BE9C11EE513D1EEE059 /* Debug */,
-				4AAF81AB8ED95694719FC4C17DEE2F3F /* Release */,
+				4FD56F984BF344AC37C62CE8A5F6363C /* Debug */,
+				D57DFF61A6BDE219FBD4E621C62FBE54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1862,8 +1835,8 @@
 		7BC4EC3441BACC3E79D9775AAB8FBDFA /* Build configuration list for PBXNativeTarget "Pods-TestApp iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3C2556AA954F163C7E771687A5E62A1A /* Debug */,
-				B863B489747B672BF8C0691522E77250 /* Release */,
+				C0E4E36B9607369085721646B2874420 /* Debug */,
+				20441BCB2F4937F68C51FD0BDA5C2408 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1871,8 +1844,8 @@
 		923A396EB53416814DBAD96C9EF81121 /* Build configuration list for PBXNativeTarget "BMSCore-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8D58F5C04787CB665940FD67092FBF86 /* Debug */,
-				1AA8C451A5BE9F26A6826DBB9F5547F1 /* Release */,
+				FFED0CDA42F607401FB95F40C47A77D7 /* Debug */,
+				81B249F94857615798B88BB035C9E94E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1880,8 +1853,8 @@
 		9E5477CDA9075A45E9D29CD0076ED6D1 /* Build configuration list for PBXNativeTarget "BMSAnalyticsAPI-watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AFDDC9D985663AB3D28B3D2CFCF93508 /* Debug */,
-				47EE4FED41AD9ECB1C0EFC90EC3CD95B /* Release */,
+				3CC38C4BD4E21EEC340F944C52E51E87 /* Debug */,
+				792A87A1E9B4AE18B8B11B4E950110F6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1889,8 +1862,8 @@
 		B82AB43CD2861BBCE30383747668CFB9 /* Build configuration list for PBXNativeTarget "Pods-BMSAnalytics watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				377E4D8C5D9C82D07C53B21BDC525414 /* Debug */,
-				11EE21931DE5C7117B2B667ED157A4AC /* Release */,
+				DE6513BD3B2B9475D650D1E9D38AA8D2 /* Debug */,
+				F8A8B62F6F05A107DC0C98AF249CD564 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1898,8 +1871,8 @@
 		B99E5DE6A8F63515896F35C2A84408D7 /* Build configuration list for PBXNativeTarget "Pods-BMSAnalytics Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8487EFA67849FA39DC416ADD54CA7B8A /* Debug */,
-				C7EA74A30C96FC19EAA6618C76BA5B5A /* Release */,
+				A55C5707951AF743FEBE1CF5574F6CB2 /* Debug */,
+				E17103D570F9F42908D332783760D822 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1907,8 +1880,8 @@
 		CABEEBF22578374251827FAE14D77DAC /* Build configuration list for PBXNativeTarget "BMSCore-watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9F149648B427229F2D46196FC43D5E27 /* Debug */,
-				36B4870EB7777B3B11E6FACC8D8A3293 /* Release */,
+				C8D44E9E651C56E8F9EDAF7F088C93DC /* Debug */,
+				5B36D919404376E345B2F6CF5DE7352B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1916,8 +1889,8 @@
 		D2957223D4E03F20F84F9C31360A20FB /* Build configuration list for PBXNativeTarget "Pods-TestApp watchOS Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				62FC1586DE074D104547DFDFE42810B5 /* Debug */,
-				A78B940A6FE135740C9EC6C5BF39031F /* Release */,
+				5F7C14778B452E6AA48E1673A22D8305 /* Debug */,
+				8FFC3AE34A5FF88630D1CCE1C992D8CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
