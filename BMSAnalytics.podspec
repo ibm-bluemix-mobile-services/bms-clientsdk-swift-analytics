@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
     ss.source_files = 'Source/SSZipArchive/*.{m,h}', 'Source/SSZipArchive/minizip/*.{c,h}', 'Source/SSZipArchive/minizip/aes/*.{c,h}' 
     ss.libraries = 'z'
     ss.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/Source/SSZipArchive','LIBRARY_SEARCH_PATHS' => '$(SRCROOT)/Source/SSZipArchive'}
-    ss.public_header_files= 'Source/SSZipArchive/*.h','Source/SSZipArchive/minizip/*.h','Source/SSZipArchive/minizip/aes/*.h'
+    ss.public_header_files= 'Source/SSZipArchive/*.h'
   end
 
   s.source_files = 'Source/**/*.swift','Source/Resource/*.h'
