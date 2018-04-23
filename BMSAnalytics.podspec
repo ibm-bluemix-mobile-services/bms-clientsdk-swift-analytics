@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Source/**/*.swift','Source/Resource/*.h'
   s.ios.exclude_files = 'Source/**/*watchOS*.swift'
-  s.watchos.exclude_files = 'Source/**/*iOS*.swift','Source/Feedback','Source/SSZipArchive/*.{swift,h}', 'Source/SSZipArchive/minizip/*.{c,h}', 'Source/Zip/minizip/aes/*.{c,h}'
+  s.watchos.exclude_files = 'Source/**/*iOS*.swift','Source/Feedback','Source/SSZipArchive/*.{swift,h}', 'Source/SSZipArchive/minizip/*.{c,h}', 'Source/SSZipArchive/minizip/aes/*.{c,h}'
   s.dependency 'BMSCore', '~> 2.1'
 
   s.requires_arc = true
