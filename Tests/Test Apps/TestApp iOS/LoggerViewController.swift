@@ -166,7 +166,10 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         NSException(name: NSExceptionName("Test crash"), reason: "Ensure that BMSAnalytics framework is catching uncaught exceptions", userInfo: nil).raise()
     }
     
-    
+    // Ignore the warning on the extraneous underscore in Swift 2. It is there for Swift 3.
+    @IBAction func triggerFeedbackMode(_ sender: UIButton) {
+        Analytics.triggerFeedbackMode()
+    }
     
     // MARK: UIPickerViewDelegate protocol
     
