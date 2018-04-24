@@ -98,6 +98,7 @@ For apps built with Swift 2.3, use the command `carthage update --toolchain com.
 * [Log some other information](#log-some-other-information)
 * [Send the data to the server](#send-the-data-to-the-server)
 * [Disable logging output](#disable-logging-output-for-production-applications)
+* [Invoking In app feedback mode](#invoking-in-app-feedback-mode)
 
 > View the complete API reference [here](https://ibm-bluemix-mobile-services.github.io/API-docs/client-SDK/BMSAnalytics/Swift/index.html).
 
