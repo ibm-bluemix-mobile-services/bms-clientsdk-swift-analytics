@@ -1,4 +1,5 @@
 Pod::Spec.new do |s|
+
   s.name              = 'BMSAnalytics'
   s.version           = '2.2.4'
   s.summary           = 'The analytics component of the Swift client SDK for IBM Bluemix Mobile Services'
@@ -7,7 +8,7 @@ Pod::Spec.new do |s|
   s.license           = 'Apache License, Version 2.0'
   s.authors           = { 'IBM Bluemix Services Mobile SDK' => 'mobilsdk@us.ibm.com' }
 
-  s.source       = { :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics.git', :tag => s.version, }
+  s.source       = { :git => 'https://github.com/ibm-bluemix-mobile-services/bms-clientsdk-swift-analytics.git', :tag => s.version }
 
   s.subspec 'SSZipArchive' do |ss|
     ss.source_files = 'Source/SSZipArchive/*.{m,h}', 'Source/SSZipArchive/minizip/*.{c,h}', 'Source/SSZipArchive/minizip/aes/*.{c,h}' 
