@@ -13,6 +13,9 @@
 
 
 @import Foundation;
+@import CoreLocation;
+
+#import "SSZipArchive.h"
 
 //! Project version number for BMSAnalytics.
 FOUNDATION_EXPORT double BMSAnalyticsVersionNumber;
