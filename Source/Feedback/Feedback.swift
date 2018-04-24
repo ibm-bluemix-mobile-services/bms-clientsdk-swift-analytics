@@ -431,19 +431,14 @@ public class Feedback {
     }
 
     internal static func createZip(instanceName: String) -> Void {
-        //let imageFile = BMSLogger.feedbackDocumentPath+instanceName+"/image.png"
-        //let jsonFile = BMSLogger.feedbackDocumentPath+instanceName+"/feedback.json"
         let dirToZip = BMSLogger.feedbackDocumentPath+instanceName
         let zipPath = BMSLogger.feedbackDocumentPath+"../"+instanceName+".zip"
 
-        do {
-            SSZipArchive.createZipFile(atPath: zipPath, withContentsOfDirectory: dirToZip)
-
-            //let zipFilePath = try Zip.quickZipFiles([URL(string: imageFile)!, URL(string: jsonFile)!], fileName: instanceName)
-            //BMSLogger.internalLogger.info(message: "zipFilePath: " + zipFilePath.absoluteString)
-        }
-        catch {
-            BMSLogger.internalLogger.error(message: "Something went wrong")
+        let success = SSZipArchive.createZipFile(atPath: zipPath, withContentsOfDirectory: dirToZip)
+        if success {
+            BMSLogger.internalLogger.info(message: "Success zip")
+        } else {
+            BMSLogger.internalLogger.error(message: "No success zip")
         }
     }
 

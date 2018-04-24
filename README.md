@@ -98,6 +98,7 @@ For apps built with Swift 2.3, use the command `carthage update --toolchain com.
 * [Log some other information](#log-some-other-information)
 * [Send the data to the server](#send-the-data-to-the-server)
 * [Disable logging output](#disable-logging-output-for-production-applications)
+* [In app feedback mode](#in-app-feedback-mode)
 
 > View the complete API reference [here](https://ibm-bluemix-mobile-services.github.io/API-docs/client-SDK/BMSAnalytics/Swift/index.html).
 
@@ -207,6 +208,16 @@ Analytics.send(completionHandler: { (response: Response?, error: Error?) in
 ### Disable logging output for production applications
 
 By default, the Logger class will print its logs to Xcode console. If is advised to disable Logger output for applications built in release mode. In order to do so add a debug flag named `RELEASE_BUILD` to your release build configuration. One way of doing so is adding `-D RELEASE_BUILD` to the `Other Swift Flags` section of the project build configuration.
+
+--
+
+### In app feedback mode
+
+Users and Testers can record and send feedback and bug reports 'In-app', as they run and use the application. App owners get a deeper sense of the application's user experience with this context rich user feedback. Developers on the other hand receive accurate application contexts to diagnose and fix bugs / feature deficiencies. 
+
+Applications can invoke feedback mode on any application event such as buttons, menu actions or gestures on calling the method:
+
+```Analytics.triggerFeedbackMode()```
 
 --------
 

@@ -1,3 +1,5 @@
 coverage_service: coveralls
 xcodeproj: BMSAnalytics.xcodeproj
 scheme: BMSAnalytics iOS
+ignore:
+  - Source/SSZipArchive/*
