@@ -54,7 +54,13 @@ public extension BMSAnalytics {
         
         return (osVersion, model, deviceId)
     }
-    
+
+    // Set uiviewcontroller from cordova applications
+    public static var callersUIViewController: UIViewController?
+    public static func setCallersUIViewController( uiViewController: UIViewController) -> Void {
+        callersUIViewController = uiViewController
+    }
+
 }
     
     

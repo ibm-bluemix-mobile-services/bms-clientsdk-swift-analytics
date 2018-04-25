@@ -35,6 +35,7 @@ internal struct Constants {
         
         static let hostName = "mobile-analytics-dashboard"
         static let uploadPath =  "/analytics-service/rest/data/events/clientlogs/"
+        static let uploadFeedbackPath =  "/analytics-service/rest/data/events/inappfeedback/"
     }
     
     

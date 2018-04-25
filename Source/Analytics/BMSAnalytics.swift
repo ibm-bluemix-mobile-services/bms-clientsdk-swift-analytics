@@ -94,6 +94,11 @@ public extension Analytics {
         else {
             Analytics.logger.warn(message: "Make sure that the BMSClient class has been initialized before calling the Analytics initializer.")
         }
+
+        // Send Feedback data
+        #if os(iOS)
+            Feedback.send(fromSentButton: false)
+        #endif
     }
     
     
@@ -119,7 +124,19 @@ public extension Analytics {
         
         Logger.sendAnalytics(completionHandler: userCallback)
     }
-    
+
+    /**
+        Trigger feedback Mode
+
+        Note: Feedback Mode can only be triggered if the BMSClient was initialized with `BMSClient.sharedInstance.initialize(bluemixRegion:)` from the `BMSCore` framework.
+    */
+    public static func triggerFeedbackMode() {
+        #if os(iOS)
+            Feedback.invokeFeedback()
+        #else
+            Analytics.logger.warn(message: "Feedback Mode cannot be invoked for non-iOS apps.")
+        #endif
+    }
 }
 
 

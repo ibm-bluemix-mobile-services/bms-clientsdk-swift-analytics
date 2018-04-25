@@ -1,3 +1,7 @@
 coverage_service: coveralls
 xcodeproj: BMSAnalytics.xcodeproj
 scheme: BMSAnalytics iOS
+ignore:
+  - Source/SSZipArchive/*
+  - Source/Feedback/ComposeEditorViewController.swift
+  - Source/Feedback/UIImageControllerViewController.swift
