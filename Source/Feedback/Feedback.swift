@@ -135,17 +135,23 @@ public class Feedback {
             instanceName = ""
             screenshot=nil
 
-            let uiViewController = topController(nil)
-            let instance: String = NSStringFromClass(uiViewController.classForCoder)
+            let uiViewController:UIViewController?
+            if BMSAnalytics.callersUIViewController != nil {
+                uiViewController = BMSAnalytics.callersUIViewController
+            } else {
+                uiViewController = topController(nil)
+            }
+
+            let instance: String = NSStringFromClass(uiViewController!.classForCoder)
             Feedback.instanceName = instance.replacingOccurrences(of: "_", with: "")
             Feedback.creationDate = String(Int((Date().timeIntervalSince1970 * 1000.0).rounded()))
-            Feedback.screenshot = takeScreenshot(uiViewController.view)
+            takeScreenshot(uiViewController!.view)
 
             let feedbackBundle = Bundle(for: UIImageControllerViewController.self)
             let feedbackStoryboard: UIStoryboard!
             feedbackStoryboard = UIStoryboard(name: "Feedback", bundle: feedbackBundle)
             let feedbackViewController: UIViewController = feedbackStoryboard.instantiateViewController(withIdentifier: "feedbackImageView")
-            uiViewController.present(feedbackViewController, animated: true, completion: nil)
+            uiViewController!.present(feedbackViewController, animated: true, completion: nil)
         }
     }
 
@@ -186,12 +192,13 @@ public class Feedback {
     }
 
     // MARK: - Internal methods
-    internal static func takeScreenshot(_ view: UIView) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, UIScreen.main.scale)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
+    internal static func takeScreenshot(_ view: UIView) -> Void {
+        DispatchQueue.main.async(execute: {
+            UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, UIScreen.main.scale)
+            view.layer.render(in: UIGraphicsGetCurrentContext()!)
+            Feedback.screenshot = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+        })
     }
 
     internal static func topController(_ parent: UIViewController? = nil) -> UIViewController {
