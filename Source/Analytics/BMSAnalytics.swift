@@ -233,7 +233,8 @@ public class BMSAnalytics: AnalyticsDelegate {
             return
         }
         
-        if CLLocationManager.locationServicesEnabled() && CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
+        if BMSAnalytics.locationEnabled && CLLocationManager.locationServicesEnabled() && 
+            CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
             self.locationManager.requestWhenInUseAuthorization()
         }
       
