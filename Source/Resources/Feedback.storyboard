@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 7 format" minToolsVersion="7.0"/>
     </dependencies>
@@ -59,6 +59,12 @@
                                             <segue destination="k6H-cw-lTn" kind="presentation" identifier="segueModal" id="vYS-MB-MRy"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem image="undo" id="56f-bx-7MT" userLabel="Undo Btn">
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <connections>
+                                            <action selector="eraseButton:" destination="Sl1-kx-SF6" id="FWQ-dc-wqc"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="n8S-Ut-ytL"/>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="7Zd-2m-JcG"/>
                                     <barButtonItem title="SEND" style="plain" id="z1D-KZ-3fh">
@@ -105,6 +111,7 @@
                         <outlet property="imageView" destination="BUs-St-dML" id="fEb-os-ewF"/>
                         <outlet property="imageViewGesture" destination="133-nQ-CD8" id="aoo-pS-Zx5"/>
                         <outlet property="markerBtn" destination="C2F-ed-qba" id="DJY-4r-jv3"/>
+                        <outlet property="undoBtn" destination="56f-bx-7MT" id="Cde-sP-zZ4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Smo-r0-B3E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -173,6 +180,7 @@
         <image name="comment" width="20" height="20"/>
         <image name="edit" width="20" height="20"/>
         <image name="eraser-1" width="20" height="20"/>
+        <image name="undo" width="20" height="20"/>
     </resources>
     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

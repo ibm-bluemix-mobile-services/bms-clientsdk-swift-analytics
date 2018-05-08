@@ -30,6 +30,8 @@ class UIImageControllerViewController: UIViewController {
     static var ext: UIImage?
     static var counter: Int = 0
     static var isImageEdited: Bool = false
+    var pathArray: [CAShapeLayer] = []
+    var undoBuffer: [Any] = []
 
     @IBOutlet weak var composeBtn: UIBarButtonItem!
     @IBOutlet weak var editBtn: UIBarButtonItem!
@@ -114,16 +116,6 @@ class UIImageControllerViewController: UIViewController {
         // drawImageView(mainImage: #imageLiteral(resourceName: "edit-1"), withBadge:#imageLiteral(resourceName: "eraser") )
     }
 
-    func drawImageView(mainImage: UIImage, withBadge badge: UIImage) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(mainImage.size, false, 0.0)
-        mainImage.draw(in: CGRect(x: 0, y: 0, width: mainImage.size.width, height: mainImage.size.height))
-        badge.draw(in: CGRect(x: mainImage.size.width - badge.size.width, y: 0, width: badge.size.width, height: badge.size.height))
-
-        let resultImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return resultImage
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         imageView.image = Feedback.screenshot
     }
@@ -138,6 +130,7 @@ class UIImageControllerViewController: UIViewController {
         if !UIImageControllerViewController.touchEnabled && UIImageControllerViewController.isComposeBtnPressed {
             addComment(touches)
         }
+
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -153,6 +146,11 @@ class UIImageControllerViewController: UIViewController {
             // call  draw
             draw()
         }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        undoBuffer.append(pathArray)
+        pathArray = []
     }
 
     func addComment(_ touches: Set<UITouch>) {
@@ -186,6 +184,12 @@ class UIImageControllerViewController: UIViewController {
             strokeLayer.addSublayer(textLayer)
             imageView.layer.addSublayer(strokeLayer)
             imageView.setNeedsDisplay()
+
+            pathArray = []
+            pathArray.append(strokeLayer);
+            undoBuffer.append(pathArray)
+            pathArray = []
+
             path = UIBezierPath()
 
             performSegue(withIdentifier: "segueModal", sender: self)
@@ -206,6 +210,8 @@ class UIImageControllerViewController: UIViewController {
         strokeLayer.path = path.cgPath
         imageView.layer.addSublayer(strokeLayer)
         imageView.setNeedsDisplay()
+
+        pathArray.append(strokeLayer);
         path = UIBezierPath()
     }
 
@@ -227,12 +233,31 @@ class UIImageControllerViewController: UIViewController {
         }
     }
 
-    /* To add an erase/undo button
-     @IBAction func eraseButton(_ sender: UIBarButtonItem) {
-     path.removeAllPoints()
-     imageView.layer.sublayers = nil
-     imageView.setNeedsDisplay()
-     } */
+    // Implementtion for undo
+    @IBAction func eraseButton(_ sender: UIBarButtonItem) {
+        if undoBuffer.count > 0 {
+            // Check and update if undo action on comment option.
+            let circleShapeBuffer = undoBuffer[undoBuffer.count-1] as! [CAShapeLayer]
+            if circleShapeBuffer.count == 1 {
+                if circleShapeBuffer[0].fillColor == UIColor.orange.cgColor {
+                    Feedback.messages.removeLast()
+                    UIImageControllerViewController.counter = UIImageControllerViewController.counter - 1
+                }
+            }
+            undoBuffer.removeLast()
+            imageView.layer.sublayers = nil
+            imageView.image = Feedback.screenshot
+            for i in 0..<undoBuffer.count {
+                let shapeBuffer = undoBuffer[i] as! [CAShapeLayer]
+                for j in 0..<shapeBuffer.count {
+                    imageView.layer.addSublayer(shapeBuffer[j])
+                    imageView.setNeedsDisplay()
+                }
+            }
+        }
+    }
+
+    @IBOutlet weak var undoBtn: UIBarButtonItem!
 
     @IBAction func closeButton(_ sender: Any) {
         if UIImageControllerViewController.isImageEdited {
