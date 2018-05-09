@@ -53,16 +53,16 @@
                                             <action selector="composeFeedButton:" destination="Sl1-kx-SF6" id="cOj-bt-8wS"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" id="mxc-OD-IJ4">
-                                        <connections>
-                                            <action selector="composeButtonTapped:" destination="Sl1-kx-SF6" id="zUb-yG-YjS"/>
-                                            <segue destination="k6H-cw-lTn" kind="presentation" identifier="segueModal" id="vYS-MB-MRy"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem image="undo" id="56f-bx-7MT" userLabel="Undo Btn">
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <action selector="eraseButton:" destination="Sl1-kx-SF6" id="FWQ-dc-wqc"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="mxc-OD-IJ4">
+                                        <connections>
+                                            <action selector="composeButtonTapped:" destination="Sl1-kx-SF6" id="zUb-yG-YjS"/>
+                                            <segue destination="k6H-cw-lTn" kind="presentation" identifier="segueModal" id="vYS-MB-MRy"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="n8S-Ut-ytL"/>

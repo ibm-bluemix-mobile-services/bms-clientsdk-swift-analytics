@@ -235,6 +235,14 @@ class UIImageControllerViewController: UIViewController {
 
     // Implementtion for undo
     @IBAction func eraseButton(_ sender: UIBarButtonItem) {
+        undoBtn.tintColor = UIColor.orange
+        markerBtn.tintColor = UIColor.black
+        compBtn.tintColor = UIColor.black
+        editBtn.tintColor = UIColor.black
+        UIImageControllerViewController.isMarkerBtnPressed = false
+        UIImageControllerViewController.touchEnabled = false
+        UIImageControllerViewController.isComposeBtnPressed = false
+
         if undoBuffer.count > 0 {
             // Check and update if undo action on comment option.
             let circleShapeBuffer = undoBuffer[undoBuffer.count-1] as! [CAShapeLayer]
@@ -254,6 +262,9 @@ class UIImageControllerViewController: UIViewController {
                     imageView.setNeedsDisplay()
                 }
             }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            self.undoBtn.tintColor = UIColor.black
         }
     }
 
