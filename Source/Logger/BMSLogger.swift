@@ -263,7 +263,9 @@ public class BMSLogger: LoggerDelegate {
             }
         }
 
-        BMSLogger.checkSignal()
+        DispatchQueue.main.async(execute: {
+            BMSLogger.checkSignal()
+        })
     }
     
     internal static func checkSignal() {
